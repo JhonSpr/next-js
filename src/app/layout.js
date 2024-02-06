@@ -1,6 +1,6 @@
 'use client'
 
-import Navigation from './components/Navigation'
+import Navigation from '@/components/Navigation'
 import '@/styles/globals.css'
 import '@/styles/navbar.css'
 import '@/styles/app.css'
