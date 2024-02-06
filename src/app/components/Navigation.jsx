@@ -41,80 +41,50 @@ function Navigation() {
 
   return (
     <header>
-      <nav className={`navbar navbar-expand-lg`}>
-        <div className='container'>
-          <a className='navbar-brand' href='/'>
-            <img
-              src='https://i.postimg.cc/L8gP10cN/animesz-high-resolution-logo-transparent-1.png'
-              alt=''
-            />
-          </a>
+      <nav class='navbar navbar-expand-lg bg-body-tertiary'>
+        <div class='container-fluid'>
           <button
-            className='position-absolute z-2 btn__close__navbar'
+            class='navbar-toggler'
             type='button'
             data-bs-toggle='collapse'
-            data-bs-target='#navbarSupportedContent'
-            aria-controls='navbarSupportedContent'
+            data-bs-target='#navbarTogglerDemo03'
+            aria-controls='navbarTogglerDemo03'
             aria-expanded='false'
-            aria-label='Toggle navigation'
-            onClick={openX}>
-            <FaBars />
+            aria-label='Toggle navigation'>
+            <span class='navbar-toggler-icon'></span>
           </button>
-          <div
-            className={`${
-              collapse
-                ? 'collapse navbar-collapse show'
-                : 'collapse navbar-collapse'
-            }`}
-            id='navbarSupportedContent'>
-            <ul className='navbar-nav me-auto mb-2 mb-lg-0'>
-              {hrefs.map(({ route, label }) => (
-                <li className='nav-item' key={route}>
-                  <a className='nav-link' aria-current='page' href={route}>
-                    {label}
-                  </a>
-                </li>
-              ))}
+          <a class='navbar-brand' href='#'>
+            Navbar
+          </a>
+          <div class='collapse navbar-collapse' id='navbarTogglerDemo03'>
+            <ul class='navbar-nav me-auto mb-2 mb-lg-0'>
+              <li class='nav-item'>
+                <a class='nav-link active' aria-current='page' href='#'>
+                  Home
+                </a>
+              </li>
+              <li class='nav-item'>
+                <a class='nav-link' href='#'>
+                  Link
+                </a>
+              </li>
+              <li class='nav-item'>
+                <a class='nav-link disabled' aria-disabled='true'>
+                  Disabled
+                </a>
+              </li>
             </ul>
-            <ThemeSwitcher />
-            <form className='d-flex' role='search'>
+            <form class='d-flex' role='search'>
               <input
-                className='form-control me-2'
+                class='form-control me-2'
                 type='text'
-                name='q'
-                autoComplete='off'
-                placeholder='busca anime ...'
-                aria-label='q'
-                onChange={handleSearch}
+                placeholder='Search'
+                aria-label='Search'
               />
-              <button className='btn' type='submit'>
-                <FaSearch />
+              <button class='btn btn-outline-success' type='submit'>
+                Search
               </button>
             </form>
-            <div className={`container__user ${!user ? 'disable' : ''}`}>
-              <div className='menu__navbar__user'>
-                <FaUserCircle
-                  fontSize={'30px'}
-                  color='c1c1c1'
-                  cursor={'pointer'}
-                  onClick={handleOpen}
-                />
-                <span>{user?.displayName}</span>
-              </div>
-
-              <div className={`user ${isOpen ? 'show' : ''}`}>
-                <a
-                  href={`/auth/${user?.displayName
-                    ?.replace(/ /g, '-')
-                    ?.toLowerCase()}`}>
-                  Mi lista
-                </a>
-                <LogoutButton />
-              </div>
-            </div>
-            <a href='/auth/login' className={user ? 'disable' : ''}>
-              Ingresar
-            </a>
           </div>
         </div>
       </nav>

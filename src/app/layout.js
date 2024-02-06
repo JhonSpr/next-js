@@ -1,15 +1,15 @@
 'use client'
+import './app.css'
+import './DarkMode.css'
+import './desktop.css'
+import './filterMenu.css'
+import './globals.css'
+import './mobile.css'
+import './navbar.css'
+import './tablet.css'
 
-import Navigation from '@/components/Navigation'
-import '@/styles/globals.css'
-import '@/styles/navbar.css'
-import '@/styles/app.css'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import '@/styles/filterMenu.css'
-import '@/Styles/desktop.css'
-import '@/Styles/mobile.css'
-import '@/Styles/tablet.css'
-import '@/Styles/DarkMode.css'
+import Navigation from './components/Navigation'
+
 import { Providers } from './providers'
 
 export default function RootLayout({ children }) {
