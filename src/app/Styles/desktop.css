@@ -1,0 +1,548 @@
+@media only screen and (min-width: 1450px) {
+  .btn__close__navbar {
+    display: none;
+  }
+  .container__ {
+    width: 80%;
+    margin: 30px auto;
+    min-height: 40dvh;
+  }
+
+  .list__animes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    overflow: hidden;
+    justify-content: center;
+    place-content: center;
+    min-height: 50dvh;
+  }
+
+  .list__animes .card__anime {
+    width: calc(300px - 10px);
+    background-color: #1b1a1f;
+    border-radius: 7px;
+    position: relative;
+  }
+
+  .list__animes .card__anime .image__anime {
+    width: 100%;
+    height: 85%;
+    border-radius: 7px;
+  }
+  .list__animes .card__anime .name__anime {
+    color: #c1c1c1;
+    font-weight: 700;
+    text-align: center;
+    display: block;
+    padding: 0px 10px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    text-wrap: nowrap;
+    font-size: 14px;
+  }
+  .list__animes .card__anime .type__anime,
+  .list__animes .card__anime .status__anime,
+  .list__animes .card__anime .year__anime {
+    position: absolute;
+    z-index: 1;
+    text-transform: capitalize;
+    border-radius: 5px;
+    font-size: 12px;
+  }
+
+  .list__animes .card__anime .status__anime {
+    top: 5px;
+    right: 5px;
+    background-color: #1283b8;
+    padding: 4px 6px;
+    font-weight: bold;
+    color: #fff;
+    font-size: 15px;
+  }
+
+  .list__animes .card__anime .type__anime {
+    bottom: 20%;
+    font-size: 16px;
+    right: 5px;
+    background-color: #1283b8;
+    padding: 4px 6px;
+    text-transform: lowercase;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  .list__animes .card__anime .year__anime {
+    background-color: #1283b8;
+    color: #fff;
+    padding: 4px 6px;
+    font-weight: bold;
+    bottom: 20%;
+    left: 5px;
+    font-size: 14px;
+  }
+
+  .search__container {
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+    margin-bottom: 20px;
+  }
+  .search__container .search__title {
+    font-size: 30px;
+    font-weight: 700;
+    color: #1283b8 !important;
+  }
+  .search__container .search__input {
+    padding: 20px;
+    width: 500px;
+    background-color: #1b1a1f;
+    border: 0;
+    border-radius: 7px;
+    color: #1283b8;
+    transition: all 1s ease-out;
+    &::placeholder {
+      color: #ccc;
+      font-size: 20px;
+    }
+    &:focus {
+      outline: #1283b8 2px solid;
+      background-color: #17171a;
+    }
+  }
+  .filter__container .filter__button {
+    width: 200px;
+    display: block;
+    text-align: center;
+    border-radius: 4px;
+    background-color: #1b1a1f;
+    color: #c1c1c1;
+    font-weight: 700;
+    font-size: 14px;
+    text-transform: capitalize;
+    cursor: pointer;
+    padding: 7px;
+  }
+  .filter__item {
+    position: absolute;
+    background-color: #1b1a1f;
+    z-index: 0;
+    color: #c1c1c1;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 7px;
+    top: 40px;
+    overflow: hidden;
+    border-radius: 4px;
+    opacity: 0;
+    padding: 20px 40px;
+    width: 440px;
+
+    &.show {
+      opacity: 1;
+      z-index: 2;
+    }
+
+    & > label {
+      cursor: pointer;
+      font-size: 15px;
+      width: 160px;
+      text-align: center;
+      position: relative;
+      padding: 7px 10px;
+      & > input {
+        position: absolute;
+        right: 5px;
+        top: 30%;
+      }
+
+      &.active {
+        color: #1283b8;
+      }
+    }
+  }
+  .container__ main {
+    display: grid;
+    grid-template-columns: 25% 70%;
+  }
+  .container__ main .container__image {
+    width: max-content;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .container__ main .container__image .image__anime img {
+    padding: 20px;
+    background-color: #17171a;
+    border: 2px solid #17171a;
+    border-radius: 7px;
+  }
+
+  .container__ main .container__image .rating__anime {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    gap: 6px;
+    place-content: center;
+    margin: 5px auto;
+    padding: 4px 12px;
+    background-color: #1a191767;
+    color: #000;
+    border-radius: 4px;
+  }
+  .container__ main .container__information {
+    width: 100%;
+  }
+  .information__page {
+    padding: 40px 0;
+  }
+  .container__ main .container__information .info__anime {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .container__ main .container__information .info__anime .title__anime {
+    font-size: 30px;
+    text-transform: capitalize;
+    color: #1283b8;
+    border-bottom: 1px solid #17171a;
+  }
+  .container__ main .container__information .info__anime .wrapp__anime {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  .container__ main .container__information .info__anime .wrapp__anime > span {
+    color: #000;
+    font-weight: bold;
+    padding: 10px 0;
+    text-transform: capitalize;
+    & strong {
+      color: #2d2d30;
+    }
+    &::before {
+      content: '';
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      background-color: #1283b8;
+      margin-right: 5px;
+    }
+  }
+  .container__
+    main
+    .container__information
+    .info__anime
+    .wrapp__anime
+    .trailer__anime {
+    position: absolute;
+    right: 0;
+    width: 400px;
+    height: 300px;
+  }
+
+  .container__ main .container__information .info__anime .episode__anime__list {
+    margin-top: 100px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    height: 500px;
+  }
+  .container__
+    main
+    .container__information
+    .info__anime
+    .episode__anime__list
+    .episode__item {
+    width: 250px;
+    height: 160px;
+    position: relative;
+    &:hover .overlay {
+      color: #1283b8;
+      opacity: 1;
+      width: 100%;
+      height: 100%;
+      font-size: 40px;
+      border-radius: 7px;
+      & svg:hover {
+        color: #000;
+      }
+    }
+  }
+  .container__
+    main
+    .container__information
+    .info__anime
+    .episode__anime__list
+    .episode__item
+    .episode__img {
+    width: 250px;
+    height: 160px;
+    border-radius: 7px;
+  }
+  .container__
+    main
+    .container__information
+    .info__anime
+    .episode__anime__list
+    .episode__item
+    .episode__number {
+    position: absolute;
+    z-index: 2;
+    top: 5px;
+    right: 5px;
+    background-color: #1283b8;
+    color: #fff;
+    padding: 5px 20px;
+    font-size: 14px;
+    border-radius: 10px;
+  }
+  .episodes__pagination {
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .episodes__pagination button {
+    padding: 6px 20px;
+    border: 0;
+    border-radius: 7px;
+    color: #ccc;
+    background-color: #17171a;
+  }
+  .container__episode__page {
+    display: grid;
+    grid-template-columns: 70% 30%;
+    min-height: 80dvh;
+    width: 70%;
+    margin: 20px auto;
+    gap: 10px;
+  }
+  .scrollBarSide {
+    width: 100%;
+    background-color: #ccc;
+    padding: 10px;
+    height: 800px;
+    overflow: hidden;
+    overflow-y: auto;
+    border-radius: 7px;
+  }
+
+  .container__few__added {
+    height: max-content;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    &::before {
+      content: 'Ultimos episodios';
+      display: block;
+      font-size: 20px;
+      border-bottom: 2px solid #1283b8;
+    }
+  }
+  .container__few__added a {
+    display: block;
+    width: 100%;
+    height: 220px;
+    position: relative;
+  }
+
+  .few__added__image {
+    width: inherit;
+    height: 80%;
+    position: relative;
+    border-radius: 7px;
+  }
+  .few__added__episode__number {
+    display: block;
+    color: #000;
+    text-transform: capitalize;
+    font-size: 14px;
+    & span {
+      color: #2d2d30;
+      color-scheme: light;
+      font-weight: 0;
+    }
+  }
+  .few__added__name {
+    overflow: hidden;
+    text-wrap: nowrap;
+    text-overflow: ellipsis;
+    width: 100% !important;
+    display: block;
+    color-scheme: light;
+    color: #000;
+    text-transform: capitalize;
+  }
+  .container__year__animes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    justify-content: center;
+    margin-top: 40px;
+    &::before {
+      content: 'Animes años';
+      display: block;
+      width: 100%;
+      font-size: 20px;
+      border-bottom: 2px solid #17171a;
+      text-transform: capitalize;
+    }
+  }
+  .container__year__animes a {
+    padding: 3px 10px;
+    background-color: #b8b5bb;
+    color: #17171a;
+    font-size: 14px;
+    border-radius: 4px;
+  }
+  .container__iframe {
+    width: 100%;
+  }
+  .container__iframe h4 {
+    color: #1283b8;
+  }
+  .container__iframe iframe {
+    width: 100%;
+    height: 518px;
+    border-radius: 7px;
+  }
+  .container__user {
+    position: relative;
+  }
+  .user {
+    position: absolute;
+    width: 200px;
+    background-color: #323235;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #c1c1c1;
+    top: 45px;
+    gap: 7px;
+    left: -50px;
+    border-radius: 7px;
+    padding: 10px;
+    visibility: hidden;
+    &.show {
+      visibility: visible;
+    }
+  }
+  .user a {
+    color: #ccc;
+    font-size: 15px;
+    cursor: pointer;
+  }
+  .container__user__page {
+    width: 80%;
+    margin: 20px auto;
+    min-height: 80dvh;
+    display: grid;
+    grid-template-columns: 30% 70%;
+  }
+
+  .container__user__page .info__user {
+    width: 100%;
+    background-color: #ccc;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border-radius: 7px;
+  }
+  .container__user__page .info__user .information {
+    width: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    place-items: center;
+    flex-direction: column;
+  }
+  .container__user__page .info__user .information img {
+    width: 100px;
+    height: 120px;
+    border-radius: 10px;
+  }
+  .container__user__page .info__user .information span {
+    color: #000;
+    text-transform: capitalize;
+  }
+
+  .container__user__page .info__user .btn__logout {
+    width: 80%;
+    background-color: #17171a;
+    padding: 10px;
+    color: #c1c1c1;
+    text-align: center;
+    border-radius: 7px;
+    margin: 10px auto;
+    cursor: pointer;
+  }
+  .container__user__page .info__user .container__options__user {
+    display: flex;
+    flex-direction: column;
+  }
+  .container__user__page .info__user .container__options__user span {
+    display: block;
+    background-color: #17171a;
+    margin: 4px 0;
+    padding: 7px;
+    color: #1283b8;
+    border-radius: 7px;
+    width: 100% !important;
+  }
+  .cards {
+    width: 100%;
+    margin-left: 20px;
+    background-color: #c1c1c1;
+    padding: 20px;
+  }
+  .comments_container {
+    width: 100%;
+    padding: 20px;
+    margin-top: 20px;
+    background-color: #17171a;
+    color: #1283b8;
+    border-radius: 7px;
+    display: none;
+    overflow: hidden;
+    &.show {
+      display: block;
+    }
+  }
+  .btn_comments {
+    display: block;
+    margin: 20px 0;
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    border-radius: 7px;
+    background-color: #17171a;
+    color: #c1c1c1;
+    cursor: pointer;
+  }
+  .controls {
+    display: flex;
+    gap: 10px;
+  }
+  .controls a:nth-child(1),
+  .controls a:nth-child(3) {
+    width: 30%;
+    background-color: #17171a;
+    color: #c1c1c1;
+    text-align: center;
+    padding: 7px;
+    border-radius: 7px;
+  }
+  .controls a:nth-child(2) {
+    width: 40%;
+    background-color: #17171a;
+    color: #c1c1c1;
+    text-align: center;
+    border-radius: 7px;
+    padding: 7px;
+  }
+}

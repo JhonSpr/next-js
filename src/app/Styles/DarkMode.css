@@ -1,0 +1,74 @@
+html.dark {
+  & body {
+    background-color: #111 !important;
+  }
+}
+
+.information__page.dark {
+  background-color: #141414;
+}
+.information__page.dark .title__anime {
+  color: #458c9e !important;
+}
+.information__page.dark p {
+  color: #c1c1c1;
+}
+
+.information__page.dark .wrapp__anime span {
+  color: #458c9e !important;
+}
+.information__page.dark .wrapp__anime strong {
+  color: #c1c1c1 !important;
+}
+
+.info__user.dark {
+  background-color: #141414 !important;
+}
+
+.info__user.dark .container__options__user span {
+  background-color: #202022 !important;
+}
+
+.info__user.dark .information span {
+  color: #c1c1c1;
+}
+.info__user.dark .btn__logout {
+  background-color: #202022 !important;
+}
+
+.information__page.dark .container__image .rating__anime {
+  background-color: #3c3c44 !important;
+  color: #c1c1c1;
+}
+.information__page.dark .container__image img {
+  background-color: #3c3c44 !important;
+}
+.information__page.dark .episodes__pagination button {
+  background-color: #3c3c44 !important;
+}
+
+#disqus_thread {
+  color-scheme: light;
+}
+.scrollBarSide.dark {
+  background-color: transparent;
+  color: #c1c1c1;
+}
+
+.container__few__added.dark a .few__added__name {
+  color-scheme: dark;
+  color: #c1c1c1;
+}
+.few__added__episode__number.dark {
+  color-scheme: dark !important;
+
+  & span {
+    color: #1283b8 !important;
+    color-scheme: dark !important;
+  }
+}
+
+.scrollBarSide.dark .container__year__animes a {
+  color: #fff !important;
+  background-color: rgba(0, 0, 0, 0.3);
+}

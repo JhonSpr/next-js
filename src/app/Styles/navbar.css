@@ -1,0 +1,13 @@
+.navbar {
+  background-color: #1b1a1f;
+  height: 100px;
+  & .nav-link {
+    color: #fff !important;
+    &:hover {
+      color: #1283b8 !important;
+    }
+  }
+  & .navbar-brand {
+    color: #1283b8 !important;
+  }
+}
