@@ -76,8 +76,10 @@ function Navigation() {
                 </li>
               ))}
             </ul>
-            <ThemeSwitcher />
-            <form className='d-flex' role='search'>
+            <div style={{ minWidth: '40px' }}>
+              <ThemeSwitcher />
+            </div>
+            <form className='d-flex' role='search' action={'/directorio'}>
               <input
                 className='form-control me-2'
                 type='text'
@@ -92,14 +94,13 @@ function Navigation() {
               </button>
             </form>
             <div className={`container__user ${!user ? 'disable' : ''}`}>
-              <div className='menu__navbar__user'>
+              <div className='menu__navbar__user' style={{ minWidth: '40px' }}>
                 <FaUserCircle
                   fontSize={'30px'}
                   color='c1c1c1'
                   cursor={'pointer'}
                   onClick={handleOpen}
                 />
-                <span>{user?.displayName}</span>
               </div>
 
               <div className={`user ${isOpen ? 'show' : ''}`}>
@@ -112,7 +113,10 @@ function Navigation() {
                 <LogoutButton />
               </div>
             </div>
-            <a href='/auth/login' className={user ? 'disable' : ''}>
+            <a
+              href='/auth/login'
+              className={user ? 'disable' : ''}
+              style={{ minWidth: '40px' }}>
               Ingresar
             </a>
           </div>

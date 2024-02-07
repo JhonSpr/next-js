@@ -14,29 +14,23 @@ export function ThemeSwitcher() {
 
   if (!mounted) return null
 
-  const handleSwitch = (isSelected, className) => {
-    if (isSelected) {
-      setTheme('light')
-      return <SunIcon className={className} />
-    } else {
-      setTheme('dark')
-      return <MoonIcon className={className} />
-    }
-  }
-
   return (
     <div className='nav-item'>
       {theme == 'dark' ? (
         <button onClick={() => setTheme('light')} className='switch'>
           <SunIcon />
         </button>
-      ) : null}
+      ) : (
+        <div style={{ minWidth: '40px' }} />
+      )}
 
       {theme == 'light' ? (
         <button onClick={() => setTheme('dark')} className='switch'>
           <MoonIcon />
         </button>
-      ) : null}
+      ) : (
+        <div style={{ minWidth: '40px' }} />
+      )}
     </div>
   )
 }

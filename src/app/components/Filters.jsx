@@ -67,8 +67,9 @@ export const FilterMenu = ({ queryAños, queryGeneros }) => {
     setShowGeneros(false)
     setShowAños(false)
   }
+
   return (
-    <form className='filter__form' action={'/directorio'}>
+    <form className='filter__form'>
       <div className='filter__container'>
         <span className='filter__button' onClick={handleShowAños}>
           años: todos

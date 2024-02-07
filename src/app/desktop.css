@@ -29,6 +29,7 @@
     width: 100%;
     height: 85%;
     border-radius: 7px;
+    image-rendering: optimizeSpeed;
   }
   .list__animes .card__anime .name__anime {
     color: #c1c1c1;
