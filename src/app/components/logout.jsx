@@ -8,13 +8,10 @@ const LogoutButton = () => {
   const router = useRouter()
   const handleLogout = async () => {
     try {
-      // Cerrar sesión en Firebase
       await signOut(auth)
 
-      // Eliminar la cookie
       removeCookie(`username`)
 
-      // Redirigir a la página actual (recargar)
       router.push('/')
     } catch (error) {
       console.error('Error al cerrar sesión:', error)

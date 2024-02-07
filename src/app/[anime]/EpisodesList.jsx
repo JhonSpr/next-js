@@ -5,7 +5,7 @@ import { FaPlayCircle } from 'react-icons/fa'
 export default function EpisodesList({ data, name }) {
   const [total_results, setTotalResults] = useState(null)
   useEffect(() => {
-    setTotalResults(data?.datos?.map((e) => e.episodes__overlay)[0]?.length)
+    setTotalResults(data?.map((e) => e.episodes__overlay)[0]?.length)
   }, [data])
   const episodesPerPage = 12
   const [currentPage, setCurrentPage] = useState(1)
@@ -19,20 +19,18 @@ export default function EpisodesList({ data, name }) {
   const totalEpisodes = total_results
   const totalPages = Math.ceil(totalEpisodes / episodesPerPage)
 
-  const handleChangePage = (page) => {
+  const handleChangePage = async (page) => {
     setCurrentPage(page)
   }
-  const episodeArray = data?.datos?.map((e) => e.episodes__overlay)[0]
+  const episodeArray = data?.map((e) => e.episodes__overlay)[0]
+
   return (
     <>
       <div className='episode__anime__list'>
         {episodeArray
           ?.map((e, index) => (
             <div className='episode__item' key={index}>
-              <a
-                href={`/${name?.replace(/ /g, '-')?.toLowerCase()}/${
-                  e.episode
-                }`}>
+              <a href={`/${name[0]?.toLowerCase()}/${e.episode}`}>
                 <div className='overlay'>
                   <FaPlayCircle />
                 </div>

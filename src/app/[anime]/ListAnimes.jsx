@@ -5,22 +5,15 @@ import { useContext, useEffect, useState } from 'react'
 import { contextApp } from '../providers'
 import Comments from '../components/comments'
 
-const fecthAnimes = (name) => {
-  return fetch(
-    `https://api-rest.up.railway.app/api/v1/animes?info=${name}`
-  ).then((res) => res.json())
-}
-
-export function FetchSingleAnime({ name }) {
-  const [animes, setAnimes] = useState([])
+export function FetchSingleAnime({ data }) {
+  const name = data?.map((e) => e.name?.replace(/ /g, '-'))
   const [loading, setLoading] = useState([])
 
   const { theme } = useContext(contextApp)
   useEffect(() => {
     setLoading(true)
-    fecthAnimes(name).then((res) => setAnimes(res))
     setLoading(false)
-  }, [])
+  }, [loading])
 
   if (loading) {
     return (
@@ -31,12 +24,13 @@ export function FetchSingleAnime({ name }) {
           placeContent: 'center',
           placeItems: 'center',
           color: '#458c9e',
+          minHeight: '80dvh',
         }}>
         Cargando...
       </div>
     )
   }
-  return animes?.datos?.map((e, index) => (
+  return data?.map((e, index) => (
     <main
       className={`information__page ${theme === 'dark' ? 'dark ' : ''}`}
       key={index}>
@@ -79,7 +73,7 @@ export function FetchSingleAnime({ name }) {
               src={`https://www.youtube.com/embed/${e.trailer}`}
               className='trailer__anime'></iframe>
           </div>
-          <EpisodesList data={animes} name={name} />
+          <EpisodesList data={data} name={name} />
         </div>
         <Comments noButton={false} />
       </section>

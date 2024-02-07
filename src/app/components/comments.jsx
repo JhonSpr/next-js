@@ -19,7 +19,19 @@ export default function Comments({
     setshowComments(!showComments)
   }
   useEffect(() => {
-    if (window.DISQUS) {
+    const loadDisqus = () => {
+      const disqusScript = document.createElement('script')
+      disqusScript.src = `https://${shortname}.disqus.com/embed.js`
+      disqusScript.async = true
+      disqusScript.setAttribute('data-timestamp', +new Date())
+      document.body.appendChild(disqusScript)
+    }
+
+    if (!window.DISQUS) {
+      // Si Disqus no está cargado, cargar el script asincrónicamente
+      loadDisqus()
+    } else {
+      // Si Disqus ya está cargado, simplemente resetear la configuración
       window.DISQUS.reset({
         reload: true,
         config: function () {
@@ -28,14 +40,9 @@ export default function Comments({
           this.page.url = url
         },
       })
-    } else {
-      const script = document.createElement('script')
-      script.src = `https://${shortname}.disqus.com/embed.js`
-      script.async = true
-      script.setAttribute('data-timestamp', +new Date())
-      document.body.appendChild(script)
     }
 
+    // Función de limpieza
     return () => {
       const disqusThread = document.getElementById('disqus_thread')
       if (disqusThread) {

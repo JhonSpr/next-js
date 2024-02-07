@@ -26,6 +26,10 @@ ul {
   list-style: none;
 }
 
+img {
+  image-rendering: optimizeSpeed;
+}
+
 .switch {
   border: 0;
   background-color: transparent;
