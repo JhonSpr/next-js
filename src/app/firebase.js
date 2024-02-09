@@ -1,16 +1,18 @@
 // En tu archivo de inicialización de Firebase
 import { initializeApp } from 'firebase/app'
+import { getDatabase } from 'firebase/database'
 import {
   getAuth,
   setPersistence,
   browserLocalPersistence,
   GithubAuthProvider,
 } from 'firebase/auth'
-import { getFirestore } from 'firebase/firestore'
+import { collection, getFirestore } from 'firebase/firestore'
 import { getPerformance } from 'firebase/performance'
 const firebaseConfig = {
   apiKey: 'AIzaSyDHfPcbbo2zg-Hqc-rDp3qgHJ9kj9EtaT8',
   authDomain: 'animesz-f90c0.firebaseapp.com',
+  databaseURL: 'https://animesz-f90c0-default-rtdb.firebaseio.com',
   projectId: 'animesz-f90c0',
   storageBucket: 'animesz-f90c0.appspot.com',
   messagingSenderId: '117785365870',
@@ -19,6 +21,7 @@ const firebaseConfig = {
 }
 const app = initializeApp(firebaseConfig)
 const db = getFirestore(app)
+const database = getDatabase(app)
 const auth = getAuth(app)
 let perf
 
@@ -26,7 +29,6 @@ if (typeof window !== 'undefined') {
   perf = getPerformance(app) // Inicializar perf solo si window está presente
 }
 
-const githubProvider = new GithubAuthProvider()
 setPersistence(auth, browserLocalPersistence)
 
-export { auth, db, perf, githubProvider }
+export { auth, db, perf, database }

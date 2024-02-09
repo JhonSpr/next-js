@@ -175,6 +175,7 @@
 
   .container__ main .container__image .image__anime img {
     padding: 20px;
+    width: 350px;
     background-color: #17171a;
     border: 2px solid #17171a;
     border-radius: 7px;

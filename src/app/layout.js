@@ -11,29 +11,30 @@ import './tablet.css'
 import Navigation from './components/Navigation'
 
 import { Providers } from './providers'
+import Footer from './components/Footer'
 
 export default function RootLayout({ children }) {
   return (
     <html lang='es'>
       <head>
         <link
+          href='https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.css'
           rel='stylesheet'
-          href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css'
         />
         <meta name='theme-color' content='#ffffff'></meta>
         <link
           rel='icon'
           href='https://i.postimg.cc/L8gP10cN/animesz-high-resolution-logo-transparent-1.png'
         />
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js'></script>
       </head>
 
       <body>
         <Providers>
           <Navigation />
           {children}
-          <footer>
-            <span>Animesz | animes gratis HD sub español y doblaje latino</span>
-          </footer>
+
+          <Footer />
         </Providers>
         <script
           id='dsq-count-scr'

@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { FaFilter } from 'react-icons/fa6'
 
-const años = [
+export const años = [
   { query: 'años', value: 2024, checked: false },
   { query: 'años', value: 2023, checked: false },
   { query: 'años', value: 2022, checked: false },

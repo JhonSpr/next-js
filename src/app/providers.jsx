@@ -1,11 +1,11 @@
 'use client'
 
 import { NextUIProvider } from '@nextui-org/react'
+import { onAuthStateChanged } from 'firebase/auth'
 import { ThemeProvider as NextThemesProvider, useTheme } from 'next-themes'
 import { createContext, useContext, useEffect, useState } from 'react'
-import { auth } from './firebase'
-import { onAuthStateChanged } from 'firebase/auth'
 import { useCookies } from 'react-cookie'
+import { auth } from './firebase'
 
 export const contextApp = createContext()
 export const ContextProvider = ({ children }) => {
@@ -18,13 +18,10 @@ export const ContextProvider = ({ children }) => {
   const { theme } = useTheme()
 
   useEffect(() => {
-    setTimeout(() => {
-      setEjeciones(ejecuciones + 1)
-    }, timeout)
-    if (ejecuciones) {
-      setTimeout(0)
+    if (ejecuciones < 3) {
+      setEjeciones((prevEjecuciones) => prevEjecuciones + 1)
     }
-  }, [])
+  }, [ejecuciones])
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -34,18 +31,18 @@ export const ContextProvider = ({ children }) => {
     return () => unsubscribe()
   }, [ejecuciones])
 
-  useEffect(() => {
-    if (user !== null) {
-      setCookie('username', user?.displayName, { path: '/' })
-    }
-    setDataUser(
-      JSON.parse(
-        localStorage.getItem(
-          `firebase:authUser:AIzaSyDHfPcbbo2zg-Hqc-rDp3qgHJ9kj9EtaT8:[DEFAULT]`
-        )
-      )
-    )
-  }, [ejecuciones])
+  // useEffect(() => {
+  //   if (user !== null) {
+  //     setCookie('username', user?.displayName, { path: '/' })
+  //   }
+  //   setDataUser(
+  //     JSON.parse(
+  //       localStorage.getItem(
+  //         `firebase:authUser:AIzaSyDHfPcbbo2zg-Hqc-rDp3qgHJ9kj9EtaT8:[DEFAULT]`
+  //       )
+  //     )
+  //   )
+  // }, [ejecuciones])
   const updateUserProfilePhoto = (photoUrl) => {
     setUserProfilePhoto(photoUrl)
   }
@@ -56,6 +53,7 @@ export const ContextProvider = ({ children }) => {
     theme,
     updateUserProfilePhoto,
     userProfilePhoto,
+    user,
   }
   return (
     <contextApp.Provider value={contextValue}>{children}</contextApp.Provider>

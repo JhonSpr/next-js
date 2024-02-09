@@ -92,7 +92,10 @@ export default async function page({ params }) {
 
   return (
     <section className='container__'>
-      <FetchSingleAnime data={datos?.datos || []} />
+      <FetchSingleAnime
+        data={datos?.datos || []}
+        animeName={anime.replace(/-/g, ' ')}
+      />
     </section>
   )
 }

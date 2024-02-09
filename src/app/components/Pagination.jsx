@@ -1,7 +1,12 @@
 'use client'
 /* eslint-disable no-unused-vars */
 
-import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
+import {
+  FaArrowCircleLeft,
+  FaArrowCircleRight,
+  FaChevronLeft,
+  FaChevronRight,
+} from 'react-icons/fa'
 /* eslint-disable react/prop-types */
 export default function Pagination({
   results = 0,
@@ -76,40 +81,58 @@ export default function Pagination({
   }
 
   return (
-    <div className='pagination'>
-      {current_page === 1 ? null : (
-        <a
-          href={url + `page=${current_page - 1}`}
-          className={`${isLoading ? 'disable' : 'pagination_item arrow'}`}
-          onClick={handlePageChange}>
-          <FaChevronLeft />
-        </a>
-      )}
-
-      {pageNumber
-        .map((i, index) => (
-          <div key={index++}>
+    <div
+      style={{
+        textAlign: 'center',
+        width: '100%',
+        display: 'block',
+        justifyContent: 'center',
+        margin: '50px 0',
+      }}>
+      <nav aria-label='Page navigation example'>
+        <ul class='inline-flex -space-x-px text-base h-10'>
+          <li>
             <a
-              href={url + `page=${i}`}
-              key={index++}
-              className={`${
-                i === current_page
-                  ? 'active pagination_item'
-                  : 'pagination_item'
-              }`}>
-              {i}
+              href={
+                current_page == 1 ? null : `${url + `page=${current_page - 1}`}`
+              }
+              class={`flex items-center justify-center px-4 h-10 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white ${
+                current_page == 1 ? 'cursor-not-allowed' : ''
+              } ${total_pages === 1 ? 'disable' : ''}`}>
+              <FaArrowCircleLeft />
             </a>
-          </div>
-        ))
-        .slice(start, end)}
-      {current_page === total_pages ? null : (
-        <a
-          href={url + `page=${current_page + 1}`}
-          className={isLoading ? 'disable' : 'pagination_item arrow'}
-          onClick={() => handlePageChange(current_page + 1)}>
-          <FaChevronRight />
-        </a>
-      )}
+          </li>
+          {pageNumber
+            ?.map((i) => (
+              <li>
+                <a
+                  href={url + `page=${i}`}
+                  aria-current={i === current_page ? i : 'none'}
+                  class={
+                    current_page == i
+                      ? 'z-10 flex items-center justify-center px-4 h-10 leading-tight text-blue-600 border border-blue-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white'
+                      : 'flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'
+                  }>
+                  {i}
+                </a>
+              </li>
+            ))
+            .slice(start, end)}
+          <li>
+            <a
+              href={
+                current_page === total_pages
+                  ? null
+                  : `${url + `page=${current_page + 1}`}`
+              }
+              class={`flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white ${
+                current_page === total_pages ? 'cursor-not-allowed' : ''
+              } ${total_pages === 1 ? 'disable' : ''}`}>
+              <FaArrowCircleRight />
+            </a>
+          </li>
+        </ul>
+      </nav>
     </div>
   )
 }

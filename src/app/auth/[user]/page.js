@@ -133,4 +133,16 @@ const Page = () => {
   )
 }
 
+export function calcularRating(likes, dislikes) {
+  const totalVotos = likes + dislikes
+
+  if (totalVotos === 0) {
+    return 0
+  }
+
+  const rating = (likes + 1) / (totalVotos + 2)
+  const ratingEnEscalaDe10 = rating * 10
+
+  return ratingEnEscalaDe10?.toFixed(2)
+}
 export default Page

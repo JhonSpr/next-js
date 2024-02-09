@@ -3,6 +3,7 @@
 
 import { useTheme } from 'next-themes'
 import { useEffect, useState } from 'react'
+import { FaMoon, FaSun } from 'react-icons/fa'
 
 export function ThemeSwitcher() {
   const [mounted, setMounted] = useState(false)
@@ -15,23 +16,24 @@ export function ThemeSwitcher() {
   if (!mounted) return null
 
   return (
-    <div className='nav-item'>
-      {theme == 'dark' ? (
-        <button onClick={() => setTheme('light')} className='switch'>
-          <SunIcon />
-        </button>
-      ) : (
-        <div style={{ minWidth: '40px' }} />
-      )}
-
-      {theme == 'light' ? (
-        <button onClick={() => setTheme('dark')} className='switch'>
-          <MoonIcon />
-        </button>
-      ) : (
-        <div style={{ minWidth: '40px' }} />
-      )}
-    </div>
+    <label class='relative inline-flex items-center cursor-pointer'>
+      <input
+        type='checkbox'
+        value={theme == 'dark' ? 'dark' : 'light'}
+        class='sr-only peer'
+        onClick={() => {
+          if (theme === 'dark') {
+            setTheme('light')
+          } else {
+            setTheme('dark')
+          }
+        }}
+      />
+      <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+      <span class='ms-3 text-sm font-medium text-gray-900 dark:text-gray-300'>
+        {theme === 'dark' ? <FaMoon /> : <FaSun />}
+      </span>
+    </label>
   )
 }
 
