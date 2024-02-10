@@ -1,23 +1,12 @@
 'use client'
-import { FaStar } from 'react-icons/fa6'
 import EpisodesList from './EpisodesList'
 import { useContext, useEffect, useState } from 'react'
 import { contextApp } from '../providers'
 import Comments from '../components/comments'
-import { agregarDatos, database, db, obtenerAnimes } from '../firebase'
-import { collection, doc, getDoc, setDoc, updateDoc } from 'firebase/firestore'
-import { getAuth } from 'firebase/auth'
-import {
-  child,
-  get,
-  getDatabase,
-  onValue,
-  push,
-  ref,
-  runTransaction,
-  set,
-} from 'firebase/database'
+import { child, get, getDatabase, onValue, ref, set } from 'firebase/database'
 import { calcularRating } from '../auth/[user]/page'
+import { AiTwotoneLike, AiTwotoneDislike } from 'react-icons/ai'
+import Alert from '../components/Alert'
 
 export function FetchSingleAnime({ data }) {
   const name = data?.map((e) => e.name?.replace(/ /g, '-'))
@@ -27,33 +16,91 @@ export function FetchSingleAnime({ data }) {
   const [dislikes, setDislikes] = useState(null)
   const [rating, setRating] = useState(null)
   const [datos, setDatos] = useState(null)
-  const { theme, dataUser, user } = useContext(contextApp)
+  const [isVisible, setIsVisible] = useState(null)
+  const [message, setMessage] = useState(String)
+  const [remove, setRemove] = useState(Boolean)
+  const [votos, setVotos] = useState(Number)
+  const { theme, user } = useContext(contextApp)
+  const [userVote, setUserVote] = useState(null)
+  const [firstClick, setFirstClick] = useState(true)
+
   useEffect(() => {
     setLoading(true)
     setLoading(false)
   }, [loading])
 
-  async function writeUserData(animeId, name) {
+  async function updateLikes(animeId, newLikes, userId, isPositiveVote) {
+    try {
+      const db = getDatabase()
+      const animeRef = ref(db, `animes/${animeId}`)
+      const userVotesRef = ref(db, `usersVotes/${userId}/${animeId}`)
+      const userVoteSnapshot = await get(userVotesRef)
+      const userVote = userVoteSnapshot.val()
+      const snapshot = await get(child(animeRef, 'likes'))
+      const currentLikes = snapshot.val()
+      if (userVote !== null) {
+        if (userVote === isPositiveVote) {
+          if (isPositiveVote) {
+            await set(child(animeRef, 'likes'), currentLikes - 1)
+          } else {
+            await set(child(animeRef, 'likes'), currentLikes + 1)
+          }
+          setMessage('El usuario eliminó su voto.')
+          await set(userVotesRef, null)
+          setIsVisible(true)
+          setRemove(true)
+          setTimeout(() => {
+            setIsVisible(false)
+          }, 4000)
+          setMessage('El usuario eliminó su voto.')
+        } else {
+          if (isPositiveVote) {
+            await set(child(animeRef, 'likes'), currentLikes + 1)
+          } else {
+            await set(child(animeRef, 'likes'), currentLikes - 1)
+          }
+          setMessage('El usuario cambió su voto.')
+          await set(userVotesRef, isPositiveVote)
+          setMessage('El usuario cambió su voto.')
+        }
+      } else {
+        await set(userVotesRef, isPositiveVote)
+        if (isPositiveVote) {
+          await set(child(animeRef, 'likes'), currentLikes + 1)
+        } else {
+          await set(child(animeRef, 'likes'), currentLikes - 1)
+        }
+        setIsVisible(true) // Asegurarse de que la alerta sea visible
+        setTimeout(() => {
+          setIsVisible(false)
+        }, 4000)
+        setRemove(false)
+        setMessage('El votó fue registrado')
+      }
+      setUserVote(isPositiveVote) // Actualizar el estado de userVote
+      setFirstClick(false) // Marcar como false después del primer clic
+    } catch (error) {
+      console.error('Error al actualizar los likes del anime:', error)
+    }
+  }
+
+  async function writeAnimesData(animeId, name) {
     try {
       const db = getDatabase()
       const animeRef = ref(db, `animes/${animeId}`)
 
-      // Verificar si el anime ya existe
-      const animeSnapshot = await get(child(animeRef, `$`))
-      if (exists(animeSnapshot)) {
-        console.log('El anime ya existe en la base de datos.')
-        return // Salir de la función si el anime ya existe
+      const snapshot = await get(child(animeRef, 'anime'))
+      const existingAnime = snapshot.val()
+
+      if (!existingAnime) {
+        await set(animeRef, {
+          anime: name,
+          likes: 0,
+          dislikes: 0,
+          visitas: 0,
+        })
+      } else {
       }
-
-      // Agregar el nuevo anime si no existe
-      await set(animeRef, {
-        anime: name,
-        likes: 0,
-        dislikes: 0,
-        visitas: 0,
-      })
-
-      console.log('El anime se agregó correctamente a la base de datos.')
     } catch (error) {
       console.error('Error al escribir los datos:', error)
     }
@@ -105,6 +152,7 @@ export function FetchSingleAnime({ data }) {
       setDatos(data)
       setDislikes(data.dislikes)
       setLikes(data.likes)
+      setVotos(data.likes + data.dislikes)
 
       return data
     } catch (error) {
@@ -117,31 +165,16 @@ export function FetchSingleAnime({ data }) {
     if (user !== undefined && user !== null) {
       agregarValorAVistosRecientes(data[0].name, data[0].image)
       fetchData()
-      writeUserData(animeId, data[0].name)
+      writeAnimesData(animeId, data[0].name)
     }
-  }, [data, user])
+  }, [data, user, message])
+
   useEffect(() => {
     setRating(calcularRating(likes, dislikes))
   }, [datos])
 
-  const obtenerDatosUsuario = async (userId) => {
-    try {
-      // Obtén una referencia al documento del usuario en la base de datos
-      const userRef = ref(database, 'users/' + userId)
-
-      // Escucha cambios en los datos del usuario (en tiempo real)
-      onValue(userRef, (snapshot) => {
-        const userData = snapshot.val()
-        console.log('Datos del usuario:', userData)
-      })
-
-      // También puedes obtener los datos una vez
-      // const snapshot = await get(userRef);
-      // const userData = snapshot.val();
-      // console.log('Datos del usuario:', userData);
-    } catch (error) {
-      console.error('Error al obtener datos de usuario:', error)
-    }
+  const handleClose = () => {
+    setIsVisible(false)
   }
 
   if (loading) {
@@ -167,29 +200,31 @@ export function FetchSingleAnime({ data }) {
         <div className='image__anime'>
           <img src={e.image} alt='' />
         </div>
+        <div className='footer__image__anime'>
+          <button
+            onClick={() => updateLikes(animeId, likes + 1, user?.uid, true)}>
+            <AiTwotoneLike />
+          </button>
+        </div>
       </section>
 
       <section className={`container__information`}>
         <div className='info__anime'>
-          <button onClick={() => obtenerDatosUsuario(user?.uid)}>
-            obtener valores
-          </button>
-          <button>Like</button>
-          <div class='flex items-center'>
+          <div className='flex items-center'>
             <svg
-              class='w-4 h-4 text-yellow-300 me-1'
+              className='w-4 h-4 text-yellow-300 me-1'
               aria-hidden='true'
               xmlns='http://www.w3.org/2000/svg'
               fill='currentColor'
               viewBox='0 0 22 20'>
               <path d='M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z' />
             </svg>
-            <p class='ms-2 text-xlarge font-bold text-gray-900 dark:text-white'>
+            <p className='ms-2 text-xlarge font-bold text-gray-900 dark:text-white'>
               {rating}
             </p>
-            <span class='w-1 h-1 mx-1.5 bg-gray-500 rounded-full dark:bg-gray-400'></span>
-            <a class='text-sm font-medium text-gray-900 underline hover:no-underline dark:text-white'>
-              {dislikes + likes} votos
+            <span className='w-1 h-1 mx-1.5 bg-gray-500 rounded-full dark:bg-gray-400'></span>
+            <a className='text-sm font-medium text-gray-900 underline hover:no-underline dark:text-white'>
+              {votos} votos
             </a>
           </div>
           <strong className='title__anime'>{e.name}</strong>
@@ -224,6 +259,12 @@ export function FetchSingleAnime({ data }) {
         </div>
         <Comments noButton={false} />
       </section>
+      <Alert
+        isVisible={isVisible && !firstClick}
+        message={message}
+        remove={remove}
+        handleClose={handleClose}
+      />
     </main>
   ))
 }

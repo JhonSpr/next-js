@@ -71,7 +71,7 @@ const Footer = () => {
               </h2>
               <ul class='text-gray-500 dark:text-gray-400 font-medium'>
                 <li class='mb-4'>
-                  <a href='/calendario-animes' class='hover:underline'>
+                  <a href='/canlendario/invierno' class='hover:underline'>
                     Calendario Invierno
                   </a>
                 </li>

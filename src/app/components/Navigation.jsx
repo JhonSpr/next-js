@@ -126,6 +126,15 @@ function Navigation() {
               />
             </svg>
           </button>
+          <img
+            class='w-10 h-10 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500'
+            src={
+              user?.photoURL ??
+              'https://i.postimg.cc/P54mBTNx/avatar-chico-anime-fuego-fondo-cara-perfil-frontal-nino-llamas-967743-602.avif'
+            }
+            alt='Bordered avatar'
+            style={{ marginLeft: '10px' }}
+          />
         </div>
         <div
           class='items-center justify-between hidden w-full md:flex md:w-auto md:order-1'

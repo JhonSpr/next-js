@@ -21,6 +21,14 @@ html.dark {
   color: #c1c1c1 !important;
 }
 
+.information__page.dark .container__information .btn_comments {
+  background-color: #3c3c44 !important;
+}
+
+.comments_container.dark {
+  background-color: #3c3c44 !important;
+}
+
 .info__user.dark {
   background-color: #141414 !important;
 }
