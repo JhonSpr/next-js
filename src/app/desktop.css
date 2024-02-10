@@ -548,4 +548,23 @@
     border-radius: 7px;
     padding: 7px;
   }
+
+  .user__botton {
+    position: relative;
+    width: auto;
+    cursor: pointer;
+  }
+  .container__card__user {
+    position: absolute;
+    top: 50px;
+    width: 300px !important;
+    height: 0;
+    border: 0;
+    overflow: hidden;
+    transition: height 0.2s ease-out;
+    &.show {
+      visibility: visible !important;
+      height: 250px;
+    }
+  }
 }
