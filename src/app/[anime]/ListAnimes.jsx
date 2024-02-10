@@ -30,7 +30,7 @@ export function FetchSingleAnime({ data }) {
     setLoading(false)
   }, [loading])
 
-  async function updateLikes(animeId, newLikes, userId, isPositiveVote) {
+  async function updateLikes(animeId, userId) {
     try {
       if (!user) {
         setMessage('Debes iniciar sesión para usar esta función')
@@ -47,50 +47,114 @@ export function FetchSingleAnime({ data }) {
         const userVote = userVoteSnapshot.val()
         const snapshot = await get(child(animeRef, 'likes'))
         const currentLikes = snapshot.val()
+
         if (userVote !== null) {
-          if (userVote === isPositiveVote) {
-            if (isPositiveVote) {
-              await set(child(animeRef, 'likes'), currentLikes - 1)
-            } else {
-              await set(child(animeRef, 'likes'), currentLikes + 1)
-            }
+          if (userVote.like && !userVote.dislike) {
+            // Si el usuario ya había dado like y no dislike, se cambia a false
+            await set(child(animeRef, 'likes'), currentLikes - 1)
             setMessage('El usuario eliminó su voto.')
-            await set(userVotesRef, null)
+            await set(userVotesRef, { like: false, dislike: false })
             setIsVisible(true)
             setRemove(true)
             setTimeout(() => {
               setIsVisible(false)
+              setRemove(false)
             }, 4000)
-            setMessage('El usuario eliminó su voto.')
+          } else if (!userVote.like && !userVote.dislike) {
+            // Si el usuario no ha votado, se registra el like
+            await set(child(animeRef, 'likes'), currentLikes + 1)
+            setIsVisible(true)
+            setTimeout(() => {
+              setIsVisible(false)
+            }, 4000)
+            setMessage('El voto fue registrado')
+            await set(userVotesRef, { like: true, dislike: false })
           } else {
-            if (isPositiveVote) {
-              await set(child(animeRef, 'likes'), currentLikes + 1)
-            } else {
-              await set(child(animeRef, 'likes'), currentLikes - 1)
-            }
-            setMessage('El usuario cambió su voto.')
-            await set(userVotesRef, isPositiveVote)
-            setMessage('El usuario cambió su voto.')
+            // Si ya tiene un voto contrario, muestra un mensaje de alerta
+            setMessage('Ya tienes un voto!')
+            setIsVisible(true)
+            setTimeout(() => {
+              setIsVisible(false)
+            }, 4000)
           }
         } else {
-          await set(userVotesRef, isPositiveVote)
-          if (isPositiveVote) {
-            await set(child(animeRef, 'likes'), currentLikes + 1)
-          } else {
-            await set(child(animeRef, 'likes'), currentLikes - 1)
-          }
-          setIsVisible(true) // Asegurarse de que la alerta sea visible
+          // Si el usuario no había votado antes, registra su voto como like
+          await set(userVotesRef, { like: true, dislike: false })
+          await set(child(animeRef, 'likes'), currentLikes + 1)
+          setIsVisible(true)
           setTimeout(() => {
             setIsVisible(false)
           }, 4000)
-          setRemove(false)
           setMessage('El voto fue registrado')
         }
-        setUserVote(isPositiveVote)
         setFirstClick(false)
       }
     } catch (error) {
       console.error('Error al actualizar los likes del anime:', error)
+    }
+  }
+
+  async function updateDislikes(animeId, userId) {
+    try {
+      if (!user) {
+        setMessage('Debes iniciar sesión para usar esta función')
+        setNoLogged(true)
+        setTimeout(() => {
+          setNoLogged(false)
+        }, 3000)
+        return
+      } else {
+        const db = getDatabase()
+        const animeRef = ref(db, `animes/${animeId}`)
+        const userVotesRef = ref(db, `usersVotes/${userId}/${animeId}`)
+        const userVoteSnapshot = await get(userVotesRef)
+        const userVote = userVoteSnapshot.val()
+        const dislikesSnapshot = await get(child(animeRef, 'dislikes'))
+        const currentDislikes = dislikesSnapshot.val()
+
+        if (userVote !== null) {
+          if (userVote.dislike && !userVote.like) {
+            // Si el usuario ya había dado dislike y no like, se cambia a false
+            await set(child(animeRef, 'dislikes'), currentDislikes - 1)
+            setMessage('El usuario eliminó su voto.')
+            await set(userVotesRef, { like: false, dislike: false })
+            setIsVisible(true)
+            setRemove(true)
+            setTimeout(() => {
+              setIsVisible(false)
+              setRemove(false)
+            }, 4000)
+          } else if (!userVote.dislike && !userVote.like) {
+            // Si el usuario no ha votado, se registra el dislike
+            await set(child(animeRef, 'dislikes'), currentDislikes + 1)
+            setIsVisible(true)
+            setTimeout(() => {
+              setIsVisible(false)
+            }, 4000)
+            setMessage('El voto fue registrado')
+            await set(userVotesRef, { like: false, dislike: true })
+          } else {
+            // Si ya tiene un voto contrario, muestra un mensaje de alerta
+            setMessage('Ya tienes un voto!')
+            setIsVisible(true)
+            setTimeout(() => {
+              setIsVisible(false)
+            }, 4000)
+          }
+        } else {
+          // Si el usuario no había votado antes, registra su voto como dislike
+          await set(userVotesRef, { like: false, dislike: true })
+          await set(child(animeRef, 'dislikes'), currentDislikes + 1)
+          setIsVisible(true)
+          setTimeout(() => {
+            setIsVisible(false)
+          }, 4000)
+          setMessage('El voto fue registrado')
+        }
+        setFirstClick(false)
+      }
+    } catch (error) {
+      console.error('Error al actualizar los dislikes del anime:', error)
     }
   }
 
@@ -213,8 +277,14 @@ export function FetchSingleAnime({ data }) {
         </div>
         <div className='footer__image__anime'>
           <button
-            onClick={() => updateLikes(animeId, likes + 1, user?.uid, true)}>
+            onClick={() => updateLikes(animeId, user?.uid, true)}
+            className='btn__voto'>
             <AiTwotoneLike />
+          </button>
+          <button
+            onClick={() => updateDislikes(animeId, user?.uid, true)}
+            className='btn__voto'>
+            <AiTwotoneDislike />
           </button>
         </div>
       </section>
