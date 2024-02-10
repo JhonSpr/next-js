@@ -99,6 +99,7 @@
     width: 500px;
     background-color: #1b1a1f;
     border: 0;
+    outline: none !important;
     border-radius: 7px;
     color: #1283b8;
     transition: all 1s ease-out;
