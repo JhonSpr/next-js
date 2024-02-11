@@ -245,3 +245,19 @@
 .menu__navbar__user span {
   width: 50px;
 }
+
+.skeleton-loader {
+  background: linear-gradient(90deg, #222121 25%, #1b1a1a 50%, #202020 85%);
+  background-size: 200% 100% !important;
+  animation: loading 2.2s infinite alternate-reverse !important;
+  border-radius: 4px;
+}
+
+@keyframes loading {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}

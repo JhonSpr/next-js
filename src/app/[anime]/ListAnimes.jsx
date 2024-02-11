@@ -54,18 +54,20 @@ export function FetchSingleAnime({ data }) {
             await set(child(animeRef, 'likes'), currentLikes - 1)
             setMessage('El usuario eliminó su voto.')
             await set(userVotesRef, { like: false, dislike: false })
+
             setIsVisible(true)
             setRemove(true)
             setTimeout(() => {
               setIsVisible(false)
-              setRemove(false)
             }, 4000)
           } else if (!userVote.like && !userVote.dislike) {
             // Si el usuario no ha votado, se registra el like
             await set(child(animeRef, 'likes'), currentLikes + 1)
             setIsVisible(true)
+            setRemove(false)
             setTimeout(() => {
               setIsVisible(false)
+              setRemove(false)
             }, 4000)
             setMessage('El voto fue registrado')
             await set(userVotesRef, { like: true, dislike: false })
@@ -73,8 +75,10 @@ export function FetchSingleAnime({ data }) {
             // Si ya tiene un voto contrario, muestra un mensaje de alerta
             setMessage('Ya tienes un voto!')
             setIsVisible(true)
+            setRemove(true)
             setTimeout(() => {
               setIsVisible(false)
+              setRemove(false)
             }, 4000)
           }
         } else {
@@ -84,6 +88,7 @@ export function FetchSingleAnime({ data }) {
           setIsVisible(true)
           setTimeout(() => {
             setIsVisible(false)
+            setRemove(false)
           }, 4000)
           setMessage('El voto fue registrado')
         }
@@ -130,24 +135,26 @@ export function FetchSingleAnime({ data }) {
             setIsVisible(true)
             setTimeout(() => {
               setIsVisible(false)
+              setRemove(false)
             }, 4000)
+
             setMessage('El voto fue registrado')
             await set(userVotesRef, { like: false, dislike: true })
           } else {
-            // Si ya tiene un voto contrario, muestra un mensaje de alerta
             setMessage('Ya tienes un voto!')
             setIsVisible(true)
             setTimeout(() => {
               setIsVisible(false)
+              setRemove(true)
             }, 4000)
           }
         } else {
-          // Si el usuario no había votado antes, registra su voto como dislike
           await set(userVotesRef, { like: false, dislike: true })
           await set(child(animeRef, 'dislikes'), currentDislikes + 1)
           setIsVisible(true)
           setTimeout(() => {
             setIsVisible(false)
+            setRemove(false)
           }, 4000)
           setMessage('El voto fue registrado')
         }
@@ -278,12 +285,12 @@ export function FetchSingleAnime({ data }) {
         <div className='footer__image__anime'>
           <button
             onClick={() => updateLikes(animeId, user?.uid, true)}
-            className='btn__voto'>
+            className={`btn__voto ${theme === 'dark' ? 'dark' : ''}`}>
             <AiTwotoneLike />
           </button>
           <button
             onClick={() => updateDislikes(animeId, user?.uid, true)}
-            className='btn__voto'>
+            className={`btn__voto ${theme === 'dark' ? 'dark' : ''}`}>
             <AiTwotoneDislike />
           </button>
         </div>
@@ -291,7 +298,7 @@ export function FetchSingleAnime({ data }) {
 
       <section className={`container__information`}>
         <div className='info__anime'>
-          <div className='flex items-center'>
+          <div className='flex items-center rating'>
             <svg
               className='w-4 h-4 text-yellow-300 me-1'
               aria-hidden='true'

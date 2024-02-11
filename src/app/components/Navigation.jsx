@@ -30,7 +30,6 @@ function Navigation() {
   }, 600)
 
   useEffect(() => {
-    // Aplica las clases al body o a algún contenedor específico
     document.body.classList.remove('light', 'dark')
     document.body.classList.add(theme)
   }, [theme])
@@ -66,9 +65,6 @@ function Navigation() {
             alt=''
             style={{ width: '50px' }}
           />
-          <span className='self-center text-2xl font-semibold whitespace-nowrap dark:text-white'>
-            ANIMEz
-          </span>
         </a>
         <div className='flex md:order-2'>
           <button

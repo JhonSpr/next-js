@@ -80,3 +80,24 @@ html.dark {
   color: #fff !important;
   background-color: rgba(0, 0, 0, 0.3);
 }
+
+.btn__voto.dark {
+  background-color: #3c3c44 !important;
+  color: #111;
+}
+
+.controls.dark a {
+  background-color: #3c3c44 !important;
+}
+
+.btn_comments.dark {
+  background-color: #3c3c44 !important;
+}
+
+.card__anime.dark {
+  background-color: #3c3c44 !important;
+}
+
+.card__anime.dark .name__anime {
+  color: #ccc !important;
+}

@@ -16,13 +16,28 @@
     justify-content: center;
     place-content: center;
     min-height: 50dvh;
+    padding: 20px 0;
   }
 
   .list__animes .card__anime {
     width: calc(300px - 10px);
-    background-color: #1b1a1f;
+    background-color: #e0e0e0;
     border-radius: 7px;
     position: relative;
+    &:hover {
+      box-shadow: 2px 2px 7px 2px rgb(0, 0, 0);
+    }
+  }
+
+  .skeleton-loader.card__anime {
+    min-height: 400px;
+    width: calc(300px - 10px);
+    & > * {
+      display: none;
+    }
+    &:hover {
+      box-shadow: none !important;
+    }
   }
 
   .list__animes .card__anime .image__anime {
@@ -32,7 +47,7 @@
     image-rendering: optimizeSpeed;
   }
   .list__animes .card__anime .name__anime {
-    color: #c1c1c1;
+    color: #17171a;
     font-weight: 700;
     text-align: center;
     display: block;
@@ -217,18 +232,6 @@
     border-radius: 7px;
   }
 
-  .container__ main .container__image .rating__anime {
-    width: 100%;
-    height: fit-content;
-    display: flex;
-    gap: 6px;
-    place-content: center;
-    margin: 5px auto;
-    padding: 4px 12px;
-    background-color: #1a191767;
-    color: #000;
-    border-radius: 4px;
-  }
   .container__ main .container__information {
     width: 100%;
   }
@@ -252,7 +255,7 @@
     position: relative;
   }
   .container__ main .container__information .info__anime .wrapp__anime > span {
-    color: #000;
+    color: #000000;
     font-weight: bold;
     padding: 10px 0;
     text-transform: capitalize;
@@ -442,6 +445,8 @@
   }
   .container__iframe h4 {
     color: #1283b8;
+    font-size: 20px;
+    text-transform: capitalize;
   }
   .container__iframe iframe {
     width: 100%;
@@ -565,15 +570,17 @@
   .controls {
     display: flex;
     gap: 10px;
+    margin-top: 10px;
   }
   .controls a:nth-child(1),
   .controls a:nth-child(3) {
     width: 30%;
     background-color: #17171a;
     color: #c1c1c1;
-    text-align: center;
-    padding: 7px;
+    padding: 20px;
     border-radius: 7px;
+    place-content: center;
+    display: flex;
   }
   .controls a:nth-child(2) {
     width: 40%;
@@ -581,7 +588,9 @@
     color: #c1c1c1;
     text-align: center;
     border-radius: 7px;
-    padding: 7px;
+    padding: 20px;
+    place-content: center;
+    display: flex;
   }
 
   .user__botton {
@@ -592,6 +601,7 @@
   .container__card__user {
     position: absolute;
     top: 50px;
+    z-index: 3;
     width: 300px !important;
     height: 0;
     border: 0;

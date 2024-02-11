@@ -15,24 +15,25 @@ const DirectoryPage = ({
 }) => {
   return (
     <div className='container__'>
-      <Search />
-      <FilterMenu queryAños={años} queryGeneros={generos} />
-      <section className='list__animes'>
-        <title>Directorio | animesz</title>
-        <Suspense key={query + current_page} fallback={<LoaderSkeleton />}>
-          <AnimesFectching data={data.datos} />
-        </Suspense>
+      <Suspense>
+        <Search />
+        <FilterMenu queryAños={años} queryGeneros={generos} />
+        <section className='list__animes'>
+          <title>Directorio | animesz</title>
 
-        {data?.item == 0 ? <span>No hay resultados</span> : null}
-      </section>
-      <Pagination
-        current_page={Number(current_page)}
-        results={data?.item}
-        genre={generos}
-        año={años}
-        search={query}
-        estado={estados}
-      />
+          <AnimesFectching data={data.datos} />
+
+          {data?.item == 0 ? <span>No hay resultados</span> : null}
+        </section>
+        <Pagination
+          current_page={Number(current_page)}
+          results={data?.item}
+          genre={generos}
+          año={años}
+          search={query}
+          estado={estados}
+        />
+      </Suspense>
     </div>
   )
 }

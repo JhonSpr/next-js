@@ -1,10 +1,4 @@
-import { Suspense } from 'react'
-import Pagination from '../components/Pagination'
-import Search from './Search'
-import AnimesFectching from './animesFetch'
-import LoaderSkeleton from '../components/LoaderSkeleton'
 import { Request_Animes } from '../FetchingData/request_animes'
-import { FilterMenu } from '../components/Filters'
 import DirectoryPage from './DirectoryPage'
 export default async function page({ searchParams }) {
   const años = Array.isArray(searchParams?.años)

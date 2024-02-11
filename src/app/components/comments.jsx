@@ -56,7 +56,9 @@ export default function Comments({
   return (
     <div className={`comments `} style={{ marginTop: marginTop }}>
       <a
-        className={`btn_comments ${noButton ? 'disable' : ''}`}
+        className={`btn_comments ${noButton ? 'disable' : ''} ${
+          theme === 'dark' ? 'dark' : ''
+        }`}
         onClick={handleShowComments}>
         {showComments ? 'Ocultar Comentarios' : 'Mostrar Comentarios'}
       </a>
