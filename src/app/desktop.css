@@ -21,6 +21,7 @@
 
   .list__animes .card__anime {
     width: calc(300px - 10px);
+    height: 500px;
     background-color: #e0e0e0;
     border-radius: 7px;
     position: relative;
