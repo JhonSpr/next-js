@@ -4,14 +4,14 @@ import { FaBars } from 'react-icons/fa6'
 import { useDebouncedCallback } from 'use-debounce'
 import { IoMdClose } from 'react-icons/io'
 import { FaSearch, FaUserCircle } from 'react-icons/fa'
-import { Button } from '@nextui-org/react'
 import { ThemeSwitcher } from './ThemeSwitcher'
 import { contextApp } from '../providers'
-import LogoutButton from './logout'
 import { useCookies, withCookies } from 'react-cookie'
 import { useTheme } from 'next-themes'
 import { signOut } from 'firebase/auth'
 import { auth } from '../firebase'
+import Register from './RegisterComponent'
+import { Login } from './LoginComponent'
 const hrefs = [
   { label: 'Inicio', route: '/' },
   { label: 'Animes', route: '/directorio' },
@@ -22,6 +22,8 @@ function Navigation() {
   const [search, setSearch] = useState('')
   const [cookie, setCookie, removeCookie] = useCookies()
   const [showMenu, setShowMenu] = useState(false)
+  const [loginPage, setLoginPage] = useState(null)
+  const [registerPage, setRegisterPage] = useState(null)
   const { theme } = useTheme()
   const { user } = useContext(contextApp)
 
@@ -43,13 +45,10 @@ function Navigation() {
       removeCookie(`username`)
       removeCookie(`like${animeName}`)
       removeCookie(`dislike${animeName}`)
-
-      setTimeout(() => {
-        location.replace(location.pathname)
-      }, 600)
     } catch (error) {
       console.error('Error al cerrar sesión:', error)
     }
+    setShowMenu(false)
   }
 
   const handleShowMenu = () => {
@@ -170,17 +169,29 @@ function Navigation() {
               {!user ? (
                 <div className='flex flex-col items-center pb-10'>
                   <h5 className='mb-1 text-xl font-medium text-gray-900 dark:text-white'>
-                    Registrar o Inicia sesión
+                    Ingresar/Registrarse
                   </h5>
                   <span className='text-sm text-gray-500 dark:text-gray-400'>
                     {user?.displayName}
                   </span>
                   <div className='flex mt-4 md:mt-6'>
-                    <button className='inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:outline-none  dark:bg-blue-600 dark:hover:bg-blue-700 '>
+                    <button
+                      className='inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:outline-none  dark:bg-blue-600 dark:hover:bg-blue-700 '
+                      onClick={() => (
+                        setLoginPage(!loginPage),
+                        setRegisterPage(false),
+                        setShowMenu(false)
+                      )}>
                       Ingresar
                     </button>
-                    <button className='inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:outline-none dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700  ms-3'>
-                      Restrarse
+                    <button
+                      className='inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:outline-none dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700  ms-3'
+                      onClick={() => (
+                        setRegisterPage(!registerPage),
+                        setLoginPage(false),
+                        setShowMenu(false)
+                      )}>
+                      Registrase
                     </button>
                   </div>
                 </div>
@@ -320,6 +331,21 @@ function Navigation() {
           </ul>
         </div>
       </div>
+
+      {loginPage ? (
+        <Login
+          setLoginPage={setLoginPage}
+          setRegisterPage={setRegisterPage}
+          setShowMenu={setShowMenu}
+        />
+      ) : null}
+      {registerPage ? (
+        <Register
+          setLoginPage={setLoginPage}
+          setRegisterPage={setRegisterPage}
+          setShowMenu={setShowMenu}
+        />
+      ) : null}
     </nav>
   )
 }
