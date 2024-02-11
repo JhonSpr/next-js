@@ -104,7 +104,7 @@ export default function Pagination({
           </li>
           {pageNumber
             ?.map((i) => (
-              <li>
+              <li key={i}>
                 <a
                   href={url + `page=${i}`}
                   aria-current={i === current_page ? i : 'none'}

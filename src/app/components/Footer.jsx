@@ -54,7 +54,7 @@ const Footer = () => {
                     gap: '5px',
                   }}>
                   {años?.map((e) => (
-                    <li class='mb-4'>
+                    <li class='mb-4' key={e}>
                       <a
                         href={`/directorio?años=${e.value}`}
                         class='hover:underline '>
