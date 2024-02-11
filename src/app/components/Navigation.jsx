@@ -81,9 +81,9 @@ function Navigation() {
               viewBox='0 0 20 20'>
               <path
                 stroke='currentColor'
-                stroke-linecap='round'
-                stroke-linejoin='round'
-                stroke-width='2'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                strokeWidth='2'
                 d='m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z'
               />
             </svg>
@@ -92,18 +92,18 @@ function Navigation() {
           <div className='user__botton'>
             {!user ? (
               <div
-                class='relative w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600'
+                className='relative w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600'
                 style={{ marginRight: '10px' }}
                 onClick={handleShowMenu}>
                 <svg
-                  class='absolute w-12 h-12 text-gray-400 -left-1'
+                  className='absolute w-12 h-12 text-gray-400 -left-1'
                   fill='currentColor'
                   viewBox='0 0 20 20'
                   xmlns='http://www.w3.org/2000/svg'>
                   <path
-                    fill-rule='evenodd'
+                    fillRule='evenodd'
                     d='M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z'
-                    clip-rule='evenodd'></path>
+                    clipRule='evenodd'></path>
                 </svg>
               </div>
             ) : (
@@ -120,18 +120,18 @@ function Navigation() {
             )}
 
             <div
-              class={`w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 container__card__user ${
+              className={`w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 container__card__user ${
                 showMenu ? 'show' : ''
               }`}>
-              <div class='flex justify-end px-4 pt-4'>
+              <div className='flex justify-end px-4 pt-4'>
                 {/* <button
                 id='dropdownButton'
                 data-dropdown-toggle='dropdown'
-                class='inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5'
+                className='inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5'
                 type='button'>
-                <span class='sr-only'>Open dropdown</span>
+                <span className='sr-only'>Open dropdown</span>
                 <svg
-                  class='w-5 h-5'
+                  className='w-5 h-5'
                   aria-hidden='true'
                   xmlns='http://www.w3.org/2000/svg'
                   fill='currentColor'
@@ -141,26 +141,26 @@ function Navigation() {
               </button> */}
                 <div
                   id='dropdown'
-                  class='z-10 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700'>
-                  <ul class='py-2' aria-labelledby='dropdownButton'>
+                  className='z-10 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700'>
+                  <ul className='py-2' aria-labelledby='dropdownButton'>
                     <li>
                       <a
                         href='#'
-                        class='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white'>
+                        className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white'>
                         Edit
                       </a>
                     </li>
                     <li>
                       <a
                         href='#'
-                        class='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white'>
+                        className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white'>
                         Export Data
                       </a>
                     </li>
                     <li>
                       <a
                         href='#'
-                        class='block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white'>
+                        className='block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white'>
                         Delete
                       </a>
                     </li>
@@ -168,51 +168,51 @@ function Navigation() {
                 </div>
               </div>
               {!user ? (
-                <div class='flex flex-col items-center pb-10'>
-                  <h5 class='mb-1 text-xl font-medium text-gray-900 dark:text-white'>
+                <div className='flex flex-col items-center pb-10'>
+                  <h5 className='mb-1 text-xl font-medium text-gray-900 dark:text-white'>
                     Registrar o Inicia sesión
                   </h5>
-                  <span class='text-sm text-gray-500 dark:text-gray-400'>
+                  <span className='text-sm text-gray-500 dark:text-gray-400'>
                     {user?.displayName}
                   </span>
-                  <div class='flex mt-4 md:mt-6'>
+                  <div className='flex mt-4 md:mt-6'>
                     <a
                       href='/auth/login'
-                      class='inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'>
+                      className='inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'>
                       Ingresar
                     </a>
                     <a
                       href='/auth/register'
-                      class='inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700 ms-3'>
+                      className='inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700 ms-3'>
                       Restrarse
                     </a>
                   </div>
                 </div>
               ) : (
-                <div class={`flex flex-col items-center pb-10 `}>
+                <div className={`flex flex-col items-center pb-10 `}>
                   <img
-                    class='w-24 h-24 mb-3 rounded-full shadow-lg'
+                    className='w-24 h-24 mb-3 rounded-full shadow-lg'
                     src={
                       user?.photoURL ??
                       'https://i.postimg.cc/MGT3117z/avatars-000477344763-dvv5lr-t500x500.jpg'
                     }
                     alt='Bonnie image'
                   />
-                  <h5 class='mb-1 text-xl font-medium text-gray-900 dark:text-white'>
+                  <h5 className='mb-1 text-xl font-medium text-gray-900 dark:text-white'>
                     usuario
                   </h5>
-                  <span class='text-sm text-gray-500 dark:text-gray-400'>
+                  <span className='text-sm text-gray-500 dark:text-gray-400'>
                     {user?.displayName}
                   </span>
-                  <div class='flex mt-4 md:mt-6'>
+                  <div className='flex mt-4 md:mt-6'>
                     <a
                       href='#'
-                      class='inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'>
+                      className='inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'>
                       Mi lista
                     </a>
                     <button
                       onClick={logout}
-                      class='inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700 ms-3'>
+                      className='inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700 ms-3'>
                       Cerrar sesión
                     </button>
                   </div>
@@ -252,7 +252,7 @@ function Navigation() {
             </form>
           </div>
           <button
-            data-collapse-toggle='navbar-search'
+            datacollapsetoggle='navbar-search'
             type='button'
             className='inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600'
             aria-controls='navbar-search'
@@ -306,8 +306,8 @@ function Navigation() {
             </form>
           </div>
           <ul className='flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700'>
-            {hrefs.flatMap(({ route, label }) => (
-              <li>
+            {hrefs.map(({ route, label }) => (
+              <li key={route}>
                 <a
                   href={route}
                   className={

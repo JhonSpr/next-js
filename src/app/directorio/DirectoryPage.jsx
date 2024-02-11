@@ -1,5 +1,4 @@
 import React, { Suspense } from 'react'
-import LoaderSkeleton from '../components/LoaderSkeleton'
 import AnimesFectching from './animesFetch'
 import Search from './Search'
 import { FilterMenu } from '../components/Filters'
@@ -15,25 +14,24 @@ const DirectoryPage = ({
 }) => {
   return (
     <div className='container__'>
-      <Suspense>
-        <Search />
-        <FilterMenu queryAños={años} queryGeneros={generos} />
-        <section className='list__animes'>
-          <title>Directorio | animesz</title>
-
+      <Search />
+      <FilterMenu queryAños={años} queryGeneros={generos} />
+      <section className='list__animes'>
+        <title>Directorio | animesz</title>
+        <Suspense key={query + current_page + años + generos + data + estados}>
           <AnimesFectching data={data.datos} />
 
           {data?.item == 0 ? <span>No hay resultados</span> : null}
-        </section>
-        <Pagination
-          current_page={Number(current_page)}
-          results={data?.item}
-          genre={generos}
-          año={años}
-          search={query}
-          estado={estados}
-        />
-      </Suspense>
+        </Suspense>
+      </section>
+      <Pagination
+        current_page={Number(current_page)}
+        results={data?.item}
+        genre={generos}
+        año={años}
+        search={query}
+        estado={estados}
+      />
     </div>
   )
 }

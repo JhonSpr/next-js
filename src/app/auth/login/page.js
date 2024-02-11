@@ -70,14 +70,6 @@ const Login = () => {
     }
   }
 
-  const handleToggleLogin = () => {
-    setLogin(!login)
-  }
-
-  const handleShowpassword = () => {
-    setShowpassword(!showPassword)
-  }
-
   const handleKeyPress = (event) => {
     if (event.key === 'Enter') {
       handleLogin()
@@ -85,6 +77,47 @@ const Login = () => {
   }
   return (
     <>
+      <div class='container__'>
+        <div>
+          <label
+            id='#'
+            for='first_name'
+            class='block mb-2 text-sm font-medium text-gray-900 dark:text-white'>
+            Correo electronico
+          </label>
+          <input
+            type='text'
+            placeholder={`correo electronico`}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            onKeyDown={handleKeyPress}
+            required
+            minLength={1}
+            class='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+          />
+        </div>
+        <br />
+        <div>
+          <label
+            for='password'
+            class='block mb-2 text-sm font-medium text-gray-900 dark:text-white'>
+            Password
+          </label>
+          <input
+            type='password'
+            id='password'
+            class='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+            placeholder='•••••••••'
+            required
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            autoComplete='off'
+            onKeyDown={handleKeyPress}
+          />
+        </div>
+        <div />
+      </div>
+
       <title>Iniciar Sesión</title>
       {login && (
         <div className={login ? `login__page show` : 'login__page'}>
@@ -102,23 +135,7 @@ const Login = () => {
             ) : null}
             <h2>{login ? 'Iniciar Sesión' : 'Registrarse'}</h2>
 
-            <input
-              type='text'
-              placeholder={`correo electronico`}
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              onKeyDown={handleKeyPress}
-            />
             <label htmlFor=''>
-              <FaEye
-                className={showPassword ? 'icon__' : 'disable'}
-                onClick={handleShowpassword}
-              />
-
-              <FaEyeSlash
-                className={showPassword ? 'disable' : 'icon__'}
-                onClick={handleShowpassword}
-              />
               <input
                 type={showPassword ? 'text' : 'password'}
                 placeholder='contraseña'
@@ -150,6 +167,7 @@ const Login = () => {
             <br />
             <br />
             <br />
+
             <button onClick={() => router.push('/auth/register')}>
               registrarse
             </button>
