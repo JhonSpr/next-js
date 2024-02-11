@@ -1,13 +1,13 @@
+// app/components/ThemeSwitcher.tsx
 'use client'
+
 import { useTheme } from 'next-themes'
 import { useEffect, useState } from 'react'
 import { FaMoon, FaSun } from 'react-icons/fa'
 
 export function ThemeSwitcher() {
   const [mounted, setMounted] = useState(false)
-  const { setTheme } = useTheme()
-
-  const theme = localStorage.getItem('theme')
+  const { theme, setTheme } = useTheme()
 
   return (
     <label className='relative inline-flex items-center cursor-pointer'>
