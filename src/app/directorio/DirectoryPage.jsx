@@ -16,7 +16,7 @@ const DirectoryPage = ({
     <div className='container__'>
       <Search />
       <FilterMenu queryAños={años} queryGeneros={generos} />
-      <section className='list__animes'>
+      <section className='list__animes' style={{ minHeight: '80dvh' }}>
         <title>Directorio | animesz</title>
         <Suspense key={query + current_page + años + generos + data + estados}>
           <AnimesFectching data={data.datos} />

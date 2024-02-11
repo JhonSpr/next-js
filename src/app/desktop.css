@@ -25,13 +25,10 @@
     background-color: #e0e0e0;
     border-radius: 7px;
     position: relative;
-    &:hover {
-      box-shadow: 2px 2px 7px 2px rgb(0, 0, 0);
-    }
   }
 
   .skeleton-loader.card__anime {
-    min-height: 400px;
+    height: 500px;
     width: calc(300px - 10px);
     & > * {
       display: none;

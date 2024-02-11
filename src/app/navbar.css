@@ -1,13 +1,6 @@
-.navbar {
-  background-color: #1b1a1f;
-  height: 100px;
-  & .nav-link {
-    color: #fff !important;
-    &:hover {
-      color: #1283b8 !important;
-    }
-  }
-  & .navbar-brand {
-    color: #1283b8 !important;
-  }
+.black {
+  color: #1283b8 !important;
+  background-color: #1283b8 !important;
+  outline: none !important;
+  border: 0 !important;
 }
