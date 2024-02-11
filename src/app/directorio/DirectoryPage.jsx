@@ -18,7 +18,7 @@ const DirectoryPage = ({
       <FilterMenu queryAños={años} queryGeneros={generos} />
       <section className='list__animes' style={{ minHeight: '80dvh' }}>
         <title>Directorio | animesz</title>
-        <Suspense key={query + current_page + años + generos + data + estados}>
+        <Suspense>
           <AnimesFectching data={data.datos} />
 
           {data?.item == 0 ? <span>No hay resultados</span> : null}

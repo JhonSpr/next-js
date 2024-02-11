@@ -72,7 +72,7 @@ function Navigation() {
             data-collapse-toggle='navbar-search'
             aria-controls='navbar-search'
             aria-expanded='false'
-            className='md:hidden text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 me-1'>
+            className='md:hidden text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none rounded-lg text-sm p-2.5 me-1'>
             <svg
               className='w-5 h-5'
               aria-hidden='true'
@@ -124,21 +124,21 @@ function Navigation() {
                 showMenu ? 'show' : ''
               }`}>
               <div className='flex justify-end px-4 pt-4'>
-                {/* <button
-                id='dropdownButton'
-                data-dropdown-toggle='dropdown'
-                className='inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5'
-                type='button'>
-                <span className='sr-only'>Open dropdown</span>
-                <svg
-                  className='w-5 h-5'
-                  aria-hidden='true'
-                  xmlns='http://www.w3.org/2000/svg'
-                  fill='currentColor'
-                  viewBox='0 0 16 3'>
-                  <path d='M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z' />
-                </svg>
-              </button> */}
+                <button
+                  id='dropdownButton'
+                  data-dropdown-toggle='dropdown'
+                  className='inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none rounded-lg text-sm p-1.5'
+                  type='button'>
+                  <span className='sr-only'>Open dropdown</span>
+                  <svg
+                    className='w-5 h-5'
+                    aria-hidden='true'
+                    xmlns='http://www.w3.org/2000/svg'
+                    fill='currentColor'
+                    viewBox='0 0 16 3'>
+                    <path d='M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z' />
+                  </svg>
+                </button>
                 <div
                   id='dropdown'
                   className='z-10 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700'>
@@ -176,16 +176,12 @@ function Navigation() {
                     {user?.displayName}
                   </span>
                   <div className='flex mt-4 md:mt-6'>
-                    <a
-                      href='/auth/login'
-                      className='inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'>
+                    <button className='inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:outline-none  dark:bg-blue-600 dark:hover:bg-blue-700 '>
                       Ingresar
-                    </a>
-                    <a
-                      href='/auth/register'
-                      className='inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700 ms-3'>
+                    </button>
+                    <button className='inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:outline-none dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700  ms-3'>
                       Restrarse
-                    </a>
+                    </button>
                   </div>
                 </div>
               ) : (
@@ -207,12 +203,12 @@ function Navigation() {
                   <div className='flex mt-4 md:mt-6'>
                     <a
                       href='#'
-                      className='inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'>
+                      className='inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:outline-none dark:bg-blue-600 dark:hover:bg-blue-700 '>
                       Mi lista
                     </a>
                     <button
                       onClick={logout}
-                      className='inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700 ms-3'>
+                      className='inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:outline-none  dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700  ms-3'>
                       Cerrar sesión
                     </button>
                   </div>
@@ -252,9 +248,9 @@ function Navigation() {
             </form>
           </div>
           <button
-            datacollapsetoggle='navbar-search'
+            data-collapse-toggle='navbar-search'
             type='button'
-            className='inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600'
+            className='inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none dark:text-gray-400 dark:hover:bg-gray-700'
             aria-controls='navbar-search'
             aria-expanded='false'>
             <span className='sr-only'>Open main menu</span>
@@ -300,7 +296,7 @@ function Navigation() {
                 id='search-navbar'
                 name='q'
                 autoComplete='off'
-                className='block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                className='block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white'
                 placeholder='buscar un anime...'
               />
             </form>
