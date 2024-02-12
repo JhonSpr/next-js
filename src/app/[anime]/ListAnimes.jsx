@@ -357,7 +357,7 @@ export function FetchSingleAnime({ data }) {
       <section className={`container__information`}>
         <div className='info__anime'>
           <button
-            className={`btn__favorite ${
+            className={`btn__favorite ${theme === 'dark' ? 'dark' : ''} ${
               favoritos.some((objeto) => objeto?.name === e.name)
                 ? 'active'
                 : ''
