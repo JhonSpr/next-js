@@ -170,27 +170,27 @@ export function FetchSingleAnime({ data }) {
     }
   }
 
-  async function writeAnimesData(animeId, name) {
-    try {
-      const db = getDatabase()
-      const animeRef = ref(db, `animes/${animeId}`)
+  // async function writeAnimesData(animeId, name) {
+  //   try {
+  //     const db = getDatabase()
+  //     const animeRef = ref(db, `animes/${animeId}`)
 
-      const snapshot = await get(child(animeRef, 'anime'))
-      const existingAnime = snapshot.val()
+  //     const snapshot = await get(child(animeRef, 'anime'))
+  //     const existingAnime = snapshot.val()
 
-      if (!existingAnime) {
-        await set(animeRef, {
-          anime: name,
-          likes: 0,
-          dislikes: 0,
-          visitas: 0,
-        })
-      } else {
-      }
-    } catch (error) {
-      console.error('Error al escribir los datos:', error)
-    }
-  }
+  //     if (!existingAnime) {
+  //       await set(animeRef, {
+  //         anime: name,
+  //         likes: 0,
+  //         dislikes: 0,
+  //         visitas: 0,
+  //       })
+  //     } else {
+  //     }
+  //   } catch (error) {
+  //     console.error('Error al escribir los datos:', error)
+  //   }
+  // }
 
   const fetchData = async () => {
     try {
