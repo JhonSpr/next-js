@@ -4,14 +4,17 @@ import { useContext, useEffect, useState } from 'react'
 import { contextApp } from '../providers'
 import Comments from '../components/comments'
 import { child, get, getDatabase, onValue, ref, set } from 'firebase/database'
-import { calcularRating } from '../auth/[user]/page'
 import { AiTwotoneLike, AiTwotoneDislike } from 'react-icons/ai'
 import Alert from '../components/Alert'
+import { calcularRating } from '../user/[idUser]/userPage'
+import { IoMdAdd } from 'react-icons/io'
+import { MdAdd } from 'react-icons/md'
 
 export function FetchSingleAnime({ data }) {
   const name = data?.map((e) => e.name?.replace(/ /g, '-'))
   const animeId = data?.map((e) => e.id)
   const [loading, setLoading] = useState([])
+  const [favoritos, setFavoritos] = useState([])
   const [likes, setLikes] = useState(null)
   const [dislikes, setDislikes] = useState(null)
   const [rating, setRating] = useState(null)
@@ -22,7 +25,6 @@ export function FetchSingleAnime({ data }) {
   const [noLogged, setNoLogged] = useState(Boolean)
   const [votos, setVotos] = useState(Number)
   const { theme, user } = useContext(contextApp)
-  const [userVote, setUserVote] = useState(null)
   const [firstClick, setFirstClick] = useState(true)
 
   useEffect(() => {
@@ -199,6 +201,7 @@ export function FetchSingleAnime({ data }) {
       const snapshot = await get(userRef)
       const userData = snapshot?.val() || {}
       const vistosRecientes = userData?.vistos_reciente || []
+      const favoritos = userData?.favoritos || []
 
       // Verificar si el objeto ya existe en vistosRecientes
       const objetoExistente = vistosRecientes.find(
@@ -208,8 +211,8 @@ export function FetchSingleAnime({ data }) {
       if (!objetoExistente) {
         // Si el objeto no existe, agregarlo
         set(ref(db, 'users/' + user?.uid), {
-          nombre: user?.displayName || '',
-          mi_lista: [''],
+          nombre: user?.displayName || 'undefined',
+          favoritos: [...favoritos],
           vistos_reciente: [...vistosRecientes, object],
         })
       } else {
@@ -242,17 +245,81 @@ export function FetchSingleAnime({ data }) {
     }
   }
 
+  const cargarDataUser = async () => {
+    try {
+      const db = getDatabase()
+      const userRef = ref(db, 'users/' + user?.uid)
+      const snapshot = await get(userRef)
+      const userData = snapshot?.val() || {}
+      setFavoritos(userData.favoritos || [])
+    } catch (error) {
+      console.error('Error al agregar/eliminar anime de favoritos:', error)
+    }
+  }
+  const agregarFavoritos = async (name, image) => {
+    try {
+      const db = getDatabase()
+      const userRef = ref(db, 'users/' + user?.uid)
+      const snapshot = await get(userRef)
+      const userData = snapshot?.val() || {}
+      const vistosRecientes = userData?.vistos_reciente || []
+      const favoritos = userData?.favoritos || []
+      const objetoExistenteIndex = favoritos.findIndex(
+        (objeto) => objeto?.name === name
+      )
+
+      if (objetoExistenteIndex === -1) {
+        // Si el anime no está en favoritos, lo agregamos
+        await set(userRef, {
+          nombre: user?.displayName || 'undefined',
+          vistos_reciente: [...vistosRecientes],
+          favoritos: [...favoritos, { name, image }],
+        })
+        setMessage('Agregado a favoritos')
+        setIsVisible(true)
+
+        const idTimer = setTimeout(() => {
+          setIsVisible(false)
+        }, 4000)
+
+        setFavoritos(userData.favoritos || [])
+      } else {
+        // Si el anime ya está en favoritos, lo eliminamos
+        favoritos.splice(objetoExistenteIndex, 1)
+        await set(userRef, {
+          nombre: user?.displayName || 'undefined',
+          vistos_reciente: [...vistosRecientes],
+          favoritos: favoritos,
+        })
+        setMessage('Eliminado de favoritos')
+        setIsVisible(true)
+        setRemove(true)
+        const idTimer = setTimeout(() => {
+          setIsVisible(false)
+          setRemove(false)
+        }, 4000)
+        setFavoritos(userData.favoritos || [])
+      }
+      setFirstClick(false)
+    } catch (error) {
+      console.error('Error al agregar/eliminar anime de favoritos:', error)
+    }
+  }
+
+  console.log(isVisible)
+
   useEffect(() => {
     if ((user !== undefined && user !== null) || !user) {
       agregarValorAVistosRecientes(data[0].name, data[0].image)
       fetchData()
       writeAnimesData(animeId, data[0].name)
+      cargarDataUser()
     }
   }, [data, user, message])
 
   useEffect(() => {
     setRating(calcularRating(likes, dislikes))
-  }, [datos])
+  }, [datos, message])
 
   const handleClose = () => {
     setIsVisible(false)
@@ -274,6 +341,7 @@ export function FetchSingleAnime({ data }) {
       </div>
     )
   }
+
   return data?.map((e, index) => (
     <main
       className={`information__page ${theme === 'dark' ? 'dark ' : ''}`}
@@ -298,6 +366,18 @@ export function FetchSingleAnime({ data }) {
 
       <section className={`container__information`}>
         <div className='info__anime'>
+          <button
+            className='btn__favorite'
+            onClick={() => agregarFavoritos(e.name, e.image)}>
+            <span>
+              <span className='menssage'>
+                {favoritos.some((objeto) => objeto?.name === e.name)
+                  ? 'Eliminar favoritos'
+                  : 'Agregar a favoritos'}
+              </span>
+              <MdAdd />
+            </span>
+          </button>
           <div className='flex items-center rating'>
             <svg
               className='w-4 h-4 text-yellow-300 me-1'

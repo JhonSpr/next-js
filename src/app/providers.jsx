@@ -6,6 +6,7 @@ import { ThemeProvider as NextThemesProvider, useTheme } from 'next-themes'
 import { createContext, useContext, useEffect, useState } from 'react'
 import { useCookies } from 'react-cookie'
 import { auth } from './firebase'
+import { get, getDatabase, ref } from 'firebase/database'
 
 export const contextApp = createContext()
 export const ContextProvider = ({ children }) => {
@@ -16,6 +17,7 @@ export const ContextProvider = ({ children }) => {
   const [userProfilePhoto, setUserProfilePhoto] = useState(null)
   const [dataUser, setDataUser] = useState(null)
   const { theme } = useTheme()
+  const [favoritos, setFavoritos] = useState([])
 
   useEffect(() => {
     if (ejecuciones < 3) {
@@ -31,21 +33,24 @@ export const ContextProvider = ({ children }) => {
     return () => unsubscribe()
   }, [ejecuciones])
 
-  // useEffect(() => {
-  //   if (user !== null) {
-  //     setCookie('username', user?.displayName, { path: '/' })
-  //   }
-  //   setDataUser(
-  //     JSON.parse(
-  //       localStorage.getItem(
-  //         `firebase:authUser:AIzaSyDHfPcbbo2zg-Hqc-rDp3qgHJ9kj9EtaT8:[DEFAULT]`
-  //       )
-  //     )
-  //   )
-  // }, [ejecuciones])
   const updateUserProfilePhoto = (photoUrl) => {
     setUserProfilePhoto(photoUrl)
   }
+
+  useEffect(() => {
+    const cargarDataUser = async () => {
+      try {
+        const db = getDatabase()
+        const userRef = ref(db, 'users/' + user?.uid)
+        const snapshot = await get(userRef)
+        const userData = snapshot?.val() || {}
+        setFavoritos(userData.favoritos || [])
+      } catch (error) {
+        console.error('Error al agregar/eliminar anime de favoritos:', error)
+      }
+    }
+    cargarDataUser()
+  }, [user])
 
   const contextValue = {
     user,
@@ -54,6 +59,7 @@ export const ContextProvider = ({ children }) => {
     updateUserProfilePhoto,
     userProfilePhoto,
     user,
+    favoritos,
   }
   return (
     <contextApp.Provider value={contextValue}>{children}</contextApp.Provider>

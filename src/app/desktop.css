@@ -230,6 +230,37 @@
     border-radius: 7px;
   }
 
+  .container__ main .info__anime .btn__favorite {
+    position: absolute;
+    font-size: 30px;
+    text-transform: capitalize;
+    padding: 2px 20px;
+    border-radius: 6px;
+    right: 0;
+    background-color: #323235;
+    transition: all 0.2s ease-out;
+    &:hover {
+      background-color: #1b1a1f;
+    }
+
+    &:hover .menssage {
+      width: 170px;
+      height: 25px;
+    }
+    & span {
+      display: flex;
+    }
+  }
+
+  .container__ main .info__anime .btn__favorite .menssage {
+    font-size: 17px;
+    padding-top: 2px;
+    width: 0;
+    height: 25px;
+    overflow: hidden;
+    transition: all 0.2s ease-out;
+  }
+
   .container__ main .container__information {
     width: 100%;
   }
@@ -240,6 +271,7 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+    position: relative;
   }
   .container__ main .container__information .info__anime .title__anime {
     font-size: 30px;
