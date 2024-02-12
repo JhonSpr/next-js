@@ -27,6 +27,7 @@ export function FetchSingleAnime({ data }) {
   const { theme, user } = useContext(contextApp)
   const [firstClick, setFirstClick] = useState(true)
   const [votosList, setVotosList] = useState({})
+  const nameID = data?.map((e) => e.anime?.replace(/ /g, ' '))[0]
 
   useEffect(() => {
     setLoading(true)
@@ -195,7 +196,7 @@ export function FetchSingleAnime({ data }) {
   const fetchData = async () => {
     try {
       const response = await fetch(
-        `https://animesz-f90c0-default-rtdb.firebaseio.com/animes/${animeId}.json`
+        `https://animesz-f90c0-default-rtdb.firebaseio.com/animes/${nameID}.json`
       )
       if (!response.ok) {
         throw new Error('Error al recuperar los datos')
@@ -212,8 +213,6 @@ export function FetchSingleAnime({ data }) {
       return null
     }
   }
-
-  const nameID = data?.map((e) => e.anime?.replace(/ /g, ' '))[0]
 
   const cargarDataUser = async () => {
     try {
