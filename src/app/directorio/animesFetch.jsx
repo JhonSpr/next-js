@@ -1,16 +1,23 @@
 'use client'
 
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { contextApp } from '../providers'
 
-export default async function AnimesFectching({ data }) {
+export default function AnimesFectching({ data }) {
   const { theme } = useContext(contextApp)
+  const [loading, setLoading] = useState(false)
+  useEffect(() => {
+    setLoading(true)
+    setTimeout(() => {
+      setLoading(false)
+    }, 600)
+  }, [])
 
   return [
     data?.map((e, index) => (
       <article
         className={`card__anime ${theme === 'dark' ? 'dark' : ''} ${
-          theme === undefined ? 'skeleton-loader' : ''
+          loading || theme == undefined ? 'skeleton-loader' : ''
         }`}
         key={index}>
         <a href={`/${e.name.replace(/ /g, '-')}`}>
