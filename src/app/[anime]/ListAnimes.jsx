@@ -15,15 +15,15 @@ export function FetchSingleAnime({ data }) {
   const animeId = data?.map((e) => e.id?.toLowerCase())
   const [loading, setLoading] = useState([])
   const [favoritos, setFavoritos] = useState([])
-  const [likes, setLikes] = useState(null) || 0
-  const [dislikes, setDislikes] = useState(null) || 0
+  const [likes, setLikes] = useState(0) || 0
+  const [dislikes, setDislikes] = useState(0) || 0
   const [rating, setRating] = useState(null)
   const [datos, setDatos] = useState(null)
   const [isVisible, setIsVisible] = useState(null)
   const [message, setMessage] = useState(String)
   const [remove, setRemove] = useState(Boolean)
   const [noLogged, setNoLogged] = useState(Boolean)
-  const [votos, setVotos] = useState(Number)
+  const [votos, setVotos] = useState(Number) || 0
   const { theme, user } = useContext(contextApp)
   const [firstClick, setFirstClick] = useState(true)
   const [votosList, setVotosList] = useState({})
