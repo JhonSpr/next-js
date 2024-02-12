@@ -116,10 +116,7 @@ export function FetchSingleAnime({ data }) {
       } else {
         const db = getDatabase()
         const animeRef = ref(db, `animes/${animeId}`)
-        const userVotesRef = ref(
-          db,
-          `usersVotes/${userId}/${name.replace(/-/g, ' ').toLowerCase()}`
-        )
+        const userVotesRef = ref(db, `usersVotes/${userId}/${animeId}`)
         const userVoteSnapshot = await get(userVotesRef)
         const userVote = userVoteSnapshot.val()
         const dislikesSnapshot = await get(child(animeRef, 'dislikes'))
