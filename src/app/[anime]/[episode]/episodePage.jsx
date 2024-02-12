@@ -7,8 +7,10 @@ import { useContext, useEffect, useState } from 'react'
 import { FaArrowRight, FaList } from 'react-icons/fa6'
 import { FaArrowLeft } from 'react-icons/fa'
 import { contextApp } from '@/app/providers'
+import { get, getDatabase, ref, set } from 'firebase/database'
 
 function EpisodePage({ name, episode }) {
+  const { user } = useContext(contextApp)
   const [animes, setAnimes] = useState([])
   const [lastEpisodes, setLastEpisodes] = useState([])
   useEffect(() => {
@@ -20,6 +22,56 @@ function EpisodePage({ name, episode }) {
   const services2 = services?.map((i) => i?.[dynamicCapKey])
   const servicesList = services2[0]?.map((i) => i)
   const { theme } = useContext(contextApp)
+  const image = animes?.datos?.map((e) => e.image)
+  const agregarValorAVistosRecientes = async (name, image) => {
+    try {
+      const db = getDatabase()
+      const object = {
+        url: `${location?.pathname}`,
+        name: name,
+        image: image[0],
+        episode: episode,
+      }
+
+      if (name && image && episode) {
+        const userRef = ref(db, 'users/' + user?.uid)
+        const snapshot = await get(userRef)
+        const userData = snapshot?.val() || {}
+        const vistosRecientes = userData?.vistos_reciente || []
+        const favoritos = userData?.favoritos || []
+
+        // Verificar si el objeto ya existe en vistosRecientes
+        const objetoExistente = vistosRecientes.find(
+          (objeto) => objeto?.name === name && objeto?.episode === episode
+        )
+
+        if (!objetoExistente) {
+          // Si el objeto no existe, agregarlo
+          await set(ref(db, 'users/' + user?.uid), {
+            nombre: user?.displayName || 'undefined',
+            favoritos: [...favoritos],
+            vistos_reciente: [...vistosRecientes, object],
+          })
+          console.log('Objeto agregado a vistosRecientes:', object)
+        } else {
+          console.log('El objeto ya existe en vistosRecientes:', object)
+        }
+      } else {
+        console.error('name, image y episode deben estar definidos.')
+      }
+    } catch (error) {
+      console.error('Error al agregar el objeto a vistosRecientes:', error)
+    }
+  }
+
+  useEffect(() => {
+    if (
+      (user !== undefined && user !== null) ||
+      (!user && animes === undefined && animes === null)
+    ) {
+      agregarValorAVistosRecientes(name, image)
+    }
+  }, [animes, user])
 
   return animes?.datos?.map((e) => (
     <main className='container__episode__page' key={e.id}>

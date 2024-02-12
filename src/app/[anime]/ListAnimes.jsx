@@ -26,11 +26,14 @@ export function FetchSingleAnime({ data }) {
   const [votos, setVotos] = useState(Number)
   const { theme, user } = useContext(contextApp)
   const [firstClick, setFirstClick] = useState(true)
+  const [votosList, setVotosList] = useState({})
 
   useEffect(() => {
     setLoading(true)
-    setLoading(false)
-  }, [loading])
+    setTimeout(() => {
+      setLoading(false)
+    }, 600)
+  }, [])
 
   async function updateLikes(animeId, userId) {
     try {
@@ -39,7 +42,7 @@ export function FetchSingleAnime({ data }) {
         setNoLogged(true)
         setTimeout(() => {
           setNoLogged(false)
-        }, 3000)
+        }, 2000)
         return
       } else {
         const db = getDatabase()
@@ -108,12 +111,15 @@ export function FetchSingleAnime({ data }) {
         setNoLogged(true)
         setTimeout(() => {
           setNoLogged(false)
-        }, 3000)
+        }, 2000)
         return
       } else {
         const db = getDatabase()
         const animeRef = ref(db, `animes/${animeId}`)
-        const userVotesRef = ref(db, `usersVotes/${userId}/${animeId}`)
+        const userVotesRef = ref(
+          db,
+          `usersVotes/${userId}/${name.replace(/-/g, ' ').toLowerCase()}`
+        )
         const userVoteSnapshot = await get(userVotesRef)
         const userVote = userVoteSnapshot.val()
         const dislikesSnapshot = await get(child(animeRef, 'dislikes'))
@@ -189,41 +195,6 @@ export function FetchSingleAnime({ data }) {
     }
   }
 
-  const agregarValorAVistosRecientes = async (name, image) => {
-    const db = getDatabase()
-    const object = {
-      url: `${location?.pathname}`,
-      name: name,
-      image: image,
-    }
-    if (name && image) {
-      const userRef = ref(db, 'users/' + user?.uid)
-      const snapshot = await get(userRef)
-      const userData = snapshot?.val() || {}
-      const vistosRecientes = userData?.vistos_reciente || []
-      const favoritos = userData?.favoritos || []
-
-      // Verificar si el objeto ya existe en vistosRecientes
-      const objetoExistente = vistosRecientes.find(
-        (objeto) => objeto?.name === name
-      )
-
-      if (!objetoExistente) {
-        // Si el objeto no existe, agregarlo
-        set(ref(db, 'users/' + user?.uid), {
-          nombre: user?.displayName || 'undefined',
-          favoritos: [...favoritos],
-          vistos_reciente: [...vistosRecientes, object],
-        })
-      } else {
-      }
-    } else {
-      console.error(
-        'Name e image deben estar definidos para agregar el objeto a vistosRecientes.'
-      )
-    }
-  }
-
   const fetchData = async () => {
     try {
       const response = await fetch(
@@ -245,17 +216,38 @@ export function FetchSingleAnime({ data }) {
     }
   }
 
+  const nameID = data?.map((e) => e.anime?.replace(/ /g, ' '))[0]
+
   const cargarDataUser = async () => {
     try {
       const db = getDatabase()
-      const userRef = ref(db, 'users/' + user?.uid)
+      const id = user?.uid
+
+      const voteUsersRef = ref(db, 'usersVotes/' + id)
+      const snapshotVote = await get(voteUsersRef)
+      const votesData = snapshotVote?.val() || {}
+
+      // Aquí recorremos cada anime en votesData para obtener sus votos
+      const likesDislikes = {}
+      for (const anime in votesData) {
+        const animeVotes = votesData[anime]
+        const { like, dislike } = animeVotes
+        likesDislikes[anime] = { like, dislike }
+      }
+
+      // Ahora likesDislikes contendrá un objeto con los votos de cada anime
+
+      const userRef = ref(db, 'users/' + id)
       const snapshot = await get(userRef)
       const userData = snapshot?.val() || {}
+
       setFavoritos(userData.favoritos || [])
+      setVotosList(likesDislikes[`${nameID}`]) // Establecer el estado con los votos
     } catch (error) {
-      console.error('Error al agregar/eliminar anime de favoritos:', error)
+      console.error('Error al cargar los datos del usuario:', error)
     }
   }
+
   const agregarFavoritos = async (name, image) => {
     try {
       const db = getDatabase()
@@ -280,7 +272,7 @@ export function FetchSingleAnime({ data }) {
 
         const idTimer = setTimeout(() => {
           setIsVisible(false)
-        }, 4000)
+        }, 2000)
 
         setFavoritos(userData.favoritos || [])
       } else {
@@ -297,7 +289,7 @@ export function FetchSingleAnime({ data }) {
         const idTimer = setTimeout(() => {
           setIsVisible(false)
           setRemove(false)
-        }, 4000)
+        }, 2000)
         setFavoritos(userData.favoritos || [])
       }
       setFirstClick(false)
@@ -306,16 +298,13 @@ export function FetchSingleAnime({ data }) {
     }
   }
 
-  console.log(isVisible)
-
   useEffect(() => {
     if ((user !== undefined && user !== null) || !user) {
-      agregarValorAVistosRecientes(data[0].name, data[0].image)
       fetchData()
       writeAnimesData(animeId, data[0].name)
       cargarDataUser()
     }
-  }, [data, user, message])
+  }, [data, user, message, likes, dislikes])
 
   useEffect(() => {
     setRating(calcularRating(likes, dislikes))
@@ -352,13 +341,17 @@ export function FetchSingleAnime({ data }) {
         </div>
         <div className='footer__image__anime'>
           <button
-            onClick={() => updateLikes(animeId, user?.uid, true)}
-            className={`btn__voto ${theme === 'dark' ? 'dark' : ''}`}>
+            onClick={() => updateLikes(nameID, user?.uid, true)}
+            className={`btn__voto ${theme === 'dark' ? 'dark' : ''} ${
+              votosList?.like ? 'active' : ''
+            }`}>
             <AiTwotoneLike />
           </button>
           <button
-            onClick={() => updateDislikes(animeId, user?.uid, true)}
-            className={`btn__voto ${theme === 'dark' ? 'dark' : ''}`}>
+            onClick={() => updateDislikes(nameID, user?.uid, true)}
+            className={`btn__voto ${theme === 'dark' ? 'dark' : ''} ${
+              votosList?.dislike ? 'active' : ''
+            }`}>
             <AiTwotoneDislike />
           </button>
         </div>
@@ -367,10 +360,14 @@ export function FetchSingleAnime({ data }) {
       <section className={`container__information`}>
         <div className='info__anime'>
           <button
-            className='btn__favorite'
+            className={`btn__favorite ${
+              favoritos.some((objeto) => objeto?.name === e.name)
+                ? 'active'
+                : ''
+            }`}
             onClick={() => agregarFavoritos(e.name, e.image)}>
             <span>
-              <span className='menssage'>
+              <span className={`menssage`}>
                 {favoritos.some((objeto) => objeto?.name === e.name)
                   ? 'Eliminar favoritos'
                   : 'Agregar a favoritos'}

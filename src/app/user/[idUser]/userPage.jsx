@@ -12,10 +12,17 @@ import { auth } from '@/app/firebase'
 
 const UserPage = () => {
   const [cookie, setCookie] = useCookies(['username'])
-  const { dataUser, theme, updateUserProfilePhoto, user, favoritos } =
-    useContext(contextApp)
+  const {
+    dataUser,
+    theme,
+    updateUserProfilePhoto,
+    user,
+    favoritos,
+    ultimosVistados,
+  } = useContext(contextApp)
   const [MiList, setMilist] = useState(true)
   const [AnimesPending, setAnimesPending] = useState(false)
+  const [ultimosVistadosT, setultimosVistadosT] = useState(false)
   const router = useRouter()
   const [newPhoto, setNewPhoto] = useState(null)
   const [selectedFile, setSelectedFile] = useState(null)
@@ -243,7 +250,9 @@ const UserPage = () => {
                 <li>
                   <button
                     onClick={() => (
-                      setMilist(!MiList), setAnimesPending(false)
+                      setMilist(!MiList),
+                      setAnimesPending(false),
+                      setultimosVistadosT(false)
                     )}
                     class={`flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 ${
                       MiList && 'bg-gray-700'
@@ -261,7 +270,9 @@ const UserPage = () => {
                 <li>
                   <button
                     onClick={() => (
-                      setAnimesPending(!AnimesPending), setMilist(false)
+                      setAnimesPending(!AnimesPending),
+                      setMilist(false),
+                      setultimosVistadosT(false)
                     )}
                     class={`flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 ${
                       AnimesPending && 'bg-gray-700'
@@ -270,11 +281,15 @@ const UserPage = () => {
                   </button>
                 </li>
                 <li>
-                  <a
-                    href='#'
+                  <button
+                    onClick={() => {
+                      setultimosVistadosT(!ultimosVistadosT)
+                      setAnimesPending(false)
+                      setMilist(false)
+                    }}
                     class='flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700'>
                     Ultimos episodios visitados
-                  </a>
+                  </button>
                 </li>
               </ul>
             </li>
@@ -357,6 +372,22 @@ const UserPage = () => {
                 src='https://i.postimg.cc/XY8nF4GW/sekai-saikou-no-ansatsusha-isekai-kizoku-ni-tensei-suru.webp'
                 alt=''
               />
+            </div>
+          )}
+          {ultimosVistadosT && (
+            <div
+              style={{ minHeight: '80dvh' }}
+              class={`grid gap-5 mb-4 ${
+                esDispositivoMovil ? 'grid-cols-2' : 'grid-cols-7'
+              }`}>
+              {ultimosVistados?.map((e, index) => (
+                <article key={index} className='ultimosVistos__panel__user'>
+                  <a href={`/${e.name?.replace(/ /g, '-')}`}>
+                    <span className='tag'>{e.episode}</span>
+                    <img src={e.image} alt='' />
+                  </a>
+                </article>
+              ))}
             </div>
           )}
         </div>
