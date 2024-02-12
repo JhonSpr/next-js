@@ -81,7 +81,9 @@ function EpisodePage({ name, episode }) {
           {name} {episode}
         </h4>
         <div className='container__iframe'>
-          <iframe src={servicesList?.map((i) => i.url)}></iframe>
+          <iframe
+            src={servicesList?.map((i) => i.url)}
+            allowFullScreen></iframe>
           <div className={`controls ${theme === 'dark' ? 'dark' : ''}`}>
             <a
               href={`/${name.replace(/ /g, '-')}/${episode - 1}`}
