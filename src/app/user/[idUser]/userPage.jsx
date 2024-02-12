@@ -255,7 +255,7 @@ const UserPage = () => {
                       setultimosVistadosT(false)
                     )}
                     class={`flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 ${
-                      MiList && 'bg-gray-700'
+                      MiList && 'bg-gray-700 text-white'
                     }`}>
                     Mi lista de Favoritos
                   </button>
@@ -275,7 +275,7 @@ const UserPage = () => {
                       setultimosVistadosT(false)
                     )}
                     class={`flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 ${
-                      AnimesPending && 'bg-gray-700'
+                      AnimesPending && 'bg-gray-700 text-white'
                     }`}>
                     Animes Para ver luego
                   </button>
@@ -287,7 +287,8 @@ const UserPage = () => {
                       setAnimesPending(false)
                       setMilist(false)
                     }}
-                    class='flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700'>
+                    class={`flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700
+                    ${ultimosVistadosT && 'bg-gray-700 text-white'}`}>
                     Ultimos episodios visitados
                   </button>
                 </li>
