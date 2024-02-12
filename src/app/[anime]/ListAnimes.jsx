@@ -12,7 +12,7 @@ import { MdAdd } from 'react-icons/md'
 
 export function FetchSingleAnime({ data }) {
   const name = data?.map((e) => e.name?.replace(/ /g, '-'))
-  const animeId = data?.map((e) => e.id).toLowerCase()
+  const animeId = data?.map((e) => e.id)?.toLowerCase()
   const [loading, setLoading] = useState([])
   const [favoritos, setFavoritos] = useState([])
   const [likes, setLikes] = useState(null)
