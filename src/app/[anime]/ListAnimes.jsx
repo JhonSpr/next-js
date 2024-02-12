@@ -298,7 +298,7 @@ export function FetchSingleAnime({ data }) {
   useEffect(() => {
     if ((user !== undefined && user !== null) || !user) {
       fetchData()
-      writeAnimesData(animeId, data[0].name)
+      // writeAnimesData(animeId, data[0].name)
       cargarDataUser()
     }
   }, [data, user, message, likes, dislikes])
