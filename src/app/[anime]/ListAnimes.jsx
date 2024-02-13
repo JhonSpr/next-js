@@ -14,11 +14,12 @@ export function FetchSingleAnime({ data }) {
   let animeId = data?.map((e) => e?.id)
   const [loading, setLoading] = useState([])
   const [favoritos, setFavoritos] = useState([])
-  const [likes, setLikes] = useState(0) || 0
-  const [dislikes, setDislikes] = useState(0) || 0
+  const [likes, setLikes] = useState(0) ?? 0
+  const [dislikes, setDislikes] = useState(0)
   const [rating, setRating] = useState(null)
   const [datos, setDatos] = useState(null)
-  const [votos, setVotos] = useState(Number) || 0
+  const [votos, setVotos] = useState(Number) ?? 0
+
   const {
     theme,
     user,
@@ -193,11 +194,11 @@ export function FetchSingleAnime({ data }) {
       }
       const data = await response.json()
       setDatos(data)
-      setDislikes(data.dislikes)
-      setLikes(data.likes)
-      setDislike(data.dislikes)
-      setLike(data.likes)
-      setVotos(data.likes + data.dislikes)
+      setDislikes(data.dislikes || 0)
+      setLikes(data.likes || 0)
+      setDislike(data.dislikes || 0)
+      setLike(data.likes || 0)
+      setVotos(data.likes + data.dislikes || data.likes || data.dislikes)
 
       return data
     } catch (error) {
