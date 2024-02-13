@@ -25,6 +25,9 @@
     background-color: #e0e0e0;
     border-radius: 7px;
     position: relative;
+    &:hover .image__anime {
+      filter: brightness(100%);
+    }
   }
 
   .skeleton-loader.card__anime {
@@ -38,11 +41,28 @@
     }
   }
 
+  .list__animes .card__anime .rating__anime {
+    position: absolute;
+    z-index: 2;
+    background-color: #17171a;
+    top: 5px;
+    left: 5px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 14px;
+  }
+
+  .list__animes .card__anime.isFavorite {
+    outline: 2px solid #1283b8;
+  }
+
   .list__animes .card__anime .image__anime {
     width: 100%;
     height: 85%;
     border-radius: 7px;
     image-rendering: optimizeSpeed;
+    transition: filter 0.2s ease-out;
+    filter: brightness(70%);
   }
   .list__animes .card__anime .name__anime {
     color: #17171a;

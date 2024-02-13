@@ -1,5 +1,36 @@
 import { Request_Animes } from '../FetchingData/request_animes'
 import DirectoryPage from './DirectoryPage'
+
+export async function generateMetadata({ params }) {
+  {
+    return {
+      title: 'Directorio | Animesz',
+      description: 'Directorio de animes | animesz',
+      siteName: 'animesz',
+      locale: 'es',
+      type: 'website',
+      robots: {
+        index: false,
+        follow: true,
+        nocache: true,
+        googleBot: {
+          index: true,
+          follow: false,
+          noimageindex: true,
+          'max-video-preview': -1,
+          'max-image-preview': 'large',
+          'max-snippet': -1,
+        },
+      },
+      verification: {
+        google: 'google',
+        yandex: 'yandex',
+        yahoo: 'yahoo',
+      },
+    }
+  }
+}
+
 export default async function page({ searchParams }) {
   const años = Array.isArray(searchParams?.años)
     ? searchParams?.años

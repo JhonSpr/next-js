@@ -7,28 +7,38 @@ import { child, get, getDatabase, onValue, ref, set } from 'firebase/database'
 import { AiTwotoneLike, AiTwotoneDislike } from 'react-icons/ai'
 import Alert from '../components/Alert'
 import { calcularRating } from '../user/[idUser]/userPage'
-import { IoMdAdd } from 'react-icons/io'
 import { MdAdd } from 'react-icons/md'
 
 export function FetchSingleAnime({ data }) {
   const name = data?.map((e) => e.name?.replace(/ /g, '-'))
-  const animeId = data?.map((e) => e.id?.toLowerCase())
+  let animeId = data?.map((e) => e?.id)
   const [loading, setLoading] = useState([])
   const [favoritos, setFavoritos] = useState([])
   const [likes, setLikes] = useState(0) || 0
   const [dislikes, setDislikes] = useState(0) || 0
   const [rating, setRating] = useState(null)
   const [datos, setDatos] = useState(null)
-  const [isVisible, setIsVisible] = useState(null)
-  const [message, setMessage] = useState(String)
-  const [remove, setRemove] = useState(Boolean)
-  const [noLogged, setNoLogged] = useState(Boolean)
   const [votos, setVotos] = useState(Number) || 0
-  const { theme, user } = useContext(contextApp)
-  const [firstClick, setFirstClick] = useState(true)
+  const {
+    theme,
+    user,
+    agregarFavoritos,
+    remove,
+    message,
+    isVisible,
+    noLogged,
+    firstClicked,
+    setIsVisible,
+    setMessage,
+    setNoLogged,
+    setRemove,
+    setFirstClicked,
+    setLike,
+    setDislike,
+    rate,
+  } = useContext(contextApp)
   const [votosList, setVotosList] = useState({})
   const nameID = data?.map((e) => e.anime?.replace(/ /g, ' '))[0]
-
   useEffect(() => {
     setLoading(true)
     setTimeout(() => {
@@ -65,7 +75,7 @@ export function FetchSingleAnime({ data }) {
             setRemove(true)
             setTimeout(() => {
               setIsVisible(false)
-            }, 4000)
+            }, 2000)
           } else if (!userVote.like && !userVote.dislike) {
             // Si el usuario no ha votado, se registra el like
             await set(child(animeRef, 'likes'), currentLikes + 1)
@@ -74,7 +84,7 @@ export function FetchSingleAnime({ data }) {
             setTimeout(() => {
               setIsVisible(false)
               setRemove(false)
-            }, 4000)
+            }, 2000)
             setMessage('El voto fue registrado')
             await set(userVotesRef, { like: true, dislike: false })
           } else {
@@ -85,7 +95,7 @@ export function FetchSingleAnime({ data }) {
             setTimeout(() => {
               setIsVisible(false)
               setRemove(false)
-            }, 4000)
+            }, 2000)
           }
         } else {
           // Si el usuario no había votado antes, registra su voto como like
@@ -95,10 +105,10 @@ export function FetchSingleAnime({ data }) {
           setTimeout(() => {
             setIsVisible(false)
             setRemove(false)
-          }, 4000)
+          }, 2000)
           setMessage('El voto fue registrado')
         }
-        setFirstClick(false)
+        setFirstClicked(false)
       }
     } catch (error) {
       console.error('Error al actualizar los likes del anime:', error)
@@ -134,25 +144,27 @@ export function FetchSingleAnime({ data }) {
             setTimeout(() => {
               setIsVisible(false)
               setRemove(false)
-            }, 4000)
+            }, 2000)
           } else if (!userVote.dislike && !userVote.like) {
             // Si el usuario no ha votado, se registra el dislike
             await set(child(animeRef, 'dislikes'), currentDislikes + 1)
             setIsVisible(true)
+            setRemove(false)
             setTimeout(() => {
               setIsVisible(false)
               setRemove(false)
-            }, 4000)
+            }, 2000)
 
             setMessage('El voto fue registrado')
             await set(userVotesRef, { like: false, dislike: true })
           } else {
             setMessage('Ya tienes un voto!')
             setIsVisible(true)
+            setRemove(false)
             setTimeout(() => {
               setIsVisible(false)
-              setRemove(true)
-            }, 4000)
+              setRemove(false)
+            }, 2000)
           }
         } else {
           await set(userVotesRef, { like: false, dislike: true })
@@ -161,37 +173,15 @@ export function FetchSingleAnime({ data }) {
           setTimeout(() => {
             setIsVisible(false)
             setRemove(false)
-          }, 4000)
+          }, 2000)
           setMessage('El voto fue registrado')
         }
-        setFirstClick(false)
+        setFirstClicked(false)
       }
     } catch (error) {
       console.error('Error al actualizar los dislikes del anime:', error)
     }
   }
-
-  // async function writeAnimesData(animeId, name) {
-  //   try {
-  //     const db = getDatabase()
-  //     const animeRef = ref(db, `animes/${animeId}`)
-
-  //     const snapshot = await get(child(animeRef, 'anime'))
-  //     const existingAnime = snapshot.val()
-
-  //     if (!existingAnime) {
-  //       await set(animeRef, {
-  //         anime: name,
-  //         likes: 0,
-  //         dislikes: 0,
-  //         visitas: 0,
-  //       })
-  //     } else {
-  //     }
-  //   } catch (error) {
-  //     console.error('Error al escribir los datos:', error)
-  //   }
-  // }
 
   const fetchData = async () => {
     try {
@@ -205,6 +195,8 @@ export function FetchSingleAnime({ data }) {
       setDatos(data)
       setDislikes(data.dislikes)
       setLikes(data.likes)
+      setDislike(data.dislikes)
+      setLike(data.likes)
       setVotos(data.likes + data.dislikes)
 
       return data
@@ -244,66 +236,39 @@ export function FetchSingleAnime({ data }) {
     }
   }
 
-  const agregarFavoritos = async (name, image) => {
+  const handleRatingSubmit = async () => {
     try {
-      const db = getDatabase()
-      const userRef = ref(db, 'users/' + user?.uid)
-      const snapshot = await get(userRef)
-      const userData = snapshot?.val() || {}
-      const vistosRecientes = userData?.vistos_reciente || []
-      const favoritos = userData?.favoritos || []
-      const objetoExistenteIndex = favoritos.findIndex(
-        (objeto) => objeto?.name === name
-      )
-
-      if (objetoExistenteIndex === -1) {
-        // Si el anime no está en favoritos, lo agregamos
-        await set(userRef, {
-          nombre: user?.displayName || 'undefined',
-          vistos_reciente: [...vistosRecientes],
-          favoritos: [...favoritos, { name, image }],
-        })
-        setMessage('Agregado a favoritos')
-        setIsVisible(true)
-
-        const idTimer = setTimeout(() => {
-          setIsVisible(false)
-        }, 2000)
-
-        setFavoritos(userData.favoritos || [])
-      } else {
-        // Si el anime ya está en favoritos, lo eliminamos
-        favoritos.splice(objetoExistenteIndex, 1)
-        await set(userRef, {
-          nombre: user?.displayName || 'undefined',
-          vistos_reciente: [...vistosRecientes],
-          favoritos: favoritos,
-        })
-        setMessage('Eliminado de favoritos')
-        setIsVisible(true)
-        setRemove(true)
-        const idTimer = setTimeout(() => {
-          setIsVisible(false)
-          setRemove(false)
-        }, 2000)
-        setFavoritos(userData.favoritos || [])
+      if (!animeId && data?.length) {
+        animeId = data[0].id
       }
-      setFirstClick(false)
-    } catch (error) {
-      console.error('Error al agregar/eliminar anime de favoritos:', error)
-    }
+
+      if (animeId) {
+        const response = await fetch(
+          `https://api-rest.up.railway.app/api/v1/animes/${animeId}/rating`,
+          {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              rating: parseFloat(rating),
+            }),
+          }
+        )
+      }
+    } catch (error) {}
   }
 
   useEffect(() => {
     if ((user !== undefined && user !== null) || !user) {
       fetchData()
-      // writeAnimesData(animeId, data[0].name)
       cargarDataUser()
     }
   }, [data, user, message, likes, dislikes])
 
   useEffect(() => {
     setRating(calcularRating(likes, dislikes))
+    handleRatingSubmit()
   }, [datos, message])
 
   const handleClose = () => {
@@ -421,7 +386,7 @@ export function FetchSingleAnime({ data }) {
         <Comments noButton={false} />
       </section>
       <Alert
-        isVisible={isVisible && !firstClick}
+        isVisible={isVisible && !firstClicked}
         message={message}
         remove={remove}
         handleClose={handleClose}

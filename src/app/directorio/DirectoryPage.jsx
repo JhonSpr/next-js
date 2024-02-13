@@ -1,4 +1,3 @@
-import React, { Suspense } from 'react'
 import AnimesFectching from './animesFetch'
 import Search from './Search'
 import { FilterMenu } from '../components/Filters'
@@ -17,7 +16,6 @@ const DirectoryPage = ({
       <Search />
       <FilterMenu queryAños={años} queryGeneros={generos} />
       <section className='list__animes' style={{ minHeight: '80dvh' }}>
-        <title>Directorio | animesz</title>
         <AnimesFectching data={data.datos} />
 
         {data?.item == 0 ? <span>No hay resultados</span> : null}
