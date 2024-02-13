@@ -43,7 +43,7 @@
 
   .list__animes .card__anime .rating__anime {
     position: absolute;
-    z-index: 2;
+    z-index: 1;
     background-color: #17171a;
     top: 5px;
     left: 5px;
