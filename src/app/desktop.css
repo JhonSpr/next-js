@@ -50,6 +50,7 @@
     padding: 4px 10px;
     border-radius: 6px;
     font-size: 14px;
+    color: #ccc;
   }
 
   .list__animes .card__anime.isFavorite {
