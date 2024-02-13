@@ -43,5 +43,5 @@ export const Request_Animes = (
   if (page) {
     url += `page=${page}`
   }
-  return fetch(url, { next: { revalidate: 100 } }).then((res) => res.json())
+  return fetch(url, { next: { revalidate: 10 } }).then((res) => res.json())
 }
