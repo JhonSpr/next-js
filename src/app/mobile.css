@@ -18,6 +18,7 @@
   .list__animes .card__anime {
     max-width: calc(230px - 30px);
     background-color: #e0e0e0;
+    height: 400px;
     border-radius: 8px;
     overflow: hidden;
     position: relative;
@@ -28,13 +29,27 @@
   }
 
   .skeleton-loader.card__anime {
-    min-height: 400px;
-    max-width: calc(230px - 30px) !important;
+    height: 400px;
+    width: calc(230px - 30px);
     & > * {
       display: none;
     }
+    &:hover {
+      box-shadow: none !important;
+    }
   }
 
+  .list__animes .card__anime .rating__anime {
+    position: absolute;
+    z-index: 1;
+    background-color: #17171a;
+    top: 5px;
+    left: 5px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 14px;
+    color: #ccc;
+  }
   .list__animes .card__anime .image__anime {
     width: 100%;
     height: 85%;
@@ -239,6 +254,9 @@
     gap: 10px;
     margin: 20px auto;
   }
+  .container__ main .container__image .footer__image__anime {
+    position: relative;
+  }
   .container__ main .container__image .footer__image__anime .btn__voto {
     width: 166px;
     background-color: #17171a;
@@ -248,20 +266,85 @@
     display: flex;
     gap: 10px;
     justify-content: center;
+    color: #1283b8;
     &:hover {
       color: #1283b8;
     }
-    &:nth-child(1):before {
-      content: 'Me Gusta';
-      display: inline-block;
-      font-size: 15px;
-      color: #c1c1c1;
+    &.active {
+      background-color: #004768 !important;
+      color: #f8f8f8;
     }
-    &:nth-child(2):before {
-      content: 'No Me Gusta';
-      display: inline-block;
-      font-size: 15px;
-      color: #c1c1c1;
+  }
+
+  .container__ main .info__anime .btn__favorite {
+    position: relative;
+    margin: auto;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    font-size: 30px;
+    text-transform: capitalize;
+    padding: 2px 20px;
+    border-radius: 6px;
+    background-color: #323235;
+    transition: all 0.2s ease-out;
+    color: #fff;
+    & .menssage {
+      display: none !important;
+    }
+    & span {
+      display: flex;
+    }
+    &.active {
+      background-color: #004768 !important;
+    }
+  }
+
+  .container__ main .info__anime .generos__anime {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 7px;
+  }
+  .container__ main .info__anime .generos__anime a {
+    padding: 3px 12px;
+    background-color: #004768 !important;
+    border-radius: 6px;
+    color: #fff;
+  }
+  .carousel__container {
+    display: flex;
+    gap: 6px;
+    margin: 30px auto;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-evenly;
+    &::before {
+      content: 'Animes relacionados';
+      display: block;
+      width: 100%;
+      background-color: #323235;
+      text-align: center;
+      color: #fff;
+      padding: 7px;
+      border-radius: 6px;
+      text-transform: capitalize;
+    }
+  }
+
+  .carousel__container .carouse__item {
+    width: 140px;
+    height: 270px;
+    overflow: hidden;
+    border-radius: 7px;
+    background-color: #323235;
+  }
+  .carousel__container .carouse__item img {
+    height: 100%;
+    width: 100%;
+    transition: transform 0.2s ease-out;
+    &:hover {
+      transform: scale(105%);
     }
   }
 
@@ -463,12 +546,12 @@
     min-height: 80dvh;
     width: 100%;
     gap: 10px;
+    padding: 10px;
   }
 
   .scrollBarSide {
     width: 100%;
     background-color: transparent;
-    padding: 10px;
     height: max-content;
     overflow: hidden;
     overflow-y: auto;
@@ -545,7 +628,6 @@
   }
   .container__iframe {
     width: 100%;
-    padding: 7px;
   }
   .container__iframe h4 {
     font-size: 20px;
@@ -560,30 +642,33 @@
   }
   .controls {
     display: flex;
-    gap: 0px;
+    gap: 5px;
+    margin-top: 10px;
   }
   .controls a:nth-child(1),
   .controls a:nth-child(3) {
     width: 30%;
     background-color: #17171a;
     color: #c1c1c1;
-    padding: 7px;
+    padding: 10px;
     font-size: 15px;
     display: flex;
     gap: 5px;
     justify-content: center;
     place-items: center;
+    border-radius: 7px;
   }
   .controls a:nth-child(2) {
     width: 40%;
     background-color: #17171a;
     color: #c1c1c1;
-    padding: 7px;
+    padding: 10px;
     display: flex;
     font-size: 15px;
     gap: 5px;
     justify-content: center;
     place-items: center;
+    border-radius: 7px;
   }
   .user__botton {
     position: relative;

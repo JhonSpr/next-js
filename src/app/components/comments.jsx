@@ -12,12 +12,14 @@ export default function Comments({
   identifier = 'animesz-3',
   marginTop,
   noButton,
+  showCommentarios,
 }) {
   const { theme } = useTheme()
   const [showComments, setshowComments] = useState(false)
   const handleShowComments = () => {
     setshowComments(!showComments)
   }
+
   useEffect(() => {
     const loadDisqus = () => {
       const disqusScript = document.createElement('script')
@@ -53,6 +55,10 @@ export default function Comments({
     }
   }, [theme, showComments])
 
+  useEffect(() => {
+    setshowComments(false)
+  }, [theme])
+
   return (
     <div className={`comments `} style={{ marginTop: marginTop }}>
       <a
@@ -60,17 +66,18 @@ export default function Comments({
           theme === 'dark' ? 'dark' : ''
         }`}
         onClick={handleShowComments}>
-        {showComments ? 'Ocultar Comentarios' : 'Mostrar Comentarios'}
+        {showComments || showCommentarios
+          ? 'Ocultar Comentarios'
+          : 'Mostrar Comentarios'}
       </a>
 
       <div
-        className={`comments_container ${showComments ? 'show' : ''} ${
-          theme === 'dark' ? 'dark' : ''
-        }`}>
-        <h3 className={`title ${theme === 'dark' ? 'dark' : ''}`}>
-          <FaComments /> Comentarios
-        </h3>
-        <div id={`disqus_thread`}></div>
+        className={`comments_container ${
+          showComments || showCommentarios ? 'show' : ''
+        } ${theme === 'dark' ? 'dark' : ''}`}>
+        <div
+          id={`disqus_thread`}
+          className={`${theme === 'dark' ? 'dark' : ''}`}></div>
 
         <div id='disqus-recommendations'></div>
       </div>

@@ -26,7 +26,7 @@ html.dark {
 }
 
 .comments_container.dark {
-  background-color: #3c3c44 !important;
+  background-color: transparent !important;
 }
 
 .info__user.dark {
@@ -55,7 +55,7 @@ html.dark {
   background-color: #3c3c44 !important;
 }
 
-#disqus_thread {
+#disqus_thread.dark {
   color-scheme: light;
 }
 .scrollBarSide.dark {
@@ -100,4 +100,9 @@ html.dark {
 
 .card__anime.dark .name__anime {
   color: #ccc !important;
+}
+
+.generos__anime.dark a {
+  background-color: #1283b8 !important;
+  color: #fff !important;
 }
