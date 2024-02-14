@@ -9,6 +9,7 @@ import './navbar.css'
 import './tablet.css'
 
 import Navigation from './components/Navigation'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 
 import { Providers } from './providers'
 import Footer from './components/Footer'
@@ -34,6 +35,7 @@ export default function RootLayout({ children }) {
       <body>
         <Providers>
           <Navigation />
+          <SpeedInsights />
           {children}
 
           <Footer />
