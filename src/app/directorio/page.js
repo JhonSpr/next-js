@@ -48,7 +48,7 @@ export default async function page({ searchParams }) {
     ? [searchParams.estado]
     : []
   const data = await Request_Animes(
-    searchParams?.page,
+    searchParams?.page || 1,
     searchParams?.q,
     estados,
     años,
