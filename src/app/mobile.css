@@ -48,7 +48,9 @@
     padding: 4px 10px;
     border-radius: 6px;
     font-size: 14px;
-    color: #ccc;
+    & p {
+      color: #ccc !important;
+    }
   }
   .list__animes .card__anime .image__anime {
     width: 100%;
