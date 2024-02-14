@@ -47,8 +47,9 @@ export default async function page({ searchParams }) {
     : searchParams?.estado
     ? [searchParams.estado]
     : []
+  const current_page = Number(searchParams?.page || 1)
   const data = await Request_Animes(
-    searchParams?.page || 1,
+    current_page,
     searchParams?.q,
     estados,
     años,
@@ -59,7 +60,7 @@ export default async function page({ searchParams }) {
   )
 
   const query = searchParams?.q || ''
-  const current_page = searchParams?.page || 1
+  console.log(current_page)
   return (
     <DirectoryPage
       data={data}
