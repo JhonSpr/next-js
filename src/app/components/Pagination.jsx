@@ -1,9 +1,13 @@
 'use client'
 /* eslint-disable no-unused-vars */
 
-import { useEffect, useState } from 'react'
-import { FaArrowCircleLeft, FaArrowCircleRight } from 'react-icons/fa'
-
+import {
+  FaArrowCircleLeft,
+  FaArrowCircleRight,
+  FaChevronLeft,
+  FaChevronRight,
+} from 'react-icons/fa'
+/* eslint-disable react/prop-types */
 export default function Pagination({
   results = 0,
   current_page = 1,
@@ -58,9 +62,9 @@ export default function Pagination({
     url += `rating=${rate}&`
   }
 
+  url
   const handlePageChange = (pageNumber) => {
-    // Actualizar la URL con el número de página seleccionado
-    window.location.href = `${url}page=${pageNumber}`
+    current_page - 1
   }
 
   let start = 0
@@ -89,11 +93,11 @@ export default function Pagination({
         <ul className='inline-flex -space-x-px text-base h-10'>
           <li>
             <button
-              onClick={() => handlePageChange(current_page - 1)}
+              href={`/directorio?${
+                current_page == 1 ? null : `${url + `page=${current_page - 1}`}`
+              }`}
               className={`flex items-center justify-center px-4 h-10 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white ${
-                current_page === 1 || total_pages === 1
-                  ? 'cursor-not-allowed'
-                  : ''
+                current_page == 1 ? 'cursor-not-allowed' : ''
               } ${total_pages === 1 ? 'disable' : ''}`}>
               <FaArrowCircleLeft />
             </button>
@@ -101,29 +105,31 @@ export default function Pagination({
           {pageNumber
             ?.map((i, index) => (
               <li key={index}>
-                <button
-                  onClick={() => handlePageChange(i)}
+                <a
+                  href={url + `page=${i}`}
                   aria-current={i === current_page ? i : 'none'}
                   className={
-                    current_page === i
+                    current_page == i
                       ? 'z-10 flex items-center justify-center px-4 h-10 leading-tight text-blue-600 border border-blue-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white'
                       : 'flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'
                   }>
                   {i}
-                </button>
+                </a>
               </li>
             ))
             .slice(start, end)}
           <li>
-            <button
-              onClick={() => handlePageChange(current_page + 1)}
+            <a
+              href={
+                current_page === total_pages
+                  ? null
+                  : `${url + `page=${current_page + 1}`}`
+              }
               className={`flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white ${
-                current_page === total_pages || total_pages === 1
-                  ? 'cursor-not-allowed'
-                  : ''
+                current_page === total_pages ? 'cursor-not-allowed' : ''
               } ${total_pages === 1 ? 'disable' : ''}`}>
               <FaArrowCircleRight />
-            </button>
+            </a>
           </li>
         </ul>
       </nav>
