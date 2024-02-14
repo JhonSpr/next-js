@@ -52,12 +52,9 @@ function EpisodePage({ name, episode }) {
             favoritos: [...favoritos],
             vistos_reciente: [...vistosRecientes, object],
           })
-          console.log('Objeto agregado a vistosRecientes:', object)
         } else {
-          console.log('El objeto ya existe en vistosRecientes:', object)
         }
       } else {
-        console.error('name, image y episode deben estar definidos.')
       }
     } catch (error) {
       console.error('Error al agregar el objeto a vistosRecientes:', error)
