@@ -60,7 +60,6 @@ export default async function page({ searchParams }) {
   )
 
   const query = searchParams?.q || ''
-  console.log(current_page)
   return (
     <DirectoryPage
       data={data}
