@@ -15,7 +15,7 @@ const DirectoryPage = ({
     <div className='container__'>
       <Search />
       <FilterMenu queryAños={años} queryGeneros={generos} />
-      <section className='list__animes' style={{ minHeight: '80dvh' }}>
+      <section className='list__animes'>
         <AnimesFectching data={data.datos} />
 
         {data?.item == 0 ? <span>No hay resultados</span> : null}
