@@ -207,7 +207,7 @@
     padding: 20px 40px;
     width: 440px;
     transition-property: opacity;
-    transition-duration: 0.3s;
+    transition-duration: 0.2s;
     transition-timing-function: ease-in;
     &.show {
       opacity: 1;

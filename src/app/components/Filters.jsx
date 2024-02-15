@@ -52,6 +52,8 @@ export const FilterMenu = ({ queryAños, queryGeneros }) => {
   const [showAños, setShowAños] = useState(false)
   const [showGeneros, setShowGeneros] = useState(false)
   const [showEstados, setShowEstados] = useState(false)
+  const [selectedAños, setSelectedAños] = useState(queryAños || [])
+  const [selectedGeneros, setSelectedGeneros] = useState(queryGeneros || [])
   const handleShowAños = () => {
     setShowAños(!showAños)
     setShowGeneros(false)
@@ -66,6 +68,27 @@ export const FilterMenu = ({ queryAños, queryGeneros }) => {
     setShowEstados(!showEstados)
     setShowGeneros(false)
     setShowAños(false)
+  }
+  const handleCheckboxChange = (e) => {
+    const { name, value, checked } = e.target
+
+    // Manejar el cambio de estado del checkbox según el nombre (query) y el valor
+    if (name === 'años') {
+      // Si el nombre es 'años', actualiza el estado de los años seleccionados
+      if (checked) {
+        setSelectedAños([...selectedAños, value]) // Agrega el año seleccionado
+      } else {
+        setSelectedAños(selectedAños.filter((year) => year !== value)) // Elimina el año deseleccionado
+      }
+    } else if (name === 'generos') {
+      // Si el nombre es 'generos', actualiza el estado de los géneros seleccionados
+      if (checked) {
+        setSelectedGeneros([...selectedGeneros, value]) // Agrega el género seleccionado
+      } else {
+        setSelectedGeneros(selectedGeneros.filter((genre) => genre !== value)) // Elimina el género deseleccionado
+      }
+    }
+    // Agrega condiciones adicionales para otros tipos de filtros si es necesario
   }
 
   return (
@@ -84,8 +107,9 @@ export const FilterMenu = ({ queryAños, queryGeneros }) => {
               {e.value}
               <input
                 type='checkbox'
-                className={queryAños?.includes(`${e.value}`) ? 'active' : ''}
-                name={e.query}
+                checked={selectedAños?.includes(`${e.value}`)}
+                onChange={handleCheckboxChange}
+                name='años'
                 value={e.value}
               />
               <div className='cr-input'></div>
@@ -111,6 +135,8 @@ export const FilterMenu = ({ queryAños, queryGeneros }) => {
               <input
                 type='checkbox'
                 className={queryGeneros?.includes(`${e.value}`) ? 'active' : ''}
+                checked={selectedGeneros?.includes(`${e.value}`)}
+                onChange={handleCheckboxChange}
                 name={e.query}
                 value={e.value}
               />
