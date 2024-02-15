@@ -10,7 +10,7 @@
 
   .list__animes {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(410px, 200px));
+    grid-template-columns: repeat(auto-fit, minmax(420px, 200px));
     gap: 9px;
   }
 
@@ -206,7 +206,9 @@
     opacity: 0;
     padding: 20px 40px;
     width: 440px;
-
+    transition-property: opacity;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in;
     &.show {
       opacity: 1;
       z-index: 2;
@@ -230,17 +232,22 @@
       }
     }
   }
-  .container__ main {
+  .container__anime {
+    width: 80%;
+    margin: 30px auto;
+    min-height: 60dvh;
+  }
+  .container__anime main {
     display: grid;
     grid-template-columns: 25% 70%;
   }
-  .container__ main .container__image {
+  .container__anime main .container__image {
     width: max-content;
     text-align: center;
     justify-content: center;
   }
 
-  .container__ main .container__image .footer__image__anime {
+  .container__anime main .container__image .footer__image__anime {
     width: 100%;
     position: relative;
     padding: 15px auto;
@@ -249,7 +256,7 @@
     margin-top: 5px;
   }
 
-  .container__ main .container__image .footer__image__anime .btn__voto {
+  .container__anime main .container__image .footer__image__anime .btn__voto {
     width: 50%;
     background-color: #17171a;
     color: #fff;
@@ -269,7 +276,7 @@
     }
   }
 
-  .container__ main .container__image .image__anime img {
+  .container__anime main .container__image .image__anime img {
     padding: 20px;
     width: 350px;
     background-color: #17171a;
@@ -277,20 +284,20 @@
     border-radius: 7px;
   }
 
-  .container__ main .info__anime .generos__anime {
+  .container__anime main .info__anime .generos__anime {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     gap: 7px;
   }
-  .container__ main .info__anime .generos__anime a {
+  .container__anime main .info__anime .generos__anime a {
     padding: 3px 12px;
     background-color: #17171a;
     border-radius: 6px;
     color: #c1c1c1;
   }
 
-  .container__ main .info__anime .btn__favorite {
+  .container__anime main .info__anime .btn__favorite {
     position: absolute;
     font-size: 30px;
     text-transform: capitalize;
@@ -316,7 +323,7 @@
     }
   }
 
-  .container__ main .info__anime .btn__favorite .menssage {
+  .container__anime main .info__anime .btn__favorite .menssage {
     font-size: 17px;
     padding-top: 2px;
     width: 0;
@@ -325,30 +332,35 @@
     transition: all 0.2s ease-out;
   }
 
-  .container__ main .container__information {
+  .container__animemain .container__information {
     width: 100%;
   }
   .information__page {
     padding: 40px 0;
   }
-  .container__ main .container__information .info__anime {
+  .container__anime main .container__information .info__anime {
     display: flex;
     flex-direction: column;
     gap: 10px;
     position: relative;
   }
-  .container__ main .container__information .info__anime .title__anime {
+  .container__anime main .container__information .info__anime .title__anime {
     font-size: 30px;
     text-transform: capitalize;
     color: #1283b8;
     border-bottom: 1px solid #17171a;
   }
-  .container__ main .container__information .info__anime .wrapp__anime {
+  .container__anime main .container__information .info__anime .wrapp__anime {
     display: flex;
     flex-direction: column;
     position: relative;
   }
-  .container__ main .container__information .info__anime .wrapp__anime > span {
+  .container__anime
+    main
+    .container__information
+    .info__anime
+    .wrapp__anime
+    > span {
     color: #000000;
     font-weight: bold;
     padding: 10px 0;
@@ -365,7 +377,7 @@
       margin-right: 5px;
     }
   }
-  .container__
+  .container__anime
     main
     .container__information
     .info__anime
@@ -378,7 +390,11 @@
     border-radius: 7px;
   }
 
-  .container__ main .container__information .info__anime .episode__anime__list {
+  .container__anime
+    main
+    .container__information
+    .info__anime
+    .episode__anime__list {
     margin-top: 100px;
     width: 100%;
     display: flex;
@@ -386,7 +402,7 @@
     gap: 10px;
     height: 500px;
   }
-  .container__
+  .container__anime
     main
     .container__information
     .info__anime
@@ -407,7 +423,7 @@
       }
     }
   }
-  .container__
+  .container__anime
     main
     .container__information
     .info__anime
@@ -418,7 +434,7 @@
     height: 160px;
     border-radius: 7px;
   }
-  .container__
+  .container__anime
     main
     .container__information
     .info__anime
