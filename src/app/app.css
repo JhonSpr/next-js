@@ -247,10 +247,14 @@
 }
 
 .skeleton-loader {
-  background: linear-gradient(90deg, #242323 35%, #1b1a1a 50%, #242323 85%);
+  background: linear-gradient(90deg, #111111 35%, #080808 50%, #0f0f0f 85%);
   background-size: 200% 100% !important;
-  animation: loading 2.2s infinite !important;
+  animation: loading 7s infinite alternate !important ;
   border-radius: 4px;
+
+  & > * {
+    visibility: hidden;
+  }
 }
 
 @keyframes loading {
@@ -260,4 +264,21 @@
   100% {
     background-position: 200% 0;
   }
+}
+::-webkit-scrollbar {
+  width: 20px; /* Ancho del scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: #111111; /* Color de fondo del scrollbar */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #070707; /* Color del thumb (barra) */
+}
+
+/* Para Firefox */
+* {
+  scrollbar-width: thin; /* Ancho del scrollbar */
+  scrollbar-color: #3d3c3c #f1f1f1; /* Color del thumb (barra) y del scrollbar */
 }
