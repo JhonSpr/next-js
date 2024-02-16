@@ -26,7 +26,7 @@ export async function generateMetadata({ params }) {
   const { name, descripcion } = data.datos[0]
 
   return {
-    title: `${name} - Animesz`,
+    title: `${anime?.replace(/-/g, ' ')} - Animesz`,
     description: descripcion,
     siteName: 'animesz',
     locale: 'es',
