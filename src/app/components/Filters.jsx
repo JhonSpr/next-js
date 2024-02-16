@@ -104,9 +104,9 @@ export const FilterMenu = ({ queryAños, queryGeneros, queryEstados }) => {
   const resetFilter = (e) => {
     e.preventDefault()
     if (
-      selectedAños.length > 0 ||
-      selectedEstados.length > 0 ||
-      selectedGeneros.length > 0
+      queryAños.length > 0 ||
+      queryEstados.length > 0 ||
+      queryGeneros.length > 0
     ) {
       setEliminando(true)
       setTimeout(() => {
