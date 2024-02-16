@@ -235,10 +235,11 @@
   display: flex;
   gap: 2px;
   margin-bottom: 12px;
+  flex-wrap: wrap;
 }
 .letras__container button {
   padding: 3px 7px;
-  flex-grow: 1;
+  flex-shrink: 1;
   border-radius: 2px;
   background-color: #1b1a1f;
   color: #f1f1f1;
