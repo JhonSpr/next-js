@@ -5,7 +5,6 @@ export async function generateMetadata({ params }) {
   const { anime, episode } = params
   const data = await Request_Animes({ info: anime?.replace(/-/g, ' ') })
 
-  // Extraer datos directamente del primer elemento de datos.datos
   const { name, descripcion } = data.datos[0]
 
   return {

@@ -21,38 +21,9 @@ const fecthAnimes = async (name) => {
 
 export async function generateMetadata({ params }) {
   const { anime } = params
-  const data = await fecthAnimes(anime?.replace(/-/g, ' '))
+  const data = await Request_Animes({ info: anime?.replace(/-/g, ' ') })
 
-  if (!data || !data.datos || !data.datos.length) {
-    return {
-      title: 'Animesz',
-      description: '',
-      siteName: 'animesz',
-      locale: 'es',
-      type: 'website',
-      robots: {
-        index: false,
-        follow: true,
-        nocache: true,
-        googleBot: {
-          index: true,
-          follow: false,
-          noimageindex: true,
-          'max-video-preview': -1,
-          'max-image-preview': 'large',
-          'max-snippet': -1,
-        },
-      },
-      verification: {
-        google: 'google',
-        yandex: 'yandex',
-        yahoo: 'yahoo',
-      },
-    }
-  }
-
-  // Extraer datos directamente del primer elemento de datos.datos
-  const { name, image, descripcion } = data.datos[0]
+  const { name, descripcion } = data.datos[0]
 
   return {
     title: `${name} - Animesz`,
