@@ -210,6 +210,7 @@ export const FilterMenu = ({ queryAños, queryGeneros, queryEstados }) => {
                 }
                 onChange={handleCheckboxChange}
                 name={e.query}
+                checked={selectedEstados?.includes(`${e.value}`)}
                 value={e.value}
               />
               <div className='cr-input'></div>
