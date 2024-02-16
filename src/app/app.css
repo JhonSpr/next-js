@@ -231,6 +231,28 @@
   border-color: #225d69;
 }
 
+.letras__container {
+  display: flex;
+  gap: 2px;
+  margin-bottom: 12px;
+}
+.letras__container button {
+  padding: 3px 7px;
+  flex-grow: 1;
+  border-radius: 2px;
+  background-color: #1b1a1f;
+  color: #f1f1f1;
+  text-transform: uppercase;
+  transition-property: backgrond-color;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-out;
+
+  &.active {
+    background-color: #1283b8;
+    color: #fff !important;
+  }
+}
+
 .menu__navbar__user {
   cursor: pointer;
   background-color: #1b1a1f;

@@ -32,12 +32,12 @@
   .column__image {
     width: 50%;
     height: 400px;
+    &:hover .btn__anime {
+      transform: scale(100%);
+    }
 
     &:hover .name__anime {
       opacity: 0;
-    }
-    &:hover .btn__anime {
-      transform: scale(100%);
     }
   }
   .column__image .image__anime {
@@ -207,8 +207,8 @@
     padding: 20px 40px;
     width: 440px;
     transition-property: opacity;
-    transition-duration: 0.2s;
-    transition-timing-function: ease-in;
+    transition-duration: 0.1s;
+    transition-timing-function: ease-out;
     &.show {
       opacity: 1;
       z-index: 2;

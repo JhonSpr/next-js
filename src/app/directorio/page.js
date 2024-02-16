@@ -48,20 +48,28 @@ export default async function page({ searchParams }) {
     ? [searchParams.estado]
     : []
   const current_page = Number(searchParams?.page || 1)
-  const data = await Request_Animes(
-    current_page,
-    searchParams?.q,
-    estados,
-    años,
-    searchParams?.tipos,
-    searchParams?.sortBy,
-    searchParams?.rate,
-    generos
-  )
+  const querySearch = searchParams?.q
+  const tipos = searchParams?.tipos
+  const sortBy = searchParams?.sortBy
+  const rate = searchParams?.rate
+  const letra = searchParams?.letra
+  const requestParams = {
+    page: current_page,
+    search: querySearch,
+    estado: estados,
+    años: años,
+    tipo: tipos,
+    sortBy: sortBy,
+    rate: rate,
+    genero: generos,
+    letra: letra,
+  }
+  const data = await Request_Animes(requestParams)
 
   const query = searchParams?.q || ''
   return (
     <DirectoryPage
+      letra={letra}
       data={data}
       query={query}
       estados={estados}

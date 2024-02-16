@@ -1,3 +1,4 @@
+import { Request_Animes } from '../FetchingData/request_animes'
 import { FetchSingleAnime } from './ListAnimes'
 
 let animeDataCache = {}
@@ -84,9 +85,21 @@ export default async function page({ params }) {
   const { anime } = params
   let datos = animeDataCache[anime]
 
+  const name = anime?.replace(/-/g, ' ')
+
   // Si los datos no están en la caché, obtenerlos de la API
   if (!datos) {
-    datos = await fecthAnimes(anime?.replace(/-/g, ' '))
+    datos = await Request_Animes({
+      page: 1,
+      search: false,
+      estado: [],
+      años: [],
+      tipo: [],
+      sortBy: [],
+      rate: [],
+      genero: [],
+      info: name,
+    })
     animeDataCache[anime] = datos
   }
 

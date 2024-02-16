@@ -106,3 +106,7 @@ html.dark {
   background-color: #1283b8 !important;
   color: #fff !important;
 }
+
+.letras__container.dark button {
+  color: #fff !important;
+}

@@ -19,6 +19,7 @@ export default function Pagination({
   search,
   isLoading,
   rate,
+  letra,
 }) {
   const results_page = 24
 
@@ -33,6 +34,10 @@ export default function Pagination({
 
   if (search) {
     url += `q=${search}&`
+  }
+
+  if (letra) {
+    url += `letra=${letra}&`
   }
 
   if (estado && estado.length > 0) {

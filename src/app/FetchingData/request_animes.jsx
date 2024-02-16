@@ -1,4 +1,4 @@
-export const Request_Animes = (
+export const Request_Animes = ({
   page,
   search,
   estado,
@@ -6,12 +6,22 @@ export const Request_Animes = (
   tipo,
   sortBy,
   rate,
-  genero
-) => {
+  genero,
+  info,
+  letra,
+}) => {
   let url = 'https://api-rest.up.railway.app/api/v1/animes?'
 
-  if (search && search !== '' && search !== 'null') {
+  if (letra !== undefined) {
+    url += `letra=${letra}&`
+  }
+
+  if (search !== undefined) {
     url += `name=${search}&`
+  }
+
+  if (info !== '' && info !== 'null' && info !== undefined) {
+    url += `info=${info}&`
   }
   if (años && años.length > 0) {
     const listAños = años?.join('&años=')
@@ -43,5 +53,6 @@ export const Request_Animes = (
   if (page) {
     url += `page=${page}`
   }
+
   return fetch(url, { next: { revalidate: 0 } }).then((res) => res.json())
 }
