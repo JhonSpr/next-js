@@ -61,6 +61,8 @@ function EpisodePage({ name, episode }) {
     }
   }
 
+  console.log('hola')
+
   useEffect(() => {
     if (
       (user !== undefined && user !== null) ||

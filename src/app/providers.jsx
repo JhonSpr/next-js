@@ -7,6 +7,7 @@ import { createContext, useContext, useEffect, useState } from 'react'
 import { auth } from './firebase'
 import { get, getDatabase, ref, set } from 'firebase/database'
 import { calcularRating } from './user/[idUser]/userPage'
+import { data } from 'autoprefixer'
 
 export const contextApp = createContext()
 export const ContextProvider = ({ children }) => {
@@ -104,7 +105,7 @@ export const ContextProvider = ({ children }) => {
       }
     }
     cargarDataUser()
-  }, [user, favoritos])
+  }, [user, dataUser])
   const contextValue = {
     user,
     dataUser,
