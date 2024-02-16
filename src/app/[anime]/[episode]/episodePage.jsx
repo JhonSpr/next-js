@@ -1,5 +1,4 @@
 'use client'
-import { Few__added } from '@/app/FetchingData/few_added'
 import { Request_episode } from '@/app/FetchingData/request_episode'
 import Comments from '@/app/components/comments'
 import ScrollSide from './scrollSide'
@@ -8,6 +7,7 @@ import { FaArrowRight, FaList } from 'react-icons/fa6'
 import { FaArrowLeft } from 'react-icons/fa'
 import { contextApp } from '@/app/providers'
 import { get, getDatabase, ref, set } from 'firebase/database'
+import { Request_Animes } from '@/app/FetchingData/request_animes'
 
 function EpisodePage({ name, episode }) {
   const { user } = useContext(contextApp)
@@ -15,7 +15,7 @@ function EpisodePage({ name, episode }) {
   const [lastEpisodes, setLastEpisodes] = useState([])
   useEffect(() => {
     Request_episode(name).then((res) => setAnimes(res))
-    Few__added().then((res) => setLastEpisodes(res))
+    Request_Animes({ recien: true }).then((res) => setLastEpisodes(res))
   }, [])
   const dynamicCapKey = `cap${episode}`
   const services = animes?.datos?.map((i) => i.services[0]) || []
@@ -60,8 +60,6 @@ function EpisodePage({ name, episode }) {
       console.error('Error al agregar el objeto a vistosRecientes:', error)
     }
   }
-
-  console.log('hola')
 
   useEffect(() => {
     if (

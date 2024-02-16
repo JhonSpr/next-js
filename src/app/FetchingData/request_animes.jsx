@@ -9,8 +9,11 @@ export const Request_Animes = ({
   genero,
   info,
   letra,
+  recien,
 }) => {
-  let url = 'https://api-rest.up.railway.app/api/v1/animes?'
+  let url = `https://api-rest.up.railway.app/api/v1/${
+    recien ? 'recien-agregados' : 'animes'
+  }?`
 
   if (letra !== undefined) {
     url += `letra=${letra}&`
