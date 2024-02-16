@@ -1,7 +1,7 @@
 @media only screen and (max-width: 600px) {
   .container__ {
     width: 98%;
-    padding: 20px auto;
+    padding: 30px 7px;
     margin: 30px auto;
     min-height: 80dvh;
     height: max-content;
@@ -9,7 +9,7 @@
 
   .list__animes {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(calc(230px - 30px), 200px));
+    grid-template-columns: repeat(auto-fit, minmax(calc(236px - 30px), 200px));
     gap: 9px;
   }
 
@@ -77,6 +77,11 @@
     font-weight: 400;
     display: block;
     text-align: center;
+  }
+
+  .letras__container button {
+    flex-shrink: 1 !important;
+    flex-grow: initial !important;
   }
 
   .column__image .name__anime {

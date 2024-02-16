@@ -239,7 +239,7 @@
 }
 .letras__container button {
   padding: 3px 7px;
-  flex-shrink: 1;
+  flex-grow: 1;
   border-radius: 2px;
   background-color: #1b1a1f;
   color: #f1f1f1;
