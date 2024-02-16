@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { FaFilter } from 'react-icons/fa6'
-
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 export const años = [
   { query: 'años', value: 2024, checked: false },
   { query: 'años', value: 2023, checked: false },
@@ -48,12 +48,15 @@ const estados = [
   { query: 'estado', value: 'finalizado', label: 'finalizado' },
 ]
 
-export const FilterMenu = ({ queryAños, queryGeneros }) => {
+export const FilterMenu = ({ queryAños, queryGeneros, queryEstados }) => {
   const [showAños, setShowAños] = useState(false)
   const [showGeneros, setShowGeneros] = useState(false)
   const [showEstados, setShowEstados] = useState(false)
   const [selectedAños, setSelectedAños] = useState(queryAños || [])
   const [selectedGeneros, setSelectedGeneros] = useState(queryGeneros || [])
+  const [selectedEstados, setSelectedEstados] = useState(queryEstados || [])
+  const [eliminando, setEliminando] = useState(false)
+
   const handleShowAños = () => {
     setShowAños(!showAños)
     setShowGeneros(false)
@@ -87,22 +90,52 @@ export const FilterMenu = ({ queryAños, queryGeneros }) => {
       } else {
         setSelectedGeneros(selectedGeneros.filter((genre) => genre !== value)) // Elimina el género deseleccionado
       }
+    } else if (name === 'estado') {
+      // Si el nombre es 'generos', actualiza el estado de los géneros seleccionados
+      if (checked) {
+        setSelectedEstados([...selectedEstados, value]) // Agrega el género seleccionado
+      } else {
+        setSelectedEstados(selectedEstados.filter((status) => status !== value)) // Elimina el género deseleccionado
+      }
     }
-    // Agrega condiciones adicionales para otros tipos de filtros si es necesario
+  }
+
+  const router = useRouter()
+  const resetFilter = (e) => {
+    e.preventDefault()
+    if (
+      selectedAños.length > 0 ||
+      selectedEstados.length > 0 ||
+      selectedGeneros.length > 0
+    ) {
+      setEliminando(true)
+      setTimeout(() => {
+        setEliminando(false)
+      }, 700)
+
+      setSelectedAños([])
+      setSelectedEstados([])
+      setSelectedGeneros([])
+      router.replace('/directorio')
+    }
   }
 
   return (
     <form className='filter__form'>
       <div className='filter__container'>
         <span className='filter__button' onClick={handleShowAños}>
-          años: todos
+          {selectedAños.length > 1
+            ? `años: selecionados (${selectedAños.length})`
+            : `años: ${selectedAños}`}
+
+          {selectedAños.length == 0 ? 'todos' : ''}
         </span>
         <div className={showAños ? 'filter__item show' : 'filter__item'}>
           {años?.map((e, index) => (
             <label
               key={index}
               className={`cr-wrapper ${
-                queryAños?.includes(`${e.value}`) ? 'active' : ''
+                selectedAños?.includes(`${e.value}`) ? 'active' : ''
               }`}>
               {e.value}
               <input
@@ -119,7 +152,11 @@ export const FilterMenu = ({ queryAños, queryGeneros }) => {
       </div>
       <div className='filter__container'>
         <span className='filter__button' onClick={handleShowGeneros}>
-          generos: todos
+          generos:{' '}
+          {selectedGeneros.length > 1
+            ? `selecionados (${selectedGeneros.length})`
+            : `${selectedGeneros}`}
+          {selectedGeneros.length == 0 ? 'todos' : ''}
         </span>
         <div
           className={
@@ -129,12 +166,14 @@ export const FilterMenu = ({ queryAños, queryGeneros }) => {
             <label
               key={index}
               className={`cr-wrapper ${
-                queryGeneros?.includes(`${e.value}`) ? 'active' : ''
+                selectedGeneros?.includes(`${e.value}`) ? 'active' : ''
               }`}>
               {e.label}
               <input
                 type='checkbox'
-                className={queryGeneros?.includes(`${e.value}`) ? 'active' : ''}
+                className={
+                  selectedGeneros?.includes(`${e.value}`) ? 'active' : ''
+                }
                 checked={selectedGeneros?.includes(`${e.value}`)}
                 onChange={handleCheckboxChange}
                 name={e.query}
@@ -147,7 +186,11 @@ export const FilterMenu = ({ queryAños, queryGeneros }) => {
       </div>{' '}
       <div className='filter__container'>
         <span className='filter__button' onClick={handleShowEstados}>
-          estados: todos
+          estados:{' '}
+          {selectedEstados.length > 1
+            ? `selecionados (${selectedEstados.length})`
+            : `${selectedEstados}`}
+          {selectedEstados.length == 0 ? 'todos' : ''}
         </span>
         <div
           className={
@@ -157,12 +200,15 @@ export const FilterMenu = ({ queryAños, queryGeneros }) => {
             <label
               key={index}
               className={`cr-wrapper ${
-                queryAños?.includes(`${e.value}`) ? 'active' : ''
+                selectedEstados?.includes(`${e.value}`) ? 'active' : ''
               }`}>
               {e.label}
               <input
                 type='checkbox'
-                className={queryAños?.includes(`${e.value}`) ? 'active' : ''}
+                className={
+                  selectedEstados?.includes(`${e.value}`) ? 'active' : ''
+                }
+                onChange={handleCheckboxChange}
                 name={e.query}
                 value={e.value}
               />
@@ -173,6 +219,9 @@ export const FilterMenu = ({ queryAños, queryGeneros }) => {
       </div>
       <button>
         <FaFilter />
+      </button>
+      <button onClick={resetFilter} disabled={eliminando}>
+        {eliminando ? 'restableciendo...' : 'restablecer filtros'}
       </button>
     </form>
   )

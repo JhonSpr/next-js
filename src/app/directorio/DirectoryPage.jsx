@@ -17,7 +17,11 @@ const DirectoryPage = ({
     <div className='container__'>
       <Search />
       <LetrasMenu letraQuery={letra} />
-      <FilterMenu queryAños={años} queryGeneros={generos} />
+      <FilterMenu
+        queryAños={años}
+        queryGeneros={generos}
+        queryEstados={estados}
+      />
       <section className='list__animes'>
         <AnimesFectching data={data.datos} />
 
