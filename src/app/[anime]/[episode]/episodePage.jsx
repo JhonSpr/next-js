@@ -72,7 +72,6 @@ function EpisodePage({ name, episode }) {
 
   return animes?.datos?.map((e) => (
     <main className='container__episode__page' key={e.id}>
-      <title>{name + ' | sub español - audio latino'}</title>
       <div className='container__iframe'>
         <h4>
           {name} {episode}
