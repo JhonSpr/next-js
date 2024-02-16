@@ -292,7 +292,7 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #111111; /* Color de fondo del scrollbar */
+  background: #1283b8; /* Color de fondo del scrollbar */
 }
 
 ::-webkit-scrollbar-thumb {
@@ -302,5 +302,34 @@
 /* Para Firefox */
 * {
   scrollbar-width: thin; /* Ancho del scrollbar */
-  scrollbar-color: #3d3c3c #f1f1f1; /* Color del thumb (barra) y del scrollbar */
+  scrollbar-color: rgb(17, 24, 39) #c1c1c100;
+}
+.nav,
+footer {
+  background-color: rgb(17, 24, 39) !important;
+}
+
+.ul {
+  background-color: rgb(17, 24, 39) !important;
+}
+
+.ul li a {
+  color: #fff !important;
+  &:hover {
+    color: #64748b !important;
+  }
+}
+
+.item__navigation {
+  background-color: rgb(17, 24, 39) !important;
+  color: #c1c1c1 !important;
+
+  &.active {
+    background-color: #1283b8 !important;
+    color: #fff !important;
+  }
+}
+
+.a {
+  color: #e2e8f0 !important;
 }

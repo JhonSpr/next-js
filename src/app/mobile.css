@@ -93,7 +93,7 @@
     width: 100%;
     overflow: hidden;
     height: 25%;
-    background-color: #17171a;
+    background-color: inherit !important;
     padding: 10px 10px;
     font-weight: 600;
     font-size: 15px;

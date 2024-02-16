@@ -121,7 +121,7 @@
     width: 50%;
     bottom: 0;
     height: 30%;
-    background-color: rgba(17, 17, 17, 0.699);
+    background-color: rgba(17, 17, 17, 0.699) !important;
     color: #ffffff;
     text-transform: capitalize;
     left: 0;

@@ -13,7 +13,7 @@ const Footer = () => {
                 className='h-8 me-3'
                 alt='FlowBite Logo'
               />
-              <span className='self-center text-2xl font-semibold whitespace-nowrap dark:text-white'>
+              <span className='self-center text-2xl font-semibold whitespace-nowrap dark:text-white text-white'>
                 Animesz | gratis sub español
               </span>
             </a>
@@ -41,10 +41,10 @@ const Footer = () => {
               </ul>
             </div>
             <div>
-              <h2 className='mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white'>
+              <h2 className='mb-6 text-sm font-semibold text-gray-500 uppercase dark:text-white'>
                 años
               </h2>
-              <ul className='text-gray-500 dark:text-gray-400 font-medium'>
+              <ul className='text-white dark:text-gray-400 font-medium'>
                 <div
                   style={{
                     width: '200px',
@@ -66,10 +66,10 @@ const Footer = () => {
               </ul>
             </div>
             <div>
-              <h2 className='mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white'>
+              <h2 className='mb-6 text-sm font-semibold text-gray-500 uppercase dark:text-white'>
                 Calendario de animes
               </h2>
-              <ul className='text-gray-500 dark:text-gray-400 font-medium'>
+              <ul className='text-white dark:text-gray-400 font-medium'>
                 <li className='mb-4'>
                   <a href='/canlendario/invierno' className='hover:underline'>
                     Calendario Invierno
@@ -79,11 +79,11 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <hr className='my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8' />
-        <div className='sm:flex sm:items-center sm:justify-between'>
-          <span className='text-sm text-gray-500 sm:text-center dark:text-gray-400'>
+        <hr className='my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8 text-white' />
+        <div className='sm:flex sm:items-center sm:justify-between text-white'>
+          <span className='text-sm text-white sm:text-center dark:text-gray-400'>
             © 2023{' '}
-            <a href='https://flowbite.com/' className='hover:underline'>
+            <a href='/' style={{ color: 'fff' }} className='a'>
               Animesz™
             </a>
             . All Rights Reserved.
@@ -91,7 +91,7 @@ const Footer = () => {
           <div className='flex mt-4 sm:justify-center sm:mt-0'>
             <a
               href='#'
-              className='text-gray-500 hover:text-gray-900 dark:hover:text-white'>
+              className='text-gray-500 hover:text-gray-500 dark:hover:text-white'>
               <svg
                 className='w-4 h-4'
                 aria-hidden='true'

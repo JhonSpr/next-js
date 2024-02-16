@@ -40,7 +40,7 @@ export function ThemeSwitcher() {
         {theme === 'dark' ? (
           <FaMoon fontSize={'20px'} color='#fff' />
         ) : (
-          <FaSun fontSize={'20px'} color='#111' />
+          <FaSun fontSize={'20px'} color='#fff' />
         )}
       </span>
     </label>
