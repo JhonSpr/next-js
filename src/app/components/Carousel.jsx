@@ -1,4 +1,6 @@
 'use client'
+import 'owl.carousel/dist/assets/owl.carousel.css'
+import 'owl.carousel/dist/assets/owl.theme.default.css'
 import { useEffect, useState } from 'react'
 import useRecomends from '../Hooks/Recomends'
 import dynamic from 'next/dynamic'

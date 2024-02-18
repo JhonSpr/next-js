@@ -5,7 +5,7 @@ export async function generateMetadata({ params }) {
   const { anime, episode } = params
   const data = await Request_Animes({ info: anime?.replace(/-/g, ' ') })
 
-  const { name, descripcion } = data.datos[0]
+  const { name, descripcion } = data?.datos[0]
 
   return {
     title: `${name} episiodio ${episode} - sub español - audio latino`,
