@@ -284,6 +284,18 @@
     border-radius: 7px;
   }
 
+  .background__page__info {
+    position: absolute;
+    width: 100%;
+    background-size: cover;
+    z-index: -1;
+    filter: brightness(30%);
+    height: 300px;
+    min-height: 80dvh;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
   .container__anime main .info__anime .generos__anime {
     display: flex;
     flex-direction: row;
@@ -336,7 +348,10 @@
     width: 100%;
   }
   .information__page {
-    padding: 40px 0;
+    padding: 40px 0px;
+    padding-left: 20px;
+    border-radius: 6px;
+    background-color: #efeff1;
   }
   .container__anime main .container__information .info__anime {
     display: flex;

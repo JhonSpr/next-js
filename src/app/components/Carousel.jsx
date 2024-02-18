@@ -15,7 +15,7 @@ const OwlCarousel = dynamic(() => import('react-owl-carousel'), {
 if (typeof window !== 'undefined') {
   window.$ = window.jQuery = require('jquery')
 }
-const Carousel = ({ data }) => {
+const Carousel = ({ animecurrent, genero1, genero2 }) => {
   const [esDispositivoMovil, setEsDispositivoMovil] = useState(false)
 
   const Responsive = {
@@ -52,14 +52,14 @@ const Carousel = ({ data }) => {
     // Limpiar el event listener en el cleanup de useEffect
     return () => window.removeEventListener('resize', handleResize)
   }, [])
-  const { uniqueArray } = useRecomends()
+  const { uniqueArray } = useRecomends(animecurrent, genero1, genero2)
   return (
     <OwlCarousel {...setting}>
       {uniqueArray
         ?.map((e, index) => (
           <div className='carouse__item' key={index}>
-            <a href={e.name.replace(/ /g, '-').toLowerCase()}>
-              <img src={e.image} alt='' />
+            <a href={e.name?.replace(/ /g, '-').toLowerCase()}>
+              <img src={e?.image} alt='' />
             </a>
           </div>
         ))

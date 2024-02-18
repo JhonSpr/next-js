@@ -73,13 +73,21 @@ export default async function page({ params }) {
     })
     animeDataCache[anime] = datos
   }
+  const { image, banner } = datos?.datos[0]
 
   return (
-    <section className='container__anime'>
-      <FetchSingleAnime
-        data={datos?.datos || []}
-        animeName={anime.replace(/-/g, ' ')}
-      />
-    </section>
+    <>
+      <div
+        className='background__page__info'
+        style={{
+          backgroundImage: `url(${banner ?? image})`,
+        }}></div>
+      <section className='container__anime'>
+        <FetchSingleAnime
+          data={datos?.datos || []}
+          animeName={anime.replace(/-/g, ' ')}
+        />
+      </section>
+    </>
   )
 }

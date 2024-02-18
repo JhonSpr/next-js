@@ -4,6 +4,10 @@ html.dark {
   }
 }
 
+.information__page.dark {
+  background-color: #111 !important;
+}
+
 .information__page.dark .title__anime {
   color: #458c9e !important;
 }
@@ -48,6 +52,7 @@ html.dark {
 .information__page.dark .container__image img {
   background-color: #3c3c44 !important;
 }
+
 .information__page.dark .episodes__pagination button {
   background-color: #3c3c44 !important;
 }

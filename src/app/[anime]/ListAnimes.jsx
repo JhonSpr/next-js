@@ -298,19 +298,7 @@ export function FetchSingleAnime({ data }) {
   }
 
   if (loading) {
-    return (
-      <div
-        className='container'
-        style={{
-          display: 'flex',
-          placeContent: 'center',
-          placeItems: 'center',
-          color: '#458c9e',
-          minHeight: '80dvh',
-        }}>
-        Cargando...
-      </div>
-    )
+    return <div></div>
   }
 
   return data?.map((e, index) => (
@@ -415,7 +403,11 @@ export function FetchSingleAnime({ data }) {
           <EpisodesList data={data} name={name} />
         </div>
         <div className='carousel__container'>
-          <Carousel data={data} />
+          <Carousel
+            animecurrent={e.name.toLowerCase()}
+            genero1={e.genero1}
+            genero2={e.genero2}
+          />
         </div>
         <Comments noButton={true} showCommentarios={true} />
       </section>
