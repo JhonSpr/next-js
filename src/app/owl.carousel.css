@@ -69,6 +69,10 @@
   -webkit-user-select: none;
   -moz-user-select: none;
   user-select: none;
+  position: absolute;
+}
+.owl-carousel .owl-nav .owl-next {
+  right: 0;
 }
 .owl-carousel .owl-nav button.owl-prev,
 .owl-carousel .owl-nav button.owl-next,
@@ -78,6 +82,7 @@
   border: none;
   padding: 0 !important;
   font: inherit;
+  background-color: #17d2;
 }
 .owl-carousel.owl-loaded {
   display: block;
