@@ -55,9 +55,11 @@ html.dark {
   background-color: #3c3c44 !important;
 }
 
-#disqus_thread.dark {
+#disqus_thread.dark,
+#disqus-recommendations.dark {
   color-scheme: light;
 }
+
 .scrollBarSide.dark {
   background-color: transparent;
   color: #c1c1c1;

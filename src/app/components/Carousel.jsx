@@ -1,6 +1,5 @@
 'use client'
-import 'owl.carousel/dist/assets/owl.carousel.css'
-import 'owl.carousel/dist/assets/owl.theme.default.css'
+
 import { useEffect, useState } from 'react'
 import useRecomends from '../Hooks/Recomends'
 import dynamic from 'next/dynamic'
@@ -15,6 +14,12 @@ if (typeof window !== undefined) {
 
 const Carousel = ({ data }) => {
   const [esDispositivoMovil, setEsDispositivoMovil] = useState(false)
+
+  const Responsive = {
+    0: { items: 3, margin: 2 },
+    768: { items: 4, margin: 10 },
+    1024: { items: 5, margin: 20 },
+  }
 
   useEffect(() => {
     function handleResize() {
@@ -32,9 +37,17 @@ const Carousel = ({ data }) => {
     return () => window.removeEventListener('resize', handleResize)
   }, [])
   const { uniqueArray } = useRecomends()
-  const end = Number(esDispositivoMovil ? 6 : 5)
   return (
-    <OwlCarousel items={5}>
+    <OwlCarousel
+      items={5}
+      responsive={Responsive}
+      autoplay={true}
+      autoplayTimeout={2000}
+      lazyContent={true}
+      lazyLoad={true}
+      loop={true}
+      nav={true}
+      autoplayHoverPause={true}>
       {uniqueArray
         ?.map((e, index) => (
           <div className='carouse__item' key={index}>

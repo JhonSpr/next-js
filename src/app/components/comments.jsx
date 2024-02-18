@@ -79,7 +79,9 @@ export default function Comments({
           id={`disqus_thread`}
           className={`${theme === 'dark' ? 'dark' : ''}`}></div>
 
-        <div id='disqus-recommendations'></div>
+        <div
+          id='disqus-recommendations'
+          className={`${theme === 'dark' ? 'dark' : ''}`}></div>
       </div>
     </div>
   )

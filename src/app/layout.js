@@ -7,6 +7,7 @@ import './globals.css'
 import './mobile.css'
 import './navbar.css'
 import './tablet.css'
+import './owl.carousel.css'
 
 import Navigation from './components/Navigation'
 import { SpeedInsights } from '@vercel/speed-insights/next'

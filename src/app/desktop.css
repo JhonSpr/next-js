@@ -679,7 +679,13 @@
     cursor: pointer;
   }
 
-  #disqus_thread.light {
+  .owl-next {
+    position: absolute;
+    padding: 20px;
+  }
+
+  #disqus_thread.light,
+  #disqus-recommendations.light {
     color-scheme: dark !important;
     background-color: transparent !important;
   }
