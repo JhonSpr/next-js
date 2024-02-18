@@ -35,8 +35,6 @@ const Carousel = ({ data }) => {
     nav: true,
     autoplayHoverPause: true,
     dots: true,
-    dotsData: true,
-    dotsEach: true,
   }
 
   useEffect(() => {
