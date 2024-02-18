@@ -138,8 +138,8 @@
   position: absolute;
   top: 50%;
   left: 0;
-  height: 7px;
-  width: 7px;
+  height: 15px;
+  width: 15px;
   background: #94a3b8;
   transition: background 250ms;
   border: 1px solid #f1f5f9;
@@ -164,13 +164,13 @@
   content: '';
   position: absolute;
   display: none;
-  left: 4px;
-  top: 4px;
-  width: 10px;
+  left: 2px;
+  top: 3px;
   height: 10px;
-  border-radius: 20px;
-  background: #ffffff;
+  width: 10px;
   transition: background 250ms;
+  background-color: #ffffff;
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
 }
 
 .cr-wrapper input:checked ~ .cr-input::after {

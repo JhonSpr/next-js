@@ -50,7 +50,11 @@ export default async function page({ searchParams }) {
   const current_page = Number(searchParams?.page || 1)
   const querySearch = searchParams?.q
   const tipos = searchParams?.tipos
-  const sortBy = searchParams?.sortBy
+  const sortBy = Array.isArray(searchParams?.sortBy)
+    ? searchParams?.sortBy
+    : searchParams?.sortBy
+    ? [searchParams.sortBy]
+    : []
   const rate = searchParams?.rate
   const letra = Array.isArray(searchParams?.letra)
     ? searchParams?.letra
@@ -76,6 +80,7 @@ export default async function page({ searchParams }) {
       letra={letra}
       data={data}
       query={query}
+      sortBy={sortBy}
       estados={estados}
       años={años}
       current_page={current_page}

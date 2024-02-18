@@ -35,4 +35,8 @@
     height: auto;
     display: flex !important;
   }
+
+  &.Sort {
+    width: min-content !important;
+  }
 }

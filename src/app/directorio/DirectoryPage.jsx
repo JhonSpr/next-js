@@ -12,6 +12,7 @@ const DirectoryPage = ({
   data,
   estados,
   letra,
+  sortBy,
 }) => {
   return (
     <div className='container__'>
@@ -22,6 +23,7 @@ const DirectoryPage = ({
         queryGeneros={generos}
         queryEstados={estados}
         queryLetra={letra}
+        querySort={sortBy}
       />
       <section className='list__animes'>
         <AnimesFectching data={data.datos} />
@@ -36,6 +38,7 @@ const DirectoryPage = ({
         año={años}
         search={query}
         estado={estados}
+        sortBy={sortBy}
       />
     </div>
   )

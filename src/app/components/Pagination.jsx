@@ -17,7 +17,6 @@ export default function Pagination({
   año,
   sortBy,
   search,
-  isLoading,
   rate,
   letra,
 }) {
@@ -36,8 +35,9 @@ export default function Pagination({
     url += `q=${search}&`
   }
 
-  if (letra) {
-    url += `letra=${letra}&`
+  if (letra && letra.length > 0) {
+    const letraQuery = letra.join('&letra')
+    url += `letra=${letraQuery}&`
   }
 
   if (estado && estado.length > 0) {
@@ -55,8 +55,9 @@ export default function Pagination({
     url += `años=${añosQuery}&`
   }
 
-  if (sortBy) {
-    url += `A-Z=${sortBy}&`
+  if (sortBy && sortBy.length > 0) {
+    const sortByQuery = sortBy?.join('&sortBy=')
+    url += `sortBy=${sortByQuery}&`
   }
 
   if (genre && genre.length > 0) {
@@ -68,9 +69,6 @@ export default function Pagination({
   }
 
   url
-  const handlePageChange = (pageNumber) => {
-    current_page - 1
-  }
 
   let start = 0
   let end = 6

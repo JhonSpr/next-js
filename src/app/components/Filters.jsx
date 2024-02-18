@@ -49,59 +49,78 @@ const estados = [
   { query: 'estado', value: 'finalizado', label: 'finalizado' },
 ]
 
+const sortBy = [
+  { query: 'sortBy', value: 'asc', label: 'nombre A-Z' },
+  { query: 'sortBy', value: 'desc', label: 'nombre Z-A' },
+  { query: 'sortBy', value: 'mayor', label: 'Mayor Calificacion' },
+]
+
 export const FilterMenu = ({
   queryAños,
   queryGeneros,
   queryEstados,
   queryLetra,
+  querySort,
 }) => {
   const [showAños, setShowAños] = useState(false)
   const [showGeneros, setShowGeneros] = useState(false)
   const [showEstados, setShowEstados] = useState(false)
+  const [showSort, setShowSort] = useState(false)
   const [selectedAños, setSelectedAños] = useState(queryAños || [])
   const [selectedGeneros, setSelectedGeneros] = useState(queryGeneros || [])
   const [selectedEstados, setSelectedEstados] = useState(queryEstados || [])
+  const [selectedSort, setSelectedSort] = useState(querySort || [])
   const [eliminando, setEliminando] = useState(false)
 
   const handleShowAños = () => {
     setShowAños(!showAños)
     setShowGeneros(false)
     setShowEstados(false)
+    setShowSort(false)
   }
   const handleShowGeneros = () => {
     setShowGeneros(!showGeneros)
     setShowAños(false)
     setShowEstados(false)
+    setShowSort(false)
   }
   const handleShowEstados = () => {
     setShowEstados(!showEstados)
     setShowGeneros(false)
     setShowAños(false)
+    setShowSort(false)
+  }
+  const handleShowSort = () => {
+    setShowSort(!showSort)
+    setShowEstados(false)
+    setShowGeneros(false)
+    setShowAños(false)
   }
   const handleCheckboxChange = (e) => {
     const { name, value, checked } = e.target
-
-    // Manejar el cambio de estado del checkbox según el nombre (query) y el valor
     if (name === 'años') {
-      // Si el nombre es 'años', actualiza el estado de los años seleccionados
       if (checked) {
-        setSelectedAños([...selectedAños, value]) // Agrega el año seleccionado
+        setSelectedAños([...selectedAños, value])
       } else {
-        setSelectedAños(selectedAños.filter((year) => year !== value)) // Elimina el año deseleccionado
+        setSelectedAños(selectedAños.filter((year) => year !== value))
       }
     } else if (name === 'generos') {
-      // Si el nombre es 'generos', actualiza el estado de los géneros seleccionados
       if (checked) {
-        setSelectedGeneros([...selectedGeneros, value]) // Agrega el género seleccionado
+        setSelectedGeneros([...selectedGeneros, value])
       } else {
-        setSelectedGeneros(selectedGeneros.filter((genre) => genre !== value)) // Elimina el género deseleccionado
+        setSelectedGeneros(selectedGeneros.filter((genre) => genre !== value))
       }
     } else if (name === 'estado') {
-      // Si el nombre es 'generos', actualiza el estado de los géneros seleccionados
       if (checked) {
-        setSelectedEstados([...selectedEstados, value]) // Agrega el género seleccionado
+        setSelectedEstados([...selectedEstados, value])
       } else {
-        setSelectedEstados(selectedEstados.filter((status) => status !== value)) // Elimina el género deseleccionado
+        setSelectedEstados(selectedEstados.filter((status) => status !== value))
+      }
+    } else if (name === 'sortBy') {
+      if (checked) {
+        setSelectedSort([...selectedSort, value])
+      } else {
+        setSelectedSort(selectedSort.filter((order) => order !== value))
       }
     }
   }
@@ -113,14 +132,15 @@ export const FilterMenu = ({
       queryAños.length > 0 ||
       queryEstados.length > 0 ||
       queryGeneros.length > 0 ||
-      queryLetra.length > 0
+      queryLetra.length > 0 ||
+      querySort.length > 0
     ) {
       setEliminando(true)
       setTimeout(() => {
         setEliminando(false)
         router.replace('/directorio')
       }, 700)
-
+      setSelectedSort([])
       setSelectedAños([])
       setSelectedEstados([])
       setSelectedGeneros([])
@@ -218,6 +238,35 @@ export const FilterMenu = ({
                 onChange={handleCheckboxChange}
                 name={e.query}
                 checked={selectedEstados?.includes(`${e.value}`)}
+                value={e.value}
+              />
+              <div className='cr-input'></div>
+            </label>
+          ))}
+        </div>
+      </div>
+      <div className='filter__container'>
+        <span className='filter__button' onClick={handleShowSort}>
+          orden:{' '}
+          {selectedSort.length > 1
+            ? `selecionados ${selectedSort.length}`
+            : `${selectedSort}`}
+          {selectedSort.length == 0 ? 'Por defecto' : ''}
+        </span>
+        <div className={showSort ? 'filter__item Sort show' : 'filter__item'}>
+          {sortBy?.map((e, index) => (
+            <label
+              key={index}
+              className={`cr-wrapper ${
+                selectedSort?.includes(`${e.value}`) ? 'active' : ''
+              }`}>
+              {e.label}
+              <input
+                type='checkbox'
+                className={selectedSort?.includes(`${e.value}`) ? 'active' : ''}
+                onChange={handleCheckboxChange}
+                name={e.query}
+                checked={selectedSort?.includes(`${e.value}`)}
                 value={e.value}
               />
               <div className='cr-input'></div>

@@ -170,7 +170,7 @@
 
 .owl-carousel .owl-item .owl-lazy {
   opacity: 0;
-  transition: opacity 400ms ease;
+  transition: opacity 1s ease;
 }
 .owl-carousel .owl-item .owl-lazy[src^=''],
 .owl-carousel .owl-item .owl-lazy:not([src]) {
@@ -245,7 +245,7 @@
   border-radius: 3px;
 }
 .owl-theme .owl-nav [class*='owl-']:hover {
-  background: #869791;
+  background: #869791 !important;
   color: #fff;
   text-decoration: none;
 }
@@ -279,16 +279,17 @@
 }
 
 .owl-carousel button.owl-dot {
-  width: 25px;
+  width: 15px;
   height: 5px;
   border-radius: 10px;
-  margin: 0 10px;
+  margin: 0 5px;
   background-color: #c1c1c1;
-  transition-property: background-color;
+  transition-property: background-color width;
   transition-duration: 0.2s;
   transition-timing-function: ease-out;
   &.active {
-    background-color: #12e3dc;
+    width: 25px;
+    background-color: #1283b8;
   }
 }
 .owl-theme .owl-dots .owl-dot span {
