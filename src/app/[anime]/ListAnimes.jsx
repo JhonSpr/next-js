@@ -195,11 +195,11 @@ export function FetchSingleAnime({ data }) {
       }
       const data = await response.json()
       setDatos(data)
-      setDislikes(data.dislikes || 0)
-      setLikes(data.likes || 0)
-      setDislike(data.dislikes || 0)
-      setLike(data.likes || 0)
-      setVotos(data.likes + data.dislikes || data.likes || data.dislikes)
+      setDislikes(data?.dislikes || 0)
+      setLikes(data?.likes || 0)
+      setDislike(data?.dislikes || 0)
+      setLike(data?.likes || 0)
+      setVotos(data?.likes + data?.dislikes || data?.likes || data?.dislikes)
 
       return data
     } catch (error) {
