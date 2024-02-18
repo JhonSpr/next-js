@@ -21,6 +21,7 @@ const DirectoryPage = ({
         queryAños={años}
         queryGeneros={generos}
         queryEstados={estados}
+        queryLetra={letra}
       />
       <section className='list__animes'>
         <AnimesFectching data={data.datos} />

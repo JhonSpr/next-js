@@ -4,9 +4,6 @@ html.dark {
   }
 }
 
-.information__page.dark {
-  background-color: #141414;
-}
 .information__page.dark .title__anime {
   color: #458c9e !important;
 }

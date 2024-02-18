@@ -52,7 +52,11 @@ export default async function page({ searchParams }) {
   const tipos = searchParams?.tipos
   const sortBy = searchParams?.sortBy
   const rate = searchParams?.rate
-  const letra = searchParams?.letra
+  const letra = Array.isArray(searchParams?.letra)
+    ? searchParams?.letra
+    : searchParams?.letra
+    ? [searchParams.letra]
+    : []
   const requestParams = {
     page: current_page,
     search: querySearch,

@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { FaFilter } from 'react-icons/fa6'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { FcClearFilters } from 'react-icons/fc'
 export const años = [
   { query: 'años', value: 2024, checked: false },
   { query: 'años', value: 2023, checked: false },
@@ -48,7 +49,12 @@ const estados = [
   { query: 'estado', value: 'finalizado', label: 'finalizado' },
 ]
 
-export const FilterMenu = ({ queryAños, queryGeneros, queryEstados }) => {
+export const FilterMenu = ({
+  queryAños,
+  queryGeneros,
+  queryEstados,
+  queryLetra,
+}) => {
   const [showAños, setShowAños] = useState(false)
   const [showGeneros, setShowGeneros] = useState(false)
   const [showEstados, setShowEstados] = useState(false)
@@ -103,20 +109,22 @@ export const FilterMenu = ({ queryAños, queryGeneros, queryEstados }) => {
   const router = useRouter()
   const resetFilter = (e) => {
     e.preventDefault()
-    // if (
-    //   queryAños.length > 0 ||
-    //   queryEstados.length > 0 ||
-    //   queryGeneros.length > 0
-    // ) {
-    //   setEliminando(true)
-    //   setTimeout(() => {
-    //     setEliminando(false)
-    //   }, 700)
+    if (
+      queryAños.length > 0 ||
+      queryEstados.length > 0 ||
+      queryGeneros.length > 0 ||
+      queryLetra.length > 0
+    ) {
+      setEliminando(true)
+      setTimeout(() => {
+        setEliminando(false)
+        router.replace('/directorio')
+      }, 700)
 
-    //   setSelectedAños([])
-    //   setSelectedEstados([])
-    //   setSelectedGeneros([])
-    router.replace('/directorio')
+      setSelectedAños([])
+      setSelectedEstados([])
+      setSelectedGeneros([])
+    }
   }
 
   return (
@@ -124,7 +132,7 @@ export const FilterMenu = ({ queryAños, queryGeneros, queryEstados }) => {
       <div className='filter__container'>
         <span className='filter__button' onClick={handleShowAños}>
           {selectedAños.length > 1
-            ? `años: selecionados (${selectedAños.length})`
+            ? `años: selecionados ${selectedAños.length}`
             : `años: ${selectedAños}`}
 
           {selectedAños.length == 0 ? 'todos' : ''}
@@ -153,7 +161,7 @@ export const FilterMenu = ({ queryAños, queryGeneros, queryEstados }) => {
         <span className='filter__button' onClick={handleShowGeneros}>
           generos:{' '}
           {selectedGeneros.length > 1
-            ? `selecionados (${selectedGeneros.length})`
+            ? `selecionados ${selectedGeneros.length}`
             : `${selectedGeneros}`}
           {selectedGeneros.length == 0 ? 'todos' : ''}
         </span>
@@ -187,7 +195,7 @@ export const FilterMenu = ({ queryAños, queryGeneros, queryEstados }) => {
         <span className='filter__button' onClick={handleShowEstados}>
           estados:{' '}
           {selectedEstados.length > 1
-            ? `selecionados (${selectedEstados.length})`
+            ? `selecionados ${selectedEstados.length}`
             : `${selectedEstados}`}
           {selectedEstados.length == 0 ? 'todos' : ''}
         </span>
@@ -220,8 +228,11 @@ export const FilterMenu = ({ queryAños, queryGeneros, queryEstados }) => {
       <button>
         <FaFilter />
       </button>
-      <button onClick={resetFilter} disabled={eliminando}>
-        {eliminando ? 'restableciendo...' : 'restablecer filtros'}
+      <button
+        onClick={resetFilter}
+        disabled={eliminando}
+        className='btn__clear__filters'>
+        {eliminando ? 'eliminando filtros' : <FcClearFilters />}
       </button>
     </form>
   )
