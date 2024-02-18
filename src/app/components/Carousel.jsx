@@ -4,13 +4,15 @@ import useRecomends from '../Hooks/Recomends'
 import dynamic from 'next/dynamic'
 
 // Importa jQuery de manera dinámica para evitar problemas con SSR
+const $ = dynamic(() => import('jquery'), {
+  ssr: false,
+})
 
 const OwlCarousel = dynamic(() => import('react-owl-carousel'), {
   ssr: false,
 })
 
-var $ = require('jquery')
-if (typeof window !== undefined) {
+if (typeof window !== 'undefined') {
   window.$ = window.jQuery = require('jquery')
 }
 const Carousel = ({ data }) => {
@@ -20,6 +22,21 @@ const Carousel = ({ data }) => {
     0: { items: 3, margin: 2 },
     768: { items: 4, margin: 10 },
     1024: { items: 5, margin: 20 },
+  }
+
+  const setting = {
+    items: 5,
+    responsive: Responsive,
+    autoplay: true,
+    autoplayTimeout: 2000,
+    lazyContent: true,
+    lazyLoad: true,
+    loop: true,
+    nav: true,
+    autoplayHoverPause: true,
+    dots: true,
+    dotsData: true,
+    dotsEach: true,
   }
 
   useEffect(() => {
@@ -39,16 +56,7 @@ const Carousel = ({ data }) => {
   }, [])
   const { uniqueArray } = useRecomends()
   return (
-    <OwlCarousel
-      items={5}
-      responsive={Responsive}
-      autoplay={true}
-      autoplayTimeout={2000}
-      lazyContent={true}
-      lazyLoad={true}
-      loop={true}
-      nav={true}
-      autoplayHoverPause={true}>
+    <OwlCarousel {...setting}>
       {uniqueArray
         ?.map((e, index) => (
           <div className='carouse__item' key={index}>

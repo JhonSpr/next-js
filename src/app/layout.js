@@ -23,8 +23,6 @@ export default function RootLayout({ children }) {
           href='https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.css'
           rel='stylesheet'
         />
-        <link rel='stylesheet' href='owlcarousel/owl.carousel.min.css' />
-        <link rel='stylesheet' href='owlcarousel/owl.theme.default.min.css' />
         <meta name='theme-color' content='#ffffff'></meta>
         <link
           rel='icon'
