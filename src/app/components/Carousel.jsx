@@ -16,8 +16,15 @@ if (typeof window !== 'undefined') {
   window.$ = window.jQuery = require('jquery')
 }
 const Carousel = ({ animecurrent, genero1, genero2 }) => {
-  const [esDispositivoMovil, setEsDispositivoMovil] = useState(false)
-
+  useEffect(() => {
+    // Verifica si OwlCarousel está disponible en el navegador
+    if (typeof window !== 'undefined') {
+      // Agrega la clase de animación de desvanecimiento al salir del carrusel
+      document.querySelectorAll('.owl-item').forEach((item) => {
+        item.classList.add('fadeOut')
+      })
+    }
+  }, [])
   const Responsive = {
     0: { items: 3, margin: 2 },
     768: { items: 4, margin: 10 },
@@ -35,23 +42,10 @@ const Carousel = ({ animecurrent, genero1, genero2 }) => {
     nav: true,
     autoplayHoverPause: true,
     dots: true,
+    animateOut: true,
+    animateIn: false,
   }
 
-  useEffect(() => {
-    function handleResize() {
-      // Verificar si el ancho de la ventana es menor que cierto valor (por ejemplo, 768 para tabletas)
-      setEsDispositivoMovil(window.innerWidth < 768)
-    }
-
-    // Agregar un event listener para el evento de cambio de tamaño de la ventana
-    window.addEventListener('resize', handleResize)
-
-    // Llamar a handleResize una vez al inicio para establecer el estado inicial
-    handleResize()
-
-    // Limpiar el event listener en el cleanup de useEffect
-    return () => window.removeEventListener('resize', handleResize)
-  }, [])
   const { uniqueArray } = useRecomends(animecurrent, genero1, genero2)
   return (
     <OwlCarousel {...setting}>
