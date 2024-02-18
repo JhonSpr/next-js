@@ -5,7 +5,6 @@ import { contextApp } from '../providers'
 import { useTheme } from 'next-themes'
 
 export default function Comments({
-  classParam,
   shortname = 'animesz-3',
   url = 'https://animesz.vercel.app',
   title = 'animesz',
@@ -29,6 +28,20 @@ export default function Comments({
       document.body.appendChild(disqusScript)
     }
 
+    const setDisqusTheme = () => {
+      if (
+        window.DISQUSWIDGETS &&
+        typeof window.DISQUSWIDGETS.override === 'function'
+      ) {
+        const disqusConfig = {
+          theme: theme === 'dark' ? 'dark' : 'light',
+          // Agrega el color de fondo según el tema
+          backgroundColor: theme === 'dark' ? '#111' : '#111',
+        }
+        window.DISQUSWIDGETS.override(disqusConfig)
+      }
+    }
+
     if (!window.DISQUS) {
       // Si Disqus no está cargado, cargar el script asincrónicamente
       loadDisqus()
@@ -42,6 +55,8 @@ export default function Comments({
           this.page.url = url
         },
       })
+      // Establecer el tema de Disqus cuando el componente se monta
+      setDisqusTheme()
     }
 
     // Función de limpieza
@@ -77,10 +92,6 @@ export default function Comments({
         } ${theme === 'dark' ? 'dark' : ''}`}>
         <div
           id={`disqus_thread`}
-          className={`${theme === 'dark' ? 'dark' : ''}`}></div>
-
-        <div
-          id='disqus-recommendations'
           className={`${theme === 'dark' ? 'dark' : ''}`}></div>
       </div>
     </div>

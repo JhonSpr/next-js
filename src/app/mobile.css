@@ -713,4 +713,12 @@
       height: 250px;
     }
   }
+  .owl-carousel .owl-nav button.owl-next {
+    right: 20px;
+    top: 50px !important;
+  }
+  .owl-carousel .owl-nav button.owl-prev {
+    left: 20px;
+    top: 50px !important;
+  }
 }

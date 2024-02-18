@@ -52,9 +52,11 @@ html.dark {
   background-color: #3c3c44 !important;
 }
 
-#disqus_thread.dark,
-#disqus-recommendations.dark {
+#disqus_thread.dark {
   color-scheme: light;
+}
+#disqus_recommendations {
+  color-scheme: none;
 }
 
 .scrollBarSide.dark {
