@@ -1,7 +1,15 @@
 'use client'
-
 import { useEffect, useState } from 'react'
 import useRecomends from '../Hooks/Recomends'
+import dynamic from 'next/dynamic'
+const OwlCarousel = dynamic(() => import('react-owl-carousel'), {
+  ssr: false,
+})
+
+var $ = require('jquery')
+if (typeof window !== undefined) {
+  window.$ = window.jQuery = require('jquery')
+}
 
 const Carousel = ({ data }) => {
   const [esDispositivoMovil, setEsDispositivoMovil] = useState(false)
@@ -23,15 +31,19 @@ const Carousel = ({ data }) => {
   }, [])
   const { uniqueArray } = useRecomends()
   const end = Number(esDispositivoMovil ? 6 : 5)
-  return uniqueArray
-    ?.map((e, index) => (
-      <div className='carouse__item' key={index}>
-        <a href={e.name.replace(/ /g, '-').toLowerCase()}>
-          <img src={e.image} alt='' />
-        </a>
-      </div>
-    ))
-    .slice(0, end)
+  return (
+    <OwlCarousel items={5}>
+      {uniqueArray
+        ?.map((e, index) => (
+          <div className='carouse__item' key={index}>
+            <a href={e.name.replace(/ /g, '-').toLowerCase()}>
+              <img src={e.image} alt='' />
+            </a>
+          </div>
+        ))
+        .slice(0, 12)}
+    </OwlCarousel>
+  )
 }
 
 export default Carousel

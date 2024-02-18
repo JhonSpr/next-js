@@ -103,21 +103,20 @@ export const FilterMenu = ({ queryAños, queryGeneros, queryEstados }) => {
   const router = useRouter()
   const resetFilter = (e) => {
     e.preventDefault()
-    if (
-      queryAños.length > 0 ||
-      queryEstados.length > 0 ||
-      queryGeneros.length > 0
-    ) {
-      setEliminando(true)
-      setTimeout(() => {
-        setEliminando(false)
-      }, 700)
+    // if (
+    //   queryAños.length > 0 ||
+    //   queryEstados.length > 0 ||
+    //   queryGeneros.length > 0
+    // ) {
+    //   setEliminando(true)
+    //   setTimeout(() => {
+    //     setEliminando(false)
+    //   }, 700)
 
-      setSelectedAños([])
-      setSelectedEstados([])
-      setSelectedGeneros([])
-      router.replace('/directorio')
-    }
+    //   setSelectedAños([])
+    //   setSelectedEstados([])
+    //   setSelectedGeneros([])
+    router.replace('/directorio')
   }
 
   return (
