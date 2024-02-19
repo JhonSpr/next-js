@@ -74,9 +74,9 @@ export const CarouselSoloItem = ({ itemsShow, ArrayList, solo }) => {
     setLoaded(true)
   }
   const Responsive = {
-    0: { items: 1, margin: 0 },
-    768: { items: 1, margin: 0 },
-    1024: { items: itemsShow, margin: 0 },
+    0: { items: 1, margin: 5 },
+    768: { items: 1, margin: 10 },
+    1024: { items: itemsShow, margin: 10 },
   }
 
   const setting = {
