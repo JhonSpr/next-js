@@ -15,7 +15,7 @@ const OwlCarousel = dynamic(() => import('react-owl-carousel'), {
 if (typeof window !== 'undefined') {
   window.$ = window.jQuery = require('jquery')
 }
-const Carousel = ({ animecurrent, genero1, genero2 }) => {
+const Carousel = ({ animecurrent, genero1, genero2, ArrayList }) => {
   const [loaded, setLoaded] = useState(false)
 
   const handleTranslated = () => {
@@ -43,26 +43,23 @@ const Carousel = ({ animecurrent, genero1, genero2 }) => {
     onTranslated: handleTranslated,
   }
 
-  const { uniqueArray } = useRecomends(animecurrent, genero1, genero2)
   return (
     <OwlCarousel {...setting}>
-      {uniqueArray
-        ?.map((e, index) => (
-          <div
-            className={`carouse__item ${!loaded ? 'loading' : ''}`}
-            key={index}>
-            <a href={e.name?.replace(/ /g, '-').toLowerCase()}>
-              <img
-                src={e?.image}
-                alt=''
-                onLoad={() => {
-                  setLoaded(true)
-                }}
-              />
-            </a>
-          </div>
-        ))
-        .slice(0, 12)}
+      {ArrayList?.map((e, index) => (
+        <div
+          className={`carouse__item ${!loaded ? 'loading' : ''}`}
+          key={index}>
+          <a href={e.name?.replace(/ /g, '-').toLowerCase()}>
+            <img
+              src={e?.image}
+              alt=''
+              onLoad={() => {
+                setLoaded(true)
+              }}
+            />
+          </a>
+        </div>
+      )).slice(0, 12)}
     </OwlCarousel>
   )
 }

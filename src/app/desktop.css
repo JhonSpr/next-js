@@ -415,7 +415,9 @@
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    height: 500px;
+    height: auto;
+    min-height: min-content;
+    max-width: max-content;
   }
   .container__anime
     main
@@ -436,6 +438,9 @@
       & svg:hover {
         color: #000;
       }
+    }
+    &:hover .episode__number {
+      opacity: 0;
     }
   }
   .container__anime

@@ -53,6 +53,7 @@ const sortBy = [
   { query: 'sortBy', value: 'asc', label: 'nombre A-Z' },
   { query: 'sortBy', value: 'desc', label: 'nombre Z-A' },
   { query: 'sortBy', value: 'mayor', label: 'Mayor Calificacion' },
+  { query: 'sortBy', value: 'menor', label: 'Menor Calificacion' },
 ]
 
 export const FilterMenu = ({

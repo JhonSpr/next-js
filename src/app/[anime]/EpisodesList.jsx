@@ -30,7 +30,7 @@ export default function EpisodesList({ data, name }) {
         {episodeArray
           ?.map((e, index) => (
             <div className='episode__item' key={index}>
-              <a href={`/${name[0]?.toLowerCase()}/${e.episode}`}>
+              <a href={`/${name?.toLowerCase()}/${e.episode}`}>
                 <div className='overlay'>
                   <FaPlayCircle />
                 </div>

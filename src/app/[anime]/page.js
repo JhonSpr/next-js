@@ -82,7 +82,7 @@ export default async function page({ params }) {
         style={{
           backgroundImage: `url(${banner ?? image})`,
         }}></div>
-      <section className='container__anime'>
+      <section className='container__anime' style={{ minHeight: '70dvh' }}>
         <FetchSingleAnime
           data={datos?.datos || []}
           animeName={anime.replace(/-/g, ' ')}

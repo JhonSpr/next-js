@@ -9,9 +9,10 @@ import { calcularRating } from '../user/[idUser]/userPage'
 import { MdAdd } from 'react-icons/md'
 import { BiSolidDislike, BiSolidLike } from 'react-icons/bi'
 import Carousel from '../components/Carousel'
+import useRecomends from '../Hooks/Recomends'
 
 export function FetchSingleAnime({ data }) {
-  const name = data?.map((e) => e.name?.replace(/ /g, '-'))
+  const { name, genero1, genero2 } = data[0]
   let animeId = data?.map((e) => e?.id)
   const [loading, setLoading] = useState([])
   const [favoritos, setFavoritos] = useState([])
@@ -20,7 +21,24 @@ export function FetchSingleAnime({ data }) {
   const [rating, setRating] = useState(0)
   const [datos, setDatos] = useState(null)
   const [votos, setVotos] = useState(Number) ?? 0
+  const [isMobile, setIsMobile] = useState(false)
 
+  useEffect(() => {
+    // Función para verificar si la pantalla es de un dispositivo móvil
+    const checkIsMobile = () => {
+      // Verificar el ancho de la ventana para determinar si es un dispositivo móvil
+      setIsMobile(window.innerWidth <= 768) // Puedes ajustar el ancho máximo para considerar como móvil
+    }
+
+    // Llamar a la función al cargar la página
+    checkIsMobile()
+
+    // Agregar un event listener para el evento de cambio de tamaño de la ventana
+    window.addEventListener('resize', checkIsMobile)
+
+    // Limpiar el event listener en el cleanup de useEffect
+    return () => window.removeEventListener('resize', checkIsMobile)
+  }, [])
   const {
     theme,
     user,
@@ -297,6 +315,7 @@ export function FetchSingleAnime({ data }) {
     setNoLogged(false)
   }
 
+  const { uniqueArray } = useRecomends(name, genero1, genero2)
   if (loading) {
     return <div></div>
   }
@@ -364,7 +383,8 @@ export function FetchSingleAnime({ data }) {
           </div>
 
           <strong className='title__anime'>{e.name}</strong>
-          <p>{e.descripcion}</p>
+          <p className='sypnosis'>{e.descripcion}</p>
+
           <div className={`wrapp__anime`}>
             <span>
               fecha de emisión: <strong>{e.emitido}</strong>
@@ -396,18 +416,15 @@ export function FetchSingleAnime({ data }) {
                 </a>
               ))}
             </div>
-            <iframe
-              src={`https://www.youtube.com/embed/${e.trailer}`}
-              className='trailer__anime'></iframe>
+            <div className='trailer__anime'>
+              <iframe
+                src={`https://www.youtube.com/embed/${e.trailer}`}></iframe>
+            </div>
           </div>
-          <EpisodesList data={data} name={name} />
+          <EpisodesList data={data} name={name?.replace(/ /g, '-')} />
         </div>
         <div className='carousel__container'>
-          <Carousel
-            animecurrent={e.name.toLowerCase()}
-            genero1={e.genero1}
-            genero2={e.genero2}
-          />
+          <Carousel ArrayList={uniqueArray} />
         </div>
         <Comments noButton={true} showCommentarios={true} />
       </section>

@@ -15,8 +15,9 @@ export const Request_Animes = ({
     recien ? 'recien-agregados' : 'animes'
   }?`
 
-  if (letra !== undefined) {
-    url += `letra=${letra}&`
+  if (letra && letra.length > 0) {
+    const letraQuery = letra.join('&letra')
+    url += `letra=${letraQuery}&`
   }
 
   if (search !== undefined) {
@@ -41,12 +42,17 @@ export const Request_Animes = ({
     url += `type=${tipoQuery}&`
   }
 
-  if (sortBy) {
-    url += `sortBy=${sortBy}&`
+  if (sortBy && sortBy.length > 0) {
+    const sortByQuery = sortBy?.join('&sortBy=')
+
+    if (sortBy.includes('mayor') || sortBy.includes('menor')) {
+      url += `rating=${sortBy}&`
+    } else {
+      url += `sortBy=${sortByQuery}&`
+    }
   }
 
   if (rate) {
-    url += `rating=${rate}&`
   }
 
   if (genero && genero.length > 0) {
