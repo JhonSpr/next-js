@@ -239,11 +239,11 @@
   }
   .container__anime main {
     display: grid;
-    gap: 10px;
+    gap: 20px;
     grid-template-columns: 29% 69%;
   }
   .container__anime main .container__image {
-    width: 100%;
+    width: 90%;
   }
 
   .container__anime main .container__image .footer__image__anime {
@@ -861,15 +861,15 @@
 
   .item .hero__text {
     position: relative;
-    z-index: 9;
-    height: 300px;
+    z-index: 1;
+    height: max-content;
     width: 70%;
     margin-top: 10px;
     margin-left: 10px;
   }
   .item .hero__text h2 {
     color: #ffffff;
-    font-size: 30px;
+    font-size: 40px;
     font-family: 'Oswald', sans-serif;
     font-weight: 700;
     line-height: 52px;
@@ -888,6 +888,8 @@
     -webkit-transition: all, 0.8s;
     -o-transition: all, 0.8s;
     transition: all, 0.8s;
+    display: inline-block;
+    width: 180px !important;
   }
 
   .item .hero__text a span {
