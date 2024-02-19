@@ -48,7 +48,7 @@ export default async function Home() {
         <span className='title'>Recien Agregados</span>
         <section className='recientes'>
           {recientAgregados.datos.map((e, index) => (
-            <article className='anime__card'>
+            <article className='anime__card' key={index}>
               <a href={`/${e.name.replace(/ /g, '-')}`}>
                 <div className='container__image__card'>
                   <div className='overlay'>

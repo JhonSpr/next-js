@@ -849,7 +849,7 @@
     position: absolute;
     object-position: center;
     object-fit: cover;
-
+    filter: brightness(70%);
     transition-property: filter;
     transition-duration: 0.4s;
     transition-timing-function: ease-out;
@@ -858,36 +858,67 @@
       cursor: pointer;
     }
   }
-  .item a {
-    bottom: -100%;
-    border: 2px solid #000000;
-    border-radius: 7px;
-    right: 20px;
-    position: absolute;
-    padding: 10px 30px;
-    background: linear-gradient(
-      to left,
-      rgb(59, 151, 226),
-      rgba(17, 103, 161, 0.719)
-    );
-    transition-property: transform background-color bottom;
-    transition-duration: 0.6s;
-    transition-timing-function: ease-in-out;
-    &:hover {
-      background-color: #1283b8;
-      transform: scale(105%);
-    }
+
+  .item .hero__text {
+    position: relative;
+    z-index: 9;
+    height: 300px;
+    width: 70%;
+    margin-top: 10px;
+    margin-left: 10px;
+  }
+  .item .hero__text h2 {
+    color: #ffffff;
+    font-size: 30px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    line-height: 52px;
+    margin-top: 5px;
+    margin-bottom: 8px;
+    position: relative;
+    top: -100%;
+    opacity: 0;
+    transition: all, 0.4s;
   }
 
-  .item strong {
-    position: absolute;
-    top: -100%;
-    left: 30px;
-    transition-property: top;
-    transition-duration: 0.6s;
-    transition-timing-function: ease-in-out;
-    padding: 4px 15px;
-    border-bottom: 2px solid #1283b8;
+  .item .hero__text a {
+    position: relative;
+    top: -100px;
+    opacity: 0;
+    -webkit-transition: all, 0.8s;
+    -o-transition: all, 0.8s;
+    transition: all, 0.8s;
+  }
+
+  .item .hero__text a span {
+    font-size: 13px;
+    color: #ffffff;
+
+    display: inline-block;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border-radius: 4px 0 0 4px;
+    margin-right: 1px;
+    display: flex;
+    width: 180px;
+    gap: 5px;
+    & > * {
+      background: #1283b8;
+      height: 50px;
+    }
+
+    & svg {
+      width: 30px;
+      padding: 10px;
+      font-size: 14px !important;
+      border-radius: 0 4px 4px 0;
+    }
+
+    & > strong {
+      border-radius: 4px 0 0 4px;
+      padding: 14px 20px;
+    }
   }
   .carousel__container .carouse__item {
     width: 200px;

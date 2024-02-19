@@ -5,7 +5,7 @@ const SideBar = ({ ultimos__episodios }) => {
     <div className='sidebar'>
       <div className='ultimos__episodios'>
         {ultimos__episodios.recientes?.map((e, index) => (
-          <li>{e.nombre}</li>
+          <li key={index}>{e.nombre}</li>
         ))}
       </div>
     </div>

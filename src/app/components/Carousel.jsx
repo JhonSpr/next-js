@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react'
 import useRecomends from '../Hooks/Recomends'
 import dynamic from 'next/dynamic'
+import { FaChevronRight } from 'react-icons/fa6'
 
 // Importa jQuery de manera dinámica para evitar problemas con SSR
 const $ = dynamic(() => import('jquery'), {
@@ -99,8 +100,15 @@ export const CarouselSoloItem = ({ itemsShow, ArrayList, solo }) => {
       {ArrayList?.map((e, index) => (
         <div className='item' key={index}>
           <img src={e.banner ?? e.image} alt='' />
-          <a href={`/${e.name.replace(/ /g, '-')}`}>Ver Ahora</a>
-          <strong>{e.name}</strong>
+
+          <div className='hero__text'>
+            <h2>{e.name}</h2>
+            <a href={`/${e.name.replace(/ /g, '-')}`}>
+              <span>
+                <strong>Ver Ahora</strong> <FaChevronRight />
+              </span>
+            </a>
+          </div>
         </div>
       ))}
     </OwlCarousel>
