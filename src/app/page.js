@@ -49,13 +49,24 @@ export default async function Home() {
         <section className='recientes'>
           {recientAgregados.datos.map((e, index) => (
             <article className='anime__card'>
-              <div className='overlay'>
-                <FaCirclePlay />
-              </div>
               <a href={`/${e.name.replace(/ /g, '-')}`}>
-                <img src={e.image} alt='' />
-                <span className='anime__name'>{e.name}</span>
+                <div className='container__image__card'>
+                  <div className='overlay'>
+                    <FaCirclePlay />
+                  </div>
+                  <img src={e.image} alt='' />
+                </div>
               </a>
+              <div className='ds'>
+                <span
+                  className={
+                    e.estado === 'finalizado' ? 'status end' : 'status'
+                  }>
+                  {e.estado}
+                </span>
+                <span className='type'>{e.tipo}</span>
+              </div>
+              <span className='anime__name'>{e.name}</span>
             </article>
           ))}
         </section>
