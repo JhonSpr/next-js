@@ -110,6 +110,12 @@
   -webkit-user-select: none;
   -moz-user-select: none;
   user-select: none;
+  &.active .item a {
+    bottom: 20px !important;
+  }
+  &.active .item strong {
+    top: 20px !important;
+  }
 }
 .owl-carousel.owl-grab {
   cursor: move;
@@ -146,6 +152,7 @@
 
 .owl-carousel .fadeOut {
   animation-name: fadeOut;
+  transition: all 0.2s;
 }
 
 @keyframes fadeOut {

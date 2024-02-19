@@ -239,12 +239,11 @@
   }
   .container__anime main {
     display: grid;
-    grid-template-columns: 25% 70%;
+    gap: 10px;
+    grid-template-columns: 29% 69%;
   }
   .container__anime main .container__image {
-    width: max-content;
-    text-align: center;
-    justify-content: center;
+    width: 100%;
   }
 
   .container__anime main .container__image .footer__image__anime {
@@ -278,7 +277,7 @@
 
   .container__anime main .container__image .image__anime img {
     padding: 20px;
-    width: 350px;
+    width: 100%;
     background-color: #17171a;
     border: 2px solid #17171a;
     border-radius: 7px;
@@ -428,6 +427,7 @@
     width: 250px;
     height: 160px;
     position: relative;
+
     &:hover .overlay {
       color: #1283b8;
       opacity: 1;
@@ -435,6 +435,7 @@
       height: 100%;
       font-size: 40px;
       border-radius: 7px;
+
       & svg:hover {
         color: #000;
       }
@@ -727,6 +728,121 @@
     }
   }
 
+  .container__.home {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: 59% 39%;
+  }
+  .container__.home section {
+    width: 100%;
+  }
+
+  .recientes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 180px));
+    gap: 15px;
+  }
+  .recientes .anime__card {
+    position: relative;
+    height: 350px;
+    overflow: hidden;
+    line-height: normal;
+    &:hover .overlay {
+      height: 90%;
+      width: 100%;
+      opacity: 1;
+      font-size: 50px;
+    }
+  }
+
+  .recientes .anime__card .anime__name {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    width: 100%;
+    text-wrap: balance;
+  }
+
+  .title {
+    padding-top: 30px;
+    margin-bottom: 10px;
+    display: block;
+    width: 100%;
+    position: relative;
+    font-size: 20px;
+    text-transform: uppercase;
+    &::before {
+      content: '';
+      display: inline-block;
+      width: 4px;
+      height: 30px;
+      margin-right: 10px;
+      background-color: #1283b8;
+    }
+  }
+
+  .recientes .anime__card img {
+    border-radius: 7px;
+    height: 90%;
+  }
+  .sidebar {
+    width: 100%;
+  }
+
+  .sidebar li {
+    list-style: none;
+  }
+  .item {
+    width: 100%;
+    height: 350px;
+    position: relative;
+  }
+  .item img {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    object-position: center;
+    object-fit: cover;
+
+    transition-property: filter;
+    transition-duration: 0.4s;
+    transition-timing-function: ease-out;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  .item a {
+    bottom: -100%;
+    border: 2px solid #000000;
+    border-radius: 7px;
+    right: 20px;
+    position: absolute;
+    padding: 10px 30px;
+    background: linear-gradient(
+      to left,
+      rgb(59, 151, 226),
+      rgba(17, 103, 161, 0.719)
+    );
+    transition-property: transform background-color bottom;
+    transition-duration: 0.6s;
+    transition-timing-function: ease-in-out;
+    &:hover {
+      background-color: #1283b8;
+      transform: scale(105%);
+    }
+  }
+
+  .item strong {
+    position: absolute;
+    top: -100%;
+    left: 30px;
+    transition-property: top;
+    transition-duration: 0.6s;
+    transition-timing-function: ease-in-out;
+    padding: 4px 15px;
+    border-bottom: 2px solid #1283b8;
+  }
   .carousel__container .carouse__item {
     width: 200px;
     height: 270px;

@@ -15,7 +15,7 @@ const OwlCarousel = dynamic(() => import('react-owl-carousel'), {
 if (typeof window !== 'undefined') {
   window.$ = window.jQuery = require('jquery')
 }
-const Carousel = ({ animecurrent, genero1, genero2, ArrayList }) => {
+const Carousel = ({ itemsShow, ArrayList, solo }) => {
   const [loaded, setLoaded] = useState(false)
 
   const handleTranslated = () => {
@@ -24,21 +24,21 @@ const Carousel = ({ animecurrent, genero1, genero2, ArrayList }) => {
   const Responsive = {
     0: { items: 3, margin: 2 },
     768: { items: 4, margin: 0 },
-    1024: { items: 5, margin: 0 },
+    1024: { items: itemsShow, margin: 0 },
   }
 
   const setting = {
-    items: 5,
+    items: itemsShow,
     responsive: Responsive,
     autoplay: true,
-    autoplayTimeout: 2000,
+    autoplayTimeout: 3000,
     lazyLoad: true,
     loop: true,
     nav: true,
     autoplayHoverPause: true,
     dots: true,
     lazyLoadEager: 1,
-    animateOut: true,
+    animateOut: 'fadeOut',
     animateIn: false,
     onTranslated: handleTranslated,
   }
@@ -47,7 +47,9 @@ const Carousel = ({ animecurrent, genero1, genero2, ArrayList }) => {
     <OwlCarousel {...setting}>
       {ArrayList?.map((e, index) => (
         <div
-          className={`carouse__item ${!loaded ? 'loading' : ''}`}
+          className={`${solo ? 'carouse__item solo' : 'carouse__item'} ${
+            !loaded ? 'loading' : ''
+          }`}
           key={index}>
           <a href={e.name?.replace(/ /g, '-').toLowerCase()}>
             <img
@@ -64,4 +66,44 @@ const Carousel = ({ animecurrent, genero1, genero2, ArrayList }) => {
   )
 }
 
+export const CarouselSoloItem = ({ itemsShow, ArrayList, solo }) => {
+  const [loaded, setLoaded] = useState(false)
+
+  const handleTranslated = () => {
+    setLoaded(true)
+  }
+  const Responsive = {
+    0: { items: 1, margin: 0 },
+    768: { items: 1, margin: 0 },
+    1024: { items: itemsShow, margin: 0 },
+  }
+
+  const setting = {
+    items: 1,
+    responsive: Responsive,
+    autoplay: true,
+    autoplayTimeout: 3000,
+    lazyLoad: true,
+    loop: true,
+    nav: false,
+    autoplayHoverPause: true,
+    dots: true,
+    lazyLoadEager: 1,
+    animateOut: 'fadeOut',
+    animateIn: false,
+    onTranslated: handleTranslated,
+  }
+
+  return (
+    <OwlCarousel {...setting}>
+      {ArrayList?.map((e, index) => (
+        <div className='item' key={index}>
+          <img src={e.banner ?? e.image} alt='' />
+          <a href={`/${e.name.replace(/ /g, '-')}`}>Ver Ahora</a>
+          <strong>{e.name}</strong>
+        </div>
+      ))}
+    </OwlCarousel>
+  )
+}
 export default Carousel

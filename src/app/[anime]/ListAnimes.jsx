@@ -424,7 +424,7 @@ export function FetchSingleAnime({ data }) {
           <EpisodesList data={data} name={name?.replace(/ /g, '-')} />
         </div>
         <div className='carousel__container'>
-          <Carousel ArrayList={uniqueArray} />
+          <Carousel ArrayList={uniqueArray} itemsShow={5} />
         </div>
         <Comments noButton={true} showCommentarios={true} />
       </section>
