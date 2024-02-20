@@ -55,7 +55,6 @@ export function FetchSingleAnime({ data }) {
     setFirstClicked,
     setLike,
     setDislike,
-    rate,
   } = useContext(contextApp)
   const [votosList, setVotosList] = useState({})
   const nameID = data?.map((e) => e.anime?.replace(/ /g, ' '))[0]
@@ -83,7 +82,6 @@ export function FetchSingleAnime({ data }) {
         const userVote = userVoteSnapshot.val()
         const snapshot = await get(child(animeRef, 'likes'))
         const currentLikes = snapshot.val()
-
         if (userVote !== null) {
           if (userVote.like && !userVote.dislike) {
             // Si el usuario ya había dado like y no dislike, se cambia a false
@@ -174,7 +172,6 @@ export function FetchSingleAnime({ data }) {
               setIsVisible(false)
               setRemove(false)
             }, 2000)
-
             setMessage('El voto fue registrado')
             await set(userVotesRef, { like: false, dislike: true })
           } else {
@@ -256,6 +253,31 @@ export function FetchSingleAnime({ data }) {
     }
   }
 
+  useEffect(() => {
+    // Actualiza el rating basado en los nuevos valores de likes y dislikes
+    const newRating = calcularRating(likes, dislikes)
+    setRating(newRating)
+
+    // Actualiza el rating en la base de datos de Firebase
+    const updateRatingInDatabase = async (animeId) => {
+      try {
+        const db = getDatabase()
+
+        const animeRef = ref(db, `animes/${animeId[0].toLowerCase()}`)
+        await set(child(animeRef, 'rating'), newRating)
+      } catch (error) {
+        console.error(
+          'Error al actualizar el rating en la base de datos:',
+          error
+        )
+      }
+    }
+
+    if (animeId) {
+      updateRatingInDatabase(animeId)
+    }
+  }, [likes, dislikes])
+
   const handleRatingSubmit = async () => {
     try {
       // Validar si animeId tiene un valor válido
@@ -306,9 +328,12 @@ export function FetchSingleAnime({ data }) {
   }, [data, user, message, likes, dislikes])
 
   useEffect(() => {
-    setRating(calcularRating(likes, dislikes))
-    handleRatingSubmit()
-  }, [datos, message, likes, dislikes])
+    setRating(calcularRating(likes, dislikes)) // Actualiza el rating basado en los nuevos valores de likes y dislikes
+  }, [likes, dislikes, message]) // Ejecuta el efecto cada vez que likes o dislikes cambien
+
+  useEffect(() => {
+    handleRatingSubmit() // Llama a la función handleRatingSubmit para actualizar el rating en la base de datos
+  }, [rating, user])
 
   const handleClose = () => {
     setIsVisible(false)
