@@ -1,4 +1,4 @@
-@media only screen and (min-width: 1450px) {
+@media only screen and (min-width: 1250px) {
   .btn__close__navbar {
     display: none;
   }
@@ -728,18 +728,20 @@
     }
   }
 
-  .container__.home {
+  .container__.section {
     display: grid;
     gap: 10px;
-    grid-template-columns: 59% 39%;
+    grid-template-columns: 60% 40%;
+    height: min-content;
+    position: relative;
   }
-  .container__.home section {
+  .container__.section section {
     width: 100%;
   }
 
   .recientes {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 180px));
+    grid-template-columns: repeat(auto-fit, minmax(20%, 180px));
     gap: 15px;
   }
   .recientes .anime__card {
@@ -833,10 +835,73 @@
   }
   .sidebar {
     width: 100%;
+    background-color: transparent;
+    border-radius: 7px;
+    padding: 10px 25px;
   }
 
   .sidebar li {
     list-style: none;
+  }
+
+  .buttons {
+    display: flex;
+    gap: 5px;
+    margin: 10px 0;
+  }
+
+  .buttons__item {
+    flex-basis: 49%;
+    background-color: #1283b8;
+    padding: 7px;
+    color: #fff;
+    text-transform: capitalize;
+    border-radius: 7px;
+  }
+
+  .sidebar .sidebar__content {
+    width: 100%;
+    height: 0;
+    overflow: hidden;
+    overflow-y: auto;
+    border-radius: 7px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    &.show {
+      height: 120dvh;
+      padding: 10px;
+      background-color: rgb(17, 24, 39);
+    }
+
+    scrollbar-width: thin; /* Ancho del scrollbar */
+    scrollbar-color: #1283b8 transparent;
+  }
+
+  .sidebar .sidebar__content li {
+    display: flex;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 2px solid #000;
+  }
+
+  .sidebar .sidebar__content li img {
+    height: 70px;
+    flex-basis: 30%;
+    border-radius: 7px;
+  }
+
+  .sidebar .sidebar__content li a {
+    flex-basis: 70%;
+    color: #ccc;
+    text-transform: capitalize;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 26px;
+    position: relative;
+  }
+  .sidebar .sidebar__content li a span {
+    color: #1283b8;
   }
   .item {
     width: 100%;
@@ -853,7 +918,7 @@
     transition-property: filter;
     transition-duration: 0.4s;
     transition-timing-function: ease-out;
-
+    border-radius: 7px;
     &:hover {
       cursor: pointer;
     }
