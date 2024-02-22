@@ -1066,9 +1066,9 @@
     }
   }
   .container__form__page__register {
+    transform: translate(-50%, -50%) scale(110%);
     top: 35%;
     left: 50%;
-    transform: translate(-50%, -50%);
     width: 450px;
     height: 50%;
     margin: 20px auto;
@@ -1077,6 +1077,37 @@
     position: fixed;
     z-index: 4;
     border-radius: 7px;
+    transition: transform 0.2s ease-in-out;
+    animation: scale ease-in-out 0.2s;
+  }
+
+  @keyframes scale {
+    0% {
+      transform: scale(50%) translate(-50%, -50%);
+      top: 35%;
+      left: 50%;
+      width: 450px;
+      height: 50%;
+      margin: 20px auto;
+      background-color: #1b1a1f;
+      padding: 20px auto;
+      position: fixed;
+      z-index: 4;
+      border-radius: 7px;
+    }
+    100% {
+      transform: scale(100%) translate(-50%, -50%);
+      top: 35%;
+      left: 50%;
+      width: 450px;
+      height: 50%;
+      margin: 20px auto;
+      background-color: #1b1a1f;
+      padding: 20px auto;
+      position: fixed;
+      z-index: 4;
+      border-radius: 7px;
+    }
   }
   .container__form__page__register .form {
     width: 90%;
