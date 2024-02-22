@@ -398,10 +398,28 @@
     .wrapp__anime
     .trailer__anime {
     position: absolute;
-    right: 0;
+    margin: 20px auto;
+    border-radius: 7px;
     width: 400px;
     height: 220px;
-    border-radius: 7px;
+    right: 0;
+    margin-bottom: 40px !important;
+    & > iframe {
+      height: 100%;
+      width: 100%;
+      margin-top: 7px;
+      border-radius: 7px;
+    }
+    &::before {
+      content: 'Trailer';
+      display: block;
+      width: 100%;
+      background-color: #3c3c44;
+      color: #fff;
+      padding: 7px;
+      border-radius: 6px;
+      text-transform: capitalize;
+    }
   }
 
   .container__anime
@@ -719,7 +737,7 @@
       content: 'Animes relacionados';
       display: block;
       width: 100%;
-      background-color: #1b1a1f;
+      background-color: #3c3c44;
       color: #fff;
       padding: 7px;
       border-radius: 6px;

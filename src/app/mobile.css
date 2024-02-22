@@ -791,10 +791,24 @@
     border-radius: 7px;
     color: #1283b8;
     font-size: 20px;
-    background-color: #17171a;
+    background-color: #17171a !important;
+
     &.active {
       background-color: #17171a !important;
-      outline: #1283b8 1px solid;
+      color: #fff;
+    }
+
+    &:focus {
+      animation: scale alternate 0.2s ease-out;
+    }
+  }
+
+  @keyframes scale {
+    0% {
+      transform: scale(100%);
+    }
+    100% {
+      transform: scale(70%);
     }
   }
   .information__page .container__information {
@@ -808,7 +822,7 @@
   }
 
   .information__page .container__information .info__anime .btn__favorite {
-    background-color: #3c3c44;
+    background-color: #17171a;
     padding: 10px;
     border-radius: 7px;
 
@@ -1027,6 +1041,18 @@
       display: block;
     }
   }
+  .btn_comments {
+    display: block;
+    margin: 20px 0;
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    border-radius: 7px;
+    background-color: #17171a;
+    color: #c1c1c1;
+    cursor: pointer;
+  }
+
   #disqus_thread.light,
   #disqus-recommendations.light {
     color-scheme: dark !important;
