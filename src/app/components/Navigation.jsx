@@ -1,5 +1,5 @@
 'use client'
-import { use, useContext, useEffect, useState } from 'react'
+import { use, useContext, useEffect, useRef, useState } from 'react'
 import { FaBars } from 'react-icons/fa6'
 import { useDebouncedCallback } from 'use-debounce'
 import { IoMdClose } from 'react-icons/io'
@@ -26,10 +26,17 @@ function Navigation() {
   const [registerPage, setRegisterPage] = useState(null)
   const { theme } = useTheme()
   const { user } = useContext(contextApp)
+  const inputRef = useRef(null)
 
   const handleSearch = useDebouncedCallback((e) => {
     setSearch(e.target.value)
   }, 600)
+
+  const handleClick = () => {
+    if (inputRef.current) {
+      inputRef.current.focus()
+    }
+  }
 
   useEffect(() => {
     document.body.classList.remove('light', 'dark')
@@ -71,7 +78,8 @@ function Navigation() {
             data-collapse-toggle='navbar-search'
             aria-controls='navbar-search'
             aria-expanded='false'
-            className='md:hidden text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none rounded-lg text-sm p-2.5 me-1'>
+            className='md:hidden text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none rounded-lg text-sm p-2.5 me-1'
+            onClick={handleClick}>
             <svg
               className='w-5 h-5'
               aria-hidden='true'
@@ -255,6 +263,7 @@ function Navigation() {
                 autoComplete='off'
                 className='block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
                 placeholder='Buscar un anime...'
+                ref={inputRef}
               />
             </form>
           </div>
@@ -309,6 +318,7 @@ function Navigation() {
                 autoComplete='off'
                 className='block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white'
                 placeholder='buscar un anime...'
+                ref={inputRef}
               />
             </form>
           </div>

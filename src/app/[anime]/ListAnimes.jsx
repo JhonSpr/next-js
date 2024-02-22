@@ -329,10 +329,10 @@ export function FetchSingleAnime({ data }) {
 
   useEffect(() => {
     setRating(calcularRating(likes, dislikes)) // Actualiza el rating basado en los nuevos valores de likes y dislikes
-  }, [likes, dislikes, message]) // Ejecuta el efecto cada vez que likes o dislikes cambien
+  }, [likes, dislikes, message])
 
   useEffect(() => {
-    handleRatingSubmit() // Llama a la función handleRatingSubmit para actualizar el rating en la base de datos
+    handleRatingSubmit()
   }, [rating, user])
 
   const handleClose = () => {

@@ -1,14 +1,21 @@
+import { Request_Animes } from '@/app/FetchingData/request_animes'
 import EpisodePage from './episodePage'
 
 export async function generateMetadata({ params }) {
   const { anime, episode } = params
+  let name = anime?.replace(/-/g, ' ')
+  const data = await Request_Animes({
+    info: name,
+  })
+
+  const { descripcion } = data.datos[0]
 
   return {
     title: `${anime?.replace(
       /-/g,
       ' '
     )} episiodio ${episode} - sub español - audio latino`,
-    description: descripcion,
+    description: `${descripcion}`,
     siteName: 'animesz',
     locale: 'es',
     type: 'website',

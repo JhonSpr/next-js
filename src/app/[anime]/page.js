@@ -58,7 +58,6 @@ export default async function page({ params }) {
 
   const name = anime?.replace(/-/g, ' ')
 
-  // Si los datos no están en la caché, obtenerlos de la API
   if (!datos) {
     datos = await Request_Animes({
       page: 1,
