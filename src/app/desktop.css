@@ -424,8 +424,8 @@
     .info__anime
     .episode__anime__list
     .episode__item {
-    width: 250px;
-    height: 160px;
+    flex-basis: 23%;
+    height: 120px;
     position: relative;
 
     &:hover .overlay {
@@ -452,7 +452,7 @@
     .episode__item
     .episode__img {
     width: 250px;
-    height: 160px;
+    height: 120px;
     border-radius: 7px;
   }
   .container__anime
