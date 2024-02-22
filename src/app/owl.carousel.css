@@ -113,7 +113,7 @@
 }
 
 .owl-carousel.owl-drag .owl-item.active .item .hero__text h2 {
-  top: 0 !important;
+  top: 0;
   opacity: 1;
 }
 .owl-carousel.owl-drag .owl-item.active .item .hero__text a {
