@@ -99,9 +99,6 @@ export const CarouselSoloItem = ({ itemsShow, ArrayList, solo }) => {
       dots: true,
       animateOut: 'fadeOut',
       animateIn: false,
-      onTranslated: () => {
-        setLoaded(true)
-      },
     }
 
     setSetting(carouselSetting)
