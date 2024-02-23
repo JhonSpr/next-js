@@ -68,6 +68,27 @@ export default function Comments({
         }
       }
     }
+
+    async function getDisqusRecommendations(threadId) {
+      try {
+        const API_KEY =
+          'KmCWY1eT1dbwXPfr54T9i8llx7qdtcC9NnSe9QBfPgCCSjJDHHGjlVWxi3DV2jA1'
+        const FORUM_ID = 'tu-ID-de-foro'
+        const response = await axios.get(
+          `https://disqus.com/api/3.0/threads/listRelated.json?api_key=${API_KEY}&forum=${FORUM_ID}&thread=${threadId}`
+        )
+        return response.data.response
+      } catch (error) {
+        console.error('Error al obtener recomendaciones de Disqus:', error)
+        return null
+      }
+    }
+
+    // Ejemplo de uso: Obtener las recomendaciones para un hilo específico
+    const threadId = 'tu-ID-de-hilo'
+    getDisqusRecommendations(threadId).then((recommendations) => {
+      console.log('Recomendaciones de Disqus:', recommendations)
+    })
   }, [theme, showComments])
 
   useEffect(() => {
@@ -92,6 +113,9 @@ export default function Comments({
         } ${theme === 'dark' ? 'dark' : ''}`}>
         <div
           id={`disqus_thread`}
+          className={`${theme === 'dark' ? 'dark' : ''}`}></div>
+        <div
+          id={`disqus_recommendations`}
           className={`${theme === 'dark' ? 'dark' : ''}`}></div>
       </div>
     </div>
