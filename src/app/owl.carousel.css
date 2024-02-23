@@ -71,18 +71,20 @@
   user-select: none;
 }
 .owl-carousel .owl-nav button.owl-next {
-  right: 20px;
-  top: 100px;
+  right: 10px;
+  top: 90px;
 }
 .owl-carousel .owl-nav button.owl-prev {
-  left: 20px;
-  top: 100px;
+  left: 10px;
+  top: 90px;
 }
 .owl-carousel .owl-nav button.owl-prev,
 .owl-carousel .owl-nav button.owl-next {
-  padding: 40px 10px !important;
   position: absolute;
-  background-color: rgba(7, 7, 7, 0.884);
+  padding: 20px 7px;
+  font-size: 30px;
+  background-color: #1283b8;
+  border-radius: 7px;
 }
 .owl-carousel button.owl-dot {
   background: none;

@@ -3,7 +3,15 @@ import EpisodesList from './EpisodesList'
 import { useContext, useEffect, useState } from 'react'
 import { contextApp } from '../providers'
 import Comments from '../components/comments'
-import { child, get, getDatabase, onValue, ref, set } from 'firebase/database'
+import {
+  TransactionResult,
+  child,
+  get,
+  getDatabase,
+  onValue,
+  ref,
+  set,
+} from 'firebase/database'
 import Alert from '../components/Alert'
 import { calcularRating } from '../user/[idUser]/userPage'
 import { MdAdd } from 'react-icons/md'
@@ -12,7 +20,7 @@ import Carousel from '../components/Carousel'
 import useRecomends from '../Hooks/Recomends'
 
 export function FetchSingleAnime({ data }) {
-  const { name, genero1, genero2 } = data[0]
+  const { name, genero1, genero2, id } = data[0]
   let animeId = data?.map((e) => e?.id)
   const [loading, setLoading] = useState([])
   const [favoritos, setFavoritos] = useState([])
@@ -22,6 +30,7 @@ export function FetchSingleAnime({ data }) {
   const [datos, setDatos] = useState(null)
   const [votos, setVotos] = useState(Number) ?? 0
   const [isMobile, setIsMobile] = useState(false)
+  const [visitas, setVisitas] = useState(Number)
 
   useEffect(() => {
     // Función para verificar si la pantalla es de un dispositivo móvil
@@ -64,6 +73,15 @@ export function FetchSingleAnime({ data }) {
       setLoading(false)
     }, 600)
   }, [])
+
+  useEffect(() => {
+    const db = getDatabase()
+    const incrementAnimeVisits = async () => {
+      const animeRef = ref(db, `animes/${name}`)
+      await set(child(animeRef, 'visitas'), visitas + 1)
+    }
+    incrementAnimeVisits()
+  }, [user])
 
   async function updateLikes(animeId, userId) {
     try {
@@ -210,6 +228,7 @@ export function FetchSingleAnime({ data }) {
       }
       const data = await response.json()
       setDatos(data)
+      setVisitas(data.visitas)
       setDislikes(data?.dislikes || 0)
       setLikes(data?.likes || 0)
       setDislike(data?.dislikes || 0)
@@ -259,11 +278,11 @@ export function FetchSingleAnime({ data }) {
     setRating(newRating)
 
     // Actualiza el rating en la base de datos de Firebase
-    const updateRatingInDatabase = async (animeId) => {
+    const updateRatingInDatabase = async () => {
       try {
         const db = getDatabase()
 
-        const animeRef = ref(db, `animes/${animeId[0].toLowerCase()}`)
+        const animeRef = ref(db, `animes/${name.toLowerCase()}`)
         await set(child(animeRef, 'rating'), newRating)
       } catch (error) {
         console.error(
@@ -441,6 +460,9 @@ export function FetchSingleAnime({ data }) {
                 </a>
               ))}
             </div>
+            <span>
+              Visitas: <strong>{visitas}</strong>
+            </span>
             <div className='trailer__anime'>
               <iframe
                 src={`https://www.youtube.com/embed/${e.trailer}`}></iframe>
