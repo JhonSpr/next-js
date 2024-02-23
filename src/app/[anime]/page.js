@@ -23,12 +23,13 @@ export async function generateMetadata({ params }) {
   const { anime } = params
   const data = await Request_Animes({ info: anime?.replace(/-/g, ' ') })
 
-  const { name, descripcion } = data.datos[0]
+  const { name, descripcion, image } = data.datos[0]
 
   return {
     title: `${anime?.replace(/-/g, ' ')} - Animesz`,
     description: descripcion,
     siteName: 'animesz',
+    ogImage: `${image}`,
     locale: 'es',
     type: 'website',
     robots: {
