@@ -18,30 +18,37 @@ if (typeof window !== 'undefined') {
 }
 const Carousel = ({ itemsShow, ArrayList, solo }) => {
   const [loaded, setLoaded] = useState(false)
-
+  const [setting, setSetting] = useState(null)
   const handleTranslated = () => {
     setLoaded(true)
   }
-  const Responsive = {
-    0: { items: 3, margin: 2 },
-    768: { items: 4, margin: 0 },
-    1024: { items: itemsShow, margin: 0 },
-  }
+  useEffect(() => {
+    // Configuración del carrusel
+    const Responsive = {
+      0: { items: 3, margin: 2 },
+      768: { items: 4, margin: 0 },
+      1024: { items: itemsShow, margin: 0 },
+    }
 
-  const setting = {
-    items: itemsShow,
-    responsive: Responsive,
-    autoplay: true,
-    autoplayTimeout: 3000,
-    lazyLoad: true,
-    loop: true,
-    nav: true,
-    autoplayHoverPause: true,
-    dots: true,
-    animateOut: 'fadeOut',
-    animateIn: false,
-    onTranslated: handleTranslated,
-  }
+    const carouselSetting = {
+      items: itemsShow,
+      responsive: Responsive,
+      autoplay: true,
+      autoplayTimeout: 3000,
+      lazyLoad: true,
+      loop: true,
+      nav: true,
+      autoplayHoverPause: true,
+      dots: true,
+      animateOut: 'fadeOut',
+      animateIn: false,
+      onTranslated: () => {
+        setLoaded(true)
+      },
+    }
+
+    setSetting(carouselSetting)
+  }, [itemsShow])
 
   return (
     <OwlCarousel {...setting}>
@@ -68,30 +75,37 @@ const Carousel = ({ itemsShow, ArrayList, solo }) => {
 
 export const CarouselSoloItem = ({ itemsShow, ArrayList, solo }) => {
   const [loaded, setLoaded] = useState(false)
-
+  const [setting, setSetting] = useState(null)
   const handleTranslated = () => {
     setLoaded(true)
   }
-  const Responsive = {
-    0: { items: 1, margin: 5 },
-    768: { items: 1, margin: 10 },
-    1024: { items: itemsShow, margin: 10 },
-  }
+  useEffect(() => {
+    // Configuración del carrusel
+    const Responsive = {
+      0: { items: 1, margin: 2 },
+      768: { items: 1, margin: 0 },
+      1024: { items: 1, margin: 0 },
+    }
 
-  const setting = {
-    items: 1,
-    responsive: Responsive,
-    autoplay: true,
-    autoplayTimeout: 3000,
-    lazyLoad: true,
-    loop: true,
-    nav: false,
-    autoplayHoverPause: true,
-    dots: true,
-    animateOut: 'fadeOut',
-    animateIn: false,
-    onTranslated: handleTranslated,
-  }
+    const carouselSetting = {
+      items: itemsShow,
+      responsive: Responsive,
+      autoplay: true,
+      autoplayTimeout: 3000,
+      lazyLoad: true,
+      loop: true,
+      nav: false,
+      autoplayHoverPause: true,
+      dots: true,
+      animateOut: 'fadeOut',
+      animateIn: false,
+      onTranslated: () => {
+        setLoaded(true)
+      },
+    }
+
+    setSetting(carouselSetting)
+  }, [itemsShow])
 
   return (
     <OwlCarousel {...setting}>
