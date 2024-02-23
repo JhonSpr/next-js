@@ -1,5 +1,7 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
+import { FaComments } from 'react-icons/fa6'
+import { contextApp } from '../providers'
 import { useTheme } from 'next-themes'
 
 export default function Comments({
@@ -66,7 +68,7 @@ export default function Comments({
         }
       }
     }
-  }, [theme])
+  }, [theme, showComments])
 
   useEffect(() => {
     setshowComments(false)
