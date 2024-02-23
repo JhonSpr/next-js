@@ -83,8 +83,8 @@ export const CarouselSoloItem = ({ itemsShow, ArrayList, solo }) => {
     // Configuración del carrusel
     const Responsive = {
       0: { items: 1, margin: 2 },
-      768: { items: 1, margin: 0 },
-      1024: { items: 1, margin: 0 },
+      768: { items: 1, margin: 2 },
+      1024: { items: 1, margin: 2 },
     }
 
     const carouselSetting = {
