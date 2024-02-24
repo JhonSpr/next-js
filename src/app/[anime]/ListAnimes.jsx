@@ -77,7 +77,7 @@ export function FetchSingleAnime({ data }) {
   useEffect(() => {
     const db = getDatabase()
     const incrementAnimeVisits = async () => {
-      const animeRef = ref(db, `animes/${name}`)
+      const animeRef = ref(db, `animes/${name.toLowerCase()}`)
       await set(child(animeRef, 'visitas'), visitas + 1)
     }
     incrementAnimeVisits()
@@ -273,11 +273,9 @@ export function FetchSingleAnime({ data }) {
   }
 
   useEffect(() => {
-    // Actualiza el rating basado en los nuevos valores de likes y dislikes
     const newRating = calcularRating(likes, dislikes)
     setRating(newRating)
 
-    // Actualiza el rating en la base de datos de Firebase
     const updateRatingInDatabase = async () => {
       try {
         const db = getDatabase()
