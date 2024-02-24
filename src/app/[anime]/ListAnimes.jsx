@@ -66,7 +66,7 @@ export function FetchSingleAnime({ data }) {
     setDislike,
   } = useContext(contextApp)
   const [votosList, setVotosList] = useState({})
-  const nameID = data?.map((e) => e.anime?.replace(/ /g, ' '))[0]
+  const nameID = data?.map((e) => e.anime?.replace(/ /g, ' '))[0].toLowerCase()
   useEffect(() => {
     setLoading(true)
     setTimeout(() => {
@@ -81,7 +81,7 @@ export function FetchSingleAnime({ data }) {
       await set(child(animeRef, 'visitas'), visitas + 1)
     }
     incrementAnimeVisits()
-  }, [user])
+  }, [loading])
 
   async function updateLikes(animeId, userId) {
     try {
@@ -228,13 +228,28 @@ export function FetchSingleAnime({ data }) {
       }
       const data = await response.json()
       setDatos(data)
-      setVisitas(data.visitas)
       setDislikes(data?.dislikes || 0)
       setLikes(data?.likes || 0)
       setDislike(data?.dislikes || 0)
       setLike(data?.likes || 0)
       setVotos(data?.likes + data?.dislikes || data?.likes || data?.dislikes)
 
+      return data
+    } catch (error) {
+      console.error('Error al leer datos:', error)
+      return null
+    }
+  }
+  const fetchVisitas = async () => {
+    try {
+      const response = await fetch(
+        `https://animesz-f90c0-default-rtdb.firebaseio.com/animes/${nameID}.json`
+      )
+      if (!response.ok) {
+        throw new Error('Error al recuperar los datos')
+      }
+      const data = await response.json()
+      setVisitas(data.visitas)
       return data
     } catch (error) {
       console.error('Error al leer datos:', error)
@@ -356,6 +371,10 @@ export function FetchSingleAnime({ data }) {
     setIsVisible(false)
     setNoLogged(false)
   }
+
+  useEffect(() => {
+    fetchVisitas()
+  }, [loading])
 
   const { uniqueArray } = useRecomends(name, genero1, genero2)
   if (loading) {
