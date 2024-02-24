@@ -8,10 +8,33 @@ import { FaArrowLeft } from 'react-icons/fa'
 import { contextApp } from '@/app/providers'
 import { get, getDatabase, ref, set } from 'firebase/database'
 import { Request_Animes } from '@/app/FetchingData/request_animes'
+import { useRouter } from 'next/navigation'
 
 function EpisodePage({ name, episode }) {
   const { user } = useContext(contextApp)
   const [animes, setAnimes] = useState([])
+  const router = useRouter()
+
+  useEffect(() => {
+    // Reload Disqus comments when the route changes
+    const handleRouteChange = () => {
+      if (window.DISQUS) {
+        window.DISQUS.reset({
+          reload: true,
+          config: function () {
+            this.page.url = window.location.href
+            this.page.identifier = router.asPath
+          },
+        })
+      }
+    }
+
+    router.events?.on('routeChangeComplete', handleRouteChange)
+
+    return () => {
+      router.events?.off('routeChangeComplete', handleRouteChange)
+    }
+  }, [])
   const [lastEpisodes, setLastEpisodes] = useState([])
   useEffect(() => {
     Request_episode(name).then((res) => setAnimes(res))
