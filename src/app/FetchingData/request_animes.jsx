@@ -10,10 +10,15 @@ export const Request_Animes = ({
   info,
   letra,
   recien,
+  studio,
 }) => {
   let url = `https://api-rest.up.railway.app/api/v1/${
     recien ? 'recien-agregados' : 'animes'
   }?`
+
+  if (studio) {
+    url += `studio=${studio}&`
+  }
 
   if (letra && letra.length > 0) {
     const letraQuery = letra.join('&letra')

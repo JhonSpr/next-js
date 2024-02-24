@@ -29,7 +29,11 @@ export default function EpisodesList({ data, name }) {
       <div className='episode__anime__list'>
         {episodeArray
           ?.map((e, index) => (
-            <div className='episode__item' key={index}>
+            <div
+              className={`episode__item ${
+                totalEpisodes < 3 ? 'widthNormal' : ''
+              }`}
+              key={index}>
               <a href={`/${name?.toLowerCase()}/${e.episode}`}>
                 <div className='overlay'>
                   <FaPlayCircle />

@@ -61,6 +61,8 @@ export default async function page({ searchParams }) {
     : searchParams?.letra
     ? [searchParams.letra]
     : []
+
+  const studio = searchParams.studio
   const requestParams = {
     page: current_page,
     search: querySearch,
@@ -71,6 +73,7 @@ export default async function page({ searchParams }) {
     rate: rate,
     genero: generos,
     letra: letra,
+    studio: studio,
   }
   const data = await Request_Animes(requestParams)
 

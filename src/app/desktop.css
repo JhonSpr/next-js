@@ -443,6 +443,7 @@
     min-height: min-content;
     max-width: max-content;
   }
+
   .container__anime
     main
     .container__information
@@ -452,6 +453,9 @@
     flex-basis: 23%;
     height: 120px;
     position: relative;
+    &.widthNormal {
+      flex-basis: 44%;
+    }
 
     &:hover .overlay {
       color: #1283b8;

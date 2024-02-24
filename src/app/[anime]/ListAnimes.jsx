@@ -458,7 +458,15 @@ export function FetchSingleAnime({ data }) {
               Años de emisión: <strong>{e.year}</strong>
             </span>
             <span>
-              Estudio: <strong>{e.studio}</strong>
+              Estudio:{' '}
+              <strong>
+                <a
+                  href={`/directorio?studio=${e.studio
+                    .toLowerCase()
+                    .replace(/ /g, '+')}`}>
+                  {e.studio}
+                </a>
+              </strong>
             </span>
             <div className={`generos__anime ${theme === 'dark' ? 'dark' : ''}`}>
               {e.generos?.map((e, index) => (
