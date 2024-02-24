@@ -3,15 +3,7 @@ import EpisodesList from './EpisodesList'
 import { useContext, useEffect, useState } from 'react'
 import { contextApp } from '../providers'
 import Comments from '../components/comments'
-import {
-  TransactionResult,
-  child,
-  get,
-  getDatabase,
-  onValue,
-  ref,
-  set,
-} from 'firebase/database'
+import { child, get, getDatabase, ref, set } from 'firebase/database'
 import Alert from '../components/Alert'
 import { calcularRating } from '../user/[idUser]/userPage'
 import { MdAdd } from 'react-icons/md'
@@ -20,7 +12,7 @@ import Carousel from '../components/Carousel'
 import useRecomends from '../Hooks/Recomends'
 
 export function FetchSingleAnime({ data }) {
-  const { name, genero1, genero2, id } = data[0]
+  const { name, genero1, genero2, id, year } = data[0]
   let animeId = data?.map((e) => e?.id)
   const [loading, setLoading] = useState([])
   const [favoritos, setFavoritos] = useState([])
@@ -376,7 +368,7 @@ export function FetchSingleAnime({ data }) {
     fetchVisitas()
   }, [loading])
 
-  const { uniqueArray } = useRecomends(name, genero1, genero2)
+  const { uniqueArray } = useRecomends(name, genero1, genero2, year)
   if (loading) {
     return <div></div>
   }

@@ -1,10 +1,8 @@
 'use client'
 import { useEffect, useState } from 'react'
-import useRecomends from '../Hooks/Recomends'
 import dynamic from 'next/dynamic'
 import { FaChevronRight } from 'react-icons/fa6'
 
-// Importa jQuery de manera dinámica para evitar problemas con SSR
 const $ = dynamic(() => import('jquery'), {
   ssr: false,
 })
@@ -19,9 +17,7 @@ if (typeof window !== 'undefined') {
 const Carousel = ({ itemsShow, ArrayList, solo }) => {
   const [loaded, setLoaded] = useState(false)
   const [setting, setSetting] = useState(null)
-  const handleTranslated = () => {
-    setLoaded(true)
-  }
+
   useEffect(() => {
     // Configuración del carrusel
     const Responsive = {

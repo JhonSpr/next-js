@@ -1,14 +1,23 @@
 'use client'
 import { useEffect, useState } from 'react'
 
-export default function useRecomends(animeCurrent, genero1, genero2) {
+export default function useRecomends(animeCurrent, genero1, genero2, year) {
   const [data, setData] = useState([])
 
   useEffect(() => {
+    let url = 'https://api-rest.up.railway.app/api/v1/animes?'
+    if (genero1 !== undefined) {
+      url += `${genero1}&`
+    }
+    if (genero2 !== undefined) {
+      url += `${genero2}&`
+    }
+    if (year !== undefined) {
+      url += `${year}&`
+    }
+
     const fetchAnime = async () => {
-      const response = await fetch(
-        `https://api-rest.up.railway.app/api/v1/animes?genero=${genero1}&genero=${genero2}&limit=1000`
-      )
+      const response = await fetch(`${url + 'limit=1000'}`)
       const { datos } = await response.json()
 
       // Mezclar aleatoriamente el array de datos
