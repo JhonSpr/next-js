@@ -28,15 +28,26 @@ export async function generateMetadata({ params }) {
   return {
     title: `${anime?.replace(/-/g, ' ')} - Animesz`,
     description: descripcion,
+    ogimage: { image },
     siteName: 'animesz',
     keywords: [
       `${genero1}`,
       'Animes gratis online',
       'Ver anime gratis',
       'Animesz',
+      `${anime?.replace(/-/g, ' ')}`,
     ],
     openGraph: {
-      images: { image },
+      title: `${anime?.replace(/-/g, ' ')} - Animesz`,
+      description: descripcion,
+      images: [
+        {
+          url: image,
+          width: 800,
+          height: 600,
+          alt: `${anime?.replace(/-/g, ' ')} - Animesz`,
+        },
+      ],
     },
     locale: 'es',
     type: 'website',
