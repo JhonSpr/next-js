@@ -19,7 +19,6 @@ export default function RootLayout({ children }) {
   return (
     <html lang='es'>
       <head>
-        <meta property='og:image' content='<generated>' />
         <link
           href='https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.css'
           rel='stylesheet'

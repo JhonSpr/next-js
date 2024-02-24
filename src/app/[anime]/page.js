@@ -23,13 +23,21 @@ export async function generateMetadata({ params }) {
   const { anime } = params
   const data = await Request_Animes({ info: anime?.replace(/-/g, ' ') })
 
-  const { name, descripcion, image } = data.datos[0]
+  const { name, descripcion, image, genero1 } = data.datos[0]
 
   return {
     title: `${anime?.replace(/-/g, ' ')} - Animesz`,
     description: descripcion,
     siteName: 'animesz',
-    ogImage: `${image}`,
+    keywords: [
+      `${genero1}`,
+      'Animes gratis online',
+      'Ver anime gratis',
+      'Animesz',
+    ],
+    openGraph: {
+      images: { image },
+    },
     locale: 'es',
     type: 'website',
     robots: {
