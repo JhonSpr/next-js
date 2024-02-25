@@ -3,22 +3,6 @@ import { FetchSingleAnime } from './ListAnimes'
 
 let animeDataCache = {}
 
-const fecthAnimes = async (name) => {
-  try {
-    const res = await fetch(
-      `https://api-rest.up.railway.app/api/v1/animes?info=${name}`,
-      {
-        next: { revalidate: 50 },
-      },
-      { caches: 'no-store' }
-    )
-    return res.json()
-  } catch (error) {
-    console.error('Error fetching anime data:', error)
-    return null
-  }
-}
-
 export async function generateMetadata({ params }) {
   const { anime } = params
   const data = await Request_Animes({ info: anime?.replace(/-/g, ' ') })
@@ -26,7 +10,7 @@ export async function generateMetadata({ params }) {
   const { name, descripcion, image, genero1 } = data.datos[0]
 
   return {
-    title: `${anime?.replace(/-/g, ' ')} - Animesz`,
+    title: `${name?.replace(/:/g, ' ')} - Animesz`,
     description: descripcion,
     ogimage: { image },
     siteName: 'animesz',

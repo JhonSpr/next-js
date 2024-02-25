@@ -31,8 +31,8 @@ export default function EpisodesList({ data, name }) {
           ?.map((e, index) => (
             <div
               className={`episode__item ${
-                totalEpisodes < 3 ? 'widthNormal' : ''
-              }`}
+                totalEpisodes < 4 ? 'widthNormal' : ''
+              }  ${totalEpisodes == 1 ? 'solo__item' : ''}`}
               key={index}>
               <a href={`/${name?.toLowerCase()}/${e.episode}`}>
                 <div className='overlay'>

@@ -97,7 +97,7 @@ function EpisodePage({ name, episode }) {
     <main className='container__episode__page' key={e.id}>
       <div className='container__iframe'>
         <h4>
-          {name} {episode}
+          {`${name}`} {episode}
         </h4>
         <div className='container__iframe'>
           <iframe

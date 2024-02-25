@@ -381,17 +381,22 @@
     color: #fff;
     padding: 7px;
     border-radius: 7px;
-    font-size: 30px;
+    font-size: 20px;
     display: flex;
     gap: 10px;
     justify-content: center;
+
     transition: background-color 0.5s ease-out;
     &:hover {
       color: #1283b8;
     }
     &.active {
-      color: #000 !important;
-      background-color: #1283b8 !important;
+      color: #ccc !important;
+      background-color: #121212 !important;
+      outline: 2px solid #092da1;
+    }
+    & svg {
+      margin-top: 5px;
     }
   }
 
@@ -430,9 +435,9 @@
   }
   .container__anime main .info__anime .generos__anime a {
     padding: 3px 12px;
-    background-color: #17171a;
-    border-radius: 6px;
-    color: #c1c1c1;
+    border: 1px solid #17171a;
+    border-radius: 2px;
+    color: #17171a;
   }
 
   .container__anime main .info__anime .btn__favorite {
@@ -561,7 +566,7 @@
     gap: 10px;
     height: auto;
     min-height: min-content;
-    max-width: max-content;
+    max-width: fit-content;
   }
 
   .container__anime
@@ -574,7 +579,10 @@
     height: 120px;
     position: relative;
     &.widthNormal {
-      flex-basis: 44%;
+      flex-basis: 30%;
+    }
+    &.solo__item {
+      flex: 40%;
     }
 
     &:hover .overlay {

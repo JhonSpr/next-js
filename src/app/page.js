@@ -36,10 +36,14 @@ export async function generateMetadata({ params }) {
 export default async function Home() {
   const Emisiones = await Request_Animes({ estado: ['en emision'] })
   const ultimos__episodios = await Request_Animes({ recien: true })
-  const recientAgregados = await Request_Animes({ page: 1, limit: '30' })
-  const ovas = await Request_Animes({ page: 1, tipo: ['ova'] })
+  const recientAgregados = await Request_Animes({
+    page: 1,
+    limit: '30',
+    ova: false,
+  })
+  const ovas = await Request_Animes({ page: 1, ova: true })
   const MasVisitas = await Request_Animes({ page: 1, visitas: 'masVisitas' })
-
+  console.log(recientAgregados)
   return (
     <main>
       <div className='container__ section'>
@@ -49,9 +53,9 @@ export default async function Home() {
             itemsShow={1}
             solo={true}
           />
-          <span className='title'>Recien Agregados</span>
+          <span className='title'>ovas agregados</span>
           <section className='recientes'>
-            {recientAgregados.datos
+            {ovas.datos
               .map((e, index) => (
                 <article className='anime__card' key={index}>
                   <a href={`/${e.name.replace(/ /g, '-')}`}>

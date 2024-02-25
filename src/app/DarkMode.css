@@ -109,8 +109,8 @@ html.dark {
 }
 
 .generos__anime.dark a {
-  background-color: #1283b8 !important;
-  color: #fff !important;
+  border: 1px solid #1283b8 !important;
+  color: #1283b8 !important;
 }
 
 .letras__container.dark button {

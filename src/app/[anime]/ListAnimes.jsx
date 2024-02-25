@@ -58,7 +58,7 @@ export function FetchSingleAnime({ data }) {
     setDislike,
   } = useContext(contextApp)
   const [votosList, setVotosList] = useState({})
-  const nameID = data?.map((e) => e.anime?.replace(/ /g, ' '))[0].toLowerCase()
+  const nameID = data?.map((e) => e.name?.replace(/ /g, ' '))[0].toLowerCase()
   useEffect(() => {
     setLoading(true)
     setTimeout(() => {
@@ -69,7 +69,7 @@ export function FetchSingleAnime({ data }) {
   useEffect(() => {
     const db = getDatabase()
     const incrementAnimeVisits = async () => {
-      const animeRef = ref(db, `animes/${name.toLowerCase()}`)
+      const animeRef = ref(db, `animes/${name?.toLowerCase()}`)
       await set(child(animeRef, 'visitas'), visitas + 1)
       setVisitas((prevVisitas) => prevVisitas + 1)
     }
@@ -434,6 +434,7 @@ export function FetchSingleAnime({ data }) {
             className={`btn__voto ${theme === 'dark' ? 'dark' : ''} ${
               votosList?.like ? 'active' : ''
             }`}>
+            <span>{likes}</span>
             <BiSolidLike />
           </button>
           <button
@@ -441,6 +442,7 @@ export function FetchSingleAnime({ data }) {
             className={`btn__voto ${theme === 'dark' ? 'dark' : ''} ${
               votosList?.dislike ? 'active' : ''
             }`}>
+            <span>{dislikes}</span>
             <BiSolidDislike />
           </button>
         </div>
@@ -496,13 +498,16 @@ export function FetchSingleAnime({ data }) {
               Episiodios: <strong>{e.episodios}</strong>
             </span>
             <span>
-              Numero de tempodaras: <strong>{e.temporadas}</strong>
+              tempodaras: <strong>{e.temporadas}</strong>
             </span>
             <span>
               Duración x capitulo: <strong>{e.duration}</strong>
             </span>
             <span>
               Años de emisión: <strong>{e.year}</strong>
+            </span>
+            <span>
+              Categoria: <strong>{e.tipo}</strong>
             </span>
             <span>
               Estudio:{' '}
@@ -515,6 +520,10 @@ export function FetchSingleAnime({ data }) {
                 </a>
               </strong>
             </span>
+
+            <span>
+              Visitas: <strong>{visitas}</strong>
+            </span>
             <div className={`generos__anime ${theme === 'dark' ? 'dark' : ''}`}>
               {e.generos?.map((e, index) => (
                 <a
@@ -524,9 +533,6 @@ export function FetchSingleAnime({ data }) {
                 </a>
               ))}
             </div>
-            <span>
-              Visitas: <strong>{visitas}</strong>
-            </span>
             <div className='trailer__anime'>
               <iframe
                 src={`https://www.youtube.com/embed/${e.trailer}`}></iframe>
