@@ -63,7 +63,7 @@ export function FetchSingleAnime({ data }) {
     setLoading(true)
     setTimeout(() => {
       setLoading(false)
-    }, 600)
+    }, 200)
   }, [])
 
   useEffect(() => {
@@ -73,7 +73,7 @@ export function FetchSingleAnime({ data }) {
       await set(child(animeRef, 'visitas'), visitas + 1)
     }
     incrementAnimeVisits()
-  }, [user])
+  }, [loading])
 
   async function updateLikes(animeId, userId) {
     try {
