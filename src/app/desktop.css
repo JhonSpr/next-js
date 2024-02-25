@@ -1023,15 +1023,53 @@
       background-color: rgb(17, 24, 39);
     }
 
+    &.rews {
+      height: max-content;
+      overflow: visible;
+    }
+
     scrollbar-width: thin; /* Ancho del scrollbar */
     scrollbar-color: #1283b8 transparent;
   }
 
+  .list__rew {
+    background-color: rgb(17, 24, 39);
+
+    & .title {
+      padding-left: 20px;
+      color: #fff;
+    }
+  }
+
   .sidebar .sidebar__content li {
     display: flex;
-    gap: 10px;
+    gap: 6px;
     padding: 10px 0;
     border-bottom: 2px solid #000;
+    position: relative;
+    width: 100%;
+    &.card {
+      padding: 2px 0 !important;
+      display: flex;
+      width: 100%;
+      gap: 10px;
+      height: fit-content;
+
+      & .icon {
+        width: 10%;
+        color: #fff;
+      }
+      & .name {
+        width: 50%;
+        text-wrap: nowrap;
+        text-overflow: ellipsis;
+        color: #fff;
+      }
+
+      &:hover {
+        background-color: #121212;
+      }
+    }
   }
 
   .sidebar .sidebar__content li img {
@@ -1049,6 +1087,7 @@
     line-height: 26px;
     position: relative;
   }
+
   .sidebar .sidebar__content li a span {
     color: #1283b8;
   }

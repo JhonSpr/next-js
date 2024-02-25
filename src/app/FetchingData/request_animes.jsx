@@ -12,6 +12,7 @@ export const Request_Animes = ({
   recien,
   visitas,
   studio,
+  limit,
 }) => {
   let url = `https://api-rest.up.railway.app/api/v1/${
     recien ? 'recien-agregados' : 'animes'
@@ -68,6 +69,11 @@ export const Request_Animes = ({
     const generoQuery = genero.join('&genero=')
     url += `genero=${generoQuery}&`
   }
+
+  if (limit) {
+    url += `limit=${limit}&`
+  }
+
   if (page) {
     url += `page=${page}`
   }

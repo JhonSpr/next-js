@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { BiSolidRightArrowSquare } from 'react-icons/bi'
 
 const SideBar = ({ ultimos__episodios, ovas }) => {
   const [op1, setOp1] = useState(true)
@@ -50,6 +51,28 @@ const SideBar = ({ ultimos__episodios, ovas }) => {
                 href='
             '>
                 {e.nombre ?? e.name}
+              </a>
+            </li>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+export const SideBar__2 = ({ list__rews }) => {
+  return (
+    <div className='sidebar'>
+      <div className='list__rew'>
+        <span className='title'>Lista Recien agregados</span>
+        <div className={`sidebar__content show rews`}>
+          {list__rews.datos?.map((e, index) => (
+            <li key={index} className='card'>
+              <BiSolidRightArrowSquare className='icon' />
+
+              <a
+                href='
+              '>
+                <span className='name'>{e.name}</span>
               </a>
             </li>
           ))}

@@ -1,7 +1,7 @@
 import { FaCirclePlay } from 'react-icons/fa6'
 import { Request_Animes } from './FetchingData/request_animes'
 import Carousel, { CarouselSoloItem } from './components/Carousel'
-import SideBar from './components/SideBar'
+import SideBar, { SideBar__2 } from './components/SideBar'
 
 export async function generateMetadata({ params }) {
   {
@@ -36,9 +36,10 @@ export async function generateMetadata({ params }) {
 export default async function Home() {
   const Emisiones = await Request_Animes({ estado: ['en emision'] })
   const ultimos__episodios = await Request_Animes({ recien: true })
-  const recientAgregados = await Request_Animes({ page: 1 })
+  const recientAgregados = await Request_Animes({ page: 1, limit: '30' })
   const ovas = await Request_Animes({ page: 1, tipo: ['ova'] })
   const MasVisitas = await Request_Animes({ page: 1, visitas: 'masVisitas' })
+
   return (
     <main>
       <div className='container__ section'>
@@ -128,7 +129,7 @@ export default async function Home() {
               .slice(0, 20)}
           </section>
         </section>
-        <SideBar ultimos__episodios={ultimos__episodios} ovas={ovas} />
+        <SideBar__2 list__rews={recientAgregados} />
       </div>
     </main>
   )
