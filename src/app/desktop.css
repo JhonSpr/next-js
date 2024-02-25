@@ -19,7 +19,7 @@
   .section__midle .card__midle {
     position: relative;
     overflow: hidden;
-
+    color: #fff;
     &:hover .visitas__overlay {
       top: 0;
     }

@@ -81,7 +81,9 @@ export default async function Home() {
 
       <div className='section__midle'>
         <div>
-          <span className='title'>TOP MAS POPULARES</span>
+          <span className='title' style={{ color: '#fff' }}>
+            TOP MAS POPULARES
+          </span>
           {MayorRating.datos
             .map((e, index) => (
               <article key={index} className={`card__midle item${index + 1}`}>
