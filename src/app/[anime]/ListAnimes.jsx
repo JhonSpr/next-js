@@ -75,7 +75,7 @@ export function FetchSingleAnime({ data }) {
     }
 
     incrementAnimeVisits()
-  }, [loading])
+  }, [])
 
   async function updateLikes(animeId, userId) {
     try {
