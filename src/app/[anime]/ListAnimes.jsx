@@ -72,8 +72,10 @@ export function FetchSingleAnime({ data }) {
       const animeRef = ref(db, `animes/${name.toLowerCase()}`)
       await set(child(animeRef, 'visitas'), visitas + 1)
     }
-    incrementAnimeVisits()
-  }, [loading])
+    if (loading !== false) {
+      incrementAnimeVisits()
+    }
+  })
 
   async function updateLikes(animeId, userId) {
     try {
