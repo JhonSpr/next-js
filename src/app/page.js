@@ -38,7 +38,7 @@ export default async function Home() {
   const ultimos__episodios = await Request_Animes({ recien: true })
   const recientAgregados = await Request_Animes({ page: 1 })
   const ovas = await Request_Animes({ page: 1, tipo: ['ova'] })
-  const MayorRating = await Request_Animes({ page: 1, rate: 'mayor' })
+  const MasVisitas = await Request_Animes({ page: 1, visitas: 'masVisitas' })
   return (
     <main>
       <div className='container__ section'>
@@ -84,7 +84,7 @@ export default async function Home() {
           <span className='title' style={{ color: '#fff' }}>
             TOP MAS POPULARES
           </span>
-          {MayorRating.datos
+          {MasVisitas.datos
             .map((e, index) => (
               <article key={index} className={`card__midle item${index + 1}`}>
                 <a href={e.name?.replace(/ /g, '-')}>

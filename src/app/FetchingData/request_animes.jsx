@@ -10,6 +10,7 @@ export const Request_Animes = ({
   info,
   letra,
   recien,
+  visitas,
   studio,
 }) => {
   let url = `https://api-rest.up.railway.app/api/v1/${
@@ -18,6 +19,9 @@ export const Request_Animes = ({
 
   if (studio) {
     url += `studio=${studio}&`
+  }
+  if (visitas) {
+    url += `visitas=${visitas}&`
   }
 
   if (letra && letra.length > 0) {
