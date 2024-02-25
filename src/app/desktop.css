@@ -909,6 +909,22 @@
     display: flex;
     flex-direction: column;
     gap: 5px;
+
+    &.ova {
+      height: 300px !important;
+      overflow: hidden;
+      flex-direction: column;
+      & .container__image__card {
+        height: 150px;
+      }
+      & img {
+        height: 150px !important;
+      }
+
+      & .ds {
+        position: relative;
+      }
+    }
   }
 
   .recientes .anime__card .anime__name {
@@ -980,6 +996,7 @@
       transform: scale(105%);
     }
   }
+
   .recientes .anime__card .container__image__card img {
     position: absolute;
     object-fit: cover;
@@ -1056,22 +1073,45 @@
     border-bottom: 2px solid #000;
     position: relative;
     width: 100%;
+    & .tag {
+      width: max-content;
+      position: absolute;
+      right: 2px;
+      color: #1283b8;
+      margin-left: 5px;
+    }
+
+    &.card a {
+      flex-basis: 100%;
+      display: block;
+    }
     &.card {
-      padding: 2px 0 !important;
       display: flex;
       width: 100%;
-      gap: 10px;
       height: fit-content;
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+      padding-left: 20px !important;
 
-      & .icon {
-        width: 10%;
-        color: #fff;
-      }
       & .name {
-        width: 50%;
-        text-wrap: nowrap;
-        text-overflow: ellipsis;
+        display: inline-block;
+        width: 90%;
+        text-wrap: wrap;
         color: #fff;
+        overflow: hidden;
+        & .icon {
+          display: inline-block;
+          color: #fff;
+          width: max-content;
+        }
+      }
+
+      & .tag {
+        width: max-content;
+        position: absolute;
+        right: 2px;
+        color: #1283b8;
+        margin-left: 5px;
       }
 
       &:hover {
@@ -1087,7 +1127,7 @@
   }
 
   .sidebar .sidebar__content li a {
-    flex-basis: 70%;
+    flex-basis: 100%;
     color: #ccc;
     text-transform: capitalize;
     font-weight: 700;

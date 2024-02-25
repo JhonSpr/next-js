@@ -57,9 +57,9 @@ export default async function Home() {
           <section className='recientes'>
             {ovas.datos
               .map((e, index) => (
-                <article className='anime__card' key={index}>
+                <article className='anime__card ova' key={index}>
                   <a href={`/${e.name.replace(/ /g, '-')}`}>
-                    <div className='container__image__card'>
+                    <div className='container__image__card ova'>
                       <div className='overlay'>
                         <FaCirclePlay />
                       </div>

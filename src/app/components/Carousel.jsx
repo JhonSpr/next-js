@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react'
 import dynamic from 'next/dynamic'
 import { FaChevronRight } from 'react-icons/fa6'
+import { FaArrowAltCircleLeft, FaArrowAltCircleRight } from 'react-icons/fa'
 
 const $ = dynamic(() => import('jquery'), {
   ssr: false,
@@ -70,13 +71,9 @@ const Carousel = ({ itemsShow, ArrayList, solo }) => {
 }
 
 export const CarouselSoloItem = ({ itemsShow, ArrayList, solo }) => {
-  const [loaded, setLoaded] = useState(false)
   const [setting, setSetting] = useState(null)
-  const handleTranslated = () => {
-    setLoaded(true)
-  }
+
   useEffect(() => {
-    // Configuración del carrusel
     const Responsive = {
       0: { items: 1, margin: 2 },
       768: { items: 1, margin: 2 },
@@ -87,10 +84,10 @@ export const CarouselSoloItem = ({ itemsShow, ArrayList, solo }) => {
       items: itemsShow,
       responsive: Responsive,
       autoplay: true,
-      autoplayTimeout: 3000,
+      autoplayTimeout: 7000,
       lazyLoad: true,
       loop: true,
-      nav: false,
+      nav: true,
       autoplayHoverPause: true,
       dots: true,
       animateOut: 'fadeOut',
@@ -101,7 +98,7 @@ export const CarouselSoloItem = ({ itemsShow, ArrayList, solo }) => {
   }, [itemsShow])
 
   return (
-    <OwlCarousel {...setting}>
+    <OwlCarousel {...setting} className='hero__slider'>
       {ArrayList?.map((e, index) => (
         <div className='item' key={index}>
           <img src={e.banner ?? e.image} alt='' />

@@ -1,11 +1,21 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { BiSolidRightArrowSquare } from 'react-icons/bi'
+import { obtenerMensajeFecha } from '../[anime]/ListAnimes'
 
 const SideBar = ({ ultimos__episodios, ovas }) => {
   const [op1, setOp1] = useState(true)
   const [op2, setOp2] = useState(false)
+  const [fechas, setFechas] = useState({})
+
+  useEffect(() => {
+    const nuevasFechas = {}
+    ultimos__episodios.recientes?.forEach((e) => {
+      nuevasFechas[e.id] = obtenerMensajeFecha(e?.fechaAgregado)
+    })
+    setFechas(nuevasFechas)
+  }, [ultimos__episodios.recientes])
 
   return (
     <div className='sidebar'>
@@ -38,6 +48,7 @@ const SideBar = ({ ultimos__episodios, ovas }) => {
               '>
                 <h2>{e.nombre}</h2>
                 <span>{e.episode}</span>
+                <span className='tag'>{fechas[e.id]}</span>
               </a>
             </li>
           ))}
@@ -60,19 +71,34 @@ const SideBar = ({ ultimos__episodios, ovas }) => {
   )
 }
 export const SideBar__2 = ({ list__rews }) => {
+  const [fechas, setFechas] = useState({})
+
+  useEffect(() => {
+    const nuevasFechas = {}
+    list__rews.datos?.forEach((e) => {
+      nuevasFechas[e.id] = obtenerMensajeFecha(e?.fechaAgregado)
+    })
+    setFechas(nuevasFechas)
+  }, [list__rews.datos])
   return (
     <div className='sidebar'>
       <div className='list__rew'>
         <span className='title'>Lista Recien agregados</span>
         <div className={`sidebar__content show rews`}>
           {list__rews.datos?.map((e, index) => (
-            <li key={index} className='card'>
-              <BiSolidRightArrowSquare className='icon' />
-
+            <li
+              key={index}
+              className='card'
+              onLoadedData={() =>
+                setFechas(obtenerMensajeFecha(e?.fechaAgregado))
+              }>
               <a
                 href='
               '>
-                <span className='name'>{e.name}</span>
+                <span className='name'>
+                  <BiSolidRightArrowSquare className='icon' /> {e.name}
+                </span>
+                <span className='tag'>{fechas[e.id]}</span>
               </a>
             </li>
           ))}

@@ -72,11 +72,59 @@
   -webkit-user-select: none;
   -moz-user-select: none;
   user-select: none;
+  z-index: 2;
 }
 .owl-carousel .owl-nav button.owl-next {
   right: 10px;
   top: 90px;
 }
+
+.hero__slider.owl-carousel .owl-nav button {
+  font-size: 30px;
+  height: 36px;
+  width: 36px;
+  background: #35a9e2;
+  line-height: 66px;
+  text-align: center;
+  color: #ffffff;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+  z-index: 1;
+  position: absolute;
+  margin-top: 1px;
+  top: 45% !important;
+  &.owl-prev {
+    left: -18px !important;
+    right: auto;
+    & span {
+      -webkit-transform: rotate(-45deg);
+      -ms-transform: rotate(-45deg);
+      transform: rotate(-45deg) !important;
+      top: -15px !important;
+      position: absolute;
+      left: 7px;
+      z-index: 1;
+      font-size: 40px;
+    }
+  }
+
+  &.owl-next {
+    right: -15px !important;
+
+    & span {
+      -webkit-transform: rotate(-45deg);
+      -ms-transform: rotate(-45deg);
+      transform: rotate(-45deg) !important;
+      top: -18px !important;
+      position: absolute;
+      font-size: 40px;
+      right: 9px;
+      z-index: 1;
+    }
+  }
+}
+
 .owl-carousel .owl-nav button.owl-prev {
   left: 10px;
   top: 90px;
@@ -88,6 +136,11 @@
   font-size: 30px;
   background-color: #1283b8;
   border-radius: 7px;
+}
+
+.owl-carousel button.hero__banner__prev {
+  top: 50%;
+  z-index: 4;
 }
 .owl-carousel button.owl-dot {
   background: none;
@@ -212,7 +265,6 @@
   top: 50%;
   margin-left: -40px;
   margin-top: -40px;
-  background: url(/_next/static/media/owl.video.play.e3b43643.png) no-repeat;
   cursor: pointer;
   z-index: 1;
   -webkit-backface-visibility: hidden;

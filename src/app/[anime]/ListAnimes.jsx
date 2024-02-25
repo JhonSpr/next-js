@@ -10,9 +10,26 @@ import { MdAdd } from 'react-icons/md'
 import { BiSolidDislike, BiSolidLike } from 'react-icons/bi'
 import Carousel from '../components/Carousel'
 import useRecomends from '../Hooks/Recomends'
+import moment from 'moment'
+import 'moment-timezone'
+
+export const obtenerMensajeFecha = (fechaAgregado) => {
+  const fechaActual = moment()
+  const fechaAgregadoMoment = moment(fechaAgregado)
+
+  const diferenciaDias = fechaActual.diff(fechaAgregadoMoment, 'days')
+
+  if (diferenciaDias === 0) {
+    return 'hoy'
+  } else if (diferenciaDias === 1) {
+    return 'ayer'
+  } else {
+    return `hace ${diferenciaDias} días`
+  }
+}
 
 export function FetchSingleAnime({ data }) {
-  const { name, genero1, genero2, id, year } = data[0]
+  const { name, genero1, genero2, id, year, fechaAgregado } = data[0]
   let animeId = data?.map((e) => e?.id)
   const [loading, setLoading] = useState([])
   const [favoritos, setFavoritos] = useState([])
@@ -76,6 +93,7 @@ export function FetchSingleAnime({ data }) {
 
     incrementAnimeVisits()
   }, [loading])
+  const fecha = obtenerMensajeFecha(fechaAgregado)
 
   async function updateLikes(animeId, userId) {
     try {
@@ -96,7 +114,6 @@ export function FetchSingleAnime({ data }) {
         const currentLikes = snapshot.val()
         if (userVote !== null) {
           if (userVote.like && !userVote.dislike) {
-            // Si el usuario ya había dado like y no dislike, se cambia a false
             await set(child(animeRef, 'likes'), currentLikes - 1)
             setMessage('El usuario eliminó su voto.')
             await set(userVotesRef, { like: false, dislike: false })
@@ -107,7 +124,6 @@ export function FetchSingleAnime({ data }) {
               setIsVisible(false)
             }, 2000)
           } else if (!userVote.like && !userVote.dislike) {
-            // Si el usuario no ha votado, se registra el like
             await set(child(animeRef, 'likes'), currentLikes + 1)
             setIsVisible(true)
             setRemove(false)
@@ -165,7 +181,6 @@ export function FetchSingleAnime({ data }) {
 
         if (userVote !== null) {
           if (userVote.dislike && !userVote.like) {
-            // Si el usuario ya había dado dislike y no like, se cambia a false
             await set(child(animeRef, 'dislikes'), currentDislikes - 1)
             setMessage('El usuario eliminó su voto.')
             await set(userVotesRef, { like: false, dislike: false })
@@ -176,7 +191,6 @@ export function FetchSingleAnime({ data }) {
               setRemove(false)
             }, 2000)
           } else if (!userVote.dislike && !userVote.like) {
-            // Si el usuario no ha votado, se registra el dislike
             await set(child(animeRef, 'dislikes'), currentDislikes + 1)
             setIsVisible(true)
             setRemove(false)
@@ -260,7 +274,6 @@ export function FetchSingleAnime({ data }) {
       const snapshotVote = await get(voteUsersRef)
       const votesData = snapshotVote?.val() || {}
 
-      // Aquí recorremos cada anime en votesData para obtener sus votos
       const likesDislikes = {}
       for (const anime in votesData) {
         const animeVotes = votesData[anime]
@@ -268,14 +281,12 @@ export function FetchSingleAnime({ data }) {
         likesDislikes[anime] = { like, dislike }
       }
 
-      // Ahora likesDislikes contendrá un objeto con los votos de cada anime
-
       const userRef = ref(db, 'users/' + id)
       const snapshot = await get(userRef)
       const userData = snapshot?.val() || {}
 
       setFavoritos(userData.favoritos || [])
-      setVotosList(likesDislikes[`${nameID}`]) // Establecer el estado con los votos
+      setVotosList(likesDislikes[`${nameID}`]) //
     } catch (error) {
       console.error('Error al cargar los datos del usuario:', error)
     }
@@ -306,13 +317,11 @@ export function FetchSingleAnime({ data }) {
 
   const handleRatingSubmit = async () => {
     try {
-      // Validar si animeId tiene un valor válido
       if (!animeId && data?.length) {
         animeId = data[0].id
       }
 
       if (animeId) {
-        // Parsear el rating a un número decimal
         const parsedRating = parseFloat(rating)
         if (isNaN(parsedRating)) {
           throw new Error('El rating no es un número válido')
@@ -331,30 +340,23 @@ export function FetchSingleAnime({ data }) {
           }
         )
 
-        // Manejo de respuesta
         if (!response.ok) {
           throw new Error('Error al actualizar la calificación del anime')
         }
-
-        // La solicitud PUT se completó exitosamente
-        // Puedes realizar acciones adicionales si es necesario
       }
     } catch (error) {
       // Manejo de errores
       console.error('Error al enviar la solicitud PUT:', error.message)
-      // Puedes mostrar un mensaje de error al usuario o registrar el error para su posterior análisis
     }
   }
 
   const handleVisitasSubmit = async () => {
     try {
-      // Validar si animeId tiene un valor válido
       if (!animeId && data?.length) {
         animeId = data[0].id
       }
 
       if (animeId) {
-        // Parsear el rating a un número decimal
         const visitaSubmit = visitas
         if (isNaN(visitaSubmit)) {
           throw new Error('Las visitas no son un número válido')
@@ -373,18 +375,12 @@ export function FetchSingleAnime({ data }) {
           }
         )
 
-        // Manejo de respuesta
         if (!response.ok) {
           throw new Error('Error al actualizar las Visitas del anime')
         }
-
-        // La solicitud PUT se completó exitosamente
-        // Puedes realizar acciones adicionales si es necesario
       }
     } catch (error) {
-      // Manejo de errores
       console.error('Error al enviar la solicitud PUT:', error.message)
-      // Puedes mostrar un mensaje de error al usuario o registrar el error para su posterior análisis
     }
   }
 
@@ -396,7 +392,7 @@ export function FetchSingleAnime({ data }) {
   }, [data, user, message, likes, dislikes])
 
   useEffect(() => {
-    setRating(calcularRating(likes, dislikes)) // Actualiza el rating basado en los nuevos valores de likes y dislikes
+    setRating(calcularRating(likes, dislikes)) //
   }, [likes, dislikes, message])
 
   useEffect(() => {
@@ -520,7 +516,9 @@ export function FetchSingleAnime({ data }) {
                 </a>
               </strong>
             </span>
-
+            <span>
+              Agreado: <strong>{fecha}</strong>
+            </span>
             <span>
               Visitas: <strong>{visitas}</strong>
             </span>
