@@ -73,7 +73,7 @@ export function FetchSingleAnime({ data }) {
       await set(child(animeRef, 'visitas'), visitas + 1)
     }
     incrementAnimeVisits()
-  }, [loading])
+  }, [user])
 
   async function updateLikes(animeId, userId) {
     try {
