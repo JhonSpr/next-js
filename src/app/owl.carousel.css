@@ -57,6 +57,9 @@
 .owl-carousel .owl-item img {
   display: block;
   width: 100%;
+  max-width: 100%;
+  aspect-ratio: 16/9;
+  object-fit: cover;
 }
 .owl-carousel .owl-nav.disabled,
 .owl-carousel .owl-dots.disabled {

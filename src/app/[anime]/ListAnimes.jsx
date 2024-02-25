@@ -344,6 +344,48 @@ export function FetchSingleAnime({ data }) {
     }
   }
 
+  const handleVisitasSubmit = async () => {
+    try {
+      // Validar si animeId tiene un valor válido
+      if (!animeId && data?.length) {
+        animeId = data[0].id
+      }
+
+      if (animeId) {
+        // Parsear el rating a un número decimal
+        const visitaSubmit = visitas
+        if (isNaN(visitaSubmit)) {
+          throw new Error('Las visitas no son un número válido')
+        }
+
+        const response = await fetch(
+          `https://api-rest.up.railway.app/api/v1/animes/${animeId}/visitas`,
+          {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              visitas: visitaSubmit,
+            }),
+          }
+        )
+
+        // Manejo de respuesta
+        if (!response.ok) {
+          throw new Error('Error al actualizar las Visitas del anime')
+        }
+
+        // La solicitud PUT se completó exitosamente
+        // Puedes realizar acciones adicionales si es necesario
+      }
+    } catch (error) {
+      // Manejo de errores
+      console.error('Error al enviar la solicitud PUT:', error.message)
+      // Puedes mostrar un mensaje de error al usuario o registrar el error para su posterior análisis
+    }
+  }
+
   useEffect(() => {
     if ((user !== undefined && user !== null) || !user) {
       fetchData()
@@ -358,6 +400,9 @@ export function FetchSingleAnime({ data }) {
   useEffect(() => {
     handleRatingSubmit()
   }, [rating, user])
+  useEffect(() => {
+    handleVisitasSubmit()
+  }, [visitas, user])
 
   const handleClose = () => {
     setIsVisible(false)

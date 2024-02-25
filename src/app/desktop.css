@@ -1,4 +1,124 @@
 @media only screen and (min-width: 1250px) {
+  .section__midle {
+    background-color: rgb(17, 24, 39);
+    padding: 60px;
+    padding-top: 0;
+    height: fit-content;
+  }
+
+  .section__midle div {
+    display: flex;
+    margin: 10px auto;
+    width: 75%;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    position: relative;
+  }
+
+  .section__midle .card__midle {
+    position: relative;
+    overflow: hidden;
+
+    &:hover .visitas__overlay {
+      top: 0;
+    }
+    &.item1 {
+      flex-basis: 50%;
+      height: 310px;
+    }
+    &.item2 {
+      flex-basis: 29%;
+      height: 300px;
+    }
+    &.item3 {
+      flex-basis: 19%;
+      height: 280px;
+    }
+    &.item4 {
+      flex-basis: 30%;
+      height: 200px;
+    }
+    &.item5 {
+      flex-basis: 10%;
+      height: 200px;
+    }
+    &.item6 {
+      flex-basis: 10%;
+      height: 200px;
+    }
+    &.item7 {
+      flex-basis: 10%;
+      height: 200px;
+    }
+    &.item8 {
+      flex-basis: 10%;
+      height: 200px;
+    }
+    &.item9 {
+      flex-basis: 10%;
+      height: 200px;
+    }
+    &.item10 {
+      flex-basis: 10%;
+      height: 200px;
+    }
+
+    &:hover img {
+      filter: blur(2px) brightness(70%);
+    }
+  }
+
+  .section__midle .card__midle .tag {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    background-color: #1283b8;
+    padding: 3px 7px;
+    border-radius: 2px;
+    z-index: 3;
+  }
+  .section__midle .card__midle .visitas__overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: -100%;
+    display: flex;
+    margin-top: 0;
+    font-size: 20px;
+    background-color: #092ca19f;
+    z-index: 4;
+    justify-content: center;
+    align-content: center;
+    border-radius: 7px;
+    transition-property: top;
+    transition-duration: 0.3s;
+    transition-timing-function: ease;
+  }
+
+  .section__midle .card__midle .name {
+    display: block;
+    z-index: 3;
+    position: absolute;
+    padding: 7px;
+    width: 100%;
+    bottom: 0;
+    height: min-content;
+    overflow: hidden;
+    text-wrap: nowrap;
+    text-overflow: ellipsis;
+  }
+  .section__midle .card__midle img {
+    position: absolute;
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
+    height: 100%;
+    border-radius: 7px;
+    z-index: 1;
+    filter: brightness(70%);
+  }
+
   .btn__close__navbar {
     display: none;
   }
@@ -613,6 +733,7 @@
     width: 100%;
     height: 518px;
     border-radius: 7px;
+    aspect-ratio: 16/9;
   }
   .container__user {
     position: relative;

@@ -37,12 +37,11 @@ export default async function Home() {
   const Emisiones = await Request_Animes({ estado: ['en emision'] })
   const ultimos__episodios = await Request_Animes({ recien: true })
   const recientAgregados = await Request_Animes({ page: 1 })
-
   const ovas = await Request_Animes({ page: 1, tipo: ['ova'] })
+  const MayorRating = await Request_Animes({ page: 1, rate: 'mayor' })
   return (
-    <main className=''>
+    <main>
       <div className='container__ section'>
-        {' '}
         <section>
           <CarouselSoloItem
             ArrayList={Emisiones.datos}
@@ -75,6 +74,56 @@ export default async function Home() {
                 </article>
               ))
               .slice(0, 8)}
+          </section>
+        </section>
+        <SideBar ultimos__episodios={ultimos__episodios} ovas={ovas} />
+      </div>
+
+      <div className='section__midle'>
+        <div>
+          <span className='title'>TOP MAS POPULARES</span>
+          {MayorRating.datos
+            .map((e, index) => (
+              <article key={index} className={`card__midle item${index + 1}`}>
+                <a href={e.name?.replace(/ /g, '-')}>
+                  <div className='visitas__overlay'>Visitas {e.visitas}</div>
+                  <img src={e.banner ?? e.image} alt='' />
+                  <span className='tag'>{index + 1}</span>
+                </a>{' '}
+                <strong className='name'>{e.name}</strong>
+              </article>
+            ))
+            .slice(0, 10)}
+        </div>
+      </div>
+      <div className='container__ section'>
+        <section>
+          <span className='title'>Recien Agregados</span>
+          <section className='recientes'>
+            {recientAgregados.datos
+              .map((e, index) => (
+                <article className='anime__card' key={index}>
+                  <a href={`/${e.name.replace(/ /g, '-')}`}>
+                    <div className='container__image__card'>
+                      <div className='overlay'>
+                        <FaCirclePlay />
+                      </div>
+                      <img src={e.image} alt='' />
+                    </div>
+                  </a>
+                  <div className='ds'>
+                    <span
+                      className={
+                        e.estado === 'finalizado' ? 'status end' : 'status'
+                      }>
+                      {e.estado}
+                    </span>
+                    <span className='type'>{e.tipo}</span>
+                  </div>
+                  <span className='anime__name'>{e.name}</span>
+                </article>
+              ))
+              .slice(0, 20)}
           </section>
         </section>
         <SideBar ultimos__episodios={ultimos__episodios} ovas={ovas} />
