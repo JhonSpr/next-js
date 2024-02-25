@@ -1,4 +1,122 @@
 @media only screen and (max-width: 600px) {
+  .section__midle {
+    background-color: rgb(17, 24, 39);
+    padding: 10px;
+    padding-top: 0;
+    height: fit-content;
+  }
+
+  .section__midle div {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    position: relative;
+  }
+
+  .section__midle .card__midle {
+    position: relative;
+    overflow: hidden;
+    color: #fff;
+    &:hover .visitas__overlay {
+      top: 0;
+    }
+    &.item1 {
+      flex-basis: 100%;
+      height: 310px;
+    }
+    &.item2 {
+      flex-basis: 30%;
+      height: 300px;
+    }
+    &.item3 {
+      flex-basis: 29%;
+      height: 280px;
+    }
+    &.item4 {
+      flex-basis: 29%;
+      height: 200px;
+    }
+    &.item5 {
+      flex-basis: 40%;
+      height: 200px;
+    }
+    &.item6 {
+      flex-basis: 40%;
+      height: 200px;
+    }
+    &.item7 {
+      flex-basis: 40%;
+      height: 200px;
+    }
+    &.item8 {
+      flex-basis: 40%;
+      height: 200px;
+    }
+    &.item9 {
+      flex-basis: 40%;
+      height: 200px;
+    }
+    &.item10 {
+      flex-basis: 40%;
+      height: 200px;
+    }
+
+    &:hover img {
+      filter: blur(2px) brightness(70%);
+    }
+  }
+
+  .section__midle .card__midle .tag {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    background-color: #1283b8;
+    padding: 3px 7px;
+    border-radius: 2px;
+    z-index: 3;
+  }
+  .section__midle .card__midle .visitas__overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: -100%;
+    display: flex;
+    margin-top: 0;
+    font-size: 20px;
+    background-color: #092ca19f;
+    z-index: 4;
+    justify-content: center;
+    align-content: center;
+    border-radius: 7px;
+    transition-property: top;
+    transition-duration: 0.3s;
+    transition-timing-function: ease;
+  }
+
+  .section__midle .card__midle .name {
+    display: block;
+    z-index: 3;
+    position: absolute;
+    padding: 7px;
+    width: 100%;
+    bottom: 0;
+    height: min-content;
+    overflow: hidden;
+    text-wrap: nowrap;
+    text-overflow: ellipsis;
+  }
+  .section__midle .card__midle img {
+    position: absolute;
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
+    height: 100%;
+    border-radius: 7px;
+    z-index: 1;
+    filter: brightness(70%);
+  }
   nav {
     width: 100% !important;
   }
@@ -721,6 +839,28 @@
     gap: 10px;
     padding: 10px 0;
     border-bottom: 2px solid #000;
+    &.card {
+      padding: 2px 0 !important;
+      display: flex;
+      width: 100%;
+      gap: 10px;
+      height: fit-content;
+
+      & .icon {
+        width: 10%;
+        color: #fff;
+      }
+      & .name {
+        width: 50%;
+        text-wrap: nowrap;
+        text-overflow: ellipsis;
+        color: #fff;
+      }
+
+      &:hover {
+        background-color: #121212;
+      }
+    }
   }
 
   .sidebar .sidebar__content li img {
