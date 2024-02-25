@@ -507,8 +507,8 @@ export function FetchSingleAnime({ data }) {
               <strong>
                 <a
                   href={`/directorio?studio=${e.studio
-                    .toLowerCase()
-                    .replace(/ /g, '+')}`}>
+                    ?.toLowerCase()
+                    ?.replace(/ /g, '+')}`}>
                   {e.studio}
                 </a>
               </strong>
