@@ -1148,6 +1148,7 @@
   .item img {
     height: 100%;
     width: 100%;
+    z-index: 2;
     position: absolute;
     object-position: center;
     object-fit: cover;
@@ -1163,7 +1164,7 @@
 
   .item .hero__text {
     position: relative;
-    z-index: 1;
+    z-index: 3;
     height: max-content;
     width: 80%;
     margin-top: 10px;

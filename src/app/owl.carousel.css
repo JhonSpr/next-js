@@ -173,10 +173,12 @@
 .owl-carousel.owl-drag .owl-item.active .item .hero__text h2 {
   top: 0;
   opacity: 1;
+  z-index: 3;
 }
 .owl-carousel.owl-drag .owl-item.active .item .hero__text a {
   top: 0;
   opacity: 1;
+  z-index: 3;
 }
 .owl-carousel.owl-grab {
   cursor: move;
