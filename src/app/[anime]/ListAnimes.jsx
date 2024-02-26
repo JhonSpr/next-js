@@ -83,6 +83,24 @@ export function FetchSingleAnime({ data }) {
     }, 800)
   }, [])
 
+  useEffect(() => {
+    const db = getDatabase()
+    const incrementAnimeVisits = async () => {
+      const animeRef = ref(db, `animes/${name?.toLowerCase()}`)
+      // Obtener el valor actual de visitas
+      const snapshot = await get(animeRef)
+      if (snapshot.exists()) {
+        const currentVisits = snapshot.val().visitas || 0
+        // Incrementar las visitas en 1
+        await set(child(animeRef, 'visitas'), currentVisits + 1)
+        setVisitas((prevVisitas) => prevVisitas + 1)
+      } else {
+        console.error('El anime no existe en la base de datos.')
+      }
+    }
+
+    incrementAnimeVisits()
+  }, [loading])
   const fecha = obtenerMensajeFecha(fechaAgregado)
 
   async function updateLikes(animeId, userId) {
