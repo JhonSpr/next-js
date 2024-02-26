@@ -950,28 +950,37 @@
     position: relative;
   }
   .information__page .container__image .image__anime {
-    display: block;
-    width: 100%;
+    display: inline-block;
+    width: 80%;
+    margin: 20px auto;
   }
 
   .information__page .container__image .image__anime img {
-    margin: 20px auto;
+    width: 100%;
+
     border-radius: 7px;
     padding: 20px;
     background-color: #1b1a1f;
   }
   .information__page .container__image .footer__image__anime {
-    width: 100%;
-    padding: 20px auto;
+    width: 80%;
+    margin-inline: auto;
+    display: flex;
+    gap: 5px;
   }
   .information__page .container__image .footer__image__anime .btn__voto {
     padding: 10px 70px;
-    margin: 0 5px;
+    flex-basis: 50%;
     border-radius: 7px;
     color: #1283b8;
     font-size: 20px;
     background-color: #17171a !important;
+    display: flex;
+    gap: 5px;
 
+    & svg {
+      margin-top: 5px;
+    }
     &.active {
       background-color: #17171a !important;
       color: #fff;
