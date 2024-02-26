@@ -83,16 +83,6 @@ export function FetchSingleAnime({ data }) {
     }, 800)
   }, [])
 
-  useEffect(() => {
-    const db = getDatabase()
-    const incrementAnimeVisits = async () => {
-      const animeRef = ref(db, `animes/${name?.toLowerCase()}`)
-      await set(child(animeRef, 'visitas'), visitas + 1)
-      setVisitas((prevVisitas) => prevVisitas + 1)
-    }
-
-    incrementAnimeVisits()
-  }, [loading])
   const fecha = obtenerMensajeFecha(fechaAgregado)
 
   async function updateLikes(animeId, userId) {
