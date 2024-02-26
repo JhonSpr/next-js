@@ -75,7 +75,7 @@ export function FetchSingleAnime({ data }) {
     setDislike,
   } = useContext(contextApp)
   const [votosList, setVotosList] = useState({})
-  const nameID = data?.map((e) => e.name?.replace(/ /g, ' '))[0].toLowerCase()
+  const nameID = id
   useEffect(() => {
     setLoading(true)
     setTimeout(() => {
@@ -86,7 +86,7 @@ export function FetchSingleAnime({ data }) {
   useEffect(() => {
     const db = getDatabase()
     const incrementAnimeVisits = async () => {
-      const animeRef = ref(db, `animes/${name?.toLowerCase()}`)
+      const animeRef = ref(db, `animes/${id}`)
       // Obtener el valor actual de visitas
       const snapshot = await get(animeRef)
       if (snapshot.exists()) {
@@ -237,7 +237,7 @@ export function FetchSingleAnime({ data }) {
   const fetchData = async () => {
     try {
       const response = await fetch(
-        `https://animesz-f90c0-default-rtdb.firebaseio.com/animes/${nameID}.json`
+        `https://animesz-f90c0-default-rtdb.firebaseio.com/animes/${id}.json`
       )
       if (!response.ok) {
         throw new Error('Error al recuperar los datos')
@@ -259,7 +259,7 @@ export function FetchSingleAnime({ data }) {
   const fetchVisitas = async () => {
     try {
       const response = await fetch(
-        `https://animesz-f90c0-default-rtdb.firebaseio.com/animes/${nameID}.json`
+        `https://animesz-f90c0-default-rtdb.firebaseio.com/animes/${id}.json`
       )
       if (!response.ok) {
         throw new Error('Error al recuperar los datos')
@@ -308,7 +308,7 @@ export function FetchSingleAnime({ data }) {
       try {
         const db = getDatabase()
 
-        const animeRef = ref(db, `animes/${name.toLowerCase()}`)
+        const animeRef = ref(db, `animes/${id}`)
         await set(child(animeRef, 'rating'), newRating)
       } catch (error) {
         console.error(
@@ -371,7 +371,7 @@ export function FetchSingleAnime({ data }) {
         }
 
         const response = await fetch(
-          `https://api-rest.up.railway.app/api/v1/animes/${animeId}/visitas`,
+          `https://api-rest.up.railway.app/api/v1/animes/${id}/visitas`,
           {
             method: 'PUT',
             headers: {
@@ -434,7 +434,7 @@ export function FetchSingleAnime({ data }) {
         </div>
         <div className='footer__image__anime'>
           <button
-            onClick={() => updateLikes(nameID, user?.uid, true)}
+            onClick={() => updateLikes(id, user?.uid, true)}
             className={`btn__voto ${theme === 'dark' ? 'dark' : ''} ${
               votosList?.like ? 'active' : ''
             }`}>
@@ -442,7 +442,7 @@ export function FetchSingleAnime({ data }) {
             <BiSolidLike />
           </button>
           <button
-            onClick={() => updateDislikes(nameID, user?.uid, true)}
+            onClick={() => updateDislikes(id, user?.uid, true)}
             className={`btn__voto ${theme === 'dark' ? 'dark' : ''} ${
               votosList?.dislike ? 'active' : ''
             }`}>
@@ -460,7 +460,7 @@ export function FetchSingleAnime({ data }) {
                 ? 'active'
                 : ''
             }`}
-            onClick={() => agregarFavoritos(e.name, e.image)}>
+            onClick={() => agregarFavoritos(e.id, e.image)}>
             <span>
               <span className={`menssage`}>
                 {favoritos.some((objeto) => objeto?.name === e.name)
