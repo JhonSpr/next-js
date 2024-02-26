@@ -709,6 +709,22 @@
     display: flex;
     flex-direction: column;
     gap: 5px;
+
+    &.ova {
+      height: 300px !important;
+      overflow: hidden;
+      flex-direction: column;
+      & .container__image__card {
+        height: 150px;
+      }
+      & img {
+        height: 150px !important;
+      }
+
+      & .ds {
+        position: relative;
+      }
+    }
   }
 
   .recientes .anime__card .anime__name {
@@ -839,24 +855,46 @@
     gap: 10px;
     padding: 10px 0;
     border-bottom: 2px solid #000;
+    & .tag {
+      width: max-content;
+      position: absolute;
+      right: 2px;
+      color: #1283b8;
+      margin-left: 5px;
+    }
+
+    &.card a {
+      flex-basis: 100%;
+      display: block;
+    }
     &.card {
-      padding: 2px 0 !important;
       display: flex;
       width: 100%;
-      gap: 10px;
       height: fit-content;
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+      padding-left: 20px !important;
 
-      & .icon {
-        width: 10%;
-        color: #fff;
-      }
       & .name {
-        width: 50%;
-        text-wrap: nowrap;
-        text-overflow: ellipsis;
+        display: inline-block;
+        width: 90%;
+        text-wrap: wrap;
         color: #fff;
+        overflow: hidden;
+        & .icon {
+          display: inline-block;
+          color: #fff;
+          width: max-content;
+        }
       }
 
+      & .tag {
+        width: max-content;
+        position: absolute;
+        right: 2px;
+        color: #1283b8;
+        margin-left: 5px;
+      }
       &:hover {
         background-color: #121212;
       }
@@ -1198,5 +1236,50 @@
   #disqus-recommendations.light {
     color-scheme: dark !important;
     background-color: transparent !important;
+  }
+  .hero__slider.owl-carousel .owl-nav button {
+    font-size: 30px;
+    height: 36px;
+    width: 36px;
+    background: #35a9e2;
+    line-height: 66px;
+    text-align: center;
+    color: #ffffff;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+    z-index: 1;
+    position: absolute;
+    margin-top: 1px;
+    top: 45% !important;
+    &.owl-prev {
+      left: 15px !important;
+      right: auto;
+      & span {
+        -webkit-transform: rotate(-45deg);
+        -ms-transform: rotate(-45deg);
+        transform: rotate(-45deg) !important;
+        top: -15px !important;
+        position: absolute;
+        left: 7px;
+        z-index: 1;
+        font-size: 40px;
+      }
+    }
+
+    &.owl-next {
+      right: 15px !important;
+
+      & span {
+        -webkit-transform: rotate(-45deg);
+        -ms-transform: rotate(-45deg);
+        transform: rotate(-45deg) !important;
+        top: -18px !important;
+        position: absolute;
+        font-size: 40px;
+        right: 9px;
+        z-index: 1;
+      }
+    }
   }
 }

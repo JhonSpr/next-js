@@ -846,6 +846,7 @@
       display: block;
     }
   }
+
   .btn_comments {
     display: block;
     margin: 20px 0;
@@ -1095,7 +1096,7 @@
 
       & .name {
         display: inline-block;
-        width: 90%;
+        width: 70%;
         text-wrap: wrap;
         color: #fff;
         overflow: hidden;

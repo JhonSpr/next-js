@@ -95,7 +95,7 @@
   margin-top: 1px;
   top: 45% !important;
   &.owl-prev {
-    left: -18px !important;
+    left: -18px;
     right: auto;
     & span {
       -webkit-transform: rotate(-45deg);
@@ -110,7 +110,7 @@
   }
 
   &.owl-next {
-    right: -15px !important;
+    right: -15px;
 
     & span {
       -webkit-transform: rotate(-45deg);

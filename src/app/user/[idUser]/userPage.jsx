@@ -12,6 +12,7 @@ import { auth } from '@/app/firebase'
 
 const UserPage = () => {
   const [cookie, setCookie] = useCookies(['username'])
+
   const {
     dataUser,
     theme,
@@ -20,6 +21,7 @@ const UserPage = () => {
     favoritos,
     ultimosVistados,
   } = useContext(contextApp)
+
   const [MiList, setMilist] = useState(true)
   const [AnimesPending, setAnimesPending] = useState(false)
   const [ultimosVistadosT, setultimosVistadosT] = useState(false)
