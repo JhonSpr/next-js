@@ -325,11 +325,11 @@ export function FetchSingleAnime({ data }) {
 
   const handleRatingSubmit = async () => {
     try {
-      if (!animeId && data?.length) {
-        animeId = data[0].id
+      if (!id && data?.length) {
+        id = data[0].id
       }
 
-      if (animeId) {
+      if (id) {
         const parsedRating = parseFloat(rating)
         if (isNaN(parsedRating)) {
           throw new Error('El rating no es un número válido')
