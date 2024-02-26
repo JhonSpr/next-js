@@ -40,13 +40,18 @@ export async function generateMetadata({ params }) {
   }
 }
 
-function page({ params }) {
+async function page({ params }) {
   const episode = Number(params.episode)
   const name = params.anime.replace(/-/g, ' ')
+  const data = await Request_Animes({
+    info: name,
+  })
+
+  const { services } = data.datos[0]
 
   return (
     <div style={{ minHeight: '80dvh' }}>
-      <EpisodePage name={name} episode={episode} />
+      <EpisodePage name={name} episode={episode} services={services} />
     </div>
   )
 }

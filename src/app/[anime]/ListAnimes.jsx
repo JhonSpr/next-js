@@ -326,7 +326,7 @@ export function FetchSingleAnime({ data }) {
   const handleRatingSubmit = async () => {
     try {
       if (!id && data?.length) {
-        id = data[0].id
+        id
       }
 
       if (id) {

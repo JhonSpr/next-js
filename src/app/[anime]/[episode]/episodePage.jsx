@@ -10,7 +10,7 @@ import { get, getDatabase, ref, set } from 'firebase/database'
 import { Request_Animes } from '@/app/FetchingData/request_animes'
 import { useRouter } from 'next/navigation'
 
-function EpisodePage({ name, episode }) {
+function EpisodePage({ name, episode, services }) {
   const { user } = useContext(contextApp)
   const [animes, setAnimes] = useState([])
   const router = useRouter()
@@ -35,15 +35,16 @@ function EpisodePage({ name, episode }) {
       router.events?.off('routeChangeComplete', handleRouteChange)
     }
   }, [])
+
+  console.log(services)
   const [lastEpisodes, setLastEpisodes] = useState([])
   useEffect(() => {
     Request_episode(name).then((res) => setAnimes(res))
     Request_Animes({ recien: true }).then((res) => setLastEpisodes(res))
   }, [])
-  const dynamicCapKey = `cap${episode}`
-  const services = animes?.datos?.map((i) => i.services[0]) || []
-  const services2 = services?.map((i) => i?.[dynamicCapKey])
-  const servicesList = services2[0]?.map((i) => i)
+  const dynamicCapKey = `cap${episode}` // Supongamos que episode tiene el valor deseado
+
+  const servicesList = services.filter((e) => e?.[dynamicCapKey])
   const { theme } = useContext(contextApp)
   const image = animes?.datos?.map((e) => e.image)
   const agregarValorAVistosRecientes = async (name, image) => {
@@ -101,7 +102,7 @@ function EpisodePage({ name, episode }) {
         </h4>
         <div className='container__iframe'>
           <iframe
-            src={servicesList?.map((i) => i.url)}
+            src={servicesList[0]?.[dynamicCapKey]?.map((i) => i?.url)}
             allowFullScreen></iframe>
           <div className={`controls ${theme === 'dark' ? 'dark' : ''}`}>
             <a
