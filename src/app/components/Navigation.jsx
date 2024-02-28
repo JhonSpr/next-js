@@ -1,17 +1,16 @@
 'use client'
-import { use, useContext, useEffect, useRef, useState } from 'react'
-import { FaBars } from 'react-icons/fa6'
+import { useContext, useEffect, useRef, useState } from 'react'
+
 import { useDebouncedCallback } from 'use-debounce'
-import { IoMdClose } from 'react-icons/io'
-import { FaSearch, FaUserCircle } from 'react-icons/fa'
+
 import { ThemeSwitcher } from './ThemeSwitcher'
 import { contextApp } from '../providers'
-import { useCookies, withCookies } from 'react-cookie'
 import { useTheme } from 'next-themes'
 import { signOut } from 'firebase/auth'
 import { auth } from '../firebase'
 import Register from './RegisterComponent'
 import { Login } from './LoginComponent'
+import { FaStar } from 'react-icons/fa6'
 const hrefs = [
   { label: 'Inicio', route: '/' },
   { label: 'Animes', route: '/directorio' },
@@ -19,8 +18,9 @@ const hrefs = [
 ]
 
 function Navigation() {
-  const [search, setSearch] = useState('')
-  const [cookie, setCookie, removeCookie] = useCookies()
+  const [search, setSearch] = useState('null')
+  const [loading, setLoading] = useState(false)
+  const [results, setResults] = useState([])
   const [showMenu, setShowMenu] = useState(false)
   const [loginPage, setLoginPage] = useState(null)
   const [registerPage, setRegisterPage] = useState(null)
@@ -30,13 +30,34 @@ function Navigation() {
 
   const handleSearch = useDebouncedCallback((e) => {
     setSearch(e.target.value)
-  }, 600)
+  }, 100)
 
+  useEffect(() => {
+    setLoading(true)
+
+    setTimeout(() => {
+      setLoading(false)
+    }, 1000)
+  }, [search, loading])
   const handleClick = () => {
     if (inputRef.current) {
       inputRef.current.focus()
     }
   }
+
+  if (search == '') {
+    setSearch('null')
+  }
+
+  useEffect(() => {
+    fetch(
+      `https://api-rest.up.railway.app/api/v1/animes?name=${search}&page=1&limit=6`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        setResults(data)
+      })
+  }, [search, loading])
 
   useEffect(() => {
     document.body.classList.remove('light', 'dark')
@@ -46,12 +67,6 @@ function Navigation() {
   const logout = async () => {
     try {
       await signOut(auth)
-
-      // Usa la función para quitar todas las cookies
-      removeCookie(`token`)
-      removeCookie(`username`)
-      removeCookie(`like${animeName}`)
-      removeCookie(`dislike${animeName}`)
     } catch (error) {
       console.error('Error al cerrar sesión:', error)
     }
@@ -264,7 +279,47 @@ function Navigation() {
                 className='block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
                 placeholder='Buscar un anime...'
                 ref={inputRef}
+                onChange={handleSearch}
               />
+              <div
+                className={`container__results ${
+                  search === 'null' ? 'disable' : ''
+                }`}>
+                <div className={`results `}>
+                  {results?.datos?.map((e, index) => (
+                    <div
+                      className={`result ${loading ? 'disable' : ''}`}
+                      key={index}>
+                      <a href={e.name.replace(/ /g, '-')}>
+                        <div className='image__result'>
+                          <img src={e.image} alt={e.image} />
+                        </div>
+                        <div className='info__result'>
+                          <h5>{e.name}</h5>
+                          <span>{e.year}</span>
+                          <p>
+                            <FaStar />
+                            {e.rating}
+                          </p>
+                        </div>
+                      </a>
+                    </div>
+                  ))}
+                  {results?.item == 0 ? (
+                    <span className={loading ? 'disable' : ''}>
+                      No hay resultados para {`${search}`}
+                    </span>
+                  ) : null}
+
+                  {loading ? <span>Cargando...</span> : null}
+
+                  {results?.item > 6 ? (
+                    <button className={loading ? 'disable' : 'btn__results'}>
+                      Mostrar mas resultados
+                    </button>
+                  ) : null}
+                </div>
+              </div>
             </form>
           </div>
           <button
@@ -360,4 +415,4 @@ function Navigation() {
   )
 }
 
-export default withCookies(Navigation)
+export default Navigation
