@@ -130,7 +130,7 @@
 
   .list__animes {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(30%, 200px));
+    grid-template-columns: repeat(auto-fit, minmax(32.333%, 200px));
     gap: 9px;
   }
 

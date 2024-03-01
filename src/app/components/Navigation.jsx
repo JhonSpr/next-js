@@ -30,7 +30,7 @@ function Navigation() {
 
   const handleSearch = useDebouncedCallback((e) => {
     setSearch(e.target.value)
-  }, 100)
+  }, 200)
 
   useEffect(() => {
     setLoading(true)
