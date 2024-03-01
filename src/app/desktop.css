@@ -403,7 +403,7 @@
   .btn__up {
     position: absolute;
     top: -20px;
-    padding: 20px;
+    padding: 10px;
     border-radius: 50%;
     left: 50%;
     background-color: #1283b8;
@@ -450,26 +450,83 @@
     color: #17171a;
   }
 
-  .container__anime main .info__anime .btn__favorite {
-    position: absolute;
+  .setting__anime {
+    width: 100%;
+    position: relative;
+    margin-top: 10px;
+  }
+
+  .icon__settings__anime {
+    display: inline-block;
     font-size: 30px;
-    text-transform: capitalize;
-    padding: 2px 20px;
-    border-radius: 6px;
-    right: 0;
-    background-color: #323235;
-    transition: all 0.2s ease-out;
-    color: #fff;
+    width: 30%;
+    margin-left: 10px;
+    padding-left: 5px;
+    border-left: 1px solid #c1c1c1;
     &:hover {
-      background-color: #1b1a1f;
+      color: #1283b8;
+    }
+  }
+
+  .settings {
+    position: absolute;
+    font-size: 15px;
+    background-color: #17171a;
+    width: 100%;
+    left: 0;
+    border-radius: 7px;
+    height: -0;
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-right: 10px;
+    padding-left: 10px;
+    overflow: hidden;
+    top: 40px;
+    transition-property: height padding;
+    transition-duration: 0.2s;
+    transition-timing-function: ease-in-out;
+    &.show {
+      height: 120px;
+      padding-left: 10px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      padding-right: 10px;
     }
 
+    & span {
+      width: max-content;
+      text-wrap: nowrap;
+      font-size: 14px;
+      color: #86868a;
+      display: block;
+      margin: 5px 0;
+      &:hover {
+        color: #fff;
+      }
+      & svg {
+        display: inline-block;
+      }
+    }
+  }
+  .container__anime .btn__favorite {
+    display: flex;
+    position: relative;
+    font-size: 20px;
+    width: auto;
+    text-transform: lowercase;
+    padding: 2px 20px;
+    border-radius: 6px;
+    background-color: #17171a;
+    transition: all 0.2s ease-out;
+    margin-inline: auto;
+    color: #fff;
     &:hover .menssage {
       width: 170px;
       height: 25px;
     }
     & span {
-      display: flex;
+      flex-basis: 70%;
+      text-wrap: nowrap;
     }
     &.active {
       background-color: #1283b8 !important;

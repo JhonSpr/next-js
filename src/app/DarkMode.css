@@ -26,6 +26,14 @@ html.dark {
   background-color: #3c3c44 !important;
 }
 
+.btn__favorite.dark {
+  background-color: #3c3c44 !important;
+
+  & .settings {
+    background-color: #3c3c44 !important;
+  }
+}
+
 .comments_container.dark {
   background-color: transparent !important;
 }

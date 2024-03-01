@@ -6,12 +6,13 @@ import Comments from '../components/comments'
 import { child, get, getDatabase, ref, set } from 'firebase/database'
 import Alert from '../components/Alert'
 import { calcularRating } from '../user/[idUser]/userPage'
-import { MdAdd } from 'react-icons/md'
+import { MdAdd, MdKeyboardArrowDown, MdWatchLater } from 'react-icons/md'
 import { BiSolidDislike, BiSolidLike } from 'react-icons/bi'
 import Carousel from '../components/Carousel'
 import useRecomends from '../Hooks/Recomends'
 import moment from 'moment'
 import 'moment-timezone'
+import { FaCheck } from 'react-icons/fa6'
 
 export const obtenerMensajeFecha = (fechaAgregado) => {
   const fechaActual = moment()
@@ -40,6 +41,7 @@ export function FetchSingleAnime({ data }) {
   const [votos, setVotos] = useState(Number) ?? 0
   const [isMobile, setIsMobile] = useState(false)
   const [visitas, setVisitas] = useState(Number)
+  const [settings, setSettings] = useState(false)
 
   useEffect(() => {
     const checkIsMobile = () => {
@@ -442,26 +444,39 @@ export function FetchSingleAnime({ data }) {
             <BiSolidDislike />
           </button>
         </div>
-      </section>
-
-      <section className={`container__information`}>
-        <div className='info__anime'>
+        <div className='setting__anime'>
           <button
             className={`btn__favorite ${theme === 'dark' ? 'dark' : ''} ${
               favoritos.some((objeto) => objeto?.name === e.name)
                 ? 'active'
                 : ''
-            }`}
-            onClick={() => agregarFavoritos(e.id, e.image)}>
-            <span>
-              <span className={`menssage`}>
-                {favoritos.some((objeto) => objeto?.name === e.name)
-                  ? 'Eliminar favoritos'
-                  : 'Agregar a favoritos'}
-              </span>
-              <MdAdd />
+            }`}>
+            <span onClick={() => agregarFavoritos(e.id, e.image)}>
+              {favoritos.some((objeto) => objeto?.name === e.name)
+                ? 'eliminar de lista'
+                : 'añadir a lista'}
             </span>
+            <MdKeyboardArrowDown
+              className='icon__settings__anime'
+              onClick={() => {
+                setSettings(!settings)
+              }}
+            />
+
+            <div className={`settings ${settings ? 'show' : ''}`}>
+              <span>
+                <FaCheck /> Marcar como completado
+              </span>
+              <span>
+                <MdWatchLater /> Marcar pendiente
+              </span>
+            </div>
           </button>
+        </div>
+      </section>
+
+      <section className={`container__information`}>
+        <div className='info__anime'>
           <div className='flex items-center rating'>
             <svg
               className='w-4 h-4 text-yellow-300 me-1'
