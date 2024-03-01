@@ -4,7 +4,7 @@ import DirectoryPage from './DirectoryPage'
 export async function generateMetadata({ params }) {
   {
     return {
-      title: 'Directorio | Animesz',
+      title: 'Directorio - Animesz',
       description: 'Directorio de animes | animesz',
       siteName: 'animesz',
       locale: 'es',

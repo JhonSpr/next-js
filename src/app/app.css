@@ -310,8 +310,11 @@
 .nav,
 footer {
   background-color: rgb(17, 24, 39) !important;
+  position: relative;
 }
-
+footer {
+  padding-top: 50px;
+}
 .ul {
   background-color: rgb(17, 24, 39) !important;
 }

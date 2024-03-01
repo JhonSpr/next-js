@@ -4,14 +4,13 @@ import { useContext, useEffect, useState } from 'react'
 import { contextApp } from '../providers'
 
 export default function AnimesFectching({ data }) {
-  const { theme, setDatoss, rate } = useContext(contextApp)
+  const { theme } = useContext(contextApp)
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     setLoading(true)
     setTimeout(() => {
       setLoading(false)
-      setDatoss(data)
     }, 600)
   }, [])
   return [

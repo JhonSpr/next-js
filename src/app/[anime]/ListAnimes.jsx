@@ -42,19 +42,14 @@ export function FetchSingleAnime({ data }) {
   const [visitas, setVisitas] = useState(Number)
 
   useEffect(() => {
-    // Función para verificar si la pantalla es de un dispositivo móvil
     const checkIsMobile = () => {
-      // Verificar el ancho de la ventana para determinar si es un dispositivo móvil
       setIsMobile(window.innerWidth <= 768) // Puedes ajustar el ancho máximo para considerar como móvil
     }
 
-    // Llamar a la función al cargar la página
     checkIsMobile()
 
-    // Agregar un event listener para el evento de cambio de tamaño de la ventana
     window.addEventListener('resize', checkIsMobile)
 
-    // Limpiar el event listener en el cleanup de useEffect
     return () => window.removeEventListener('resize', checkIsMobile)
   }, [])
   const {
@@ -87,11 +82,9 @@ export function FetchSingleAnime({ data }) {
     const db = getDatabase()
     const incrementAnimeVisits = async () => {
       const animeRef = ref(db, `animes/${id}`)
-      // Obtener el valor actual de visitas
       const snapshot = await get(animeRef)
       if (snapshot.exists()) {
         const currentVisits = snapshot.val().visitas || 0
-        // Incrementar las visitas en 1
         await set(child(animeRef, 'visitas'), currentVisits + 1)
         setVisitas((prevVisitas) => prevVisitas + 1)
       } else {
@@ -152,7 +145,6 @@ export function FetchSingleAnime({ data }) {
             }, 2000)
           }
         } else {
-          // Si el usuario no había votado antes, registra su voto como like
           await set(userVotesRef, { like: true, dislike: false })
           await set(child(animeRef, 'likes'), currentLikes + 1)
           setIsVisible(true)

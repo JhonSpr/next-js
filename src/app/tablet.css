@@ -6,18 +6,19 @@
     width: 100%;
     margin: 30px auto;
     min-height: 60dvh;
+    padding: 40px;
   }
 
   .list__animes {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(420px, 200px));
+    grid-template-columns: repeat(auto-fit, minmax(40%, 200px));
     gap: 9px;
   }
 
   .card__anime {
     position: relative;
     overflow: hidden;
-    height: 250px;
+    height: 220px;
     padding: 10px;
     display: flex;
     background-color: #c1c1c1;
@@ -80,6 +81,7 @@
     overflow-y: auto;
     position: absolute;
     right: 0;
+    font-weight: 700;
   }
 
   .column__description .status__anime {
@@ -89,10 +91,12 @@
     color: #fff;
     border-radius: 6px;
     font-weight: 400;
-    width: 48%;
+    width: 60%;
+    font-size: 12px;
     margin: 0 2px;
     text-transform: capitalize;
     text-align: center;
+    font-weight: 700;
   }
   .column__description .type__anime {
     background-color: #1283b8;
@@ -100,9 +104,10 @@
     padding: 2px 5px;
     color: #fff;
     border-radius: 6px;
-    font-weight: 400;
-    width: 47%;
+    font-weight: 700;
+    width: 30%;
     margin: 0 2px;
+    font-size: 12px;
     text-align: center;
   }
 
@@ -114,7 +119,7 @@
   .column__image .name__anime {
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 4;
     line-height: 20px;
     font-weight: 700;
     z-index: 1;
@@ -133,6 +138,7 @@
     transition-property: opacity;
     transition-duration: 0.2s;
     transition-timing-function: ease;
+    padding-bottom: 90px !important;
   }
 
   .column__description .description__anime {

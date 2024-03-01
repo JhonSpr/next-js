@@ -7,16 +7,13 @@ import { createContext, useContext, useEffect, useState } from 'react'
 import { auth } from './firebase'
 import { get, getDatabase, ref, set } from 'firebase/database'
 import { calcularRating } from './user/[idUser]/userPage'
-import { data } from 'autoprefixer'
 
 export const contextApp = createContext()
 export const ContextProvider = ({ children }) => {
   const [user, setUser] = useState(null)
-  const [ejecuciones, setEjeciones] = useState(0)
   const [userProfilePhoto, setUserProfilePhoto] = useState(null)
   const [dataUser, setDataUser] = useState(null)
   const { theme } = useTheme()
-  const [datos, setDatoss] = useState(null)
   const [favoritos, setFavoritos] = useState([])
   const [ultimosVistados, setUltimosVisitados] = useState([])
   const [isVisible, setIsVisible] = useState(null)
@@ -56,7 +53,6 @@ export const ContextProvider = ({ children }) => {
       )
 
       if (objetoExistenteIndex === -1) {
-        // Si el anime no está en favoritos, lo agregamos
         await set(userRef, {
           nombre: user?.displayName || 'undefined',
           vistos_reciente: [...vistosRecientes],
@@ -65,11 +61,10 @@ export const ContextProvider = ({ children }) => {
         setMessage('Agregado a favoritos')
         setIsVisible(true)
 
-        const idTimer = setTimeout(() => {
+        setTimeout(() => {
           setIsVisible(false)
         }, 2000)
       } else {
-        // Si el anime ya está en favoritos, lo eliminamos
         favoritos.splice(objetoExistenteIndex, 1)
         await set(userRef, {
           nombre: user?.displayName || 'undefined',
@@ -83,7 +78,6 @@ export const ContextProvider = ({ children }) => {
           setIsVisible(false)
           setRemove(false)
         }, 2000)
-        // setFavoritos(userData.favoritos || [])
       }
       setFirstClicked(false)
     } catch (error) {
@@ -129,7 +123,6 @@ export const ContextProvider = ({ children }) => {
     setDislike,
     setLike,
     rate,
-    setDatoss,
   }
   return (
     <contextApp.Provider value={contextValue}>{children}</contextApp.Provider>

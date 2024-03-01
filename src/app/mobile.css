@@ -1169,7 +1169,7 @@
 
   .episodes__pagination {
     width: 100%;
-    justify-content: start;
+    justify-content: flex-start;
     text-align: start;
     display: flex;
     gap: 7px;

@@ -6,6 +6,7 @@
   font-family: sans-serif;
   user-select: auto;
   font-weight: 700;
+  scroll-behavior: smooth;
 }
 
 .disable {

@@ -1,9 +1,19 @@
 import React from 'react'
 import { años } from './Filters'
+import { IoIosArrowUp } from 'react-icons/io'
 
 const Footer = () => {
+  const scrollToElement = () => {
+    const element = document.getElementById('navbar')
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
   return (
     <footer className='bg-white dark:bg-gray-900'>
+      <button onClick={scrollToElement} className='btn__up'>
+        <IoIosArrowUp />
+      </button>
       <div className='mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8'>
         <div className='md:flex md:justify-between'>
           <div className='mb-6 md:mb-0'>
