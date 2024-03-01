@@ -25,6 +25,9 @@ html.dark {
 .information__page.dark .container__information .btn_comments {
   background-color: #3c3c44 !important;
 }
+.information__page.dark .container__information .proxime__episode {
+  background-color: #3c3c44 !important;
+}
 
 .btn__favorite.dark {
   background-color: #3c3c44 !important;

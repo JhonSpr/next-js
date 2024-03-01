@@ -621,12 +621,20 @@
     }
   }
 
+  .proxime__episode {
+    margin-top: 100px;
+    background-color: #17171a;
+    padding: 7px;
+    text-align: center;
+    border-radius: 7px;
+    font-weight: 400;
+  }
+
   .container__anime
     main
     .container__information
     .info__anime
     .episode__anime__list {
-    margin-top: 100px;
     width: 100%;
     display: flex;
     flex-wrap: wrap;

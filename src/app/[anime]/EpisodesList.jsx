@@ -8,6 +8,7 @@ export default function EpisodesList({ data, name }) {
     setTotalResults(data?.map((e) => e.episodes__overlay)[0]?.length)
   }, [data])
   const episodesPerPage = 12
+  const { proximo } = data[0]
   const [currentPage, setCurrentPage] = useState(1)
   const [startIndex, setStartIndex] = useState(0)
   const [endIndex, setEndIndex] = useState(episodesPerPage)
@@ -23,9 +24,11 @@ export default function EpisodesList({ data, name }) {
     setCurrentPage(page)
   }
   const episodeArray = data?.map((e) => e.episodes__overlay)[0]
-
   return (
     <>
+      <div className={`proxime__episode ${proximo === false ? 'disable' : ''}`}>
+        proximo episodio: {proximo}
+      </div>
       <div className='episode__anime__list'>
         {episodeArray
           ?.map((e, index) => (

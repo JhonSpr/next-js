@@ -551,6 +551,7 @@ export function FetchSingleAnime({ data }) {
                 src={`https://www.youtube.com/embed/${e.trailer}`}></iframe>
             </div>
           </div>
+
           <EpisodesList data={data} name={name?.replace(/ /g, '-')} />
         </div>
         <div className='carousel__container'>
