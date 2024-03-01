@@ -1,6 +1,6 @@
 'use client'
 import EpisodesList from './EpisodesList'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import { contextApp } from '../providers'
 import Comments from '../components/comments'
 import { child, get, getDatabase, ref, set } from 'firebase/database'
@@ -41,8 +41,29 @@ export function FetchSingleAnime({ data }) {
   const [votos, setVotos] = useState(Number) ?? 0
   const [isMobile, setIsMobile] = useState(false)
   const [visitas, setVisitas] = useState(Number)
-  const [settings, setSettings] = useState(false)
+  const [settings, setSettings] = useState(null)
+  const settingsRef = useRef(null)
+  const handleClick = (settingId) => {
+    if (settings === settingId) {
+      setSettings(null)
+    } else {
+      setSettings(settingId)
+    }
+  }
 
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (settingsRef.current && !settingsRef.current.contains(event.target)) {
+        setSettings(null)
+      }
+    }
+
+    document.addEventListener('click', handleOutsideClick)
+
+    return () => {
+      document.removeEventListener('click', handleOutsideClick)
+    }
+  }, [settings])
   useEffect(() => {
     const checkIsMobile = () => {
       setIsMobile(window.innerWidth <= 768) // Puedes ajustar el ancho máximo para considerar como móvil
@@ -458,12 +479,12 @@ export function FetchSingleAnime({ data }) {
             </span>
             <MdKeyboardArrowDown
               className='icon__settings__anime'
-              onClick={() => {
-                setSettings(!settings)
-              }}
+              onClick={() => handleClick(1)}
             />
 
-            <div className={`settings ${settings ? 'show' : ''}`}>
+            <div
+              ref={settingsRef}
+              className={`settings ${settings === 1 ? 'show' : ''}`}>
               <span>
                 <FaCheck /> Marcar como completado
               </span>
