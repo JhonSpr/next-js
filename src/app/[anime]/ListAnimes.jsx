@@ -13,6 +13,7 @@ import useRecomends from '../Hooks/Recomends'
 import moment from 'moment'
 import 'moment-timezone'
 import { FaCheck } from 'react-icons/fa6'
+import useWatchLater from './HooksDB/HookWatchLater'
 
 export const obtenerMensajeFecha = (fechaAgregado) => {
   const fechaActual = moment()
@@ -133,54 +134,53 @@ export function FetchSingleAnime({ data }) {
         const animeRef = ref(db, `animes/${animeId}`)
         const userVotesRef = ref(db, `usersVotes/${userId}/${animeId}`)
         const userVoteSnapshot = await get(userVotesRef)
-        const userVote = userVoteSnapshot.val()
-        const snapshot = await get(child(animeRef, 'likes'))
-        const currentLikes = snapshot.val()
-        if (userVote !== null) {
-          if (userVote.like && !userVote.dislike) {
-            await set(child(animeRef, 'likes'), currentLikes - 1)
-            setMessage('El usuario eliminó su voto.')
-            await set(userVotesRef, { like: false, dislike: false })
+        const userVote = userVoteSnapshot.val() || {}
 
-            setIsVisible(true)
-            setRemove(true)
-            setTimeout(() => {
-              setIsVisible(false)
-            }, 2000)
-          } else if (!userVote.like && !userVote.dislike) {
-            await set(child(animeRef, 'likes'), currentLikes + 1)
-            setIsVisible(true)
-            setRemove(false)
-            setTimeout(() => {
-              setIsVisible(false)
-              setRemove(false)
-            }, 2000)
-            setMessage('El voto fue registrado')
-            await set(userVotesRef, { like: true, dislike: false })
-          } else {
-            // Si ya tiene un voto contrario, muestra un mensaje de alerta
-            setMessage('Ya tienes un voto!')
-            setIsVisible(true)
-            setRemove(true)
-            setTimeout(() => {
-              setIsVisible(false)
-              setRemove(false)
-            }, 2000)
-          }
-        } else {
-          await set(userVotesRef, { like: true, dislike: false })
-          await set(child(animeRef, 'likes'), currentLikes + 1)
+        const likesSnapshot = await get(child(animeRef, 'likes'))
+        let currentLikes = likesSnapshot.val() || 0
+
+        if (userVote.dislike) {
+          setMessage('Ya has dado dislike a este anime.')
           setIsVisible(true)
+          setRemove(false)
           setTimeout(() => {
             setIsVisible(false)
             setRemove(false)
           }, 2000)
-          setMessage('El voto fue registrado')
+        } else if (userVote.like) {
+          currentLikes--
+          await Promise.all([
+            set(child(animeRef, 'likes'), currentLikes),
+            set(userVotesRef, { ...userVote, like: false }),
+          ])
+          setMessage('Like eliminado.')
+          setIsVisible(true)
+          setRemove(false)
+          setTimeout(() => {
+            setIsVisible(false)
+            setRemove(false)
+          }, 2000)
+        } else {
+          currentLikes++
+          await Promise.all([
+            set(child(animeRef, 'likes'), currentLikes),
+            set(userVotesRef, { ...userVote, like: true }),
+          ])
+          setMessage('Like registrado.')
+          setIsVisible(true)
+          setRemove(false)
+          setTimeout(() => {
+            setIsVisible(false)
+            setRemove(false)
+          }, 2000)
         }
         setFirstClicked(false)
       }
     } catch (error) {
       console.error('Error al actualizar los likes del anime:', error)
+      setMessage(
+        'Error al actualizar los likes del anime. Por favor, inténtalo de nuevo más tarde.'
+      )
     }
   }
 
@@ -198,54 +198,53 @@ export function FetchSingleAnime({ data }) {
         const animeRef = ref(db, `animes/${animeId}`)
         const userVotesRef = ref(db, `usersVotes/${userId}/${animeId}`)
         const userVoteSnapshot = await get(userVotesRef)
-        const userVote = userVoteSnapshot.val()
-        const dislikesSnapshot = await get(child(animeRef, 'dislikes'))
-        const currentDislikes = dislikesSnapshot.val()
+        const userVote = userVoteSnapshot.val() || {}
 
-        if (userVote !== null) {
-          if (userVote.dislike && !userVote.like) {
-            await set(child(animeRef, 'dislikes'), currentDislikes - 1)
-            setMessage('El usuario eliminó su voto.')
-            await set(userVotesRef, { like: false, dislike: false })
-            setIsVisible(true)
-            setRemove(true)
-            setTimeout(() => {
-              setIsVisible(false)
-              setRemove(false)
-            }, 2000)
-          } else if (!userVote.dislike && !userVote.like) {
-            await set(child(animeRef, 'dislikes'), currentDislikes + 1)
-            setIsVisible(true)
-            setRemove(false)
-            setTimeout(() => {
-              setIsVisible(false)
-              setRemove(false)
-            }, 2000)
-            setMessage('El voto fue registrado')
-            await set(userVotesRef, { like: false, dislike: true })
-          } else {
-            setMessage('Ya tienes un voto!')
-            setIsVisible(true)
-            setRemove(false)
-            setTimeout(() => {
-              setIsVisible(false)
-              setRemove(false)
-            }, 2000)
-          }
-        } else {
-          await set(userVotesRef, { like: false, dislike: true })
-          await set(child(animeRef, 'dislikes'), currentDislikes + 1)
+        const dislikesSnapshot = await get(child(animeRef, 'dislikes'))
+        let currentDislikes = dislikesSnapshot.val() || 0
+
+        if (userVote.like) {
+          setMessage('Ya has dado like a este anime.')
           setIsVisible(true)
+          setRemove(false)
           setTimeout(() => {
             setIsVisible(false)
             setRemove(false)
           }, 2000)
-          setMessage('El voto fue registrado')
+        } else if (userVote.dislike) {
+          currentDislikes--
+          await Promise.all([
+            set(child(animeRef, 'dislikes'), currentDislikes),
+            set(userVotesRef, { ...userVote, dislike: false }),
+          ])
+          setMessage('Dislike eliminado.')
+          setIsVisible(true)
+          setRemove(false)
+          setTimeout(() => {
+            setIsVisible(false)
+            setRemove(false)
+          }, 2000)
+        } else {
+          currentDislikes++
+          await Promise.all([
+            set(child(animeRef, 'dislikes'), currentDislikes),
+            set(userVotesRef, { ...userVote, dislike: true }),
+          ])
+          setMessage('Dislike registrado.')
+          setIsVisible(true)
+          setRemove(false)
+          setTimeout(() => {
+            setIsVisible(false)
+            setRemove(false)
+          }, 2000)
         }
         setFirstClicked(false)
       }
     } catch (error) {
       console.error('Error al actualizar los dislikes del anime:', error)
+      setMessage(
+        'Error al actualizar los dislikes del anime. Por favor, inténtalo de nuevo más tarde.'
+      )
     }
   }
 
@@ -434,6 +433,15 @@ export function FetchSingleAnime({ data }) {
     fetchVisitas()
   }, [loading])
 
+  const { updateWatchLater } = useWatchLater({
+    user: user,
+    setFirstClicked: setFirstClicked,
+    setIsVisible: setIsVisible,
+    setMessage: setMessage,
+    setRemove: setRemove,
+    setNoLogged: setNoLogged,
+  })
+
   const { uniqueArray } = useRecomends(name, genero1, genero2, year)
   if (loading) {
     return <div></div>
@@ -488,7 +496,7 @@ export function FetchSingleAnime({ data }) {
               <span>
                 <FaCheck /> Marcar como completado
               </span>
-              <span>
+              <span onClick={() => updateWatchLater(id, user?.uid)}>
                 <MdWatchLater /> Marcar pendiente
               </span>
             </div>

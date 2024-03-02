@@ -4,6 +4,10 @@
   flex-wrap: wrap;
   margin-bottom: 20px;
   gap: 6px;
+
+  & > * {
+    user-select: none;
+  }
 }
 
 .filter__form > * {
