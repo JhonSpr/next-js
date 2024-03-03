@@ -7,15 +7,6 @@ import { obtenerMensajeFecha } from '../[anime]/ListAnimes'
 const SideBar = ({ ultimos__episodios, ovas }) => {
   const [op1, setOp1] = useState(true)
   const [op2, setOp2] = useState(false)
-  const [fechas, setFechas] = useState({})
-
-  useEffect(() => {
-    const nuevasFechas = {}
-    ultimos__episodios.recientes?.forEach((e) => {
-      nuevasFechas[e.id] = obtenerMensajeFecha(e?.fechaAgregado)
-    })
-    setFechas(nuevasFechas)
-  }, [ultimos__episodios.recientes])
 
   return (
     <div className='sidebar'>
@@ -43,7 +34,10 @@ const SideBar = ({ ultimos__episodios, ovas }) => {
           {ultimos__episodios.recientes?.map((e, index) => (
             <li key={index}>
               <img src={e.image} alt='' />
-              <a href={`/${e.nombre.replace(/ /g, '-').toLowerCase()}`}>
+              <a
+                href={`/${e.nombre.replace(/ /g, '-').toLowerCase()}/${
+                  e.number
+                }`}>
                 <h2>{e.nombre}</h2>
                 <span>{e.episode}</span>
               </a>

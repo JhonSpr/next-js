@@ -8,14 +8,11 @@ export async function generateMetadata({ params }) {
     info: name,
   })
 
-  const { descripcion } = data.datos[0]
-
   return {
     title: `${anime?.replace(
       /-/g,
       ' '
     )} episiodio ${episode} - sub español - audio latino`,
-    description: `${descripcion}`,
     siteName: 'animesz',
     locale: 'es',
     type: 'website',
@@ -47,7 +44,9 @@ async function page({ params }) {
     info: name,
   })
 
-  const { services } = data.datos[0]
+  // Verifica si datos tiene elementos antes de acceder a datos[0]
+  const firstData = data.datos && data.datos.length > 0 ? data.datos[0] : null
+  const services = firstData ? firstData.services : []
 
   return (
     <div style={{ minHeight: '80dvh' }}>
