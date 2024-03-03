@@ -96,17 +96,18 @@ export default async function Home() {
           </span>
           {MasVotados.datos
             .map((e, index) => (
-              <article key={index} className={`card__midle item${index + 1}`}>
-                <a href={e.name?.replace(/ /g, '-')}>
-                  <div className='visitas__overlay'>
-                    <FaStar color='ffe600' display={'inline-block'} />{' '}
-                    {e.rating}
-                  </div>
-                  <img src={e.banner ?? e.image} alt='' />
-                  <span className='tag'>{index + 1}</span>
-                </a>{' '}
-                <strong className='name'>{e.name}</strong>
-              </article>
+              <div class='card__pupular' key={index}>
+                <div
+                  className='background__image'
+                  style={{ backgroundImage: `url(${e.banner})` }}></div>
+                <div class='title-1'>{e.name}</div>
+                <div class='content'>{e.descripcion}</div>
+                <button class='btn'>Ver Ahora</button>
+                <div class='bar'>
+                  <div class='emptybar'>{e.rating}</div>
+                  <div class='filledbar'></div>
+                </div>
+              </div>
             ))
             .slice(0, 10)}
         </div>

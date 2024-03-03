@@ -11,6 +11,7 @@ import { auth } from '../firebase'
 import Register from './RegisterComponent'
 import { Login } from './LoginComponent'
 import { FaStar } from 'react-icons/fa6'
+import { Loader } from './LoaderSkeleton'
 const hrefs = [
   { label: 'Inicio', route: '/' },
   { label: 'Animes', route: '/directorio' },
@@ -27,38 +28,39 @@ function Navigation() {
   const { theme } = useTheme()
   const { user } = useContext(contextApp)
   const inputRef = useRef(null)
-
   const handleSearch = useDebouncedCallback((e) => {
     setSearch(e.target.value)
-  }, 200)
-
-  useEffect(() => {
     setLoading(true)
 
     setTimeout(() => {
       setLoading(false)
-    }, 1000)
-  }, [search, loading])
+    }, 3000)
+  }, 0)
+
   const handleClick = () => {
     if (inputRef.current) {
       inputRef.current.focus()
     }
   }
 
-  if (search == '') {
+  if (search === '') {
     setSearch('null')
   }
 
   useEffect(() => {
-    fetch(
-      `https://api-rest.up.railway.app/api/v1/animes?name=${search}&page=1&limit=6`
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        setResults(data)
-      })
+    if (!loading) {
+      fetch(
+        `https://api-rest.up.railway.app/api/v1/animes?name=${search}&page=1&limit=6`
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          setResults(data)
+        })
+        .catch((error) => {
+          console.error('Error al buscar animes:', error)
+        })
+    }
   }, [search, loading])
-
   useEffect(() => {
     document.body.classList.remove('light', 'dark')
     document.body.classList.add(theme)
@@ -285,7 +287,7 @@ function Navigation() {
                 className={`container__results ${
                   search === 'null' ? 'disable' : ''
                 }`}>
-                <div className={`results `}>
+                <div className={`results`}>
                   {results?.datos?.map((e, index) => (
                     <div
                       className={`result ${loading ? 'disable' : ''}`}
@@ -311,7 +313,7 @@ function Navigation() {
                     </span>
                   ) : null}
 
-                  {loading ? <span>Cargando...</span> : null}
+                  {loading ? <Loader /> : null}
 
                   {results?.item > 6 ? (
                     <button className={loading ? 'disable' : 'btn__results'}>
