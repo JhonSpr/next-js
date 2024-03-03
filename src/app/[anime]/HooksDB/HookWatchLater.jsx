@@ -60,7 +60,135 @@ const useWatchLater = ({
     }
   }
 
-  return { updateWatchLater }
+  async function updateLikes(animeId, userId) {
+    try {
+      if (!user) {
+        setMessage('Debes iniciar sesión para usar esta función')
+        setNoLogged(true)
+        setTimeout(() => {
+          setNoLogged(false)
+        }, 2000)
+        return
+      } else {
+        const db = getDatabase()
+        const animeRef = ref(db, `animes/${animeId}`)
+        const userVotesRef = ref(db, `usersVotes/${userId}/${animeId}`)
+        const userVoteSnapshot = await get(userVotesRef)
+        const userVote = userVoteSnapshot.val() || {}
+
+        const likesSnapshot = await get(child(animeRef, 'likes'))
+        let currentLikes = likesSnapshot.val() || 0
+
+        if (userVote.dislike) {
+          setMessage('Ya has dado dislike a este anime.')
+          setIsVisible(true)
+          setRemove(false)
+          setTimeout(() => {
+            setIsVisible(false)
+            setRemove(false)
+          }, 2000)
+        } else if (userVote.like) {
+          currentLikes--
+          await Promise.all([
+            set(child(animeRef, 'likes'), currentLikes),
+            set(userVotesRef, { ...userVote, like: false }),
+          ])
+          setMessage('Like eliminado.')
+          setIsVisible(true)
+          setRemove(false)
+          setTimeout(() => {
+            setIsVisible(false)
+            setRemove(false)
+          }, 2000)
+        } else {
+          currentLikes++
+          await Promise.all([
+            set(child(animeRef, 'likes'), currentLikes),
+            set(userVotesRef, { ...userVote, like: true }),
+          ])
+          setMessage('Like registrado.')
+          setIsVisible(true)
+          setRemove(false)
+          setTimeout(() => {
+            setIsVisible(false)
+            setRemove(false)
+          }, 2000)
+        }
+        setFirstClicked(false)
+      }
+    } catch (error) {
+      console.error('Error al actualizar los likes del anime:', error)
+      setMessage(
+        'Error al actualizar los likes del anime. Por favor, inténtalo de nuevo más tarde.'
+      )
+    }
+  }
+
+  async function updateDislikes(animeId, userId) {
+    try {
+      if (!user) {
+        setMessage('Debes iniciar sesión para usar esta función')
+        setNoLogged(true)
+        setTimeout(() => {
+          setNoLogged(false)
+        }, 2000)
+        return
+      } else {
+        const db = getDatabase()
+        const animeRef = ref(db, `animes/${animeId}`)
+        const userVotesRef = ref(db, `usersVotes/${userId}/${animeId}`)
+        const userVoteSnapshot = await get(userVotesRef)
+        const userVote = userVoteSnapshot.val() || {}
+
+        const dislikesSnapshot = await get(child(animeRef, 'dislikes'))
+        let currentDislikes = dislikesSnapshot.val() || 0
+
+        if (userVote.like) {
+          setMessage('Ya has dado like a este anime.')
+          setIsVisible(true)
+          setRemove(false)
+          setTimeout(() => {
+            setIsVisible(false)
+            setRemove(false)
+          }, 2000)
+        } else if (userVote.dislike) {
+          currentDislikes--
+          await Promise.all([
+            set(child(animeRef, 'dislikes'), currentDislikes),
+            set(userVotesRef, { ...userVote, dislike: false }),
+          ])
+          setMessage('Dislike eliminado.')
+          setIsVisible(true)
+          setRemove(false)
+          setTimeout(() => {
+            setIsVisible(false)
+            setRemove(false)
+          }, 2000)
+        } else {
+          currentDislikes++
+          await Promise.all([
+            set(child(animeRef, 'dislikes'), currentDislikes),
+            set(userVotesRef, { ...userVote, dislike: true }),
+          ])
+          setMessage('Dislike registrado.')
+          setIsVisible(true)
+          setRemove(false)
+          setTimeout(() => {
+            setIsVisible(false)
+            setRemove(false)
+          }, 2000)
+        }
+        setFirstClicked(false)
+      }
+    } catch (error) {
+      console.error('Error al actualizar los dislikes del anime:', error)
+      setMessage(
+        'Error al actualizar los dislikes del anime. Por favor, inténtalo de nuevo más tarde.'
+      )
+    }
+  }
+
+  return { updateWatchLater, updateDislikes, updateLikes }
 }
 
 export default useWatchLater

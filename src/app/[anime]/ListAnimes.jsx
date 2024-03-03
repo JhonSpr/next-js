@@ -44,6 +44,10 @@ export function FetchSingleAnime({ data }) {
   const [visitas, setVisitas] = useState(Number)
   const [settings, setSettings] = useState(null)
   const settingsRef = useRef(null)
+  const [isWaiting, setIsWaiting] = useState(null)
+
+  const [votosList, setVotosList] = useState({})
+
   const handleClick = (settingId) => {
     if (settings === settingId) {
       setSettings(null)
@@ -93,7 +97,14 @@ export function FetchSingleAnime({ data }) {
     setLike,
     setDislike,
   } = useContext(contextApp)
-  const [votosList, setVotosList] = useState({})
+  const { updateWatchLater, updateDislikes, updateLikes } = useWatchLater({
+    user: user,
+    setFirstClicked: setFirstClicked,
+    setIsVisible: setIsVisible,
+    setMessage: setMessage,
+    setRemove: setRemove,
+    setNoLogged: setNoLogged,
+  })
   const nameID = id
   useEffect(() => {
     setLoading(true)
@@ -120,134 +131,6 @@ export function FetchSingleAnime({ data }) {
   }, [loading])
   const fecha = obtenerMensajeFecha(fechaAgregado)
 
-  async function updateLikes(animeId, userId) {
-    try {
-      if (!user) {
-        setMessage('Debes iniciar sesión para usar esta función')
-        setNoLogged(true)
-        setTimeout(() => {
-          setNoLogged(false)
-        }, 2000)
-        return
-      } else {
-        const db = getDatabase()
-        const animeRef = ref(db, `animes/${animeId}`)
-        const userVotesRef = ref(db, `usersVotes/${userId}/${animeId}`)
-        const userVoteSnapshot = await get(userVotesRef)
-        const userVote = userVoteSnapshot.val() || {}
-
-        const likesSnapshot = await get(child(animeRef, 'likes'))
-        let currentLikes = likesSnapshot.val() || 0
-
-        if (userVote.dislike) {
-          setMessage('Ya has dado dislike a este anime.')
-          setIsVisible(true)
-          setRemove(false)
-          setTimeout(() => {
-            setIsVisible(false)
-            setRemove(false)
-          }, 2000)
-        } else if (userVote.like) {
-          currentLikes--
-          await Promise.all([
-            set(child(animeRef, 'likes'), currentLikes),
-            set(userVotesRef, { ...userVote, like: false }),
-          ])
-          setMessage('Like eliminado.')
-          setIsVisible(true)
-          setRemove(false)
-          setTimeout(() => {
-            setIsVisible(false)
-            setRemove(false)
-          }, 2000)
-        } else {
-          currentLikes++
-          await Promise.all([
-            set(child(animeRef, 'likes'), currentLikes),
-            set(userVotesRef, { ...userVote, like: true }),
-          ])
-          setMessage('Like registrado.')
-          setIsVisible(true)
-          setRemove(false)
-          setTimeout(() => {
-            setIsVisible(false)
-            setRemove(false)
-          }, 2000)
-        }
-        setFirstClicked(false)
-      }
-    } catch (error) {
-      console.error('Error al actualizar los likes del anime:', error)
-      setMessage(
-        'Error al actualizar los likes del anime. Por favor, inténtalo de nuevo más tarde.'
-      )
-    }
-  }
-
-  async function updateDislikes(animeId, userId) {
-    try {
-      if (!user) {
-        setMessage('Debes iniciar sesión para usar esta función')
-        setNoLogged(true)
-        setTimeout(() => {
-          setNoLogged(false)
-        }, 2000)
-        return
-      } else {
-        const db = getDatabase()
-        const animeRef = ref(db, `animes/${animeId}`)
-        const userVotesRef = ref(db, `usersVotes/${userId}/${animeId}`)
-        const userVoteSnapshot = await get(userVotesRef)
-        const userVote = userVoteSnapshot.val() || {}
-
-        const dislikesSnapshot = await get(child(animeRef, 'dislikes'))
-        let currentDislikes = dislikesSnapshot.val() || 0
-
-        if (userVote.like) {
-          setMessage('Ya has dado like a este anime.')
-          setIsVisible(true)
-          setRemove(false)
-          setTimeout(() => {
-            setIsVisible(false)
-            setRemove(false)
-          }, 2000)
-        } else if (userVote.dislike) {
-          currentDislikes--
-          await Promise.all([
-            set(child(animeRef, 'dislikes'), currentDislikes),
-            set(userVotesRef, { ...userVote, dislike: false }),
-          ])
-          setMessage('Dislike eliminado.')
-          setIsVisible(true)
-          setRemove(false)
-          setTimeout(() => {
-            setIsVisible(false)
-            setRemove(false)
-          }, 2000)
-        } else {
-          currentDislikes++
-          await Promise.all([
-            set(child(animeRef, 'dislikes'), currentDislikes),
-            set(userVotesRef, { ...userVote, dislike: true }),
-          ])
-          setMessage('Dislike registrado.')
-          setIsVisible(true)
-          setRemove(false)
-          setTimeout(() => {
-            setIsVisible(false)
-            setRemove(false)
-          }, 2000)
-        }
-        setFirstClicked(false)
-      }
-    } catch (error) {
-      console.error('Error al actualizar los dislikes del anime:', error)
-      setMessage(
-        'Error al actualizar los dislikes del anime. Por favor, inténtalo de nuevo más tarde.'
-      )
-    }
-  }
-
   const fetchData = async () => {
     try {
       const response = await fetch(
@@ -257,6 +140,7 @@ export function FetchSingleAnime({ data }) {
         throw new Error('Error al recuperar los datos')
       }
       const data = await response.json()
+
       setDatos(data)
       setDislikes(data?.dislikes || 0)
       setLikes(data?.likes || 0)
@@ -303,10 +187,17 @@ export function FetchSingleAnime({ data }) {
         likesDislikes[anime] = { like, dislike }
       }
 
+      const animesEnEspera = {}
+      for (const anime in votesData) {
+        const animeVotes = votesData[anime]
+        const { enEspera } = animeVotes
+        animesEnEspera[anime] = { enEspera }
+      }
+
       const userRef = ref(db, 'users/' + id)
       const snapshot = await get(userRef)
       const userData = snapshot?.val() || {}
-
+      setIsWaiting(animesEnEspera[`${nameID}`])
       setFavoritos(userData.favoritos || [])
       setVotosList(likesDislikes[`${nameID}`]) //
     } catch (error) {
@@ -374,8 +265,8 @@ export function FetchSingleAnime({ data }) {
 
   const handleVisitasSubmit = async () => {
     try {
-      if (!animeId && data?.length) {
-        animeId = data[0].id
+      if (!id && data?.length) {
+        id
       }
 
       if (animeId) {
@@ -385,7 +276,7 @@ export function FetchSingleAnime({ data }) {
         }
 
         const response = await fetch(
-          `https://api-rest.up.railway.app/api/v1/animes/${id}/visitas`,
+          `https://api-rest.up.railway.app/api/v1/animes/${nameID}/visitas`,
           {
             method: 'PUT',
             headers: {
@@ -432,15 +323,6 @@ export function FetchSingleAnime({ data }) {
   useEffect(() => {
     fetchVisitas()
   }, [loading])
-
-  const { updateWatchLater } = useWatchLater({
-    user: user,
-    setFirstClicked: setFirstClicked,
-    setIsVisible: setIsVisible,
-    setMessage: setMessage,
-    setRemove: setRemove,
-    setNoLogged: setNoLogged,
-  })
 
   const { uniqueArray } = useRecomends(name, genero1, genero2, year)
   if (loading) {
@@ -496,8 +378,13 @@ export function FetchSingleAnime({ data }) {
               <span>
                 <FaCheck /> Marcar como completado
               </span>
-              <span onClick={() => updateWatchLater(id, user?.uid)}>
-                <MdWatchLater /> Marcar pendiente
+              <span
+                onClick={() => updateWatchLater(id, user?.uid)}
+                className={isWaiting?.enEspera ? 'active' : ''}>
+                <MdWatchLater
+                  color={isWaiting?.enEspera ? '#03fcd2ea' : 'fff'}
+                />
+                Marcar pendiente
               </span>
             </div>
           </button>

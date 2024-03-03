@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { FaFilter } from 'react-icons/fa6'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { FcClearFilters } from 'react-icons/fc'
@@ -72,31 +72,49 @@ export const FilterMenu = ({
   const [selectedEstados, setSelectedEstados] = useState(queryEstados || [])
   const [selectedSort, setSelectedSort] = useState(querySort || [])
   const [eliminando, setEliminando] = useState(false)
+  const [settings, setSettings] = useState(null)
 
-  const handleShowAños = () => {
-    setShowAños(!showAños)
-    setShowGeneros(false)
-    setShowEstados(false)
-    setShowSort(false)
+  const settingsRef = useRef(null)
+
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (settingsRef.current && !settingsRef.current.contains(event.target)) {
+        setSettings(null)
+      }
+    }
+
+    document.addEventListener('click', handleOutsideClick)
+
+    return () => {
+      document.removeEventListener('click', handleOutsideClick)
+    }
+  }, [settings])
+
+  const handleOpen = (id) => {
+    if (settings === id) {
+      setSettings(null)
+    } else {
+      setSettings(id)
+    }
   }
-  const handleShowGeneros = () => {
-    setShowGeneros(!showGeneros)
-    setShowAños(false)
-    setShowEstados(false)
-    setShowSort(false)
-  }
-  const handleShowEstados = () => {
-    setShowEstados(!showEstados)
-    setShowGeneros(false)
-    setShowAños(false)
-    setShowSort(false)
-  }
-  const handleShowSort = () => {
-    setShowSort(!showSort)
-    setShowEstados(false)
-    setShowGeneros(false)
-    setShowAños(false)
-  }
+  // const handleShowGeneros = () => {
+  //   setShowGeneros(!showGeneros)
+  //   setShowAños(false)
+  //   setShowEstados(false)
+  //   setShowSort(false)
+  // }
+  // const handleShowEstados = () => {
+  //   setShowEstados(!showEstados)
+  //   setShowGeneros(false)
+  //   setShowAños(false)
+  //   setShowSort(false)
+  // }
+  // const handleShowSort = () => {
+  //   setShowSort(!showSort)
+  //   setShowEstados(false)
+  //   setShowGeneros(false)
+  //   setShowAños(false)
+  // }
   const handleCheckboxChange = (e) => {
     const { name, value, checked } = e.target
     if (name === 'años') {
@@ -151,14 +169,16 @@ export const FilterMenu = ({
   return (
     <form className='filter__form'>
       <div className='filter__container'>
-        <span className='filter__button' onClick={handleShowAños}>
+        <span className='filter__button' onClick={() => handleOpen(1)}>
           {selectedAños.length > 1
             ? `años: selecionados ${selectedAños.length}`
             : `años: ${selectedAños}`}
 
           {selectedAños.length == 0 ? 'todos' : ''}
         </span>
-        <div className={showAños ? 'filter__item show' : 'filter__item'}>
+        <div
+          className={settings === 1 ? 'filter__item show' : 'filter__item'}
+          ref={settingsRef}>
           {años?.map((e, index) => (
             <label
               key={index}
@@ -179,7 +199,7 @@ export const FilterMenu = ({
         </div>
       </div>
       <div className='filter__container'>
-        <span className='filter__button' onClick={handleShowGeneros}>
+        <span className='filter__button' onClick={() => handleOpen(2)}>
           generos:{' '}
           {selectedGeneros.length > 1
             ? `selecionados ${selectedGeneros.length}`
@@ -188,7 +208,7 @@ export const FilterMenu = ({
         </span>
         <div
           className={
-            showGeneros ? 'filter__item grond show' : 'filter__item grond'
+            settings === 2 ? 'filter__item grond show' : 'filter__item grond'
           }>
           {generos?.map((e, index) => (
             <label
@@ -213,7 +233,7 @@ export const FilterMenu = ({
         </div>
       </div>{' '}
       <div className='filter__container'>
-        <span className='filter__button' onClick={handleShowEstados}>
+        <span className='filter__button' onClick={() => handleOpen(3)}>
           estados:{' '}
           {selectedEstados.length > 1
             ? `selecionados ${selectedEstados.length}`
@@ -222,7 +242,7 @@ export const FilterMenu = ({
         </span>
         <div
           className={
-            showEstados ? 'filter__item estados show' : 'filter__item'
+            settings === 3 ? 'filter__item estados show' : 'filter__item'
           }>
           {estados?.map((e, index) => (
             <label
@@ -247,14 +267,17 @@ export const FilterMenu = ({
         </div>
       </div>
       <div className='filter__container'>
-        <span className='filter__button' onClick={handleShowSort}>
+        <span className='filter__button' onClick={() => handleOpen(4)}>
           orden:{' '}
           {selectedSort.length > 1
             ? `selecionados ${selectedSort.length}`
             : `${selectedSort}`}
           {selectedSort.length == 0 ? 'Por defecto' : ''}
         </span>
-        <div className={showSort ? 'filter__item Sort show' : 'filter__item'}>
+        <div
+          className={
+            settings === 4 ? 'filter__item Sort show' : 'filter__item'
+          }>
           {sortBy?.map((e, index) => (
             <label
               key={index}

@@ -1,9 +1,9 @@
-import { FaCirclePlay } from 'react-icons/fa6'
+import { FaCirclePlay, FaCrown, FaStar } from 'react-icons/fa6'
 import { Request_Animes } from './FetchingData/request_animes'
-import Carousel, { CarouselSoloItem } from './components/Carousel'
+import { CarouselSoloItem } from './components/Carousel'
 import SideBar, { SideBar__2 } from './components/SideBar'
 
-export async function generateMetadata({ params }) {
+export async function generateMetadata() {
   {
     return {
       title: 'Animesz',
@@ -43,7 +43,7 @@ export default async function Home() {
   })
   const ovas = await Request_Animes({ page: 1, ova: true })
   const MasVisitas = await Request_Animes({ page: 1, visitas: 'masVisitas' })
-  console.log(recientAgregados)
+  const MasVotados = await Request_Animes({ page: 1, rate: 'mayor' })
   return (
     <main>
       <div className='container__ section'>
@@ -83,11 +83,34 @@ export default async function Home() {
         </section>
         <SideBar ultimos__episodios={ultimos__episodios} ovas={ovas} />
       </div>
+      <div className='section__midle main'>
+        <div>
+          <span className='title' style={{ color: '#fff' }}>
+            <FaStar color='ffe600' display={'inline-block'} /> CON MAS
+            CALIFICACIÓN
+          </span>
+          {MasVotados.datos
+            .map((e, index) => (
+              <article key={index} className={`card__midle item${index + 1}`}>
+                <a href={e.name?.replace(/ /g, '-')}>
+                  <div className='visitas__overlay'>
+                    <FaStar color='ffe600' display={'inline-block'} />{' '}
+                    {e.rating}
+                  </div>
+                  <img src={e.banner ?? e.image} alt='' />
+                  <span className='tag'>{index + 1}</span>
+                </a>{' '}
+                <strong className='name'>{e.name}</strong>
+              </article>
+            ))
+            .slice(0, 10)}
+        </div>
+      </div>
 
       <div className='section__midle'>
         <div>
           <span className='title' style={{ color: '#fff' }}>
-            TOP MAS POPULARES
+            <FaCrown /> TOP MAS POPULARES
           </span>
           {MasVisitas.datos
             .map((e, index) => (

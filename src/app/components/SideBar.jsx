@@ -48,7 +48,6 @@ const SideBar = ({ ultimos__episodios, ovas }) => {
               '>
                 <h2>{e.nombre}</h2>
                 <span>{e.episode}</span>
-                <span className='tag'>{fechas[e.id]}</span>
               </a>
             </li>
           ))}

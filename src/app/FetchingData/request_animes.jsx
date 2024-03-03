@@ -64,6 +64,7 @@ export const Request_Animes = ({
   }
 
   if (rate) {
+    url += `rating=${rate}&`
   }
 
   if (genero && genero.length > 0) {

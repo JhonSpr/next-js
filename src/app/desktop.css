@@ -4,11 +4,18 @@
     padding: 60px;
     padding-top: 0;
     height: fit-content;
+
+    &.main {
+      & div {
+        margin-bottom: 0;
+      }
+    }
   }
 
   .section__midle div {
     display: flex;
-    margin: 10px auto;
+    margin-top: 0;
+    margin-inline: auto;
     width: 75%;
     flex-wrap: wrap;
     gap: 10px;
@@ -332,6 +339,7 @@
     &.show {
       opacity: 1;
       z-index: 2;
+      animation: scaleFilter 0.2s ease-in-out;
     }
 
     & > label {
@@ -505,6 +513,11 @@
       }
       & svg {
         display: inline-block;
+        margin-right: 5px;
+      }
+
+      &.active {
+        color: #1283b8;
       }
     }
   }
@@ -1038,7 +1051,7 @@
   .title {
     padding-top: 30px;
     margin-bottom: 10px;
-    display: block;
+    display: flex;
     width: 100%;
     position: relative;
     font-size: 20px;
@@ -1050,6 +1063,10 @@
       height: 30px;
       margin-right: 10px;
       background-color: #1283b8;
+    }
+    & svg {
+      margin-top: 5px;
+      margin-right: 10px;
     }
   }
 
@@ -1410,6 +1427,14 @@
       position: fixed;
       z-index: 4;
       border-radius: 7px;
+    }
+  }
+  @keyframes scaleFilter {
+    0% {
+      transform: scale(98%);
+    }
+    100% {
+      transform: scale(100%);
     }
   }
   .container__form__page__register .form {
