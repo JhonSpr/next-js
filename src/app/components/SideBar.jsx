@@ -43,9 +43,7 @@ const SideBar = ({ ultimos__episodios, ovas }) => {
           {ultimos__episodios.recientes?.map((e, index) => (
             <li key={index}>
               <img src={e.image} alt='' />
-              <a
-                href='
-              '>
+              <a href={`/${e.nombre.replace(/ /g, '-').toLowerCase()}`}>
                 <h2>{e.nombre}</h2>
                 <span>{e.episode}</span>
               </a>
