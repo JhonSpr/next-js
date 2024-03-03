@@ -1,17 +1,9 @@
 @media only screen and (min-width: 1250px) {
   .section__midle {
     background-color: rgb(17, 24, 39);
-    padding: 60px;
+    padding: 100px;
     padding-top: 0;
     height: fit-content;
-    justify-content: center;
-    text-align: center;
-
-    &.main {
-      & div {
-        margin-bottom: 0;
-      }
-    }
   }
 
   .section__midle div {
@@ -41,13 +33,11 @@
     }
   }
   .card__pupular {
-    display: flex;
+    display: block;
     height: 250px;
     flex-basis: 50%;
     background-color: #2b223f;
     border-radius: 10px;
-    box-shadow: -1rem 0 3rem #00000044;
-    margin-left: -80px;
     transition: 0.4s ease-out;
     position: relative;
     overflow: hidden;
