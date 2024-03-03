@@ -2,6 +2,8 @@ import { FaCirclePlay, FaCrown, FaStar } from 'react-icons/fa6'
 import { Request_Animes } from './FetchingData/request_animes'
 import { CarouselSoloItem } from './components/Carousel'
 import SideBar, { SideBar__2 } from './components/SideBar'
+import { BsBookmarkStarFill } from 'react-icons/bs'
+import { FcRating } from 'react-icons/fc'
 
 export async function generateMetadata() {
   {
@@ -53,7 +55,10 @@ export default async function Home() {
             itemsShow={1}
             solo={true}
           />
-          <span className='title'>ovas agregados</span>
+          <span className='title'>
+            <BsBookmarkStarFill />
+            ovas agregados
+          </span>
           <section className='recientes'>
             {ovas.datos
               .map((e, index) => (
@@ -86,8 +91,8 @@ export default async function Home() {
       <div className='section__midle main'>
         <div>
           <span className='title' style={{ color: '#fff' }}>
-            <FaStar color='ffe600' display={'inline-block'} /> CON MAS
-            CALIFICACIÓN
+            <FcRating />
+            CON MAS CALIFICACIÓN
           </span>
           {MasVotados.datos
             .map((e, index) => (
@@ -128,7 +133,10 @@ export default async function Home() {
       </div>
       <div className='container__ section'>
         <section>
-          <span className='title'>Recien Agregados</span>
+          <span className='title'>
+            <BsBookmarkStarFill />
+            Recien Agregados
+          </span>
           <section className='recientes'>
             {recientAgregados.datos
               .map((e, index) => (
