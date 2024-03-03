@@ -1,43 +1,46 @@
 html.dark {
   & body {
-    background-color: #313544 !important;
+    background-color: #232735 !important;
+    --background-custom: #3c3c44;
+    --color-custom: #fff;
   }
 
   & * {
     color: #fff;
+    font-weight: 600;
   }
 }
 
 .information__page.dark {
-  background-color: #111 !important;
+  background-color: #232735 !important;
 }
 
 .information__page.dark .title__anime {
-  color: #458c9e !important;
+  color: var(--color-custom) !important;
 }
 .information__page.dark p {
   color: #c1c1c1;
 }
 
 .information__page.dark .wrapp__anime span {
-  color: #458c9e !important;
+  color: var(--color-custom) !important;
 }
 .information__page.dark .wrapp__anime strong {
   color: #c1c1c1 !important;
 }
 
 .information__page.dark .container__information .btn_comments {
-  background-color: #3c3c44 !important;
+  background-color: var(--background-custom) !important;
 }
 .information__page.dark .container__information .proxime__episode {
-  background-color: #3c3c44 !important;
+  background-color: var(--background-custom) !important;
 }
 
 .btn__favorite.dark {
-  background-color: #3c3c44 !important;
+  background-color: var(--background-custom) !important;
 
   & .settings {
-    background-color: #3c3c44 !important;
+    background-color: var(--background-custom) !important;
   }
 }
 
@@ -69,7 +72,8 @@ html.dark {
 }
 
 .information__page.dark .episodes__pagination button {
-  background-color: #1283b8 !important;
+  background-color: var(--background-custom) !important;
+  color: var(--color-custom) !important;
 }
 
 #disqus_thread.dark {
@@ -92,7 +96,7 @@ html.dark {
   color-scheme: dark !important;
 
   & span {
-    color: #1283b8 !important;
+    color: var(--color-custom) !important;
     color-scheme: dark !important;
   }
 }
@@ -103,20 +107,20 @@ html.dark {
 }
 
 .btn__voto.dark {
-  background-color: #3c3c44 !important;
+  background-color: var(--background-custom) !important;
   color: #111;
 }
 
 .controls.dark a {
-  background-color: #3c3c44 !important;
+  background-color: var(--background-custom) !important;
 }
 
 .btn_comments.dark {
-  background-color: #3c3c44 !important;
+  background-color: var(--background-custom) !important;
 }
 
 .card__anime.dark {
-  background-color: #3c3c44 !important;
+  background-color: var(--background-custom) !important;
 }
 
 .card__anime.dark .name__anime {

@@ -14,6 +14,7 @@ import moment from 'moment'
 import 'moment-timezone'
 import { FaCheck } from 'react-icons/fa6'
 import useWatchLater from './HooksDB/HookWatchLater'
+import { LoaderPage } from '../components/LoaderSkeleton'
 
 export const obtenerMensajeFecha = (fechaAgregado) => {
   const fechaActual = moment()
@@ -326,7 +327,20 @@ export function FetchSingleAnime({ data }) {
 
   const { uniqueArray } = useRecomends(name, genero1, genero2, year)
   if (loading) {
-    return <div></div>
+    return (
+      <div
+        style={{
+          minHeight: '70dvh',
+          width: '100%',
+          alignContent: 'center',
+          alignItems: 'center',
+          display: 'grid',
+          placeItems: 'center',
+          placeContent: 'center',
+        }}>
+        <LoaderPage />
+      </div>
+    )
   }
 
   return data?.map((e, index) => (
@@ -357,13 +371,13 @@ export function FetchSingleAnime({ data }) {
         </div>
         <div className='setting__anime'>
           <button
-            className={`btn__favorite ${theme === 'dark' ? 'dark' : ''} ${
-              favoritos.some((objeto) => objeto?.name === e.name)
+            className={`btn__favorite ${theme == 'dark' ? 'dark' : ''} ${
+              favoritos.some((objeto) => objeto?.name.toLowerCase() == e.name)
                 ? 'active'
                 : ''
             }`}>
             <span onClick={() => agregarFavoritos(e.id, e.image)}>
-              {favoritos.some((objeto) => objeto?.name === e.name)
+              {favoritos.some((objeto) => objeto?.name.toLowerCase() == e.name)
                 ? 'eliminar de lista'
                 : 'añadir a lista'}
             </span>

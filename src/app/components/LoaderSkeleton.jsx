@@ -7,3 +7,7 @@ export default function LoaderSkeleton() {
 export function Loader() {
   return <div className='loader'></div>
 }
+
+export function LoaderPage() {
+  return <div className='loaderPage'></div>
+}
