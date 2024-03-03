@@ -102,9 +102,12 @@ export default async function Home() {
                   style={{ backgroundImage: `url(${e.banner})` }}></div>
                 <div class='title-1'>{e.name}</div>
                 <div class='content'>{e.descripcion}</div>
+                <div class='rating'>
+                  <FaStar />
+                  {e.rating}
+                </div>
                 <button class='btn'>Ver Ahora</button>
                 <div class='bar'>
-                  <div class='emptybar'>{e.rating}</div>
                   <div class='filledbar'></div>
                 </div>
               </div>

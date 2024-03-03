@@ -37,9 +37,13 @@
     }
   }
   .card__pupular {
-    display: block;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
     height: 250px;
     flex-basis: 50%;
+    flex-direction: column;
     background-color: #2b223f;
     border-radius: 10px;
     transition: 0.4s ease-out;
@@ -121,10 +125,18 @@
     width: 100%;
   }
 
-  .emptybar {
-    background-color: #201c29;
-    width: 100%;
-    height: 100%;
+  .card__pupular .rating {
+    width: fit-content !important;
+    position: absolute;
+    top: 10px;
+    left: 50px;
+    z-index: 2;
+    display: flex;
+    gap: 3px;
+
+    & svg {
+      margin-top: 2px;
+    }
   }
 
   .filledbar {
