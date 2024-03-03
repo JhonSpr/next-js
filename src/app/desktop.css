@@ -689,6 +689,7 @@
     transition: all 0.2s ease-out;
     margin-inline: auto;
     color: #fff;
+    background-color: #17171a;
     & span {
       text-wrap: nowrap;
       padding: 0 7px;
