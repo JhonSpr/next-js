@@ -88,7 +88,7 @@
     font-weight: 800;
     position: absolute;
     left: 20px;
-    top: 15px;
+    top: -20px;
     z-index: 2;
   }
 
