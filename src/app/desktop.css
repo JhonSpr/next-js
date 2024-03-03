@@ -1,9 +1,13 @@
 @media only screen and (min-width: 1250px) {
   .section__midle {
     background-color: rgb(17, 24, 39);
-    padding: 100px;
+    padding: 60px;
     padding-top: 0;
     height: fit-content;
+
+    &.main {
+      margin-inline: auto;
+    }
   }
 
   .section__midle div {
