@@ -3,6 +3,7 @@ html.dark {
     background-color: #232735 !important;
     --background-custom: #3c3c44;
     --color-custom: #fff;
+    --darkModeBackground: #17171a;
   }
 
   & * {
@@ -120,7 +121,7 @@ html.dark {
 }
 
 .card__anime.dark {
-  background-color: var(--background-custom) !important;
+  background-color: var(--darkModeBackground) !important;
 }
 
 .card__anime.dark .name__anime {

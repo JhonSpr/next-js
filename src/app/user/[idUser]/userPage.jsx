@@ -144,12 +144,12 @@ const UserPage = () => {
     //     <div>
     //       <div className='file-input-container'>
     //         <label
-    //           class='block mb-2 text-sm font-medium text-gray-900 dark:text-white'
+    //           className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'
     //           for='file_input'>
     //           Upload file
     //         </label>
     //         <input
-    //           class='block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400'
+    //           className='block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400'
     //           aria-describedby='file_input_help'
     //           id='file_input'
     //           type='file'
@@ -158,7 +158,7 @@ const UserPage = () => {
     //           style={{ cursor: 'pointer' }}
     //         />
     //         <p
-    //           class='mt-1 text-sm text-gray-500 dark:text-gray-300'
+    //           className='mt-1 text-sm text-gray-500 dark:text-gray-300'
     //           id='file_input_help'>
     //           SVG, PNG, JPG or GIF (MAX. 800x400px).
     //         </p>
@@ -192,10 +192,10 @@ const UserPage = () => {
         data-drawer-toggle='sidebar-multi-level-sidebar'
         aria-controls='sidebar-multi-level-sidebar'
         type='button'
-        class='inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600'>
-        <span class='sr-only'>Open sidebar</span>
+        className='inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600'>
+        <span className='sr-only'>Open sidebar</span>
         <svg
-          class='w-6 h-6'
+          className='w-6 h-6'
           aria-hidden='true'
           fill='currentColor'
           viewBox='0 0 20 20'
@@ -209,32 +209,32 @@ const UserPage = () => {
 
       <aside
         id='sidebar-multi-level-sidebar'
-        class='fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0'
+        className='fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0'
         aria-label='Sidebar'>
-        <div class='h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800'>
-          <ul class='space-y-2 font-medium'>
+        <div className='h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800'>
+          <ul className='space-y-2 font-medium'>
             <li>
               <a
                 href='#'
-                class='flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group'>
+                className='flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group'>
                 <FaUserCog />
 
-                <span class='ms-3'>Panel de usuario</span>
+                <span className='ms-3'>Panel de usuario</span>
               </a>
             </li>
             <li>
               <button
                 type='button'
-                class='flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700'
+                className='flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700'
                 aria-controls='dropdown-example'
                 data-collapse-toggle='dropdown-example'>
                 <MdOutlineSettings />
 
-                <span class='flex-1 ms-3 text-left rtl:text-right whitespace-nowrap'>
+                <span className='flex-1 ms-3 text-left rtl:text-right whitespace-nowrap'>
                   Opciones de usuario
                 </span>
                 <svg
-                  class='w-3 h-3'
+                  className='w-3 h-3'
                   aria-hidden='true'
                   xmlns='http://www.w3.org/2000/svg'
                   fill='none'
@@ -248,7 +248,7 @@ const UserPage = () => {
                   />
                 </svg>
               </button>
-              <ul id='dropdown-example' class='hidden py-2 space-y-2'>
+              <ul id='dropdown-example' className='hidden py-2 space-y-2'>
                 <li>
                   <button
                     onClick={() => (
@@ -256,7 +256,7 @@ const UserPage = () => {
                       setAnimesPending(false),
                       setultimosVistadosT(false)
                     )}
-                    class={`flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 ${
+                    className={`flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 ${
                       MiList && 'bg-gray-700 text-white'
                     }`}>
                     Mi lista de Favoritos
@@ -265,7 +265,7 @@ const UserPage = () => {
                 <li>
                   <a
                     href='#'
-                    class='flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700'>
+                    className='flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700'>
                     Episodios en espera
                   </a>
                 </li>
@@ -276,7 +276,7 @@ const UserPage = () => {
                       setMilist(false),
                       setultimosVistadosT(false)
                     )}
-                    class={`flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 ${
+                    className={`flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 ${
                       AnimesPending && 'bg-gray-700 text-white'
                     }`}>
                     Animes Para ver luego
@@ -289,7 +289,7 @@ const UserPage = () => {
                       setAnimesPending(false)
                       setMilist(false)
                     }}
-                    class={`flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700
+                    className={`flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700
                     ${ultimosVistadosT && 'bg-gray-700 text-white'}`}>
                     Ultimos episodios visitados
                   </button>
@@ -299,19 +299,19 @@ const UserPage = () => {
             <li>
               <a
                 href='#'
-                class='flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group'>
+                className='flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group'>
                 <svg
-                  class='flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white'
+                  className='flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white'
                   aria-hidden='true'
                   xmlns='http://www.w3.org/2000/svg'
                   fill='currentColor'
                   viewBox='0 0 18 18'>
                   <path d='M6.143 0H1.857A1.857 1.857 0 0 0 0 1.857v4.286C0 7.169.831 8 1.857 8h4.286A1.857 1.857 0 0 0 8 6.143V1.857A1.857 1.857 0 0 0 6.143 0Zm10 0h-4.286A1.857 1.857 0 0 0 10 1.857v4.286C10 7.169 10.831 8 11.857 8h4.286A1.857 1.857 0 0 0 18 6.143V1.857A1.857 1.857 0 0 0 16.143 0Zm-10 10H1.857A1.857 1.857 0 0 0 0 11.857v4.286C0 17.169.831 18 1.857 18h4.286A1.857 1.857 0 0 0 8 16.143v-4.286A1.857 1.857 0 0 0 6.143 10Zm10 0h-4.286A1.857 1.857 0 0 0 10 11.857v4.286c0 1.026.831 1.857 1.857 1.857h4.286A1.857 1.857 0 0 0 18 16.143v-4.286A1.857 1.857 0 0 0 16.143 10Z' />
                 </svg>
-                <span class='flex-1 ms-3 whitespace-nowrap'>
+                <span className='flex-1 ms-3 whitespace-nowrap'>
                   Proximamente ...
                 </span>
-                {/* <span class='inline-flex items-center justify-center px-2 ms-3 text-sm font-medium text-gray-800 bg-gray-100 rounded-full dark:bg-gray-700 dark:text-gray-300'>
+                {/* <span className='inline-flex items-center justify-center px-2 ms-3 text-sm font-medium text-gray-800 bg-gray-100 rounded-full dark:bg-gray-700 dark:text-gray-300'>
                   Pro
                 </span> */}
               </a>
@@ -319,25 +319,27 @@ const UserPage = () => {
             <li>
               <button
                 onClick={logout}
-                class='flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group'>
+                className='flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group'>
                 <CiLogout />
 
-                <span class='flex-1 ms-3 whitespace-nowrap'>Cerrar Sesión</span>
+                <span className='flex-1 ms-3 whitespace-nowrap'>
+                  Cerrar Sesión
+                </span>
               </button>
             </li>
           </ul>
         </div>
       </aside>
 
-      <div class='p-4 sm:ml-64'>
+      <div className='p-4 sm:ml-64'>
         <div
-          class={`     
+          className={`     
         p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 
         `}>
           {MiList && (
             <div
               style={{ minHeight: '80dvh' }}
-              class={`grid gap-4 mb-4 ${
+              className={`grid gap-4 mb-4 ${
                 esDispositivoMovil ? 'grid-cols-2' : 'grid-cols-7'
               }`}>
               {favoritos?.map((e, index) => (
@@ -352,7 +354,7 @@ const UserPage = () => {
           {AnimesPending && (
             <div
               style={{ minHeight: '80dvh' }}
-              class={`grid gap-4 mb-4 ${
+              className={`grid gap-4 mb-4 ${
                 esDispositivoMovil ? 'grid-cols-2' : 'grid-cols-7'
               }`}>
               <img
@@ -380,7 +382,7 @@ const UserPage = () => {
           {ultimosVistadosT && (
             <div
               style={{ minHeight: '80dvh' }}
-              class={`grid gap-5 mb-4 ${
+              className={`grid gap-5 mb-4 ${
                 esDispositivoMovil ? 'grid-cols-2' : 'grid-cols-7'
               }`}>
               {ultimosVistados?.map((e, index) => (

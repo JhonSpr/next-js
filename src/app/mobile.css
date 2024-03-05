@@ -781,7 +781,7 @@
     gap: 5px;
 
     &.ova {
-      height: 300px !important;
+      height: 230px !important;
       overflow: hidden;
       flex-direction: column;
       & .container__image__card {
@@ -789,12 +789,145 @@
       }
       & img {
         height: 150px !important;
+        object-position: center;
       }
 
       & .ds {
         position: relative;
       }
     }
+  }
+
+  .section__popular {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100%, 180px));
+    gap: 10px;
+    width: 100%;
+    padding: 12px;
+    height: max-content;
+    margin: 0 !important;
+    background-color: rgb(17, 24, 39);
+  }
+
+  .card__pupular {
+    height: 300px;
+    display: block;
+    position: relative;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: #2b223f;
+    border-radius: 10px;
+    padding: 20px;
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  .card__pupular .background__image {
+    position: relative;
+    width: 100%;
+    height: 50%;
+    border-radius: 7px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    filter: brightness(70%);
+  }
+
+  .title-1 {
+    color: #ffffff;
+    font-size: 28px;
+    font-weight: 700;
+    position: relative;
+    text-align: center;
+    overflow: hidden;
+    z-index: 2;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    width: 100%;
+    display: block;
+    text-overflow: ellipsis;
+    text-wrap: nowrap;
+  }
+  .btn {
+    position: absolute;
+    top: 30px;
+    right: 20px;
+    margin: 0 20px;
+    width: 120px;
+    height: 32px;
+    border-radius: 8px;
+    z-index: 2;
+    border: none;
+    background-color: #1283b8;
+    color: #fff;
+    transition: 0.4s ease-out;
+  }
+
+  .btn:hover {
+    transition: 0.4s ease-out;
+    background-color: #092da1;
+    color: #ffffff;
+    box-shadow: 0px 0px 20px rgba(13, 159, 204, 0.5),
+      0px 5px 5px -1px rgba(21, 105, 201, 0.25),
+      inset 4px 4px 8px rgba(26, 156, 216, 0.5),
+      inset -4px -4px 8px rgba(9, 120, 223, 0.35);
+  }
+
+  .bar {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    height: 5px;
+    width: 100%;
+  }
+
+  .card__pupular .rating {
+    width: fit-content !important;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 2;
+    display: flex;
+    gap: 3px;
+
+    & svg {
+      margin-top: 2px;
+    }
+  }
+
+  .filledbar {
+    position: absolute;
+    top: 0px;
+    z-index: 3;
+    width: 0px;
+    height: 100%;
+    background: #d059ff;
+    background: linear-gradient(90deg, #6831cfab, #a777ff 100%);
+    transition: 0.6s ease-out;
+  }
+
+  .card__pupular:hover .filledbar {
+    width: 100%;
+    transition: 0.4s ease-out;
+  }
+
+  .content {
+    position: relative;
+    top: 25px;
+    color: #eae0fd;
+    height: 80px;
+    overflow: hidden;
+    overflow-y: auto;
+    font-size: 0.7rem;
+    z-index: 2;
+  }
+
+  .stroke {
+    stroke: white;
+    stroke-dasharray: 360;
+    stroke-dashoffset: 360;
+    transition: 0.6s ease-out;
   }
 
   .recientes .anime__card .anime__name {
@@ -832,11 +965,16 @@
   .title {
     padding-top: 30px;
     margin-bottom: 10px;
-    display: block;
+    display: flex;
     width: 100%;
     position: relative;
     font-size: 20px;
     text-transform: uppercase;
+
+    & svg {
+      margin-top: 6px;
+      margin-right: 5px;
+    }
     &::before {
       content: '';
       display: inline-block;

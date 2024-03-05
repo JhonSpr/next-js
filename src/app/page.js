@@ -88,7 +88,7 @@ export default async function Home() {
         </section>
         <SideBar ultimos__episodios={ultimos__episodios} ovas={ovas} />
       </div>
-      <div className='section__midle main'>
+      <section className='section__popular'>
         <div>
           <span className='title' style={{ color: '#fff' }}>
             <FcRating />
@@ -96,25 +96,25 @@ export default async function Home() {
           </span>
           {MasVotados.datos
             .map((e, index) => (
-              <div class='card__pupular' key={index}>
+              <div className='card__pupular' key={index}>
                 <div
                   className='background__image'
                   style={{ backgroundImage: `url(${e.banner})` }}></div>
-                <div class='title-1'>{e.name}</div>
-                <div class='content'>{e.descripcion}</div>
-                <div class='rating'>
+                <div className='title-1'>{e.name}</div>
+                <div className='content'>{e.descripcion}</div>
+                <div className='rating'>
                   <FaStar />
                   {e.rating}
                 </div>
-                <button class='btn'>Ver Ahora</button>
-                <div class='bar'>
-                  <div class='filledbar'></div>
+                <button className='btn'>Ver Ahora</button>
+                <div className='bar'>
+                  <div className='filledbar'></div>
                 </div>
               </div>
             ))
             .slice(0, 10)}
         </div>
-      </div>
+      </section>
 
       <div className='section__midle'>
         <div>
