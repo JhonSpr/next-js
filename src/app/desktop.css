@@ -565,6 +565,33 @@
     }
   }
 
+  .user__panel {
+    width: 75%;
+    margin: 20px auto;
+    background-color: rgb(17, 24, 39);
+    padding: 50px;
+    color: #fff;
+    text-align: center;
+    border-radius: 10px;
+    outline: 4px solid #1283b8;
+    box-shadow: 3px 3px 120px 10px #1283b8;
+  }
+  .user__panel img {
+    height: 150px;
+    margin-inline: auto;
+    border-radius: 10px;
+  }
+
+  .user__panel span {
+    font-weight: 500;
+    color: #c1c1c1;
+    text-transform: lowercase;
+  }
+
+  .user__panel p span {
+    color: #fff;
+    font-weight: 700;
+  }
   .btn__up {
     position: absolute;
     top: -20px;

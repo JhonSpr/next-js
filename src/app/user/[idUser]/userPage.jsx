@@ -3,7 +3,7 @@ import { contextApp } from '@/app/providers'
 import { getAuth, signOut, updateProfile } from 'firebase/auth'
 import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage'
 import { useRouter } from 'next/navigation'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import { useCookies } from 'react-cookie'
 import { MdOutlineSettings } from 'react-icons/md'
 import { FaUserCog } from 'react-icons/fa'
@@ -22,12 +22,12 @@ const UserPage = () => {
     ultimosVistados,
   } = useContext(contextApp)
 
-  const [MiList, setMilist] = useState(true)
-  const [AnimesPending, setAnimesPending] = useState(false)
-  const [ultimosVistadosT, setultimosVistadosT] = useState(false)
   const router = useRouter()
   const [newPhoto, setNewPhoto] = useState(null)
   const [selectedFile, setSelectedFile] = useState(null)
+  const [settings, setSettings] = useState(4)
+
+  const settingsRef = useRef(1)
 
   const handleFileChange = (event) => {
     const file = event.target.files[0]
@@ -35,21 +35,10 @@ const UserPage = () => {
     setNewPhoto(file)
   }
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setIsLoading(false)
-  //     setIsLoading2(false)
-  //   }, 2000)
-  // }, [])
-
   const handleUploadPhoto = async () => {
     if (!newPhoto) {
-      // setMessage
       alert('Selecciona una imagen antes de subirla.')
-      // setActive(true)
-      // setTimeout(() => {
-      //   setActive(false)
-      // }, 2000)
+
       return
     }
 
@@ -65,17 +54,8 @@ const UserPage = () => {
       await updateProfile(auth.currentUser, { photoURL: photoUrl })
       updateUserProfilePhoto(photoUrl)
       setNewPhoto(null)
-      // setMessage('avatar actualizado')
-      // setActive(true)
-      // setTimeout(() => {
-      //   setActive(false)
-      // }, 2000)
     } catch (error) {
       console.log(error.message || 'Hubo un error al procesar la solicitud')
-      // setActive(true)
-      // setTimeout(() => {
-      //   setActive(false)
-      // }, 2000)
     }
 
     setSelectedFile(null)
@@ -84,13 +64,7 @@ const UserPage = () => {
     try {
       const auth = getAuth()
       await sendEmailVerification(auth.currentUser)
-    } catch (error) {
-      // setMessage(error.message || 'Hubo un error al procesar la solicitud')
-      // setActive(true)
-      // setTimeout(() => {
-      //   setActive(false)
-      // }, 2000)
-    }
+    } catch (error) {}
   }
   const photoURL =
     dataUser?.photoURL || 'https://i.postimg.cc/4xtHm8nz/images.jpg'
@@ -98,11 +72,7 @@ const UserPage = () => {
   const logout = async () => {
     try {
       await signOut(auth)
-      // Usa la función para quitar todas las cookies
-      // removeCookie(`token`)
-      // removeCookie(`username`)
-      // removeCookie(`like${animeName}`)
-      // removeCookie(`dislike${animeName}`)
+
       router.push('/')
     } catch (error) {
       console.error('Error al cerrar sesión:', error)
@@ -126,6 +96,14 @@ const UserPage = () => {
     // Limpiar el event listener en el cleanup de useEffect
     return () => window.removeEventListener('resize', handleResize)
   }, [])
+
+  const handleOpen = (id) => {
+    if (settings === id) {
+      setSettings(4)
+    } else {
+      setSettings(id)
+    }
+  }
   return (
     // <div className='container__user__page'>
     //   <title>perfil de usuario</title>
@@ -201,8 +179,8 @@ const UserPage = () => {
           viewBox='0 0 20 20'
           xmlns='http://www.w3.org/2000/svg'>
           <path
-            clip-rule='evenodd'
-            fill-rule='evenodd'
+            clipRule='evenodd'
+            fillRule='evenodd'
             d='M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z'></path>
         </svg>
       </button>
@@ -214,18 +192,18 @@ const UserPage = () => {
         <div className='h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800'>
           <ul className='space-y-2 font-medium'>
             <li>
-              <a
-                href='#'
-                className='flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group'>
-                <FaUserCog />
-
-                <span className='ms-3'>Panel de usuario</span>
-              </a>
+              <button
+                onClick={() => handleOpen(4)}
+                className={`flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group dark:text-white dark:hover:bg-gray-700 ${
+                  settings === 4 && 'bg-gray-700 text-white'
+                }`}>
+                Panel de usuario
+              </button>
             </li>
             <li>
               <button
                 type='button'
-                className='flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700'
+                className='flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group  dark:text-white dark:hover:bg-gray-700'
                 aria-controls='dropdown-example'
                 data-collapse-toggle='dropdown-example'>
                 <MdOutlineSettings />
@@ -251,13 +229,9 @@ const UserPage = () => {
               <ul id='dropdown-example' className='hidden py-2 space-y-2'>
                 <li>
                   <button
-                    onClick={() => (
-                      setMilist(!MiList),
-                      setAnimesPending(false),
-                      setultimosVistadosT(false)
-                    )}
+                    onClick={() => handleOpen(1)}
                     className={`flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 ${
-                      MiList && 'bg-gray-700 text-white'
+                      settings === 1 && 'bg-gray-700 text-white'
                     }`}>
                     Mi lista de Favoritos
                   </button>
@@ -265,32 +239,24 @@ const UserPage = () => {
                 <li>
                   <a
                     href='#'
-                    className='flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700'>
+                    className='flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group  dark:text-white dark:hover:bg-gray-700'>
                     Episodios en espera
                   </a>
                 </li>
                 <li>
                   <button
-                    onClick={() => (
-                      setAnimesPending(!AnimesPending),
-                      setMilist(false),
-                      setultimosVistadosT(false)
-                    )}
-                    className={`flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 ${
-                      AnimesPending && 'bg-gray-700 text-white'
+                    onClick={() => handleOpen(2)}
+                    className={`flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group  dark:text-white dark:hover:bg-gray-700 ${
+                      settings == 2 && 'bg-gray-700 text-white'
                     }`}>
                     Animes Para ver luego
                   </button>
                 </li>
                 <li>
                   <button
-                    onClick={() => {
-                      setultimosVistadosT(!ultimosVistadosT)
-                      setAnimesPending(false)
-                      setMilist(false)
-                    }}
-                    className={`flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700
-                    ${ultimosVistadosT && 'bg-gray-700 text-white'}`}>
+                    onClick={() => handleOpen(3)}
+                    className={`flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group  dark:text-white dark:hover:bg-gray-700
+                    ${settings == 3 && 'bg-gray-700 text-white'}`}>
                     Ultimos episodios visitados
                   </button>
                 </li>
@@ -299,7 +265,7 @@ const UserPage = () => {
             <li>
               <a
                 href='#'
-                className='flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group'>
+                className='flex items-center p-2 text-gray-900 rounded-lg dark:text-white dark:hover:bg-gray-700 group'>
                 <svg
                   className='flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white'
                   aria-hidden='true'
@@ -311,9 +277,6 @@ const UserPage = () => {
                 <span className='flex-1 ms-3 whitespace-nowrap'>
                   Proximamente ...
                 </span>
-                {/* <span className='inline-flex items-center justify-center px-2 ms-3 text-sm font-medium text-gray-800 bg-gray-100 rounded-full dark:bg-gray-700 dark:text-gray-300'>
-                  Pro
-                </span> */}
               </a>
             </li>
             <li>
@@ -336,7 +299,7 @@ const UserPage = () => {
           className={`     
         p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 
         `}>
-          {MiList && (
+          {settings === 1 && (
             <div
               style={{ minHeight: '80dvh' }}
               className={`grid gap-4 mb-4 ${
@@ -351,7 +314,7 @@ const UserPage = () => {
               ))}
             </div>
           )}
-          {AnimesPending && (
+          {settings === 2 && (
             <div
               style={{ minHeight: '80dvh' }}
               className={`grid gap-4 mb-4 ${
@@ -379,7 +342,7 @@ const UserPage = () => {
               />
             </div>
           )}
-          {ultimosVistadosT && (
+          {settings === 3 && (
             <div
               style={{ minHeight: '80dvh' }}
               className={`grid gap-5 mb-4 ${
@@ -393,6 +356,24 @@ const UserPage = () => {
                   </a>
                 </article>
               ))}
+            </div>
+          )}
+
+          {settings === 4 && (
+            <div style={{ minHeight: '80dvh' }} className={`user__panel`}>
+              <section>
+                <img src={user?.photoURL} alt='' />
+                <span>usuario: {user?.displayName}</span>
+                <p>
+                  Mi lista de Animes
+                  {favoritos.map((e) => (
+                    <>
+                      <br />
+                      <span>{e.name}</span>
+                    </>
+                  ))}
+                </p>
+              </section>
             </div>
           )}
         </div>
