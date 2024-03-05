@@ -592,6 +592,12 @@
     color: #fff;
     font-weight: 700;
   }
+
+  .button__profile__page {
+    background-color: #3c3c44;
+    border-radius: 7px;
+    padding: 7px;
+  }
   .btn__up {
     position: absolute;
     top: -20px;

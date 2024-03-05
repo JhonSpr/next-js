@@ -119,45 +119,6 @@ const UserPage = () => {
     //       <span>{user?.displayName}</span>
     //     </div>
     //     {/* <LogoutButton /> */}
-    //     <div>
-    //       <div className='file-input-container'>
-    //         <label
-    //           className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'
-    //           for='file_input'>
-    //           Upload file
-    //         </label>
-    //         <input
-    //           className='block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400'
-    //           aria-describedby='file_input_help'
-    //           id='file_input'
-    //           type='file'
-    //           onChange={handleFileChange}
-    //           accept='image/*'
-    //           style={{ cursor: 'pointer' }}
-    //         />
-    //         <p
-    //           className='mt-1 text-sm text-gray-500 dark:text-gray-300'
-    //           id='file_input_help'>
-    //           SVG, PNG, JPG or GIF (MAX. 800x400px).
-    //         </p>
-
-    //         <button className='button__profile__page'>Cambiar Avatar</button>
-    //         {selectedFile && (
-    //           <span className='file-name'>{selectedFile.name}</span>
-    //         )}
-    //       </div>
-    //       <button onClick={handleUploadPhoto} className='button__profile__page'>
-    //         Guardar Cambios
-    //       </button>
-    //       {dataUser?.user?.emailVerified ? null : (
-    //         <button
-    //           onClick={handleResendVerificationEmail}
-    //           className='btn__verify__account'>
-    //           verificar cuenta
-    //         </button>
-    //       )}
-    //     </div>
-    //   </div>
 
     //   <div className='cards'>
     //     <h4>Mi lista</h4>
@@ -373,6 +334,39 @@ const UserPage = () => {
                     </>
                   ))}
                 </p>
+
+                <div>
+                  <div className='file-input-container'>
+                    <label
+                      className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'
+                      htmlFor='file_input'>
+                      sube una imagen
+                    </label>
+                    <input
+                      className='block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400'
+                      aria-describedby='file_input_help'
+                      id='file_input'
+                      type='file'
+                      onChange={handleFileChange}
+                      accept='image/*'
+                      style={{ cursor: 'pointer' }}
+                    />
+                    <p
+                      className='mt-1 text-sm text-gray-500 dark:text-gray-300'
+                      id='file_input_help'>
+                      SVG, PNG, JPG or GIF (MAX. 800x400px).
+                    </p>
+
+                    {selectedFile && (
+                      <span className='file-name'>{selectedFile.name}</span>
+                    )}
+                  </div>
+                  <button
+                    onClick={handleUploadPhoto}
+                    className='button__profile__page'>
+                    Guardar Cambios
+                  </button>
+                </div>
               </section>
             </div>
           )}

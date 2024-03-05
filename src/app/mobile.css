@@ -808,6 +808,11 @@
     outline: 4px solid #1283b8;
     box-shadow: 3px 3px 120px 10px #1283b8;
   }
+  .button__profile__page {
+    background-color: #3c3c44;
+    border-radius: 7px;
+    padding: 7px;
+  }
   .user__panel img {
     height: 150px;
     margin-inline: auto;
