@@ -797,7 +797,15 @@
       }
     }
   }
-
+  .btn__up {
+    position: absolute;
+    top: -20px;
+    padding: 10px;
+    border-radius: 50%;
+    left: 45%;
+    background-color: #1283b8;
+    font-size: 30px;
+  }
   .section__popular {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(100%, 180px));
