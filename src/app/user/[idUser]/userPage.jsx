@@ -6,9 +6,9 @@ import { useRouter } from 'next/navigation'
 import { useContext, useEffect, useRef, useState } from 'react'
 import { useCookies } from 'react-cookie'
 import { MdOutlineSettings } from 'react-icons/md'
-import { FaUserCog } from 'react-icons/fa'
 import { CiLogout } from 'react-icons/ci'
 import { auth } from '@/app/firebase'
+import Alert from '@/app/components/Alert'
 
 const UserPage = () => {
   const [cookie, setCookie] = useCookies(['username'])
@@ -26,8 +26,7 @@ const UserPage = () => {
   const [newPhoto, setNewPhoto] = useState(null)
   const [selectedFile, setSelectedFile] = useState(null)
   const [settings, setSettings] = useState(4)
-
-  const settingsRef = useRef(1)
+  const [message, setMessage] = useState(false)
 
   const handleFileChange = (event) => {
     const file = event.target.files[0]
@@ -52,6 +51,11 @@ const UserPage = () => {
       const photoUrl = await getDownloadURL(storageRef)
       const auth = getAuth()
       await updateProfile(auth.currentUser, { photoURL: photoUrl })
+      setMessage(true)
+
+      setTimeout(() => {
+        setMessage(false)
+      }, 2000)
       updateUserProfilePhoto(photoUrl)
       setNewPhoto(null)
     } catch (error) {
@@ -87,13 +91,10 @@ const UserPage = () => {
       setEsDispositivoMovil(window.innerWidth < 768)
     }
 
-    // Agregar un event listener para el evento de cambio de tamaño de la ventana
     window.addEventListener('resize', handleResize)
 
-    // Llamar a handleResize una vez al inicio para establecer el estado inicial
     handleResize()
 
-    // Limpiar el event listener en el cleanup de useEffect
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
@@ -105,25 +106,6 @@ const UserPage = () => {
     }
   }
   return (
-    // <div className='container__user__page'>
-    //   <title>perfil de usuario</title>
-    //   <div className={`info__user ${theme == 'dark' ? 'dark' : ''}`}>
-    //     <div className='container__options__user'>
-    //       <span>Mi lista</span>
-    //       <span>Ver mas tarde</span>
-    //       <span>Animes pendientes</span>
-    //       <span>Ultimos capitulos vistos</span>
-    //     </div>
-    //     <div className='information'>
-    //       <img src={photoURL} alt='' />
-    //       <span>{user?.displayName}</span>
-    //     </div>
-    //     {/* <LogoutButton /> */}
-
-    //   <div className='cards'>
-    //     <h4>Mi lista</h4>
-    //   </div>
-    // </div>
     <>
       <title>Panel de control</title>
       <button
@@ -151,6 +133,10 @@ const UserPage = () => {
         className='fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0'
         aria-label='Sidebar'>
         <div className='h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800'>
+          <Alert
+            isVisible={message}
+            message={'Avatar cambiado correctamente'}
+          />
           <ul className='space-y-2 font-medium'>
             <li>
               <button

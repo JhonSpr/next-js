@@ -5,6 +5,10 @@
   gap: 10px;
 }
 
+.alert {
+  background-color: #1b1a1f !important;
+}
+
 .pagination > a {
   color: #c1c1c1;
   background-color: #1b1a1f;
