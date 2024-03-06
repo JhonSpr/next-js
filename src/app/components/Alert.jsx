@@ -54,7 +54,7 @@ function Alert({ isVisible, message, remove, handleClose }) {
           bottom: '30px',
         }}
         id='alert-3'
-        className='flex items-center p-4 mb-4 text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400 alert'
+        className='flex items-center p-4 mb-4 text-green-800 rounded-lg bg-green-50  dark:text-green-400 alert'
         role='alert'>
         <svg
           className='flex-shrink-0 w-4 h-4'
