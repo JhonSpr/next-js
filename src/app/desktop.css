@@ -1564,6 +1564,15 @@
       height: 300px;
     }
   }
+
+  @keyframes scaleFilter {
+    0% {
+      transform: scale(98%);
+    }
+    100% {
+      transform: scale(100%);
+    }
+  }
   .container__form__page__register {
     transform: translate(-50%, -50%) scale(110%);
     top: 35%;
@@ -1608,14 +1617,7 @@
       border-radius: 7px;
     }
   }
-  @keyframes scaleFilter {
-    0% {
-      transform: scale(98%);
-    }
-    100% {
-      transform: scale(100%);
-    }
-  }
+
   .container__form__page__register .form {
     width: 90%;
     height: 90%;
