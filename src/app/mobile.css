@@ -655,7 +655,7 @@
     }
     &.show {
       visibility: visible !important;
-      height: 260px;
+      height: 300px;
     }
   }
   .owl-carousel .owl-nav button.owl-next {
