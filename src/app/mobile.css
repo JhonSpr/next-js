@@ -217,6 +217,16 @@
     gap: 5px;
     flex-direction: column;
     width: 100%;
+
+    &:hover .overlay {
+      top: 0;
+      height: 100%;
+      width: 100%;
+      background-color: rgba(13, 159, 204, 0.5);
+      font-size: 40px;
+      border-radius: 7px;
+      opacity: 1;
+    }
   }
 
   .column__image {
@@ -224,10 +234,16 @@
     height: 50%;
     display: block;
     margin-bottom: 65px;
+    position: relative;
+    &:hover .image__anime {
+      filter: blur(10px);
+    }
   }
   .column__image .image__anime {
     position: relative;
-
+    transition-property: filter;
+    transition-duration: 0.2s;
+    transition-timing-function: ease-in-out;
     height: 100%;
     width: 100%;
   }

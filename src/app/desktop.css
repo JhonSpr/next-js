@@ -316,12 +316,27 @@
   .column__image {
     width: 50%;
     height: 400px;
+
+    &:hover .overlay {
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 50%;
+      background-color: rgba(13, 159, 204, 0.5);
+      font-size: 40px;
+      border-radius: 7px;
+      opacity: 1;
+    }
     &:hover .btn__anime {
       transform: scale(100%);
+      z-index: 5;
     }
 
     &:hover .name__anime {
       opacity: 0;
+    }
+    &:hover .image__anime {
+      filter: blur(10px);
     }
   }
   .column__image .image__anime {
@@ -335,6 +350,10 @@
     transition-duration: 0.2s;
     transition-timing-function: ease-in;
     filter: brightness(100%);
+    transition-property: filter;
+    transition-duration: 0.2s;
+    transition-timing-function: ease-in-out;
+
     &:hover {
       filter: brightness(70%);
     }

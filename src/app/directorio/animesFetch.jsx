@@ -2,6 +2,7 @@
 
 import { useContext, useEffect, useState } from 'react'
 import { contextApp } from '../providers'
+import { FaPlayCircle } from 'react-icons/fa'
 
 export default function AnimesFectching({ data }) {
   const { theme } = useContext(contextApp)
@@ -31,6 +32,9 @@ export default function AnimesFectching({ data }) {
               }}>
               Ver Ahora
             </button>
+            <div className='overlay'>
+              <FaPlayCircle />
+            </div>
           </a>
           <div className='column__description'>
             <span className='emitido__anime'>
