@@ -51,6 +51,7 @@
     &:hover .visitas__overlay {
       top: 0%;
       left: 0%;
+      background-color: rgba(13, 159, 204, 0.5);
     }
   }
   .card__pupular {
@@ -65,6 +66,10 @@
     left: 0px;
     padding: 20px;
     cursor: pointer;
+
+    &:hover .background__image {
+      transform: rotateX(360deg);
+    }
   }
 
   .card__pupular .background__image {
@@ -81,6 +86,7 @@
     border-radius: 7px;
     z-index: 1;
     filter: brightness(70%);
+    transition: all 0.7s ease-out;
   }
 
   .title-1 {
@@ -318,11 +324,11 @@
     height: 400px;
 
     &:hover .overlay {
-      top: 0;
+      bottom: 0;
       left: 0;
       height: 100%;
       width: 50%;
-      background-color: rgba(13, 159, 204, 0.5);
+      background-color: #1284b857;
       font-size: 40px;
       border-radius: 7px;
       opacity: 1;
@@ -336,11 +342,11 @@
       opacity: 0;
     }
     &:hover .image__anime {
-      filter: blur(10px);
+      filter: blur(20px);
     }
   }
   .column__image .image__anime {
-    width: inherit;
+    width: 50%;
     height: 100%;
     object-fit: cover;
     position: absolute;
@@ -349,10 +355,6 @@
     transition-property: filter;
     transition-duration: 0.2s;
     transition-timing-function: ease-in;
-    filter: brightness(100%);
-    transition-property: filter;
-    transition-duration: 0.2s;
-    transition-timing-function: ease-in-out;
 
     &:hover {
       filter: brightness(70%);
@@ -1284,6 +1286,7 @@
     }
     &:hover img {
       transform: scale(105%);
+      filter: blur(20px);
     }
   }
 
