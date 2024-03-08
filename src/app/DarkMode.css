@@ -18,7 +18,11 @@ html.dark {
     background-color: var(--darkModeBackground) !important;
   }
 }
-
+.trailer__anime.dark {
+  &::before {
+    background-color: var(--darkModeBackground) !important;
+  }
+}
 .information__page.dark {
   background-color: var(--background-color) !important;
 }

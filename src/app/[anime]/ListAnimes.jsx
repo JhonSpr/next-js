@@ -476,7 +476,10 @@ export function FetchSingleAnime({ data }) {
                 </a>
               ))}
             </div>
-            <div className='trailer__anime'>
+            <div
+              className={
+                theme === 'dark' ? 'trailer__anime dark' : 'trailer__anime'
+              }>
               <iframe
                 src={`https://www.youtube.com/embed/${e.trailer}`}></iframe>
             </div>
