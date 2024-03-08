@@ -1,9 +1,10 @@
 html.dark {
   & body {
-    background-color: #363b4d !important;
+    --background-color: #363b4d;
     --background-custom: #141414;
     --color-custom: #fff;
     --darkModeBackground: #17171a;
+    background-color: var(--background-color) !important;
   }
 
   & * {
@@ -11,8 +12,15 @@ html.dark {
   }
 }
 
+.carousel__container.dark {
+  &::before {
+    color: var(--color-custom) !important;
+    background-color: var(--darkModeBackground) !important;
+  }
+}
+
 .information__page.dark {
-  background-color: #363b4d !important;
+  background-color: var(--background-color) !important;
 }
 
 .information__page.dark .title__anime {
@@ -65,11 +73,11 @@ html.dark {
 }
 
 .information__page.dark .container__image .rating__anime {
-  background-color: #3c3c44 !important;
+  background-color: var(--darkModeBackground) !important;
   color: #c1c1c1;
 }
 .information__page.dark .container__image img {
-  background-color: #3c3c44 !important;
+  background-color: var(--darkModeBackground) !important;
 }
 
 .information__page.dark .episodes__pagination button {
@@ -110,7 +118,6 @@ html.dark {
 
 .btn__voto.dark {
   background-color: var(--background-custom) !important;
-  color: #111;
 }
 
 .controls.dark a {
