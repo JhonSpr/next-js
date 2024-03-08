@@ -1,5 +1,4 @@
 :root {
-  color-scheme: dark light;
   box-sizing: border-box;
   padding: 0;
   margin: 0;
@@ -18,9 +17,6 @@ body {
   max-width: 100vw;
   background-color: #efeff1 !important;
   overflow-x: hidden;
-  transition-property: background-color;
-  transition-duration: 0.2s;
-  transition-timing-function: ease-in-out;
 }
 
 a {

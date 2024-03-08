@@ -5,6 +5,7 @@ import SideBar, { SideBar__2 } from './components/SideBar'
 import { BsBookmarkStarFill } from 'react-icons/bs'
 import { FcRating } from 'react-icons/fc'
 import PopularSection from './popular__section'
+import Comments from './components/comments'
 
 export async function generateMetadata() {
   {

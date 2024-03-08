@@ -1,19 +1,18 @@
 html.dark {
   & body {
-    background-color: #232735 !important;
-    --background-custom: #3c3c44;
+    background-color: #363b4d !important;
+    --background-custom: #141414;
     --color-custom: #fff;
     --darkModeBackground: #17171a;
   }
 
   & * {
-    color: #fff;
     font-weight: 600;
   }
 }
 
 .information__page.dark {
-  background-color: #232735 !important;
+  background-color: #363b4d !important;
 }
 
 .information__page.dark .title__anime {
@@ -47,6 +46,7 @@ html.dark {
 
 .comments_container.dark {
   background-color: transparent !important;
+  color: #fff !important;
 }
 
 .info__user.dark {
@@ -77,11 +77,8 @@ html.dark {
   color: var(--color-custom) !important;
 }
 
-#disqus_thread.dark {
-  color-scheme: light;
-}
 #disqus_recommendations {
-  color-scheme: none;
+  color-scheme: none !important;
 }
 
 .scrollBarSide.dark {
@@ -97,9 +94,13 @@ html.dark {
   color-scheme: dark !important;
 
   & span {
-    color: var(--color-custom) !important;
-    color-scheme: dark !important;
+    color: var(--color-custom);
+    color-scheme: dark;
   }
+}
+
+#disqus_thread.dark {
+  color-scheme: auto;
 }
 
 .scrollBarSide.dark .container__year__animes a {

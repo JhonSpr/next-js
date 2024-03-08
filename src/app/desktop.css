@@ -938,7 +938,6 @@
   }
   .scrollBarSide {
     width: 100%;
-    background-color: #ccc;
     padding: 10px;
     height: 800px;
     overflow: hidden;
@@ -1121,13 +1120,13 @@
   }
   .comments_container {
     width: 100%;
-    padding: 20px;
     margin-top: 20px;
-    background-color: transparent !important;
+    background-color: #141414 !important;
     border-radius: 7px;
     font-size: 20px;
     display: none;
     overflow: hidden;
+    padding: 20px;
     &.show {
       display: block;
     }
@@ -1150,9 +1149,8 @@
     padding: 20px;
   }
 
-  #disqus_thread.light,
   #disqus-recommendations.light {
-    color-scheme: dark !important;
+    color-scheme: none !important;
     background-color: transparent !important;
   }
   .carousel__container {

@@ -2,50 +2,23 @@
 import { Request_episode } from '@/app/FetchingData/request_episode'
 import Comments from '@/app/components/comments'
 import ScrollSide from './scrollSide'
-import { useContext, useEffect, useState } from 'react'
+import { use, useContext, useEffect, useState } from 'react'
 import { FaArrowRight, FaList } from 'react-icons/fa6'
 import { FaArrowLeft } from 'react-icons/fa'
 import { contextApp } from '@/app/providers'
 import { get, getDatabase, ref, set } from 'firebase/database'
 import { Request_Animes } from '@/app/FetchingData/request_animes'
-import { useRouter } from 'next/navigation'
 
 function EpisodePage({ name, episode, services }) {
-  const { user } = useContext(contextApp)
   const [animes, setAnimes] = useState([])
-  const router = useRouter()
-
-  useEffect(() => {
-    // Reload Disqus comments when the route changes
-    const handleRouteChange = () => {
-      if (window.DISQUS) {
-        window.DISQUS.reset({
-          reload: true,
-          config: function () {
-            this.page.url = window.location.href
-            this.page.identifier = router.asPath
-          },
-        })
-      }
-    }
-
-    router.events?.on('routeChangeComplete', handleRouteChange)
-
-    return () => {
-      router.events?.off('routeChangeComplete', handleRouteChange)
-    }
-  }, [])
-
-  console.log(services)
   const [lastEpisodes, setLastEpisodes] = useState([])
   useEffect(() => {
     Request_episode(name).then((res) => setAnimes(res))
     Request_Animes({ recien: true }).then((res) => setLastEpisodes(res))
   }, [])
-  const dynamicCapKey = `cap${episode}` // Supongamos que episode tiene el valor deseado
+  const dynamicCapKey = `cap${episode}`
 
   const servicesList = services.filter((e) => e?.[dynamicCapKey])
-  const { theme } = useContext(contextApp)
   const image = animes?.datos?.map((e) => e.image)
   const agregarValorAVistosRecientes = async (name, image) => {
     try {
@@ -64,13 +37,11 @@ function EpisodePage({ name, episode, services }) {
         const vistosRecientes = userData?.vistos_reciente || []
         const favoritos = userData?.favoritos || []
 
-        // Verificar si el objeto ya existe en vistosRecientes
         const objetoExistente = vistosRecientes.find(
           (objeto) => objeto?.name === name && objeto?.episode === episode
         )
 
         if (!objetoExistente) {
-          // Si el objeto no existe, agregarlo
           await set(ref(db, 'users/' + user?.uid), {
             nombre: user?.displayName || 'undefined',
             favoritos: [...favoritos],
@@ -84,6 +55,7 @@ function EpisodePage({ name, episode, services }) {
       console.error('Error al agregar el objeto a vistosRecientes:', error)
     }
   }
+  const { theme, user } = useContext(contextApp)
 
   useEffect(() => {
     if (
@@ -94,34 +66,54 @@ function EpisodePage({ name, episode, services }) {
     }
   }, [animes, user])
 
+  const shortname = 'animesz-3'
+  const url = `/${name.replace(/ /g, '-')}/${episode}` // URL de la página actual
+  const identifier = `/${name.replace(/ /g, '-')}/${episode}` // Identificador único para la página
+  const title = { name } // Título del artículo
   return animes?.datos?.map((e) => (
     <main className='container__episode__page' key={e.id}>
       <div className='container__iframe'>
-        <h4>
-          {`${name}`} {episode}
-        </h4>
-        <div className='container__iframe'>
+        <div>
           <iframe
             src={servicesList[0]?.[dynamicCapKey]?.map((i) => i?.url)}
             allowFullScreen></iframe>
           <div className={`controls ${theme === 'dark' ? 'dark' : ''}`}>
             <a
-              href={`/${name.replace(/ /g, '-')}/${episode - 1}`}
-              className={episode === 1 ? 'disable' : ''}>
+              href={
+                episode === 1
+                  ? null
+                  : `/${name.replace(/ /g, '-')}/${episode - 1}`
+              }
+              className={episode === 1 ? 'disabled' : ''}>
               <FaArrowLeft />
             </a>
             <a href={`/${name.replace(/ /g, '-')}`}>
               <FaList />
             </a>
             <a
-              href={`/${name.replace(/ /g, '-')}/${episode + 1}`}
-              className={episode === e.episodios ? 'disable' : ''}>
+              href={
+                episode === e.episodios
+                  ? null
+                  : `/${name.replace(/ /g, '-')}/${episode + 1}`
+              }
+              className={episode === e.episodios ? 'disabled' : ''}>
               <FaArrowRight />
             </a>
           </div>
+          <span className='title'>
+            {`${name}`} {episode}
+          </span>
         </div>
-        <Comments noButton={false} />
+        <Comments
+          noButton={true}
+          showCommentarios={true}
+          shortname={shortname}
+          url={url}
+          identifier={identifier}
+          title={title}
+        />
       </div>
+
       <ScrollSide few__added__data={lastEpisodes} />
     </main>
   ))

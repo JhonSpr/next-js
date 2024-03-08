@@ -1605,7 +1605,6 @@
   }
   .comments_container {
     width: 100%;
-    padding: 20px;
     margin-top: 20px;
     background-color: transparent !important;
     border-radius: 7px;
@@ -1628,11 +1627,6 @@
     cursor: pointer;
   }
 
-  #disqus_thread.light,
-  #disqus-recommendations.light {
-    color-scheme: dark !important;
-    background-color: transparent !important;
-  }
   .hero__slider.owl-carousel .owl-nav button {
     font-size: 30px;
     height: 36px;
