@@ -30,8 +30,6 @@ export default function Comments({
 
     if (!window.DISQUS) {
       loadDisqus()
-    } else {
-      resetDisqus()
     }
   }, [])
 
