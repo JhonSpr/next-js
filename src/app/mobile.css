@@ -40,6 +40,7 @@
     padding: 7px;
     text-align: center;
     border-radius: 7px;
+    color: #fff;
   }
   .settings {
     position: absolute;
@@ -735,11 +736,71 @@
     padding-left: 7px;
     color: #1283b8;
   }
-  .container__iframe iframe {
+  .container__iframe .iframe__div {
     width: 100%;
     height: 245px;
+
+    position: relative;
+    & iframe {
+      width: 100%;
+      height: 100%;
+      aspect-ratio: 16/9;
+      border-radius: 7px;
+    }
+  }
+
+  .overlay__episode {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    background-repeat: no-repeat;
+    background-size: cover;
     border-radius: 7px;
-    aspect-ratio: 16/9;
+    z-index: 1;
+    align-content: center;
+    align-items: center;
+    display: flex;
+    overflow: hidden;
+    transition-duration: 0.6s;
+    transition-property: opacity z-index;
+    transition-timing-function: ease-out;
+    &.hide {
+      opacity: 0;
+      z-index: -1;
+    }
+    & img {
+      filter: blur(5px);
+      z-index: -1;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+    & svg {
+      z-index: 3;
+      margin-inline: auto;
+      font-size: 80px;
+      color: #1283d8;
+      transition-property: transform;
+      transition-duration: 0.2s;
+      transition-timing-function: ease-in;
+      cursor: pointer;
+      &:hover {
+        transform: scale(105%);
+      }
+    }
+
+    &::before {
+      content: '';
+      display: block;
+      width: 110%;
+      height: 110%;
+      position: absolute;
+      opacity: 0.8;
+      border-radius: 6px;
+      background-color: rgb(17, 17, 17);
+      z-index: 1;
+    }
   }
   .controls {
     display: flex;
@@ -1561,6 +1622,8 @@
   .episodes__pagination button {
     padding: 4px 14px;
     border-radius: 7px;
+    background-color: #17171a;
+    color: #fff;
   }
 
   .carousel__container {
@@ -1606,7 +1669,7 @@
   .comments_container {
     width: 100%;
     margin-top: 20px;
-    background-color: transparent !important;
+    background-color: #141414 !important;
     border-radius: 7px;
     font-size: 20px;
     display: none;

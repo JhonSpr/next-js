@@ -4,14 +4,23 @@ import Comments from '@/app/components/comments'
 import ScrollSide from './scrollSide'
 import { use, useContext, useEffect, useState } from 'react'
 import { FaArrowRight, FaList } from 'react-icons/fa6'
-import { FaArrowLeft } from 'react-icons/fa'
+import { FaArrowLeft, FaHome, FaPlayCircle } from 'react-icons/fa'
 import { contextApp } from '@/app/providers'
 import { get, getDatabase, ref, set } from 'firebase/database'
 import { Request_Animes } from '@/app/FetchingData/request_animes'
+import { LoaderPage } from '@/app/components/LoaderSkeleton'
 
 function EpisodePage({ name, episode, services }) {
   const [animes, setAnimes] = useState([])
   const [lastEpisodes, setLastEpisodes] = useState([])
+  const [play, setPlay] = useState(false)
+  const [loading, setLoading] = useState([])
+  useEffect(() => {
+    setLoading(true)
+    setTimeout(() => {
+      setLoading(false)
+    }, 800)
+  }, [])
   useEffect(() => {
     Request_episode(name).then((res) => setAnimes(res))
     Request_Animes({ recien: true }).then((res) => setLastEpisodes(res))
@@ -65,18 +74,47 @@ function EpisodePage({ name, episode, services }) {
       agregarValorAVistosRecientes(name, image)
     }
   }, [animes, user])
+  if (loading) {
+    return (
+      <div
+        style={{
+          minHeight: '70dvh',
+          width: '100%',
+          alignContent: 'center',
+          alignItems: 'center',
+          display: 'grid',
+          placeItems: 'center',
+          placeContent: 'center',
+        }}>
+        <LoaderPage />
+      </div>
+    )
+  }
 
-  const shortname = 'animesz-3'
-  const url = `/${name.replace(/ /g, '-')}/${episode}` // URL de la página actual
-  const identifier = `/${name.replace(/ /g, '-')}/${episode}` // Identificador único para la página
-  const title = { name } // Título del artículo
   return animes?.datos?.map((e) => (
     <main className='container__episode__page' key={e.id}>
       <div className='container__iframe'>
         <div>
-          <iframe
-            src={servicesList[0]?.[dynamicCapKey]?.map((i) => i?.url)}
-            allowFullScreen></iframe>
+          <p className='nav__episode'>
+            <a href='/' className='fr'>
+              <FaHome /> <span>Inicio</span>
+            </a>{' '}
+            - <a href='/directorio'>Directorio</a> -{' '}
+            <a href={`/${name.replace(/ /g, '-').toLowerCase()}`}>{name}</a> -{' '}
+            <a href={`/${name.replace(/ /g, '-').toLowerCase()}/${episode}`}>
+              {episode}
+            </a>
+          </p>
+          <div className='iframe__div'>
+            <iframe
+              src={servicesList[0]?.[dynamicCapKey]?.map((i) => i?.url)}
+              allowFullScreen></iframe>
+            <div
+              className={play ? 'overlay__episode hide' : 'overlay__episode'}>
+              <img src={e.banner ?? e.image} alt='' />
+              <FaPlayCircle onClick={() => setPlay(!play)} />
+            </div>
+          </div>
           <div className={`controls ${theme === 'dark' ? 'dark' : ''}`}>
             <a
               href={
@@ -103,15 +141,24 @@ function EpisodePage({ name, episode, services }) {
           <span className='title'>
             {`${name}`} {episode}
           </span>
+          <div className='episodes__list'>
+            {e.episodes__overlay.map((e, index) => (
+              <a
+                href={
+                  episode === e.episode
+                    ? null
+                    : `/${name.replace(/ /g, '-').toLowerCase()}/${e.episode}`
+                }
+                key={index}
+                className={episode === e.episode ? 'disabled' : 'enabled'}>
+                <img src={e.image} alt='' />
+                <p>1 - {e.episode}</p>
+                <span>Episodio {e.episode}</span>
+              </a>
+            ))}
+          </div>
         </div>
-        <Comments
-          noButton={true}
-          showCommentarios={true}
-          shortname={shortname}
-          url={url}
-          identifier={identifier}
-          title={title}
-        />
+        <Comments noButton={true} showCommentarios={true} />
       </div>
 
       <ScrollSide few__added__data={lastEpisodes} />

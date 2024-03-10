@@ -60,7 +60,8 @@ function Navigation() {
           console.error('Error al buscar animes:', error)
         })
     }
-  }, [search, loading])
+  }, [loading])
+
   useEffect(() => {
     document.body.classList.remove('light', 'dark')
     document.body.classList.add(theme)

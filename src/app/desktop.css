@@ -944,6 +944,54 @@
     gap: 10px;
   }
 
+  .container__episode__page .episodes__list {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    min-height: fit-content;
+    max-height: 400px;
+    overflow-y: auto;
+
+    padding: 10px 4px;
+    border-radius: 6px;
+  }
+  .container__episode__page .episodes__list a {
+    display: block;
+    width: 100%;
+    display: flex;
+    padding: 7px;
+    gap: 7px;
+    position: relative;
+    border-bottom: 1px solid #1b1a1f;
+    &.enabled {
+      & span:hover {
+        color: hsl(199, 82%, 40%);
+      }
+    }
+    &.disabled {
+      & span {
+        color: #c1c1c1;
+      }
+    }
+  }
+
+  .container__episode__page .episodes__list a img {
+    height: 60px;
+    border-radius: 6px;
+  }
+
+  .container__episode__page .episodes__list a span {
+    font-size: 14px;
+    font-weight: 600;
+    display: inline-block;
+    height: fit-content;
+  }
+  .container__episode__page .episodes__list a p {
+    display: inline-block;
+    height: fit-content;
+    padding: 3px 7px;
+    border-right: 2px solid #121212;
+  }
   .scrollBarSide {
     width: 100%;
     padding: 10px;
@@ -962,8 +1010,14 @@
     &::before {
       content: 'Ultimos episodios';
       display: block;
-      font-size: 20px;
-      border-bottom: 2px solid #1283b8;
+      font-size: 16px;
+      font-weight: 400;
+      text-align: center;
+      background-color: #17171a;
+      border-radius: 6px;
+      color: #fff;
+      padding-left: 5px;
+      text-transform: capitalize;
     }
   }
   .container__few__added a {
@@ -1010,11 +1064,17 @@
       content: 'Animes años';
       display: block;
       width: 100%;
-      font-size: 20px;
-      border-bottom: 2px solid #17171a;
+      font-size: 16px;
+      font-weight: 400;
+      text-align: center;
+      border-radius: 6px;
+      background-color: #17171a;
+      color: #fff;
+      padding-left: 5px;
       text-transform: capitalize;
     }
   }
+
   .container__year__animes a {
     padding: 3px 10px;
     background-color: #b8b5bb;
@@ -1030,11 +1090,71 @@
     font-size: 20px;
     text-transform: capitalize;
   }
-  .container__iframe iframe {
+  .container__iframe .iframe__div {
     width: 100%;
     height: 518px;
+
+    position: relative;
+    & iframe {
+      width: 100%;
+      height: 100%;
+      aspect-ratio: 16/9;
+      border-radius: 7px;
+    }
+  }
+
+  .overlay__episode {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    background-repeat: no-repeat;
+    background-size: cover;
     border-radius: 7px;
-    aspect-ratio: 16/9;
+    z-index: 1;
+    align-content: center;
+    align-items: center;
+    display: flex;
+    overflow: hidden;
+    transition-duration: 0.6s;
+    transition-property: opacity z-index;
+    transition-timing-function: ease-out;
+    &.hide {
+      opacity: 0;
+      z-index: -1;
+    }
+    & img {
+      filter: blur(5px);
+      z-index: -1;
+      position: absolute;
+      width: 110%;
+      height: 110%;
+    }
+    & svg {
+      z-index: 3;
+      margin-inline: auto;
+      font-size: 80px;
+      color: #1283d8;
+      transition-property: transform;
+      transition-duration: 0.2s;
+      transition-timing-function: ease-in;
+      cursor: pointer;
+      &:hover {
+        transform: scale(105%);
+      }
+    }
+
+    &::before {
+      content: '';
+      display: block;
+      width: 110%;
+      height: 110%;
+      position: absolute;
+      opacity: 0.8;
+      border-radius: 6px;
+      background-color: rgb(17, 17, 17);
+      z-index: 1;
+    }
   }
   .container__user {
     position: relative;
@@ -1750,7 +1870,7 @@
   .container__results {
     position: absolute;
     z-index: 2;
-    top: 55px;
+    top: 65px;
   }
   .results {
     display: flex;
@@ -1759,6 +1879,7 @@
     padding: 12px;
     width: 300px;
     border-radius: 7px;
+
     & span {
       color: #fff;
     }

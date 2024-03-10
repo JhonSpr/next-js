@@ -1,10 +1,14 @@
 import { Request_Animes } from '../FetchingData/request_animes'
 import DirectoryPage from './DirectoryPage'
 
-export async function generateMetadata({ params }) {
+export async function generateMetadata({ searchParams }) {
   {
     return {
-      title: 'Directorio - Animesz',
+      title: `${
+        searchParams?.page !== undefined
+          ? `Directorio - Página ${searchParams?.page}`
+          : 'Directorio'
+      }`,
       description: 'Directorio de animes | animesz',
       siteName: 'animesz',
       locale: 'es',
