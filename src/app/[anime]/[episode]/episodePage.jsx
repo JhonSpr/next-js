@@ -33,7 +33,7 @@ function EpisodePage({ name, episode, services }) {
 
   const servicesList = services.filter((e) => e?.[dynamicCapKey])
 
-  const { url, image } = servicesList[0]?.[dynamicCapKey][0]
+  const { image } = servicesList[0]?.[dynamicCapKey][0]
 
   const agregarValorAVistosRecientes = async (name, image) => {
     try {
@@ -137,7 +137,9 @@ function EpisodePage({ name, episode, services }) {
             </a>
           </p>
           <div className='iframe__div'>
-            <iframe src={url} allowFullScreen></iframe>
+            <iframe
+              src={servicesList[0]?.[dynamicCapKey].map((e) => e.url)}
+              allowFullScreen></iframe>
             <div
               className={play ? 'overlay__episode hide' : 'overlay__episode'}>
               <img src={e.banner ?? e.image} alt='' />
