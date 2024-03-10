@@ -302,6 +302,10 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(32.333%, 200px));
     gap: 9px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    align-content: center;
   }
 
   .card__anime {
