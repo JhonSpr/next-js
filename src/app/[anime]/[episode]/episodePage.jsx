@@ -3,12 +3,13 @@ import { Request_episode } from '@/app/FetchingData/request_episode'
 import Comments from '@/app/components/comments'
 import ScrollSide from './scrollSide'
 import { use, useContext, useEffect, useState } from 'react'
-import { FaArrowRight, FaList } from 'react-icons/fa6'
+import { FaArrowRight, FaClockRotateLeft, FaList } from 'react-icons/fa6'
 import { FaArrowLeft, FaHome, FaPlayCircle } from 'react-icons/fa'
 import { contextApp } from '@/app/providers'
 import { get, getDatabase, ref, set } from 'firebase/database'
 import { Request_Animes } from '@/app/FetchingData/request_animes'
 import { LoaderPage } from '@/app/components/LoaderSkeleton'
+import { MdFavorite } from 'react-icons/md'
 
 function EpisodePage({ name, episode, services }) {
   const [animes, setAnimes] = useState([])
@@ -26,6 +27,7 @@ function EpisodePage({ name, episode, services }) {
     Request_Animes({ recien: true }).then((res) => setLastEpisodes(res))
   }, [])
   const dynamicCapKey = `cap${episode}`
+  const [favoritos, setFavoritos] = useState([])
 
   const servicesList = services.filter((e) => e?.[dynamicCapKey])
 
@@ -66,7 +68,8 @@ function EpisodePage({ name, episode, services }) {
       console.error('Error al agregar el objeto a vistosRecientes:', error)
     }
   }
-  const { theme, user } = useContext(contextApp)
+  const { theme, user, agregarFavoritos, message, setMessage } =
+    useContext(contextApp)
 
   useEffect(() => {
     if (
@@ -76,6 +79,30 @@ function EpisodePage({ name, episode, services }) {
       agregarValorAVistosRecientes(name, image)
     }
   }, [animes, user])
+
+  const cargarDataUser = async () => {
+    try {
+      const db = getDatabase()
+      const id = user?.uid
+
+      const voteUsersRef = ref(db, 'usersVotes/' + id)
+      const snapshotVote = await get(voteUsersRef)
+      const votesData = snapshotVote?.val() || {}
+
+      const userRef = ref(db, 'users/' + id)
+      const snapshot = await get(userRef)
+      const userData = snapshot?.val() || {}
+      setFavoritos(userData.favoritos || [])
+    } catch (error) {
+      console.error('Error al cargar los datos del usuario:', error)
+    }
+  }
+
+  useEffect(() => {
+    if ((user !== undefined && user !== null) || !user) {
+      cargarDataUser()
+    }
+  }, [user, message])
   if (loading) {
     return (
       <div
@@ -92,6 +119,8 @@ function EpisodePage({ name, episode, services }) {
       </div>
     )
   }
+
+  console.log(favoritos)
 
   return animes?.datos?.map((e) => (
     <main className='container__episode__page' key={e.id}>
@@ -137,6 +166,16 @@ function EpisodePage({ name, episode, services }) {
               className={episode === e.episodios ? 'disabled' : ''}>
               <FaArrowRight />
             </a>
+
+            <button
+              onClick={() => agregarFavoritos(e.name.toLowerCase(), e.image)}>
+              <MdFavorite
+                color={favoritos.some((e) => e.name == name) ? '1283d8' : 'fff'}
+              />
+            </button>
+            <button>
+              <FaClockRotateLeft />
+            </button>
           </div>
           <span className='title'>
             {`${name}`} {episode}

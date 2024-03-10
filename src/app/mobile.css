@@ -749,6 +749,61 @@
     }
   }
 
+  .container__episode__page .episodes__list {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    min-height: fit-content;
+    max-height: 400px;
+    overflow-y: auto;
+
+    padding: 10px 4px;
+    border-radius: 6px;
+  }
+  .container__episode__page .episodes__list a {
+    display: block;
+    width: 100%;
+    display: flex;
+    padding: 7px;
+    gap: 7px;
+    position: relative;
+    border-bottom: 1px solid #1b1a1f;
+    &.enabled {
+      & span:hover {
+        color: hsl(199, 82%, 40%);
+      }
+    }
+    &.disabled {
+      & span {
+        color: #c1c1c1;
+      }
+    }
+  }
+  .controls button {
+    width: fit-content;
+    background-color: #17171a;
+    padding: 12px 25px;
+    font-size: 20px;
+    border-radius: 7px;
+  }
+  .container__episode__page .episodes__list a img {
+    height: 60px;
+    border-radius: 6px;
+  }
+
+  .container__episode__page .episodes__list a span {
+    font-size: 14px;
+    font-weight: 600;
+    display: inline-block;
+    height: fit-content;
+  }
+  .container__episode__page .episodes__list a p {
+    display: inline-block;
+    height: fit-content;
+    padding: 3px 7px;
+    border-right: 2px solid #121212;
+  }
+
   .overlay__episode {
     position: absolute;
     width: 100%;
