@@ -260,6 +260,9 @@ const UserPage = () => {
                 <article key={index} className='favorite__panel__user'>
                   <a href={`/${e.name?.replace(/ /g, '-')}`}>
                     <img src={e.image} alt='' />
+                    <div className='overlay'>
+                      <FaPlayCircle />
+                    </div>
                   </a>
                 </article>
               ))}
