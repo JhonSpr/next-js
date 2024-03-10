@@ -25,6 +25,8 @@ export const ContextProvider = ({ children }) => {
   const [dislike, setDislike] = useState(0) || 0
   const [rate, setRate] = useState(null)
   const [enEspera, setEnEspera] = useState([])
+  const [episodiosGuardados, setEpisodiosGuardados] = useState([])
+
   useEffect(() => {
     setRate(calcularRating(like, dislike))
   })
@@ -49,6 +51,7 @@ export const ContextProvider = ({ children }) => {
       const userData = snapshot?.val() || {}
       const vistosRecientes = userData?.vistos_reciente || []
       const favoritos = userData?.favoritos || []
+      const episodioGuardados = userData?.guardarEpisodio || []
       const objetoExistenteIndex = favoritos.findIndex(
         (objeto) => objeto?.name === name
       )
@@ -57,6 +60,7 @@ export const ContextProvider = ({ children }) => {
         await set(userRef, {
           nombre: user?.displayName || 'undefined',
           vistos_reciente: [...vistosRecientes],
+          guardarEpisodio: [...episodioGuardados],
           favoritos: [...favoritos, { name, image }],
         })
         setMessage('Agregado a favoritos')
@@ -71,7 +75,57 @@ export const ContextProvider = ({ children }) => {
         await set(userRef, {
           nombre: user?.displayName || 'undefined',
           vistos_reciente: [...vistosRecientes],
+          guardarEpisodio: [...episodioGuardados],
           favoritos: favoritos,
+        })
+        setMessage('Eliminado de favoritos')
+        setIsVisible(true)
+        setRemove(true)
+        setTimeout(() => {
+          setIsVisible(false)
+          setRemove(false)
+        }, 3000)
+        clearTimeout()
+      }
+      setFirstClicked(false)
+    } catch (error) {
+      console.error('Error al agregar/eliminar anime de favoritos:', error)
+    }
+  }
+  const guardarEpisodio = async (name, image, url) => {
+    try {
+      const db = getDatabase()
+      const userRef = ref(db, 'users/' + user?.uid)
+      const snapshot = await get(userRef)
+      const userData = snapshot?.val() || {}
+      const vistosRecientes = userData?.vistos_reciente || []
+      const favoritos = userData?.favoritos || []
+      const episodioGuardados = userData?.guardarEpisodio || []
+      const objetoExistenteIndex = episodioGuardados.findIndex(
+        (objeto) => objeto?.url === url
+      )
+
+      if (objetoExistenteIndex === -1) {
+        await set(userRef, {
+          nombre: user?.displayName || 'undefined',
+          vistos_reciente: [...vistosRecientes],
+          favoritos: [...favoritos],
+          guardarEpisodio: [...episodioGuardados, { name, image, url }],
+        })
+        setMessage('Agregado a favoritos')
+        setIsVisible(true)
+
+        setTimeout(() => {
+          setIsVisible(false)
+        }, 3000)
+        clearTimeout()
+      } else {
+        episodioGuardados.splice(objetoExistenteIndex, 1)
+        await set(userRef, {
+          nombre: user?.displayName || 'undefined',
+          vistos_reciente: [...vistosRecientes],
+          favoritos: [...favoritos],
+          guardarEpisodio: episodioGuardados,
         })
         setMessage('Eliminado de favoritos')
         setIsVisible(true)
@@ -98,6 +152,7 @@ export const ContextProvider = ({ children }) => {
         setFavoritos(userData.favoritos || [])
         setUltimosVisitados(userData.vistos_reciente || [])
         setEnEspera(userData.EnEspera || [])
+        setEpisodiosGuardados(userData.guardarEpisodio || [])
       } catch (error) {
         console.error('Error al agregar/eliminar anime de favoritos:', error)
       }
@@ -105,6 +160,7 @@ export const ContextProvider = ({ children }) => {
     cargarDataUser()
   }, [user, dataUser])
   const contextValue = {
+    guardarEpisodio,
     user,
     dataUser,
     theme,
@@ -128,6 +184,7 @@ export const ContextProvider = ({ children }) => {
     setLike,
     rate,
     enEspera,
+    episodiosGuardados,
   }
   return (
     <contextApp.Provider value={contextValue}>{children}</contextApp.Provider>

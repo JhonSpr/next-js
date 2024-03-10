@@ -2,7 +2,7 @@
 import { Request_episode } from '@/app/FetchingData/request_episode'
 import Comments from '@/app/components/comments'
 import ScrollSide from './scrollSide'
-import { use, useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { FaArrowRight, FaClockRotateLeft, FaList } from 'react-icons/fa6'
 import { FaArrowLeft, FaHome, FaPlayCircle } from 'react-icons/fa'
 import { contextApp } from '@/app/providers'
@@ -16,6 +16,9 @@ function EpisodePage({ name, episode, services }) {
   const [lastEpisodes, setLastEpisodes] = useState([])
   const [play, setPlay] = useState(false)
   const [loading, setLoading] = useState([])
+  const [favoritos, setFavoritos] = useState([])
+  const [episodiosGuardados, setEpisodiosGuardados] = useState([])
+
   useEffect(() => {
     setLoading(true)
     setTimeout(() => {
@@ -27,7 +30,6 @@ function EpisodePage({ name, episode, services }) {
     Request_Animes({ recien: true }).then((res) => setLastEpisodes(res))
   }, [])
   const dynamicCapKey = `cap${episode}`
-  const [favoritos, setFavoritos] = useState([])
 
   const servicesList = services.filter((e) => e?.[dynamicCapKey])
 
@@ -68,7 +70,7 @@ function EpisodePage({ name, episode, services }) {
       console.error('Error al agregar el objeto a vistosRecientes:', error)
     }
   }
-  const { theme, user, agregarFavoritos, message, setMessage } =
+  const { theme, user, agregarFavoritos, message, guardarEpisodio } =
     useContext(contextApp)
 
   useEffect(() => {
@@ -87,22 +89,22 @@ function EpisodePage({ name, episode, services }) {
 
       const voteUsersRef = ref(db, 'usersVotes/' + id)
       const snapshotVote = await get(voteUsersRef)
-      const votesData = snapshotVote?.val() || {}
 
       const userRef = ref(db, 'users/' + id)
       const snapshot = await get(userRef)
       const userData = snapshot?.val() || {}
       setFavoritos(userData.favoritos || [])
+      setEpisodiosGuardados(userData.guardarEpisodio || [])
     } catch (error) {
       console.error('Error al cargar los datos del usuario:', error)
     }
   }
-
   useEffect(() => {
     if ((user !== undefined && user !== null) || !user) {
       cargarDataUser()
     }
-  }, [user, message])
+  }, [message, animes])
+
   if (loading) {
     return (
       <div
@@ -119,8 +121,6 @@ function EpisodePage({ name, episode, services }) {
       </div>
     )
   }
-
-  console.log(favoritos)
 
   return animes?.datos?.map((e) => (
     <main className='container__episode__page' key={e.id}>
@@ -173,8 +173,21 @@ function EpisodePage({ name, episode, services }) {
                 color={favoritos.some((e) => e.name == name) ? '1283d8' : 'fff'}
               />
             </button>
-            <button>
-              <FaClockRotateLeft />
+            <button
+              onClick={() =>
+                guardarEpisodio(
+                  e.name.toLowerCase(),
+                  e.image,
+                  location.pathname
+                )
+              }>
+              <FaClockRotateLeft
+                color={
+                  episodiosGuardados.some((e) => e.url == location.pathname)
+                    ? '1283d8'
+                    : 'fff'
+                }
+              />
             </button>
           </div>
           <span className='title'>
