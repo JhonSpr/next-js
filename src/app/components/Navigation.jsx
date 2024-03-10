@@ -343,7 +343,9 @@ function Navigation() {
               <div
                 className={`container__results  ${
                   isFocused ? 'show' : 'hide'
-                } ${search !== null ? 'hide' : ''}`}>
+                } ${search !== null ? 'hide' : ''} ${
+                  history.length === 0 ? 'hide' : ''
+                }`}>
                 <div className='results history'>
                   {history.map((e, index) => (
                     <a href={e.url} key={index}>
