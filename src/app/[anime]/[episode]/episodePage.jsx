@@ -28,14 +28,16 @@ function EpisodePage({ name, episode, services }) {
   const dynamicCapKey = `cap${episode}`
 
   const servicesList = services.filter((e) => e?.[dynamicCapKey])
-  const image = animes?.datos?.map((e) => e.image)
+
+  const { url, image } = servicesList[0]?.[dynamicCapKey][0]
+
   const agregarValorAVistosRecientes = async (name, image) => {
     try {
       const db = getDatabase()
       const object = {
         url: `${location?.pathname}`,
         name: name,
-        image: image[0],
+        image: image,
         episode: episode,
       }
 
@@ -106,9 +108,7 @@ function EpisodePage({ name, episode, services }) {
             </a>
           </p>
           <div className='iframe__div'>
-            <iframe
-              src={servicesList[0]?.[dynamicCapKey]?.map((i) => i?.url)}
-              allowFullScreen></iframe>
+            <iframe src={url} allowFullScreen></iframe>
             <div
               className={play ? 'overlay__episode hide' : 'overlay__episode'}>
               <img src={e.banner ?? e.image} alt='' />

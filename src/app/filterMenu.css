@@ -34,7 +34,9 @@
   display: none !important;
   overflow: hidden;
   opacity: 0;
+
   &.show {
+    z-index: 999;
     opacity: 1 !important;
     height: auto;
     display: flex !important;

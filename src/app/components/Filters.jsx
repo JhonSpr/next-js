@@ -78,7 +78,11 @@ export const FilterMenu = ({
 
   useEffect(() => {
     const handleOutsideClick = (event) => {
-      if (settingsRef.current && !settingsRef.current.contains(event.target)) {
+      if (
+        settingsRef.current &&
+        !settingsRef.current.contains(event.target) &&
+        !event.target.getAttribute('ref')
+      ) {
         setSettings(null)
       }
     }
@@ -178,7 +182,7 @@ export const FilterMenu = ({
         </span>
         <div
           className={settings === 1 ? 'filter__item show' : 'filter__item'}
-          ref={settingsRef}>
+          ref={settings === 1 ? settingsRef : null}>
           {años?.map((e, index) => (
             <label
               key={index}
@@ -209,7 +213,8 @@ export const FilterMenu = ({
         <div
           className={
             settings === 2 ? 'filter__item grond show' : 'filter__item grond'
-          }>
+          }
+          ref={settings === 2 ? settingsRef : null}>
           {generos?.map((e, index) => (
             <label
               key={index}
@@ -243,7 +248,8 @@ export const FilterMenu = ({
         <div
           className={
             settings === 3 ? 'filter__item estados show' : 'filter__item'
-          }>
+          }
+          ref={settings === 3 ? settingsRef : null}>
           {estados?.map((e, index) => (
             <label
               key={index}
@@ -275,9 +281,8 @@ export const FilterMenu = ({
           {selectedSort.length == 0 ? 'Por defecto' : ''}
         </span>
         <div
-          className={
-            settings === 4 ? 'filter__item Sort show' : 'filter__item'
-          }>
+          className={settings === 4 ? 'filter__item Sort show' : 'filter__item'}
+          ref={settings === 4 ? settingsRef : null}>
           {sortBy?.map((e, index) => (
             <label
               key={index}

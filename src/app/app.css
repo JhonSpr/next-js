@@ -343,27 +343,30 @@ footer {
 .a {
   color: #e2e8f0 !important;
 }
+/* HTML: <div class="loader"></div> */
 .loader {
-  width: 40px;
-  aspect-ratio: 2;
   margin-inline: auto;
-  --_g: no-repeat radial-gradient(circle closest-side, #1283b8 90%, #0000);
-  background: var(--_g) 0% 50%, var(--_g) 50% 50%, var(--_g) 100% 50%;
-  background-size: calc(100% / 3) 50%;
-  animation: l3 1s infinite linear;
+  width: 10px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  animation: l5 1s infinite linear alternate;
 }
-@keyframes l3 {
-  20% {
-    background-position: 0% 0%, 50% 50%, 100% 50%;
+@keyframes l5 {
+  0% {
+    box-shadow: 20px 0 #1283b8, -20px 0 #1284b823;
+    background: #1283b8;
   }
-  40% {
-    background-position: 0% 100%, 50% 0%, 100% 50%;
+  33% {
+    box-shadow: 20px 0 #1283b8, -20px 0 #1284b823;
+    background: #1284b823;
   }
-  60% {
-    background-position: 0% 50%, 50% 100%, 100% 0%;
+  66% {
+    box-shadow: 20px 0 #1284b823, -20px 0 #1283b8;
+    background: #1284b823;
   }
-  80% {
-    background-position: 0% 50%, 50% 50%, 100% 100%;
+  100% {
+    box-shadow: 20px 0 #1284b823, -20px 0 #1283d8;
+    background: #1283d8;
   }
 }
 /* HTML: <div class="loader"></div> */

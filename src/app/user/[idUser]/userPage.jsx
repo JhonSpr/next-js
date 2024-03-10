@@ -9,6 +9,7 @@ import { MdOutlineSettings } from 'react-icons/md'
 import { CiLogout } from 'react-icons/ci'
 import { auth } from '@/app/firebase'
 import Alert from '@/app/components/Alert'
+import { FaPlayCircle } from 'react-icons/fa'
 
 const UserPage = () => {
   const [cookie, setCookie] = useCookies(['username'])
@@ -20,6 +21,7 @@ const UserPage = () => {
     user,
     favoritos,
     ultimosVistados,
+    enEspera,
   } = useContext(contextApp)
 
   const router = useRouter()
@@ -269,26 +271,16 @@ const UserPage = () => {
               className={`grid gap-4 mb-4 ${
                 esDispositivoMovil ? 'grid-cols-2' : 'grid-cols-7'
               }`}>
-              <img
-                src='https://i.postimg.cc/rscm9xcy/undead-unluck.webp'
-                alt=''
-              />
-              <img
-                src='https://i.postimg.cc/rscm9xcy/undead-unluck.webp'
-                alt=''
-              />
-              <img
-                src='https://i.postimg.cc/XY8nF4GW/sekai-saikou-no-ansatsusha-isekai-kizoku-ni-tensei-suru.webp'
-                alt=''
-              />
-              <img
-                src='https://i.postimg.cc/XY8nF4GW/sekai-saikou-no-ansatsusha-isekai-kizoku-ni-tensei-suru.webp'
-                alt=''
-              />
-              <img
-                src='https://i.postimg.cc/XY8nF4GW/sekai-saikou-no-ansatsusha-isekai-kizoku-ni-tensei-suru.webp'
-                alt=''
-              />
+              {enEspera?.map((e, index) => (
+                <article key={index} className='EnEspera__panel__user'>
+                  <a href={`/${e.name?.replace(/ /g, '-')}`}>
+                    <img src={e.image} alt='' />
+                    <div className='overlay'>
+                      <FaPlayCircle />
+                    </div>
+                  </a>
+                </article>
+              ))}
             </div>
           )}
           {settings === 3 && (
@@ -299,9 +291,12 @@ const UserPage = () => {
               }`}>
               {ultimosVistados?.map((e, index) => (
                 <article key={index} className='ultimosVistos__panel__user'>
-                  <a href={`/${e.name?.replace(/ /g, '-')}`}>
+                  <a href={`/${e.name?.replace(/ /g, '-')}/${e.episode}`}>
                     <span className='tag'>{e.episode}</span>
                     <img src={e.image} alt='' />
+                    <div className='overlay'>
+                      <FaPlayCircle />
+                    </div>
                   </a>
                 </article>
               ))}

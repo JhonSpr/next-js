@@ -300,12 +300,11 @@
 
   .list__animes {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(32.333%, 200px));
+    grid-template-columns: repeat(auto-fit, minmax(32.333%, 32.333%));
     gap: 9px;
     justify-content: center;
-    align-items: center;
-    text-align: center;
     align-content: center;
+    align-items: center;
   }
 
   .card__anime {
@@ -581,9 +580,8 @@
       color: #1283b8;
     }
     &.active {
-      color: #ccc !important;
-      background-color: #121212 !important;
-      outline: 2px solid #092da1;
+      color: #fff !important;
+      background-color: #1283b8 !important;
     }
     & svg {
       margin-top: 5px;
@@ -709,7 +707,7 @@
     transition-duration: 0.2s;
     transition-timing-function: ease-in-out;
     &.show {
-      width: 100%;
+      width: 120%;
       height: 120px;
       padding-left: 10px;
       padding-top: 10px;
@@ -720,6 +718,7 @@
     & span {
       width: max-content;
       text-wrap: nowrap;
+      text-transform: capitalize !important;
       font-size: 12px !important;
       color: #86868a;
       display: block;
@@ -730,8 +729,9 @@
         color: #fff;
       }
       & svg {
-        display: inline-block;
-        margin-right: 5px;
+        font-size: 18px !important;
+        display: inline-block !important;
+        margin-right: 5px !important;
       }
 
       &.active {
@@ -744,7 +744,7 @@
     position: relative;
     font-size: 20px;
     width: auto;
-    text-transform: lowercase;
+
     border-radius: 6px;
     transition: all 0.2s ease-out;
     margin-inline: auto;
@@ -753,10 +753,17 @@
     & span {
       text-wrap: nowrap;
       padding: 7px;
-      font-size: 20px;
+      font-size: 16px;
+      display: flex;
+      gap: 4px;
+      text-transform: uppercase;
+      & svg {
+        font-size: 25px;
+        margin-top: 0px !important;
+      }
     }
     &.active {
-      outline: 2px solid #1283d8;
+      background-color: #1283b8 !important;
     }
     & svg {
       margin-top: 5px !important;
@@ -1702,7 +1709,7 @@
   }
   .container__card__user {
     position: absolute;
-    top: 50px;
+    top: 65px;
     z-index: 3;
     width: 300px !important;
     height: 0;
@@ -1846,16 +1853,53 @@
       background-color: #17171a !important;
     }
   }
+
+  .EnEspera__panel__user {
+    width: 200px;
+    height: 300px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 7px;
+    &:hover img {
+      filter: blur(10px);
+    }
+    & img {
+      width: 200px;
+      height: 300px;
+      border-radius: 7px;
+    }
+    &:hover .overlay {
+      opacity: 1;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      background-color: rgba(13, 159, 204, 0.5);
+      font-size: 50px;
+      border-radius: 7px;
+    }
+  }
+
   .ultimosVistos__panel__user {
     position: relative;
     width: 100%;
-    height: 200px;
+    height: 150px;
+    &:hover .overlay {
+      opacity: 1;
+      height: 100%;
+      width: 100%;
+      display: flex;
+      background-color: rgba(13, 159, 204, 0.5);
+      place-items: center;
+      font-size: 50px;
+      border-radius: 7px;
+    }
   }
   .ultimosVistos__panel__user img {
     position: absolute;
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: 7px;
   }
 
   .ultimosVistos__panel__user .tag {
@@ -1866,15 +1910,28 @@
     z-index: 3;
     background-color: #1283b8;
     padding: 3px 16px;
+    font-size: 13px;
     &::before {
       content: 'episodio';
+      margin-right: 4px;
       display: inline-block;
     }
   }
   .container__results {
     position: absolute;
+    transition-duration: 0.1s;
+    transition-timing-function: ease-in-out;
+    transition-property: opacity;
     z-index: 2;
     top: 65px;
+    &.hide {
+      opacity: 0 !important;
+      z-index: 2;
+    }
+    &.show {
+      opacity: 1;
+      z-index: 2;
+    }
   }
   .results {
     display: flex;
@@ -1883,6 +1940,31 @@
     padding: 12px;
     width: 300px;
     border-radius: 7px;
+    gap: 10px;
+    &.history::before {
+      content: 'Busquedas Recientes';
+      display: block;
+      width: 100%;
+      color: #fff;
+      border-bottom: 2px solid #1283d8;
+    }
+
+    &.history a {
+      display: flex;
+      gap: 10px;
+    }
+    &.history a img {
+      height: 80px;
+      display: inline-block;
+      border-radius: 6px;
+    }
+
+    &.history a span {
+      display: inline-block;
+      &:hover {
+        color: #1283d8;
+      }
+    }
 
     & span {
       color: #fff;

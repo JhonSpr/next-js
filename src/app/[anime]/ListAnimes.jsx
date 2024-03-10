@@ -15,6 +15,7 @@ import 'moment-timezone'
 import { FaCheck } from 'react-icons/fa6'
 import useWatchLater from './HooksDB/HookWatchLater'
 import { LoaderPage } from '../components/LoaderSkeleton'
+import { IoIosAdd, IoMdRemoveCircle } from 'react-icons/io'
 
 export const obtenerMensajeFecha = (fechaAgregado) => {
   const fechaActual = moment()
@@ -319,6 +320,7 @@ export function FetchSingleAnime({ data }) {
   const handleClose = () => {
     setIsVisible(false)
     setNoLogged(false)
+    clearTimeout()
   }
 
   useEffect(() => {
@@ -389,9 +391,16 @@ export function FetchSingleAnime({ data }) {
                 <span onClick={() => agregarFavoritos(e.id, e.image)}>
                   {favoritos.some(
                     (objeto) => objeto?.name.toLowerCase() == e.name
+                  ) ? (
+                    <IoMdRemoveCircle />
+                  ) : (
+                    <IoIosAdd />
+                  )}
+                  {favoritos.some(
+                    (objeto) => objeto?.name.toLowerCase() == e.name
                   )
-                    ? 'eliminar de lista'
-                    : 'añadir a lista'}
+                    ? 'Mi lista'
+                    : 'Mi lista'}
                 </span>
                 <MdKeyboardArrowDown
                   className='icon__settings__anime'
@@ -405,7 +414,9 @@ export function FetchSingleAnime({ data }) {
                     <FaCheck /> Marcar como completado
                   </span>
                   <span
-                    onClick={() => updateWatchLater(id, user?.uid)}
+                    onClick={() =>
+                      updateWatchLater(id, user?.uid, e.name, e.image)
+                    }
                     className={isWaiting?.enEspera ? 'active' : ''}>
                     <MdWatchLater
                       color={isWaiting?.enEspera ? '#03fcd2ea' : 'fff'}

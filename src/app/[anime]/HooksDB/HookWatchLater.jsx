@@ -8,7 +8,7 @@ const useWatchLater = ({
   setNoLogged,
   setRemove,
 }) => {
-  async function updateWatchLater(animeId, userId) {
+  async function updateWatchLater(animeId, userId, animeName, animeImage) {
     try {
       if (!user) {
         setMessage('Debes iniciar sesión para usar esta función')
@@ -21,35 +21,48 @@ const useWatchLater = ({
         const db = getDatabase()
         const animeRef = ref(db, `animes/${animeId}`)
         const userVotesRef = ref(db, `usersVotes/${userId}/${animeId}`)
+        const userRef = ref(db, `users/${userId}`)
+
         const userVoteSnapshot = await get(userVotesRef)
         let userVote = userVoteSnapshot.val() || {}
 
-        const enEsperaSnapshot = await get(child(animeRef, 'enEspera'))
-        let currentEnEspera = enEsperaSnapshot.val() || 0
+        const snapshot = await get(userRef)
+        const userData = snapshot?.val() || {}
 
-        if (userVote.enEspera) {
+        const enEsperaSnapshot = await get(child(userRef, 'EnEspera'))
+        let currentEnEspera = enEsperaSnapshot.val() || []
+
+        const existingAnimeIndex = currentEnEspera.findIndex(
+          (item) => item.name === animeName
+        )
+
+        if (existingAnimeIndex !== -1) {
           // Si ya está en la lista de espera, lo quitamos
-          currentEnEspera--
+          currentEnEspera.splice(existingAnimeIndex, 1)
           await Promise.all([
-            set(child(animeRef, 'enEspera'), currentEnEspera),
+            set(child(animeRef, 'enEspera'), 0),
             set(userVotesRef, { ...(userVote || {}), enEspera: false }),
+            set(child(userRef, 'EnEspera'), currentEnEspera),
           ])
           setMessage('El anime fue removido de tu lista de espera.')
         } else {
           // Si no está en la lista de espera, lo agregamos
-          currentEnEspera++
+          currentEnEspera.push({ name: animeName, image: animeImage })
           await Promise.all([
-            set(child(animeRef, 'enEspera'), currentEnEspera),
+            set(child(animeRef, 'enEspera'), 1),
             set(userVotesRef, { ...(userVote || {}), enEspera: true }),
+            set(child(userRef, 'EnEspera'), currentEnEspera),
           ])
           setMessage('El anime fue agregado a tu lista de espera.')
         }
+
         setIsVisible(true)
         setRemove(false)
         setTimeout(() => {
           setIsVisible(false)
           setRemove(false)
         }, 2000)
+
         setFirstClicked(false)
       }
     } catch (error) {

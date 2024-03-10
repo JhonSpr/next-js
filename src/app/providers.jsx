@@ -24,6 +24,7 @@ export const ContextProvider = ({ children }) => {
   const [like, setLike] = useState(0) || 0
   const [dislike, setDislike] = useState(0) || 0
   const [rate, setRate] = useState(null)
+  const [enEspera, setEnEspera] = useState([])
   useEffect(() => {
     setRate(calcularRating(like, dislike))
   })
@@ -63,7 +64,8 @@ export const ContextProvider = ({ children }) => {
 
         setTimeout(() => {
           setIsVisible(false)
-        }, 2000)
+        }, 3000)
+        clearTimeout()
       } else {
         favoritos.splice(objetoExistenteIndex, 1)
         await set(userRef, {
@@ -74,10 +76,11 @@ export const ContextProvider = ({ children }) => {
         setMessage('Eliminado de favoritos')
         setIsVisible(true)
         setRemove(true)
-        const idTimer = setTimeout(() => {
+        setTimeout(() => {
           setIsVisible(false)
           setRemove(false)
-        }, 2000)
+        }, 3000)
+        clearTimeout()
       }
       setFirstClicked(false)
     } catch (error) {
@@ -94,6 +97,7 @@ export const ContextProvider = ({ children }) => {
         const userData = snapshot?.val() || []
         setFavoritos(userData.favoritos || [])
         setUltimosVisitados(userData.vistos_reciente || [])
+        setEnEspera(userData.EnEspera || [])
       } catch (error) {
         console.error('Error al agregar/eliminar anime de favoritos:', error)
       }
@@ -123,6 +127,7 @@ export const ContextProvider = ({ children }) => {
     setDislike,
     setLike,
     rate,
+    enEspera,
   }
   return (
     <contextApp.Provider value={contextValue}>{children}</contextApp.Provider>

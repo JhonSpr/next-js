@@ -19,7 +19,7 @@ const hrefs = [
 ]
 
 function Navigation() {
-  const [search, setSearch] = useState('null')
+  const [search, setSearch] = useState(null)
   const [loading, setLoading] = useState(false)
   const [results, setResults] = useState([])
   const [showMenu, setShowMenu] = useState(false)
@@ -28,6 +28,22 @@ function Navigation() {
   const { theme } = useTheme()
   const { user } = useContext(contextApp)
   const inputRef = useRef(null)
+  const [settings, setSettings] = useState(null)
+  const settingsRef = useRef(null)
+  const [history, setHistory] = useState([])
+  const [isFocused, setIsFocused] = useState(false)
+
+  const handleFocus = () => {
+    setIsFocused(true)
+  }
+
+  const handleBlur = () => {
+    setIsFocused(false)
+  }
+  useEffect(() => {
+    setHistory(JSON.parse(localStorage.getItem('history')) || [])
+  }, [])
+
   const handleSearch = useDebouncedCallback((e) => {
     setSearch(e.target.value)
     setLoading(true)
@@ -35,7 +51,7 @@ function Navigation() {
     setTimeout(() => {
       setLoading(false)
     }, 3000)
-  }, 0)
+  }, 200)
 
   const handleClick = () => {
     if (inputRef.current) {
@@ -44,24 +60,21 @@ function Navigation() {
   }
 
   if (search === '') {
-    setSearch('null')
+    setSearch(null)
   }
 
   useEffect(() => {
-    if (!loading) {
-      fetch(
-        `https://api-rest.up.railway.app/api/v1/animes?name=${search}&page=1&limit=6`
-      )
-        .then((res) => res.json())
-        .then((data) => {
-          setResults(data)
-        })
-        .catch((error) => {
-          console.error('Error al buscar animes:', error)
-        })
-    }
+    fetch(
+      `https://api-rest.up.railway.app/api/v1/animes?name=${search}&page=1&limit=6`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        setResults(data)
+      })
+      .catch((error) => {
+        console.error('Error al buscar animes:', error)
+      })
   }, [loading])
-
   useEffect(() => {
     document.body.classList.remove('light', 'dark')
     document.body.classList.add(theme)
@@ -76,9 +89,48 @@ function Navigation() {
     setShowMenu(false)
   }
 
-  const handleShowMenu = () => {
+  const handleShowMenu = (id) => {
     setShowMenu(!showMenu)
+
+    if (settings === id) {
+      setSettings(null)
+    } else {
+      setSettings(id)
+    }
   }
+
+  const handleAddHistory = (name, image) => {
+    let arrayHistory = JSON.parse(localStorage.getItem('history')) || []
+    const nameExists = arrayHistory.some((item) => item.name === name)
+
+    if (!nameExists) {
+      const newItem = {
+        image: image,
+        name: name,
+        url: `/${name.replace(/ /g, '-').toLowerCase()}`,
+      }
+      arrayHistory.push(newItem)
+      localStorage.setItem('history', JSON.stringify(arrayHistory))
+    }
+  }
+
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (
+        settingsRef.current &&
+        !settingsRef.current.contains(event.target) &&
+        !event.target.getAttribute('ref')
+      ) {
+        setSettings(null)
+      }
+    }
+
+    document.addEventListener('click', handleOutsideClick)
+
+    return () => {
+      document.removeEventListener('click', handleOutsideClick)
+    }
+  }, [settings])
 
   return (
     <nav className='bg-white border-gray-200 dark:bg-gray-900 nav' id='navbar'>
@@ -119,7 +171,7 @@ function Navigation() {
               <div
                 className='relative w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600'
                 style={{ marginRight: '10px' }}
-                onClick={handleShowMenu}>
+                onClick={() => handleShowMenu(1)}>
                 <svg
                   className='absolute w-12 h-12 text-gray-400 -left-1'
                   fill='currentColor'
@@ -140,14 +192,15 @@ function Navigation() {
                 }
                 alt='Bordered avatar'
                 style={{ marginRight: '10px' }}
-                onClick={handleShowMenu}
+                onClick={() => handleShowMenu(1)}
               />
             )}
 
             <div
               className={`w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 container__card__user ${
-                showMenu ? 'show' : ''
-              }`}>
+                settings === 1 ? 'show' : ''
+              }`}
+              ref={settingsRef}>
               <div className='flex justify-end px-4 pt-4'>
                 <button
                   id='dropdownButton'
@@ -283,17 +336,35 @@ function Navigation() {
                 placeholder='Buscar un anime...'
                 ref={inputRef}
                 onChange={handleSearch}
+                onFocus={handleFocus}
+                onBlur={handleBlur}
               />
+
+              <div
+                className={`container__results  ${
+                  isFocused ? 'show' : 'hide'
+                } ${search !== null ? 'hide' : ''}`}>
+                <div className='results history'>
+                  {history.map((e, index) => (
+                    <a href={e.url} key={index}>
+                      <img src={e.image} alt='' />
+                      <span>{e.name}</span>
+                    </a>
+                  ))}
+                </div>
+              </div>
               <div
                 className={`container__results ${
-                  search === 'null' ? 'disable' : ''
+                  search === null ? 'disable' : ''
                 }`}>
                 <div className={`results`}>
                   {results?.datos?.map((e, index) => (
                     <div
                       className={`result ${loading ? 'disable' : ''}`}
                       key={index}>
-                      <a href={e.name.replace(/ /g, '-')}>
+                      <a
+                        href={e.name.replace(/ /g, '-')}
+                        onClick={() => handleAddHistory(e.name, e.image)}>
                         <div className='image__result'>
                           <img src={e.image} alt={e.image} />
                         </div>
@@ -308,13 +379,14 @@ function Navigation() {
                       </a>
                     </div>
                   ))}
-                  {results?.item == 0 ? (
+
+                  {results?.item == 0 && (
                     <span className={loading ? 'disable' : ''}>
                       No hay resultados para {`${search}`}
                     </span>
-                  ) : null}
+                  )}
 
-                  {loading ? <Loader /> : null}
+                  {loading && <Loader />}
 
                   {results?.item > 6 ? (
                     <button className={loading ? 'disable' : 'btn__results'}>
