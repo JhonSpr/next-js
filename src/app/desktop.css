@@ -1897,9 +1897,8 @@
   .ultimosVistos__panel__user {
     position: relative;
     width: 200px;
-    height: 150px;
+    height: 150px !important;
     overflow: hidden;
-
     &:hover .tag {
       opacity: 0;
     }
