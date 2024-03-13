@@ -10,14 +10,13 @@ import { get, getDatabase, ref, set } from 'firebase/database'
 import { Request_Animes } from '@/app/FetchingData/request_animes'
 import { LoaderPage } from '@/app/components/LoaderSkeleton'
 import { MdFavorite } from 'react-icons/md'
+import Alert from '@/app/components/Alert'
 
 function EpisodePage({ name, episode, services }) {
   const [animes, setAnimes] = useState([])
   const [lastEpisodes, setLastEpisodes] = useState([])
   const [play, setPlay] = useState(false)
   const [loading, setLoading] = useState([])
-  const [favoritos, setFavoritos] = useState([])
-  const [episodiosGuardados, setEpisodiosGuardados] = useState([])
 
   useEffect(() => {
     setLoading(true)
@@ -70,8 +69,19 @@ function EpisodePage({ name, episode, services }) {
       console.error('Error al agregar el objeto a vistosRecientes:', error)
     }
   }
-  const { theme, user, agregarFavoritos, message, guardarEpisodio } =
-    useContext(contextApp)
+  const {
+    theme,
+    user,
+    agregarFavoritos,
+    guardarEpisodio,
+    favoritos,
+    episodiosGuardados,
+    isVisible,
+    remove,
+    noLogged,
+    message,
+    firstClicked,
+  } = useContext(contextApp)
 
   useEffect(() => {
     if (
@@ -82,28 +92,9 @@ function EpisodePage({ name, episode, services }) {
     }
   }, [animes, user])
 
-  const cargarDataUser = async () => {
-    try {
-      const db = getDatabase()
-      const id = user?.uid
-
-      const voteUsersRef = ref(db, 'usersVotes/' + id)
-      const snapshotVote = await get(voteUsersRef)
-
-      const userRef = ref(db, 'users/' + id)
-      const snapshot = await get(userRef)
-      const userData = snapshot?.val() || {}
-      setFavoritos(userData.favoritos || [])
-      setEpisodiosGuardados(userData.guardarEpisodio || [])
-    } catch (error) {
-      console.error('Error al cargar los datos del usuario:', error)
-    }
+  const handleClose = () => {
+    return null
   }
-  useEffect(() => {
-    if ((user !== undefined && user !== null) || !user) {
-      cargarDataUser()
-    }
-  }, [message, animes])
 
   if (loading) {
     return (
@@ -125,6 +116,14 @@ function EpisodePage({ name, episode, services }) {
   return animes?.datos?.map((e) => (
     <main className='container__episode__page' key={e.id}>
       <div className='container__iframe'>
+        {isVisible && (
+          <Alert
+            isVisible={isVisible && !firstClicked}
+            message={message}
+            remove={remove}
+            handleClose={handleClose}
+          />
+        )}
         <div>
           <p className='nav__episode'>
             <a href='/' className='fr'>
@@ -214,6 +213,50 @@ function EpisodePage({ name, episode, services }) {
         </div>
         <Comments noButton={true} showCommentarios={true} />
       </div>
+      {noLogged && (
+        <div
+          style={{
+            visibility: `${noLogged ? 'visible' : 'hidden'}`,
+            position: 'fixed',
+            bottom: '30px',
+          }}
+          id='alert-2'
+          className='flex items-center p-4 mb-4 text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 alert'
+          role='alert'>
+          <svg
+            className='flex-shrink-0 w-4 h-4'
+            aria-hidden='true'
+            xmlns='http://www.w3.org/2000/svg'
+            fill='currentColor'
+            viewBox='0 0 20 20'>
+            <path d='M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z' />
+          </svg>
+          <span className='sr-only'>Info</span>
+          <div className='ms-3 text-sm font-medium'>{message}</div>
+          <button
+            type='button'
+            className='ms-auto -mx-1.5 -my-1.5 bg-red-50 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-red-400 dark:hover:bg-gray-700'
+            data-dismiss-target='#alert-2'
+            aria-label='Close'
+            onClick={handleClose}>
+            <span className='sr-only'>Close</span>
+            <svg
+              className='w-3 h-3'
+              aria-hidden='true'
+              xmlns='http://www.w3.org/2000/svg'
+              fill='none'
+              viewBox='0 0 14 14'>
+              <path
+                stroke='currentColor'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                strokeWidth='2'
+                d='m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6'
+              />
+            </svg>
+          </button>
+        </div>
+      )}
 
       <ScrollSide few__added__data={lastEpisodes} />
     </main>

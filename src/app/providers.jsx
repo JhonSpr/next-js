@@ -45,48 +45,58 @@ export const ContextProvider = ({ children }) => {
 
   const agregarFavoritos = async (name, image) => {
     try {
-      const db = getDatabase()
-      const userRef = ref(db, 'users/' + user?.uid)
-      const snapshot = await get(userRef)
-      const userData = snapshot?.val() || {}
-      const vistosRecientes = userData?.vistos_reciente || []
-      const favoritos = userData?.favoritos || []
-      const episodioGuardados = userData?.guardarEpisodio || []
-      const objetoExistenteIndex = favoritos.findIndex(
-        (objeto) => objeto?.name === name
-      )
-
-      if (objetoExistenteIndex === -1) {
-        await set(userRef, {
-          nombre: user?.displayName || 'undefined',
-          vistos_reciente: [...vistosRecientes],
-          guardarEpisodio: [...episodioGuardados],
-          favoritos: [...favoritos, { name, image }],
-        })
-        setMessage('Agregado a favoritos')
-        setIsVisible(true)
-
+      if (!user) {
+        setMessage('Debes iniciar sesión para usar esta función')
+        setNoLogged(true)
         setTimeout(() => {
-          setIsVisible(false)
-        }, 3000)
-        clearTimeout()
+          setNoLogged(false)
+        }, 2000)
+        return
       } else {
-        favoritos.splice(objetoExistenteIndex, 1)
-        await set(userRef, {
-          nombre: user?.displayName || 'undefined',
-          vistos_reciente: [...vistosRecientes],
-          guardarEpisodio: [...episodioGuardados],
-          favoritos: favoritos,
-        })
-        setMessage('Eliminado de favoritos')
-        setIsVisible(true)
-        setRemove(true)
-        setTimeout(() => {
-          setIsVisible(false)
-          setRemove(false)
-        }, 3000)
-        clearTimeout()
+        const db = getDatabase()
+        const userRef = ref(db, 'users/' + user?.uid)
+        const snapshot = await get(userRef)
+        const userData = snapshot?.val() || {}
+        const vistosRecientes = userData?.vistos_reciente || []
+        const favoritos = userData?.favoritos || []
+        const episodioGuardados = userData?.guardarEpisodio || []
+        const objetoExistenteIndex = favoritos.findIndex(
+          (objeto) => objeto?.name === name
+        )
+
+        if (objetoExistenteIndex === -1) {
+          await set(userRef, {
+            nombre: user?.displayName || 'undefined',
+            vistos_reciente: [...vistosRecientes],
+            guardarEpisodio: [...episodioGuardados],
+            favoritos: [...favoritos, { name, image }],
+          })
+          setMessage('Agregado a favoritos')
+          setIsVisible(true)
+
+          setTimeout(() => {
+            setIsVisible(false)
+          }, 3000)
+          clearTimeout()
+        } else {
+          favoritos.splice(objetoExistenteIndex, 1)
+          await set(userRef, {
+            nombre: user?.displayName || 'undefined',
+            vistos_reciente: [...vistosRecientes],
+            guardarEpisodio: [...episodioGuardados],
+            favoritos: favoritos,
+          })
+          setMessage('Eliminado de favoritos')
+          setIsVisible(true)
+          setRemove(true)
+          setTimeout(() => {
+            setIsVisible(false)
+            setRemove(false)
+          }, 3000)
+          clearTimeout()
+        }
       }
+
       setFirstClicked(false)
     } catch (error) {
       console.error('Error al agregar/eliminar anime de favoritos:', error)
@@ -94,48 +104,58 @@ export const ContextProvider = ({ children }) => {
   }
   const guardarEpisodio = async (name, image, url) => {
     try {
-      const db = getDatabase()
-      const userRef = ref(db, 'users/' + user?.uid)
-      const snapshot = await get(userRef)
-      const userData = snapshot?.val() || {}
-      const vistosRecientes = userData?.vistos_reciente || []
-      const favoritos = userData?.favoritos || []
-      const episodioGuardados = userData?.guardarEpisodio || []
-      const objetoExistenteIndex = episodioGuardados.findIndex(
-        (objeto) => objeto?.url === url
-      )
-
-      if (objetoExistenteIndex === -1) {
-        await set(userRef, {
-          nombre: user?.displayName || 'undefined',
-          vistos_reciente: [...vistosRecientes],
-          favoritos: [...favoritos],
-          guardarEpisodio: [...episodioGuardados, { name, image, url }],
-        })
-        setMessage('Agregado a favoritos')
-        setIsVisible(true)
-
+      if (!user) {
+        setMessage('Debes iniciar sesión para usar esta función')
+        setNoLogged(true)
         setTimeout(() => {
-          setIsVisible(false)
-        }, 3000)
-        clearTimeout()
+          setNoLogged(false)
+        }, 2000)
+        return
       } else {
-        episodioGuardados.splice(objetoExistenteIndex, 1)
-        await set(userRef, {
-          nombre: user?.displayName || 'undefined',
-          vistos_reciente: [...vistosRecientes],
-          favoritos: [...favoritos],
-          guardarEpisodio: episodioGuardados,
-        })
-        setMessage('Eliminado de favoritos')
-        setIsVisible(true)
-        setRemove(true)
-        setTimeout(() => {
-          setIsVisible(false)
-          setRemove(false)
-        }, 3000)
-        clearTimeout()
+        const db = getDatabase()
+        const userRef = ref(db, 'users/' + user?.uid)
+        const snapshot = await get(userRef)
+        const userData = snapshot?.val() || {}
+        const vistosRecientes = userData?.vistos_reciente || []
+        const favoritos = userData?.favoritos || []
+        const episodioGuardados = userData?.guardarEpisodio || []
+        const objetoExistenteIndex = episodioGuardados.findIndex(
+          (objeto) => objeto?.url === url
+        )
+
+        if (objetoExistenteIndex === -1) {
+          await set(userRef, {
+            nombre: user?.displayName || 'undefined',
+            vistos_reciente: [...vistosRecientes],
+            favoritos: [...favoritos],
+            guardarEpisodio: [...episodioGuardados, { name, image, url }],
+          })
+          setMessage('Episodio guardado')
+          setIsVisible(true)
+
+          setTimeout(() => {
+            setIsVisible(false)
+          }, 3000)
+          clearTimeout()
+        } else {
+          episodioGuardados.splice(objetoExistenteIndex, 1)
+          await set(userRef, {
+            nombre: user?.displayName || 'undefined',
+            vistos_reciente: [...vistosRecientes],
+            favoritos: [...favoritos],
+            guardarEpisodio: episodioGuardados,
+          })
+          setMessage('Episodio eliminado de guardados')
+          setIsVisible(true)
+          setRemove(true)
+          setTimeout(() => {
+            setIsVisible(false)
+            setRemove(false)
+          }, 3000)
+          clearTimeout()
+        }
       }
+
       setFirstClicked(false)
     } catch (error) {
       console.error('Error al agregar/eliminar anime de favoritos:', error)
@@ -158,7 +178,7 @@ export const ContextProvider = ({ children }) => {
       }
     }
     cargarDataUser()
-  }, [user, dataUser])
+  }, [user, message])
   const contextValue = {
     guardarEpisodio,
     user,

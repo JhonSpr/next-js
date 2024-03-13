@@ -116,20 +116,23 @@ export function FetchSingleAnime({ data }) {
   }, [])
 
   useEffect(() => {
-    const db = getDatabase()
-    const incrementAnimeVisits = async () => {
-      const animeRef = ref(db, `animes/${id}`)
-      const snapshot = await get(animeRef)
-      if (snapshot.exists()) {
-        const currentVisits = snapshot.val().visitas || 0
-        await set(child(animeRef, 'visitas'), currentVisits + 1)
-        setVisitas((prevVisitas) => prevVisitas + 1)
-      } else {
-        console.error('El anime no existe en la base de datos.')
+    if (!user) {
+    } else {
+      const db = getDatabase()
+      const incrementAnimeVisits = async () => {
+        const animeRef = ref(db, `animes/${id}`)
+        const snapshot = await get(animeRef)
+        if (snapshot.exists()) {
+          const currentVisits = snapshot.val().visitas || 0
+          await set(child(animeRef, 'visitas'), currentVisits + 1)
+          setVisitas((prevVisitas) => prevVisitas + 1)
+        } else {
+          console.error('El anime no existe en la base de datos.')
+        }
       }
-    }
 
-    incrementAnimeVisits()
+      incrementAnimeVisits()
+    }
   }, [loading])
   const fecha = obtenerMensajeFecha(fechaAgregado)
 
@@ -278,7 +281,7 @@ export function FetchSingleAnime({ data }) {
         }
 
         const response = await fetch(
-          `https://api-rest.up.railway.app/api/v1/animes/${nameID}/visitas`,
+          `https://api-rest.up.railway.app/api/v1/animes/${animeId}/visitas`,
           {
             method: 'PUT',
             headers: {

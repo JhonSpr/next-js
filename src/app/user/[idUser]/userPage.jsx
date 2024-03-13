@@ -249,7 +249,8 @@ const UserPage = () => {
         <div
           className={`     
         p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 
-        `}>
+        `}
+          style={{ minHeight: '80dvh' }}>
           {settings === 1 && (
             <div
               style={{ minHeight: '80dvh' }}
@@ -288,7 +289,6 @@ const UserPage = () => {
           )}
           {settings === 3 && (
             <div
-              style={{ minHeight: '80dvh' }}
               className={`grid gap-5 mb-4 ${
                 esDispositivoMovil ? 'grid-cols-2' : 'grid-cols-7'
               }`}>
