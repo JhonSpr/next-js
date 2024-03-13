@@ -1845,18 +1845,7 @@
     font-size: 20px;
     text-align: center;
   }
-  .alert__ {
-    position: absolute;
-    color: #b8b5bb;
-    font-weight: 400;
-    padding: 7px;
-    border-radius: 5px;
-    border-bottom: 2px solid #be3939;
-    border-left: 1px solid #be3939;
-    border-right: 1px solid #be3939;
-    border-top: 2px solid #be3939;
-    bottom: 0;
-  }
+
   .close-window {
     width: max-content;
     padding: 0 !important;
