@@ -186,11 +186,11 @@ const UserPage = () => {
                   </button>
                 </li>
                 <li>
-                  <a
+                  <button
                     onClick={() => handleOpen(5)}
                     className='flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group  dark:text-white dark:hover:bg-gray-700'>
                     Episodios en espera
-                  </a>
+                  </button>
                 </li>
                 <li>
                   <button
