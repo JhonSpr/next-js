@@ -22,6 +22,7 @@ const UserPage = () => {
     favoritos,
     ultimosVistados,
     enEspera,
+    episodiosGuardados,
   } = useContext(contextApp)
 
   const router = useRouter()
@@ -189,7 +190,7 @@ const UserPage = () => {
                 </li>
                 <li>
                   <a
-                    href='#'
+                    onClick={() => handleOpen(5)}
                     className='flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group  dark:text-white dark:hover:bg-gray-700'>
                     Episodios en espera
                   </a>
@@ -269,6 +270,7 @@ const UserPage = () => {
               ))}
             </div>
           )}
+
           {settings === 2 && (
             <div
               style={{ minHeight: '80dvh' }}
@@ -354,6 +356,24 @@ const UserPage = () => {
                   </button>
                 </div>
               </section>
+            </div>
+          )}
+          {settings === 5 && (
+            <div
+              style={{ minHeight: '80dvh' }}
+              className={`grid gap-4 mb-4 ${
+                esDispositivoMovil ? 'grid-cols-2' : 'grid-cols-7'
+              }`}>
+              {episodiosGuardados?.map((e, index) => (
+                <article key={index} className='favorite__panel__user'>
+                  <a href={`/${e.name?.replace(/ /g, '-')}`}>
+                    <img src={e.image} alt='' />
+                    <div className='overlay'>
+                      <FaPlayCircle />
+                    </div>
+                  </a>
+                </article>
+              ))}
             </div>
           )}
         </div>
