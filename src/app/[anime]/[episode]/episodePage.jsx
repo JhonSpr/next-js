@@ -33,7 +33,7 @@ function EpisodePage({ name, episode, services }) {
 
   const servicesList = services.filter((e) => e?.[dynamicCapKey])
 
-  const { image } = servicesList[0]?.[dynamicCapKey][0]
+  const { image } = servicesList[0]?.[dynamicCapKey][0] ?? ''
 
   const agregarValorAVistosRecientes = async (name, image) => {
     try {
