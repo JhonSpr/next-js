@@ -3,8 +3,7 @@ import { contextApp } from '@/app/providers'
 import { getAuth, signOut, updateProfile } from 'firebase/auth'
 import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage'
 import { useRouter } from 'next/navigation'
-import { useContext, useEffect, useRef, useState } from 'react'
-import { useCookies } from 'react-cookie'
+import { useContext, useEffect, useState } from 'react'
 import { MdOutlineSettings } from 'react-icons/md'
 import { CiLogout } from 'react-icons/ci'
 import { auth } from '@/app/firebase'
@@ -12,8 +11,6 @@ import Alert from '@/app/components/Alert'
 import { FaPlayCircle } from 'react-icons/fa'
 
 const UserPage = () => {
-  const [cookie, setCookie] = useCookies(['username'])
-
   const {
     dataUser,
     theme,
