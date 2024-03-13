@@ -176,11 +176,7 @@ function EpisodePage({ name, episode, services }) {
             </button>
             <button
               onClick={() =>
-                guardarEpisodio(
-                  e.name.toLowerCase(),
-                  e.image,
-                  location.pathname
-                )
+                guardarEpisodio(e.name.toLowerCase(), image, location.pathname)
               }>
               <FaClockRotateLeft
                 color={
