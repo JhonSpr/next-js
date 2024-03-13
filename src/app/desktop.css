@@ -626,7 +626,7 @@
     top: -20px;
     padding: 10px;
     border-radius: 50%;
-    margin-inline: auto;
+    left: 50%;
     background-color: #1283b8;
     font-size: 30px;
   }
