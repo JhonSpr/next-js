@@ -365,7 +365,7 @@ const UserPage = () => {
                 <article
                   key={index}
                   className='episodiosGuardados__panel__user'>
-                  <a href={`/${e.name?.replace(/ /g, '-')}/${e.episode}`}>
+                  <a href={e.url}>
                     <img src={e.image} alt='' />
                     <div className='overlay'>
                       <FaPlayCircle />
