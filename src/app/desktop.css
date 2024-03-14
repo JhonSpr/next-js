@@ -1907,6 +1907,33 @@
     }
   }
 
+  .episodiosGuardados__panel__user {
+    width: 350px;
+    height: 200px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 7px;
+    &:hover img {
+      filter: blur(10px);
+    }
+    & img {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      object-fit: cover;
+      border-radius: 7px;
+    }
+    &:hover .overlay {
+      opacity: 1;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      background-color: rgba(13, 159, 204, 0.5);
+      font-size: 50px;
+      border-radius: 7px;
+    }
+  }
+
   .favorite__panel__user {
     width: 200px;
     height: 300px;

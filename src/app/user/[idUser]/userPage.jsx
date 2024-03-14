@@ -362,7 +362,9 @@ const UserPage = () => {
                 esDispositivoMovil ? 'grid-cols-2' : 'grid-cols-7'
               }`}>
               {episodiosGuardados?.map((e, index) => (
-                <article key={index} className='favorite__panel__user'>
+                <article
+                  key={index}
+                  className='episodiosGuardados__panel__user'>
                   <a href={`/${e.name?.replace(/ /g, '-')}/${e.episode}`}>
                     <img src={e.image} alt='' />
                     <div className='overlay'>
