@@ -6,10 +6,6 @@ html.dark {
     --darkModeBackground: #17171a;
     background-color: var(--background-color) !important;
   }
-
-  & * {
-    font-weight: 600;
-  }
 }
 
 .carousel__container.dark {
