@@ -53,6 +53,15 @@
   -webkit-backface-visibility: hidden;
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
+  &::before {
+    content: '';
+    top: 50%;
+    position: absolute;
+    width: 100%;
+    z-index: 999;
+    background: linear-gradient(to bottom, transparent, #1283b8);
+    height: 100%;
+  }
 }
 .owl-carousel .owl-item img {
   display: block;

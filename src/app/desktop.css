@@ -326,6 +326,16 @@
     width: 50%;
     height: 400px;
 
+    &::before {
+      content: '';
+      bottom: 0%;
+      left: 0;
+      position: absolute;
+      width: 50%;
+      z-index: 1;
+      background: linear-gradient(to bottom, transparent, #0a0a0a);
+      height: 50%;
+    }
     & .overlay {
       left: 0;
       top: 0;
@@ -449,8 +459,7 @@
     width: 50%;
     bottom: 0;
     height: 30%;
-    background-color: rgba(17, 17, 17, 0.699) !important;
-    color: #ffffff;
+    color: #fff;
     text-transform: capitalize;
     left: 0;
     text-align: center;
@@ -1703,12 +1712,12 @@
     height: 270px;
     overflow: hidden;
     border-radius: 7px;
-    background-color: #323235;
   }
   .carousel__container .carouse__item img {
     height: 100%;
     width: 100%;
     transition: transform 0.2s ease-out;
+
     &:hover {
       transform: scale(105%);
     }
