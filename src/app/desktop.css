@@ -490,6 +490,7 @@
     flex-direction: column;
     gap: 0px;
     margin-bottom: 20px;
+    margin-top: 150px;
   }
   .search__container .search__title {
     font-size: 30px;
@@ -677,16 +678,16 @@
     image-rendering: optimizeQuality;
     background-repeat: no-repeat;
     background-position: center;
-    filter: blur(10px);
+    filter: blur(10px) brightness(70%);
     &::before {
       content: '';
+      top: 0%;
       position: absolute;
-      display: block;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background-color: rgba(5, 5, 5, 0.37);
+      width: 100%;
+      z-index: 3;
+      background: linear-gradient(to bottom, transparent, #050505);
+      height: 100%;
+      transition: top 0.2s ease;
     }
   }
 
@@ -807,8 +808,8 @@
     width: 100%;
   }
   .information__page {
-    padding: 40px 0px;
-    padding-left: 20px;
+    padding: 140px 10px;
+    padding-right: 20px;
     border-radius: 6px;
     background-color: #efeff1;
   }
@@ -995,6 +996,7 @@
     width: 70%;
     margin: 20px auto;
     gap: 10px;
+    margin-top: 130px;
   }
 
   .container__episode__page .episodes__list {
@@ -1298,10 +1300,10 @@
     background-color: #c1c1c1;
     padding: 20px;
   }
+
   .comments_container {
     width: 100%;
     margin-top: 20px;
-    background-color: #141414 !important;
     border-radius: 7px;
     font-size: 20px;
     display: none;
@@ -2058,9 +2060,12 @@
     &.history a {
       display: flex;
       gap: 10px;
+      font-size: 14px;
+      font-weight: bold;
     }
+
     &.history a img {
-      height: 80px;
+      height: 60px;
       display: inline-block;
       border-radius: 6px;
     }

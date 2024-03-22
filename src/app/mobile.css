@@ -250,6 +250,11 @@
       height: 50%;
     }
   }
+  .nav {
+    width: 100% !important;
+    position: relative;
+    border-radius: 0;
+  }
   .column__image .image__anime {
     position: relative;
     transition-property: filter;

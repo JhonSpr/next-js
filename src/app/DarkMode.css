@@ -1,7 +1,7 @@
 html.dark {
   & body {
-    --background-color: #363b4d;
-    --background-custom: #141414;
+    --background-color: transform;
+    --background-custom: #414141;
     --color-custom: #fff;
     --darkModeBackground: #17171a;
     background-color: var(--background-color) !important;
@@ -121,6 +121,9 @@ html.dark {
 }
 
 .controls.dark a {
+  background-color: var(--background-custom) !important;
+}
+.controls.dark button {
   background-color: var(--background-custom) !important;
 }
 

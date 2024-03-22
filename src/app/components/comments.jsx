@@ -1,18 +1,14 @@
 'use client'
-import { useEffect, useState } from 'react'
-import { useTheme } from 'next-themes'
-import Disqus from 'disqus-react'
+import { useContext, useEffect, useState } from 'react'
+import { contextApp } from '../providers'
 
 export default function Comments({
-  shortname = 'animesz-3',
+  shortname = 'animesz-1',
   marginTop,
   noButton,
   showCommentarios,
-  title,
-  identifier,
-  url,
 }) {
-  const { theme } = useTheme()
+  const { theme } = useContext(contextApp)
   const [showComments, setShowComments] = useState(false)
 
   const handleShowComments = () => {
@@ -28,16 +24,13 @@ export default function Comments({
       document.body.appendChild(disqusScript)
     }
 
-    if (!window.DISQUS) {
-      loadDisqus()
-    }
-  }, [])
+    loadDisqus()
 
-  const disqusConfig = {
-    url,
-    identifier,
-    title,
-  }
+    const styleLink = document.createElement('link')
+    styleLink.rel = 'stylesheet'
+    styleLink.href = '../app.css' // Ruta a tu archivo de estilos personalizados para Disqus
+    document.head.appendChild(styleLink)
+  }, [theme])
 
   return (
     <div className={`comments `} style={{ marginTop: marginTop }}>
@@ -56,7 +49,9 @@ export default function Comments({
           showComments || showCommentarios ? 'show' : ''
         } ${theme === 'dark' ? 'dark' : ''}`}>
         <div>
-          <Disqus.DiscussionEmbed shortname={shortname} config={disqusConfig} />
+          <div
+            id='disqus_thread'
+            className={`${theme === 'dark' ? 'dark' : ''}`}></div>
         </div>
         <div
           id={`disqus-recommendations`}
