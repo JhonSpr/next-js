@@ -246,7 +246,7 @@ export function FetchSingleAnime({ data }) {
         }
 
         const response = await fetch(
-          `https://api-rest.up.railway.app/api/v1/animes/${animeId}/rating`,
+          `https://api-rest.up.railway.app/api/v1/animes/${id}/rating`,
           {
             method: 'PUT',
             headers: {
