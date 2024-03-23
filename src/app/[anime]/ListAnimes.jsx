@@ -116,24 +116,28 @@ export function FetchSingleAnime({ data }) {
   }, [])
 
   useEffect(() => {
-    if (!user) {
-    } else {
-      const db = getDatabase()
-      const incrementAnimeVisits = async () => {
-        const animeRef = ref(db, `animes/${id}`)
-        const snapshot = await get(animeRef)
-        if (snapshot.exists()) {
-          const currentVisits = snapshot.val().visitas || 0
-          await set(child(animeRef, 'visitas'), currentVisits + 1)
-          setVisitas((prevVisitas) => prevVisitas + 1)
-        } else {
-          console.error('El anime no existe en la base de datos.')
-        }
-      }
+    const db = getDatabase()
 
+    const incrementAnimeVisits = async () => {
+      const animeRef = ref(db, `animes/${id}`)
+      const snapshot = await get(animeRef)
+
+      if (snapshot.exists()) {
+        const currentVisits = snapshot.val().visitas || 0
+        await set(child(animeRef, 'visitas'), currentVisits + 1)
+        setVisitas((prevVisitas) => prevVisitas + 1)
+      } else {
+        console.error('El anime no existe en la base de datos.')
+      }
+    }
+
+    incrementAnimeVisits() // Llamada inicial
+
+    // Manejar la llamada cuando el usuario no esté autenticado
+    if (!user) {
       incrementAnimeVisits()
     }
-  }, [loading])
+  }, [id, user])
   const fecha = obtenerMensajeFecha(fechaAgregado)
 
   const fetchData = async () => {

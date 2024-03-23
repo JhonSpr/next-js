@@ -66,10 +66,6 @@
     left: 0px;
     padding: 20px;
     cursor: pointer;
-
-    &:hover .background__image {
-      transform: rotateX(360deg);
-    }
   }
 
   .card__pupular .background__image {
@@ -87,6 +83,16 @@
     z-index: 1;
     filter: brightness(70%);
     transition: all 0.7s ease-out;
+    &::before {
+      content: '';
+      top: 0%;
+      position: absolute;
+      width: 100%;
+      z-index: 3;
+      background: linear-gradient(to bottom, transparent, #151616);
+      height: 100%;
+      transition: top 0.2s ease;
+    }
   }
 
   .title-1 {
@@ -106,17 +112,6 @@
     text-overflow: ellipsis;
     text-wrap: wrap;
     left: 20px;
-    &::before {
-      content: '';
-      display: block;
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      background-color: #000000a8;
-      filter: blur(2px);
-      border-radius: 7px;
-    }
   }
 
   .btn {
@@ -574,6 +569,7 @@
     width: 70%;
     margin: 30px auto;
     min-height: 60dvh;
+    margin-top: 0px;
   }
   .container__anime main {
     display: grid;
@@ -603,7 +599,7 @@
     display: flex;
     gap: 10px;
     justify-content: center;
-
+    user-select: none;
     transition: background-color 0.5s ease-out;
     &:hover {
       color: #1283b8;
@@ -673,21 +669,21 @@
     width: 100%;
     background-size: cover;
     z-index: -2;
-    height: 300px;
+    height: 100%;
     min-height: 80dvh;
     image-rendering: optimizeQuality;
     background-repeat: no-repeat;
     background-position: center;
-    filter: blur(10px) brightness(70%);
+    filter: brightness(70%);
+    box-shadow: -29px 122px 29px 29px #050505;
     &::before {
       content: '';
       top: 0%;
       position: absolute;
       width: 100%;
-      z-index: 3;
-      background: linear-gradient(to bottom, transparent, #050505);
-      height: 100%;
-      transition: top 0.2s ease;
+      z-index: 2;
+      background: linear-gradient(to bottom, transparent, #000, #050505);
+      height: 140%;
     }
   }
 
@@ -698,6 +694,7 @@
     gap: 7px;
   }
   .container__anime main .info__anime .generos__anime a {
+    user-select: none;
     padding: 3px 12px;
     border: 1px solid #17171a;
     border-radius: 2px;
@@ -777,7 +774,7 @@
     position: relative;
     font-size: 20px;
     width: auto;
-
+    user-select: none;
     border-radius: 6px;
     transition: all 0.2s ease-out;
     margin-inline: auto;
@@ -801,6 +798,9 @@
     & svg {
       margin-top: 5px !important;
       color: #fff !important;
+    }
+    &:hover {
+      color: #1283d8;
     }
   }
 
@@ -922,15 +922,9 @@
     .info__anime
     .episode__anime__list
     .episode__item {
-    flex-basis: 31%;
+    width: 32%;
     height: 150px;
     position: relative;
-    &.widthNormal {
-      flex-basis: 31% !important;
-    }
-    &.solo__item {
-      flex: 31%;
-    }
 
     &:hover .overlay {
       color: #1283b8;
@@ -941,7 +935,7 @@
       border-radius: 7px;
 
       & svg:hover {
-        color: #000;
+        color: #fff;
       }
     }
     &:hover .episode__number {
@@ -1301,6 +1295,10 @@
     padding: 20px;
   }
 
+  .owl-carousel {
+    margin-top: 50px;
+  }
+
   .comments_container {
     width: 100%;
     margin-top: 20px;
@@ -1484,6 +1482,7 @@
     background-color: transparent;
     border-radius: 7px;
     padding: 10px 25px;
+    margin-top: 50px;
   }
 
   .sidebar li {
@@ -1494,6 +1493,7 @@
     display: flex;
     gap: 5px;
     margin: 10px 0;
+    z-index: 3 !important;
   }
 
   .buttons__item {
@@ -1502,7 +1502,12 @@
     padding: 7px;
     color: #fff;
     text-transform: capitalize;
-    border-radius: 7px;
+    border-radius: 4px;
+    cursor: pointer;
+    z-index: 3 !important;
+    &:hover {
+      background-color: #237bbe;
+    }
   }
 
   .sidebar .sidebar__content {
@@ -2030,30 +2035,31 @@
     transition-duration: 0.1s;
     transition-timing-function: ease-in-out;
     transition-property: opacity;
-    z-index: 2;
+    z-index: -1 !important;
     top: 65px;
     &.hide {
-      opacity: 0 !important;
-      z-index: -1;
+      display: none;
     }
     &.show {
-      opacity: 1;
+      display: initial;
       z-index: 2;
     }
   }
   .results {
     display: flex;
     flex-direction: column;
-    background-color: rgb(17, 24, 39);
+    background-color: rgb(30, 38, 56);
     padding: 12px;
     width: 300px;
     border-radius: 7px;
     gap: 10px;
+
     &.history::before {
       content: 'Busquedas Recientes';
       display: block;
       width: 100%;
       color: #fff;
+
       border-bottom: 2px solid #1283d8;
     }
 

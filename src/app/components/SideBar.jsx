@@ -26,7 +26,7 @@ const SideBar = ({ ultimos__episodios, ovas }) => {
               setOp2(true)
               setOp1(false)
             }}>
-            OVAS
+            Ovas
           </button>
         </div>
 

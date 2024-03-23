@@ -1,10 +1,11 @@
 html.dark {
   & body {
-    --background-color: transform;
+    --bc: #050505;
+    --background-color: transparent;
     --background-custom: #414141;
     --color-custom: #fff;
-    --darkModeBackground: #17171a;
-    background-color: var(--background-color) !important;
+    --darkModeBackground: #414141;
+    background-color: var(--bc) !important;
   }
 }
 
