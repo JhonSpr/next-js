@@ -113,7 +113,7 @@ const UserPage = () => {
         data-drawer-toggle='sidebar-multi-level-sidebar'
         aria-controls='sidebar-multi-level-sidebar'
         type='button'
-        className='inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600'>
+        className='inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden   dark:text-gray-400  '>
         <span className='sr-only'>Open sidebar</span>
         <svg
           className='w-6 h-6'
@@ -175,29 +175,28 @@ const UserPage = () => {
                   />
                 </svg>
               </button>
-              <ul id='dropdown-example' className='hidden py-2 space-y-2'>
+              <ul id='dropdown-example' className='show py-2 space-y-2'>
                 <li>
                   <button
                     onClick={() => handleOpen(1)}
-                    className={`flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 ${
-                      settings === 1 && 'bg-gray-700 text-white'
-                    }`}>
+                    className={`flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group  dark:text-white dark:hover:bg-gray-700
+                    ${settings == 1 && 'bg-gray-700 text-white'}`}>
                     Mi lista de Favoritos
                   </button>
                 </li>
                 <li>
                   <button
                     onClick={() => handleOpen(5)}
-                    className='flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group  dark:text-white dark:hover:bg-gray-700'>
+                    className={`flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group  dark:text-white dark:hover:bg-gray-700
+                    ${settings == 5 && 'bg-gray-700 text-white'}`}>
                     Episodios en espera
                   </button>
                 </li>
                 <li>
                   <button
                     onClick={() => handleOpen(2)}
-                    className={`flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group  dark:text-white dark:hover:bg-gray-700 ${
-                      settings == 2 && 'bg-gray-700 text-white'
-                    }`}>
+                    className={`flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group  dark:text-white dark:hover:bg-gray-700
+                    ${settings == 2 && 'bg-gray-700 text-white'}`}>
                     Animes Para ver luego
                   </button>
                 </li>
@@ -246,7 +245,7 @@ const UserPage = () => {
       <div className='p-4 sm:ml-64'>
         <div
           className={`     
-        p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 
+        p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 bcs
         `}
           style={{ minHeight: '80dvh' }}>
           {settings === 1 && (
@@ -262,6 +261,7 @@ const UserPage = () => {
                     <div className='overlay'>
                       <FaPlayCircle />
                     </div>
+                    <span>{e.name}</span>
                   </a>
                 </article>
               ))}

@@ -12,6 +12,7 @@ import Register from './RegisterComponent'
 import { Login } from './LoginComponent'
 import { FaStar } from 'react-icons/fa6'
 import { Loader } from './LoaderSkeleton'
+import { button } from '@nextui-org/react'
 const hrefs = [
   { label: 'Inicio', route: '/' },
   { label: 'Animes', route: '/directorio' },
@@ -339,22 +340,34 @@ function Navigation() {
                 onFocus={handleFocus}
                 onBlur={handleBlur}
               />
-
               <div
                 className={`container__results  ${
-                  isFocused ? 'show' : 'hide'
-                } ${search !== null ? 'hide' : ''} ${
-                  history.length === 0 ? 'hide' : ''
+                  history.length || isFocused || (results && results.item > 0)
+                    ? 'show'
+                    : 'disable'
                 }`}>
-                <div className='results history'>
-                  {history.map((e, index) => (
-                    <a href={e.url} key={index}>
-                      <img src={e.image} alt='' />
-                      <span>{e.name}</span>
-                    </a>
-                  ))}
-                </div>
+                {!history.length || (isFocused && search == null) ? (
+                  <div className='results history'>
+                    {history
+                      .map((e, index) => (
+                        <>
+                          <a href={e.url} key={index}>
+                            <img src={e.image} alt='' />
+                            <span>{e.name}</span>
+                          </a>
+                        </>
+                      ))
+                      .slice(0, 4)}
+                    {history.length > 4 ? (
+                      <button
+                        className={!isFocused ? 'disable' : 'btn__results'}>
+                        Mostrar Historial
+                      </button>
+                    ) : null}
+                  </div>
+                ) : null}
               </div>
+
               <div
                 className={`container__results ${
                   search === null ? 'disable' : ''
