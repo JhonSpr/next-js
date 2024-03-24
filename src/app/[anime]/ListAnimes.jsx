@@ -112,7 +112,7 @@ export function FetchSingleAnime({ data }) {
     setLoading(true)
     setTimeout(() => {
       setLoading(false)
-    }, 800)
+    }, 100)
   }, [])
 
   useEffect(() => {
@@ -336,22 +336,22 @@ export function FetchSingleAnime({ data }) {
 
   const { uniqueArray } = useRecomends(name, genero1, genero2, year)
   const { image, banner } = data[0]
-  // if (loading) {
-  //   return (
-  //     <div
-  //       style={{
-  //         minHeight: '70dvh',
-  //         width: '100%',
-  //         alignContent: 'center',
-  //         alignItems: 'center',
-  //         display: 'grid',
-  //         placeItems: 'center',
-  //         placeContent: 'center',
-  //       }}>
-  //       <LoaderPage />
-  //     </div>
-  //   )
-  // }
+  if (loading) {
+    return (
+      <div
+        style={{
+          minHeight: '70dvh',
+          width: '100%',
+          alignContent: 'center',
+          alignItems: 'center',
+          display: 'grid',
+          placeItems: 'center',
+          placeContent: 'center',
+        }}>
+        <LoaderPage />
+      </div>
+    )
+  }
 
   return data?.map((e, index) => (
     <>
