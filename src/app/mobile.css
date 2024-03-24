@@ -1453,7 +1453,6 @@
       top: 0%;
       position: absolute;
       width: 100%;
-
       z-index: 3;
       background: linear-gradient(to bottom, transparent, #050505);
       height: 100%;
