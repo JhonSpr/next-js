@@ -112,7 +112,7 @@ export function FetchSingleAnime({ data }) {
     setLoading(true)
     setTimeout(() => {
       setLoading(false)
-    }, 100)
+    }, 10)
   }, [])
 
   useEffect(() => {
