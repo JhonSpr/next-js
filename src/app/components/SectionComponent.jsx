@@ -1,11 +1,23 @@
 'use client'
 
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { FaCrown } from 'react-icons/fa6'
 import { contextApp } from '../providers'
 
 const SectionComponent = ({ MasVisitas }) => {
   const { theme } = useContext(contextApp)
+
+  const [loading, setLoading] = useState(false)
+  useEffect(() => {
+    setLoading(true)
+    setTimeout(() => {
+      setLoading(false)
+    }, 10)
+  }, [])
+
+  if (loading) {
+    return <div></div>
+  }
   return (
     <div className={`section__midle ${theme === 'dark' ? 'dark' : ''}`}>
       <div>
