@@ -4,6 +4,7 @@ import { CarouselSoloItem } from './components/Carousel'
 import SideBar, { SideBar__2 } from './components/SideBar'
 import { BsBookmarkStarFill } from 'react-icons/bs'
 import PopularSection from './components/popular__section'
+import SectionComponent from './components/SectionComponent'
 
 export async function generateMetadata() {
   {
