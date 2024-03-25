@@ -9,6 +9,27 @@ html.dark {
   }
 }
 
+.section__midle.dark {
+  background-color: #0a0a0a;
+  padding: 60px;
+  padding-top: 0;
+  height: fit-content;
+  & .title {
+    color: #fff !important;
+  }
+  &.main {
+    margin-inline: auto;
+  }
+}
+
+.section__popular.dark {
+  background-color: #0a0a0a !important;
+
+  & .title {
+    color: #fff !important;
+  }
+}
+
 .carousel__container.dark {
   &::before {
     color: var(--color-custom) !important;

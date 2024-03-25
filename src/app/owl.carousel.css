@@ -16,6 +16,7 @@
   /* position relative and z-index fix webkit rendering fonts issue */
   position: relative;
   z-index: 1;
+  overflow: hidden;
 }
 .owl-carousel .owl-stage {
   position: relative;
@@ -115,30 +116,32 @@
   margin-top: 1px;
   top: 45% !important;
   &.owl-prev {
-    left: -18px;
+    left: 20px;
     right: auto;
+    outline: 5px solid #d6d6d6;
     & span {
-      -webkit-transform: rotate(-45deg);
-      -ms-transform: rotate(-45deg);
-      transform: rotate(-45deg) !important;
-      top: -15px !important;
+      -webkit-transform: rotate(-50deg);
+      -ms-transform: rotate(-50deg);
+      transform: rotate(-50deg) !important;
+      top: -11px !important;
       position: absolute;
-      left: 7px;
+      left: 0px;
       z-index: 1;
-      font-size: 40px;
+      font-size: 60px;
     }
   }
 
   &.owl-next {
-    right: -15px;
+    right: 20px;
+    outline: 5px solid #d6d6d6;
 
     & span {
-      -webkit-transform: rotate(-45deg);
-      -ms-transform: rotate(-45deg);
-      transform: rotate(-45deg) !important;
+      -webkit-transform: rotate(-50deg);
+      -ms-transform: rotate(-50deg);
+      transform: rotate(-50deg) !important;
       top: -18px !important;
       position: absolute;
-      font-size: 40px;
+      font-size: 60px;
       right: 9px;
       z-index: 1;
     }
@@ -372,7 +375,7 @@
   height: 5px;
   border-radius: 10px;
   margin: 0 5px;
-  background-color: #c1c1c1;
+  background-color: #1f1e1e;
   transition-property: background-color width;
   transition-duration: 0.2s;
   transition-timing-function: ease-out;

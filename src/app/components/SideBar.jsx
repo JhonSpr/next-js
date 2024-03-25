@@ -1,8 +1,9 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { BiSolidRightArrowSquare } from 'react-icons/bi'
 import { obtenerMensajeFecha } from '../[anime]/ListAnimes'
+import { contextApp } from '../providers'
 
 const SideBar = ({ ultimos__episodios, ovas }) => {
   const [op1, setOp1] = useState(true)

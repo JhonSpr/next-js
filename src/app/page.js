@@ -3,9 +3,7 @@ import { Request_Animes } from './FetchingData/request_animes'
 import { CarouselSoloItem } from './components/Carousel'
 import SideBar, { SideBar__2 } from './components/SideBar'
 import { BsBookmarkStarFill } from 'react-icons/bs'
-import { FcRating } from 'react-icons/fc'
-import PopularSection from './popular__section'
-import Comments from './components/comments'
+import PopularSection from './components/popular__section'
 
 export async function generateMetadata() {
   {
@@ -91,26 +89,8 @@ export default async function Home() {
         <SideBar ultimos__episodios={ultimos__episodios} ovas={ovas} />
       </div>
       <PopularSection MasVotados={MasVotados} />
+      <SectionComponent MasVisitas={MasVisitas} />
 
-      <div className='section__midle'>
-        <div>
-          <span className='title' style={{ color: '#fff' }}>
-            <FaCrown /> TOP MAS POPULARES
-          </span>
-          {MasVisitas.datos
-            .map((e, index) => (
-              <article key={index} className={`card__midle item${index + 1}`}>
-                <a href={e.name?.replace(/ /g, '-')}>
-                  <div className='visitas__overlay'>Visitas {e.visitas}</div>
-                  <img src={e.banner ?? e.image} alt='' />
-                  <span className='tag'>{index + 1}</span>
-                </a>{' '}
-                <strong className='name'>{e.name}</strong>
-              </article>
-            ))
-            .slice(0, 10)}
-        </div>
-      </div>
       <div className='container__ section'>
         <section>
           <span className='title'>

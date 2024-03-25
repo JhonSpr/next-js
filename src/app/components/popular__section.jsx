@@ -1,10 +1,13 @@
 'use client'
+import { useContext } from 'react'
 import { FaStar } from 'react-icons/fa6'
 import { FcRating } from 'react-icons/fc'
+import { contextApp } from '../providers'
 
 const PopularSection = ({ MasVotados }) => {
+  const { theme } = useContext(contextApp)
   return (
-    <section className='section__popular'>
+    <section className={`section__popular ${theme == 'dark' ? 'dark' : ''}`}>
       <div>
         <span className='title' style={{ color: '#fff' }}>
           <FcRating />

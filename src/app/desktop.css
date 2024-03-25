@@ -1,10 +1,12 @@
 @media only screen and (min-width: 1250px) {
   .section__midle {
-    background-color: rgb(17, 24, 39);
+    background-color: transparent;
     padding: 60px;
     padding-top: 0;
     height: fit-content;
-
+    & .title {
+      color: #0a0a0a !important;
+    }
     &.main {
       margin-inline: auto;
     }
@@ -12,7 +14,7 @@
 
   .section__popular {
     width: 100%;
-    background-color: rgb(17, 24, 39);
+    background-color: #d4d5d6fd;
     padding: 60px;
     padding-top: 0;
     height: fit-content;
@@ -24,6 +26,9 @@
       width: 75%;
       gap: 10px;
       position: relative;
+    }
+    & .title {
+      color: #0a0a0a !important;
     }
   }
 
@@ -58,7 +63,7 @@
     display: block;
     height: 300px;
     width: 48% !important;
-    background-color: #2b223f;
+    background-color: #18171a;
     border-radius: 10px;
     transition: 0.4s ease-out;
     position: relative;
@@ -1528,7 +1533,7 @@
     &.show {
       height: 120dvh;
       padding: 10px;
-      background-color: rgb(17, 24, 39);
+      background-color: #0a0a0a;
     }
 
     &.rews {
@@ -1541,7 +1546,7 @@
   }
 
   .list__rew {
-    background-color: rgb(17, 24, 39);
+    background-color: #0a0a0a;
 
     & .title {
       padding-left: 20px;
