@@ -1351,10 +1351,11 @@
       content: 'Animes relacionados';
       display: block;
       margin-bottom: -40px;
-      width: 100%;
+      width: 97%;
       background-color: #17171a;
       color: #fff;
       padding: 4px;
+      margin-inline: auto;
       text-align: center;
       border-radius: 4px;
       text-transform: capitalize;
@@ -1726,12 +1727,12 @@
     }
   }
   .carousel__container .carouse__item {
-    width: 204px;
+    width: 190px;
     height: 300px;
     border-radius: 4px;
   }
   .carousel__container .carouse__item img {
-    width: 220px;
+    width: 190px;
     height: 300px;
     transition: transform 0.2s ease-out;
     &:hover {
