@@ -14,9 +14,16 @@ export const Request_Animes = ({
   studio,
   limit,
   ova,
+  calendario,
 }) => {
   let url = `https://api-rest.up.railway.app/api/v1/${
-    recien ? 'recien-agregados' : 'animes' && ova ? 'animes/ova' : 'animes'
+    recien
+      ? 'recien-agregados'
+      : 'animes' && ova
+      ? 'animes/ova'
+      : 'animes' && calendario
+      ? 'animes/calendario/data'
+      : 'animes'
   }?`
 
   if (studio) {

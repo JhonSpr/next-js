@@ -17,8 +17,7 @@ const hrefs = [
   { label: 'Emisionés', route: '/directorio?estado=en+emision' },
   {
     label: 'Calendario Primavera',
-    route: '/directorio/calendario-primavera',
-    status: 'coming soon',
+    route: '/calendario',
   },
 ]
 
