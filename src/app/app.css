@@ -2,6 +2,7 @@
   filter: brightness(20%);
   user-select: none;
   cursor: not-allowed;
+  color: #060606 !important;
 }
 
 .pagination {
