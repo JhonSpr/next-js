@@ -45,7 +45,7 @@
 
   .section__midle .card__midle {
     color: inherit;
-    opacity: 0.8;
+    opacity: 1;
     font-size: 14px;
     position: relative;
     display: flex;
@@ -53,10 +53,20 @@
     place-items: center;
     overflow: hidden;
     border-radius: 20px;
+    z-index: 1;
     &:hover .visitas__overlay {
       top: 0%;
       left: 0%;
-      background-color: rgba(13, 159, 204, 0.5);
+      background-color: rgba(22, 26, 27, 0.5);
+    }
+
+    &::before {
+      content: '';
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      z-index: 2;
+      background: linear-gradient(to bottom, transparent, rgb(0, 0, 0));
     }
   }
   .card__pupular {
@@ -291,6 +301,16 @@
 
   .btn__close__navbar {
     display: none;
+  }
+
+  .nav-link {
+    border-bottom: 2px solid #fff;
+    text-align: center !important;
+    padding: 6px !important;
+    font-size: 16px !important;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+      Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue',
+      sans-serif;
   }
   .container__ {
     width: 70%;
@@ -1532,7 +1552,7 @@
     flex-direction: column;
     gap: 10px;
     &.show {
-      height: 120dvh;
+      height: 96dvh;
       padding: 10px;
       background-color: #0a0a0a;
     }

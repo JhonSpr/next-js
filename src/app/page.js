@@ -1,4 +1,4 @@
-import { FaCirclePlay, FaCrown, FaStar } from 'react-icons/fa6'
+import { FaCirclePlay } from 'react-icons/fa6'
 import { Request_Animes } from './FetchingData/request_animes'
 import { CarouselSoloItem } from './components/Carousel'
 import SideBar, { SideBar__2 } from './components/SideBar'

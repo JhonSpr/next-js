@@ -3,7 +3,6 @@ import { useContext, useEffect, useRef, useState } from 'react'
 
 import { useDebouncedCallback } from 'use-debounce'
 
-import { ThemeSwitcher } from './ThemeSwitcher'
 import { contextApp } from '../providers'
 import { useTheme } from 'next-themes'
 import { signOut } from 'firebase/auth'
@@ -12,11 +11,15 @@ import Register from './RegisterComponent'
 import { Login } from './LoginComponent'
 import { FaStar } from 'react-icons/fa6'
 import { Loader } from './LoaderSkeleton'
-import { button } from '@nextui-org/react'
 const hrefs = [
   { label: 'Inicio', route: '/' },
   { label: 'Animes', route: '/directorio' },
   { label: 'Emisionés', route: '/directorio?estado=en+emision' },
+  {
+    label: 'Calendario Primavera',
+    route: '/directorio/calendario-primavera',
+    status: 'coming soon',
+  },
 ]
 
 function Navigation() {
@@ -333,7 +336,7 @@ function Navigation() {
                 id='search-navbar'
                 name='q'
                 autoComplete='off'
-                className='block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                className='block w-full p-2 ps-10 text-sm text-gray-900  rounded-lg bg-gray-50 focus:ring-blue-700 focus:border-blue-500 bg-gray-700 border-gray-600 placeholder-gray-700 text-white focus:border-blue-500'
                 placeholder='Buscar un anime...'
                 ref={inputRef}
                 onChange={handleSearch}
@@ -461,28 +464,26 @@ function Navigation() {
                 id='search-navbar'
                 name='q'
                 autoComplete='off'
-                className='block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white'
+                className='block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 bg-gray-700 border-gray-600 
+                bg-gray-700 placeholder-gray-400 text-white'
                 placeholder='buscar un anime...'
                 ref={inputRef}
               />
             </form>
           </div>
-          <ul className='flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700 ul'>
-            {hrefs.map(({ route, label }) => (
+          <ul className='flex flex-col p-4 md:p-0 mt-4  border border-gray-100 rounded-lg bg-gray-50 md:space-x-3 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 ul'>
+            {hrefs.map(({ route, label, status }) => (
               <li key={route}>
                 <a
-                  href={route}
-                  className={
-                    'block py-2 px-3 md:p-0 text-gray-900 rounded md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:text-blue-500 dark:text-white md:dark:hover:bg-transparent dark:border-gray-700'
-                  }
+                  href={status === undefined ? route : null}
+                  className={`block py-2 px-3 md:p-0 nav-link ${
+                    status === 'coming soon' ? 'disabled' : ''
+                  }`}
                   aria-current='page'>
                   {label}
                 </a>
               </li>
             ))}
-            <li>
-              <ThemeSwitcher />
-            </li>
           </ul>
         </div>
       </div>

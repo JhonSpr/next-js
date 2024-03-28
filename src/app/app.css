@@ -22,34 +22,30 @@
 }
 
 .switch__theme {
-  width: 60px;
+  width: 200px;
   background-color: #1b1a1f;
-  height: 20px;
+  height: fit-content;
   position: relative;
-  padding: 0px 7px;
-  border-radius: 20px;
+  border-radius: 4px;
+  position: relative;
   outline: 2px solid #1283b8;
+  margin-top: 10px;
+  color: #c1c1c1;
+  font-size: 14px;
+  padding: 7px 20px;
+  transition-property: background-color;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-out;
+  &.dark {
+    background-color: #1283b8;
+    color: #fff;
+  }
 }
 
 .switch__theme .toggle {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: #000000;
-  font-size: 13px;
+  float: right;
+  margin-top: 5px;
   color: #fff;
-  left: 5px;
-  right: initial;
-  position: absolute;
-  transition: left 0.1s ease !important;
-  & svg {
-    position: absolute;
-    top: 2px;
-    left: 3px;
-  }
-  &.active {
-    left: 60%;
-  }
 }
 
 #disqus_thread.dark {
@@ -109,34 +105,6 @@
 
 .nav-link {
   padding-left: 10px !important;
-}
-.d-flex {
-  position: relative;
-}
-.d-flex .form-control {
-  background-color: #c1c1c1;
-  border: 0 !important;
-  outline: none !important;
-  margin-left: 5px;
-  border: 0 !important;
-  outline: 0 !important;
-  &::placeholder {
-    color: #1b1a1f;
-    font-weight: 700;
-  }
-  &:focus {
-    background-color: #1283b8;
-    color: #1b1a1f;
-  }
-}
-.d-flex button {
-  position: absolute;
-  right: 6px;
-  top: 0px;
-  color: #1b1a1f;
-  background-color: #1283b8;
-  padding: 5px 7px;
-  border-radius: 0 7px 6px 0;
 }
 
 .information__page {
@@ -345,32 +313,35 @@
 /* Para Firefox */
 * {
   scrollbar-width: thin; /* Ancho del scrollbar */
-  scrollbar-color: #1283b8 #c1c1c100;
+  scrollbar-color: #1b1a1f #c1c1c100;
   scroll-behavior: smooth;
 }
 
 .nav {
-  background-color: rgb(17, 24, 39) !important;
+  background-color: #0c0c0e !important;
   position: absolute;
   z-index: 9999;
-  width: 70% !important;
-  margin-inline: auto;
-  border-radius: 7px;
+  width: 100% !important;
   left: 0;
   right: 0;
   top: 0;
+
+  & .ul {
+    background-color: #0c0c0e !important;
+  }
 }
 
 #disqus_thread {
   color-scheme: auto !important;
 }
+
+#search-navbar {
+  background-color: #1b1a1f !important;
+}
 footer {
   padding-top: 50px;
   position: relative;
-  background-color: rgb(17, 24, 39) !important;
-}
-.ul {
-  background-color: rgb(17, 24, 39) !important;
+  background-color: #0c0c0e !important;
 }
 
 #disqus_thread {

@@ -1,5 +1,4 @@
 'use client'
-import { Suspense } from 'react'
 import './app.css'
 import './DarkMode.css'
 import './desktop.css'

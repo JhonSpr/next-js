@@ -1,9 +1,9 @@
 'use client'
 
-import { useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { BiSolidRightArrowSquare } from 'react-icons/bi'
 import { obtenerMensajeFecha } from '../[anime]/ListAnimes'
-import { contextApp } from '../providers'
+import { ThemeSwitcher } from './ThemeSwitcher'
 
 const SideBar = ({ ultimos__episodios, ovas }) => {
   const [op1, setOp1] = useState(true)
@@ -12,6 +12,8 @@ const SideBar = ({ ultimos__episodios, ovas }) => {
   return (
     <div className='sidebar'>
       <div className='ultimos__episodios'>
+        <ThemeSwitcher />
+
         <div className='buttons'>
           <button
             className='buttons__item'

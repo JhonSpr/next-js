@@ -31,11 +31,12 @@ export function ThemeSwitcher() {
         checked={theme === 'dark'}
       />
       <div className={`switch__theme ${theme == 'dark' ? 'dark' : 'light'}`}>
-        <div className={`toggle ${theme == 'dark' ? 'active' : ''}`}>
+        {theme === 'dark' ? 'Cambiar a claro' : 'Cambiar a Oscuro'}
+        <div className={`toggle`}>
           {theme === 'dark' ? (
-            <FaMoon />
+            <MdSunny fontSize={'15px'} />
           ) : (
-            <MdSunny fontSize={'15px'} color='#ccda08' />
+            <FaMoon fontSize={'15px'} />
           )}
         </div>
       </div>
