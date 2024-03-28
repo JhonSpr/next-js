@@ -1,19 +1,17 @@
 'use client'
-import { lazy, Suspense } from 'react'
+import { Suspense } from 'react'
 import './app.css'
 import './DarkMode.css'
 import './desktop.css'
 import './filterMenu.css'
 import './globals.css'
 import './mobile.css'
-import './navbar.css'
 import './tablet.css'
 import './owl.carousel.css'
 import Navigation from './components/Navigation'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Providers } from './providers'
 import Footer from './components/Footer'
-import { Loader } from './components/LoaderSkeleton'
 
 export default function RootLayout({ children }) {
   return (
@@ -30,18 +28,16 @@ export default function RootLayout({ children }) {
         <script src='https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js'></script>
       </head>
       <body>
-        <Suspense>
-          <Providers>
-            <Navigation />
-            <SpeedInsights />
-            {children}
+        <Providers>
+          <Navigation />
+          <SpeedInsights />
+          {children}
 
-            <Footer />
-          </Providers>
-        </Suspense>
+          <Footer />
+        </Providers>
         <script
           id='dsq-count-scr'
-          src='//animesz-3.disqus.com/count.js'
+          src='//animesz-1.disqus.com/count.js'
           async></script>
       </body>
     </html>
