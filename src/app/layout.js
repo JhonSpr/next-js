@@ -1,4 +1,5 @@
 'use client'
+import { lazy, Suspense } from 'react'
 import './app.css'
 import './DarkMode.css'
 import './desktop.css'
@@ -12,6 +13,8 @@ import Navigation from './components/Navigation'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Providers } from './providers'
 import Footer from './components/Footer'
+import { Loader } from './components/LoaderSkeleton'
+
 export default function RootLayout({ children }) {
   return (
     <html lang='es'>
@@ -27,13 +30,15 @@ export default function RootLayout({ children }) {
         <script src='https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js'></script>
       </head>
       <body>
-        <Providers>
-          <Navigation />
-          <SpeedInsights />
-          {children}
+        <Suspense>
+          <Providers>
+            <Navigation />
+            <SpeedInsights />
+            {children}
 
-          <Footer />
-        </Providers>
+            <Footer />
+          </Providers>
+        </Suspense>
         <script
           id='dsq-count-scr'
           src='//animesz-3.disqus.com/count.js'
