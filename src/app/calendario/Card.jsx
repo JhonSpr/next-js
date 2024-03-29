@@ -7,7 +7,7 @@ export default function Card({ e, index }) {
         <img src={e.image} alt={e.name} />
       </div>
       <div className='description'>
-        <a href=''>{e.name}</a>
+        <a href={`/${e.name.replace(/ /g, '-').toLowerCase()}`}>{e.name}</a>
         <p>{e.nextEpisode}</p>
       </div>
     </article>

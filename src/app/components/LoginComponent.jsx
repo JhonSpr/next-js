@@ -47,7 +47,7 @@ export const Login = ({ setLoginPage, setRegisterPage, setShowMenu }) => {
       )
       const loggedInUser = userCredential.user
       setUser(loggedInUser)
-      location.replace('/')
+      location.reload()
       setLoginPage(false)
       setRegisterPage(false)
       setShowMenu(false)

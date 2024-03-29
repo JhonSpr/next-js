@@ -53,16 +53,7 @@
   -webkit-touch-callout: none;
   transition: all 0.2s ease;
   cursor: pointer;
-  &::before {
-    content: '';
-    top: 0%;
-    position: absolute;
-    width: 100%;
-    z-index: 3;
-    background: linear-gradient(to bottom, transparent, transparent, #11111198);
-    height: 100%;
-    transition: all 0.2s ease;
-  }
+  z-index: 1;
 }
 .owl-carousel .owl-item img {
   display: block;
@@ -70,6 +61,7 @@
   max-width: 100%;
   aspect-ratio: 16/9;
   object-fit: cover;
+  filter: brightness(70%);
 }
 .owl-carousel .owl-nav.disabled,
 .owl-carousel .owl-dots.disabled {

@@ -53,6 +53,7 @@
     height: 100%;
     width: 100%;
     overflow: hidden;
+    z-index: 2;
     &::before {
       content: '';
       position: absolute;
@@ -1835,12 +1836,10 @@
     border-radius: 4px;
   }
   .carousel__container .carouse__item img {
-    width: 190px;
+    width: 200px;
     height: 300px;
     transition: transform 0.2s ease-out;
-    &:hover {
-      transform: scale(105%);
-    }
+    overflow: hidden;
   }
 
   .controls {
@@ -1887,17 +1886,22 @@
     position: absolute;
     top: 65px;
     z-index: 3;
-    width: 300px !important;
-    height: 0;
+    padding: 20px 30px;
     border: 0;
     display: grid;
+    grid-template-rows: 0fr;
+    grid-template-columns: 0fr;
     overflow: hidden;
+    transform: scale(0%);
     align-items: center;
-    background-color: #dbd4d4 !important;
-    transition: height 0.2s ease-out;
+    background-color: #0c0c0e !important;
+    transition: transform 0.2s ease-out;
+    border-radius: 5px;
     &.show {
-      visibility: visible !important;
-      height: 300px;
+      grid-template-rows: 1fr;
+      grid-template-columns: 1fr;
+      width: max-content;
+      transform: scale(100%);
     }
   }
 
@@ -1910,7 +1914,7 @@
     }
   }
   .container__form__page__register {
-    transform: translate(-50%, -50%) scale(110%);
+    transform: translate(-50%, -50%) scale(100%);
     top: 35%;
     left: 50%;
     width: 450px;
@@ -1927,7 +1931,7 @@
 
   @keyframes scale {
     0% {
-      transform: scale(50%) translate(-50%, -50%);
+      transform: scale(0%) translate(-50%, -50%);
       top: 35%;
       left: 50%;
       width: 450px;
@@ -2176,7 +2180,7 @@
   .results {
     display: flex;
     flex-direction: column;
-    background-color: rgb(30, 38, 56);
+    background-color: #0c0c0e;
     padding: 12px;
     width: 450px;
     border-radius: 7px;
@@ -2193,7 +2197,7 @@
       display: block;
       width: 100%;
       color: #fff;
-      border-bottom: 2px solid #1283d8;
+      border-bottom: 2px solid #18191a;
     }
 
     &.history a {

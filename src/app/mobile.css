@@ -1613,7 +1613,7 @@
   }
   .information__page .container__information .info__anime {
     width: 100%;
-    background-color: #ddddeb;
+    background-color: transparent;
     text-align: center;
   }
 

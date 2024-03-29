@@ -7,7 +7,7 @@ export async function generateMetadata({ params }) {
   const { anime } = params
   const data = await Request_Animes({ info: anime?.replace(/-/g, ' ') })
 
-  const { name, descripcion, image, genero1 } = data.datos[0]
+  const { name, descripcion, image, genero1 } = data.datos[0] || {}
 
   return {
     title: `${name?.replace(/:/g, ' ')} - Animesz`,
@@ -21,18 +21,6 @@ export async function generateMetadata({ params }) {
       'Animesz',
       `${anime?.replace(/-/g, ' ')}`,
     ],
-    openGraph: {
-      title: `${anime?.replace(/-/g, ' ')} - Animesz`,
-      description: descripcion,
-      images: [
-        {
-          url: image,
-          width: 800,
-          height: 600,
-          alt: `${anime?.replace(/-/g, ' ')} - Animesz`,
-        },
-      ],
-    },
     locale: 'es',
     type: 'website',
     robots: {
