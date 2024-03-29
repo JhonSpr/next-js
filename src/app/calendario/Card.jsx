@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Card({ index, e }) {
+export default function Card({ e, index }) {
   return (
     <article key={index} className='card__calendario'>
       <div className='image'>

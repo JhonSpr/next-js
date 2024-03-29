@@ -15,10 +15,10 @@ export function ThemeSwitcher() {
   if (!mounted) return null
 
   return (
-    <label className='relative inline-flex items-center cursor-pointer'>
+    <label className='cursor-pointer'>
       <input
         type='checkbox'
-        className='sr-only peer'
+        id='switch__button'
         onChange={() => {
           if (theme === 'dark') {
             setTheme('light')

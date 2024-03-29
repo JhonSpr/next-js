@@ -34,6 +34,7 @@
   color: #c1c1c1;
   font-size: 14px;
   padding: 7px 20px;
+  margin-bottom: -25px;
   transition-property: background-color;
   transition-duration: 0.2s;
   transition-timing-function: ease-out;
@@ -41,6 +42,10 @@
     background-color: #1283b8;
     color: #fff;
   }
+}
+
+#switch__button {
+  display: none;
 }
 
 .switch__theme .toggle {

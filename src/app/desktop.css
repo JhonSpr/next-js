@@ -1890,7 +1890,10 @@
     width: 300px !important;
     height: 0;
     border: 0;
+    display: grid;
     overflow: hidden;
+    align-items: center;
+    background-color: #dbd4d4 !important;
     transition: height 0.2s ease-out;
     &.show {
       visibility: visible !important;
@@ -2161,6 +2164,7 @@
     transition-property: opacity;
     z-index: -1 !important;
     top: 65px;
+    left: -45px !important;
     &.hide {
       display: none;
     }
@@ -2174,12 +2178,12 @@
     flex-direction: column;
     background-color: rgb(30, 38, 56);
     padding: 12px;
-    width: 300px;
+    width: 450px;
     border-radius: 7px;
     gap: 10px;
     &.history {
       min-height: fit-content;
-      max-width: 300px;
+      max-width: 500px;
       height: max-content;
       overflow: hidden;
       overflow-y: none;

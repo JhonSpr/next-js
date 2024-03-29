@@ -348,7 +348,7 @@ function Navigation() {
                     ? 'show'
                     : 'disable'
                 }`}>
-                {!history.length || (isFocused && search == null) ? (
+                {history.length != 0 && isFocused && search == null ? (
                   <div className='results history'>
                     {history
                       .map((e, index) => (
