@@ -1040,25 +1040,18 @@
     position: absolute;
     margin: 20px auto;
     border-radius: 7px;
-    width: 400px;
-    height: 220px;
     right: 0;
-    margin-bottom: 40px !important;
+    width: 400px;
+    height: 0;
+    padding-bottom: 22%;
     & > iframe {
-      height: 100%;
+      position: absolute;
       width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
       margin-top: 7px;
       border-radius: 7px;
-    }
-    &::before {
-      content: 'Trailer';
-      display: block;
-      width: 100%;
-      background-color: #3c3c44;
-      color: #fff;
-      padding: 7px;
-      border-radius: 6px;
-      text-transform: capitalize;
     }
   }
 
