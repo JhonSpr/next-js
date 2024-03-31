@@ -426,7 +426,7 @@ function Navigation() {
               />
             </form>
           </div>
-          <ul className='flex flex-col p-4 md:p-0 mt-4  border border-gray-100 rounded-lg bg-gray-50 md:space-x-3 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 ul'>
+          <ul className='flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-3 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 ul'>
             {hrefs.map(({ route, label, status }) => (
               <li key={route}>
                 <a
