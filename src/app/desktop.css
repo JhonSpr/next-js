@@ -6,12 +6,11 @@
     color: #1283b8;
     font-weight: 700;
     font-style: oblique;
-    background-color: #5361685e;
+    background-color: #19191a;
   }
   .section__calendario {
     min-height: 400px;
     max-height: max-content;
-    background-color: #1b1a1f;
     color: #c1c1c1;
     padding: 10px 20px;
   }
