@@ -683,11 +683,12 @@
   .container__anime main {
     display: grid;
     gap: 20px;
-
     grid-template-columns: 20% 80%;
   }
   .container__anime main .container__image {
     width: 100%;
+    margin-top: -300px;
+    margin-left: -10px;
   }
   .container__anime main .info__anime {
     width: 100%;
@@ -787,10 +788,11 @@
     background-size: cover;
     z-index: -1;
     height: 50dvh;
+
     image-rendering: optimizeQuality;
     background-repeat: no-repeat;
     background-position: center;
-    filter: sepia(20%);
+    filter: sepia(20%) brightness(70%) blur(4px);
     box-shadow: -29px 70px 0px 29px #050505;
     top: 0;
     bottom: 0;
@@ -929,6 +931,7 @@
 
   .container__anime main .container__information {
     width: 100%;
+    margin-top: -100px;
   }
   .information__page {
     padding: 140px 10px;
