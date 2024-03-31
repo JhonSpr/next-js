@@ -683,6 +683,7 @@
   .container__anime main {
     display: grid;
     gap: 20px;
+
     grid-template-columns: 20% 80%;
   }
   .container__anime main .container__image {
@@ -780,26 +781,33 @@
     margin-top: 100px;
   }
   .background__page__info {
-    position: absolute;
+    position: relative;
     width: 100%;
+    background-attachment: fixed;
     background-size: cover;
-    z-index: -2;
-    height: 100%;
-    min-height: 80dvh;
+    z-index: -1;
+    height: 50dvh;
     image-rendering: optimizeQuality;
     background-repeat: no-repeat;
     background-position: center;
-    filter: brightness(70%);
-    box-shadow: -29px 122px 29px 29px #050505;
-    &::before {
-      content: '';
-      top: 0%;
-      position: absolute;
-      width: 100%;
-      z-index: 2;
-      background: linear-gradient(to bottom, transparent, #000, #050505);
-      height: 140%;
-    }
+    filter: sepia(20%);
+    box-shadow: -29px 70px 0px 29px #050505;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  /* Agrega un seudoelemento ::before para el degradado */
+  .background__page__info::before {
+    content: '';
+    top: 0;
+    bottom: 0;
+    position: absolute;
+    width: 100%;
+    z-index: -1;
+    background: linear-gradient(to bottom, transparent, #00000067, #050505);
+    height: 100%; /* Ajusta la altura del degradado al 100% del contenedor */
   }
 
   .container__anime main .info__anime .generos__anime {

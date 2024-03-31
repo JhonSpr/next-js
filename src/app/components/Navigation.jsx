@@ -11,6 +11,9 @@ import Register from './RegisterComponent'
 import { Login } from './LoginComponent'
 import { FaStar } from 'react-icons/fa6'
 import { Loader } from './LoaderSkeleton'
+import { BiCloset } from 'react-icons/bi'
+import { FaBars } from 'react-icons/fa'
+import { IoMdClose } from 'react-icons/io'
 const hrefs = [
   { label: 'Inicio', route: '/' },
   { label: 'Animes', route: '/directorio' },
@@ -28,6 +31,7 @@ function Navigation() {
   const [showMenu, setShowMenu] = useState(false)
   const [loginPage, setLoginPage] = useState(null)
   const [registerPage, setRegisterPage] = useState(null)
+  const [open, setOpen] = useState(false)
   const { theme } = useTheme()
   const { user } = useContext(contextApp)
   const inputRef = useRef(null)
@@ -134,7 +138,9 @@ function Navigation() {
       document.removeEventListener('click', handleOutsideClick)
     }
   }, [settings])
-
+  const toggleMenu = () => {
+    setOpen(!open)
+  }
   return (
     <nav className='bg-white border-gray-200 dark:bg-gray-900 nav' id='navbar'>
       <div className='max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 '>
@@ -151,7 +157,7 @@ function Navigation() {
             data-collapse-toggle='navbar-search'
             aria-controls='navbar-search'
             aria-expanded='false'
-            className='md:hidden text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none rounded-lg text-sm p-2.5 me-1'
+            className='md:hidden text-gray-500 dark:text-gray-400  rounded-lg text-sm p-2.5 me-1'
             onClick={handleClick}>
             <svg
               className='w-5 h-5'
@@ -373,24 +379,18 @@ function Navigation() {
           <button
             data-collapse-toggle='navbar-search'
             type='button'
-            className='inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none dark:text-gray-400 dark:hover:bg-gray-700'
+            className='inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden'
             aria-controls='navbar-search'
-            aria-expanded='false'>
-            <span className='sr-only'>Open main menu</span>
-            <svg
-              className='w-5 h-5'
-              aria-hidden='true'
-              xmlns='http://www.w3.org/2000/svg'
-              fill='none'
-              viewBox='0 0 17 14'>
-              <path
-                stroke='currentColor'
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                strokeWidth='2'
-                d='M1 1h15M1 7h15M1 13h15'
-              />
-            </svg>
+            aria-expanded={open ? 'true' : 'false'}
+            onClick={toggleMenu}>
+            <span className='sr-only'>
+              {open ? 'Close main menu' : 'Open main menu'}
+            </span>
+            {open ? (
+              <IoMdClose fontSize={'30px'} />
+            ) : (
+              <FaBars fontSize={'30px'} />
+            )}
           </button>
         </div>
         <div

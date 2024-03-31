@@ -44,7 +44,7 @@ export default function AnimesFectching({ data }) {
             <span className='type__anime'>{e.tipo}</span>
             <div className='flex items-center rating__anime'>
               <svg
-                className='w-3 h-3 text-yellow-300'
+                className='w-3 h-3'
                 aria-hidden='true'
                 xmlns='http://www.w3.org/2000/svg'
                 fill='currentColor'

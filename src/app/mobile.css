@@ -1,4 +1,17 @@
 @media only screen and (max-width: 600px) {
+  body {
+    color: #fff;
+  }
+  .switch__theme {
+    display: none;
+  }
+  .owl-next {
+    right: 40px !important;
+  }
+  body,
+  html {
+    background-color: #0a0a0a !important;
+  }
   .main__title__calendario {
     width: 100%;
     text-align: center;
@@ -129,10 +142,10 @@
   }
   .settings {
     position: absolute;
-    font-size: 15px;
     background-color: #17171a;
-    width: 100%;
-    left: 0;
+    width: max-content;
+    left: -70px;
+    overflow: hidden;
     z-index: 3;
     border-radius: 7px;
     height: -0;
@@ -140,7 +153,6 @@
     padding-bottom: 0;
     padding-right: 10px;
     padding-left: 10px;
-    overflow: hidden;
     top: 40px;
     transition-property: height padding;
     transition-duration: 0.2s;
@@ -154,9 +166,9 @@
     }
 
     & span {
-      width: max-content;
+      width: 100%;
       text-wrap: nowrap;
-      font-size: 14px;
+      font-size: 12px !important;
       color: #86868a;
       display: block;
       margin: 5px 0;
@@ -165,6 +177,7 @@
       }
       & svg {
         display: inline-block;
+        font-size: 16px !important;
       }
     }
   }
@@ -294,7 +307,7 @@
     overflow: hidden;
     height: 600px;
     display: flex;
-    background-color: #c1c1c1;
+    background-color: #111;
     border-radius: 10px;
   }
 
@@ -419,12 +432,13 @@
 
   .column__description .rating__anime {
     margin: 20px auto;
-    background-color: #17171a;
-    width: min-content;
+    background-color: #1a1a17;
+    width: fit-content;
     padding: 2px 7px;
     border-radius: 7px;
     & > p {
-      font-weight: 500;
+      color: #e0d100 !important;
+      font-weight: 700;
       font-size: 14px;
     }
   }
@@ -597,6 +611,10 @@
     margin: 20px auto;
     gap: 10px;
   }
+
+  #disqus_thread {
+    background-color: #0a0a0a !important;
+  }
   .comments_container {
     width: 100%;
     padding: 20px;
@@ -665,11 +683,11 @@
   }
   .few__added__episode__number {
     display: block;
-    color: #000;
+    color: #727171;
     text-transform: capitalize;
     font-size: 14px;
     & span {
-      color: #2d2d30;
+      color: #1283b8;
       color-scheme: light;
       font-weight: 0;
     }
@@ -802,7 +820,7 @@
     width: 100% !important;
     display: block;
     color-scheme: light;
-    color: #000;
+    color: #a8a8a8;
     text-transform: capitalize;
   }
   .container__year__animes {
@@ -822,8 +840,8 @@
   }
   .container__year__animes a {
     padding: 3px 10px;
-    background-color: #b8b5bb;
-    color: #17171a;
+    background-color: #1b1a1f;
+    color: #a0a0a7;
     font-size: 14px;
     border-radius: 4px;
   }
@@ -1578,19 +1596,21 @@
     padding: 10px 70px;
     flex-basis: 50%;
     border-radius: 7px;
-    color: #1283b8;
+    color: #fff !important;
     font-size: 20px;
     background-color: #17171a;
     display: flex;
     gap: 5px;
-    color: #fff;
 
     & svg {
       margin-top: 5px;
     }
     &.active {
       background-color: #17171a !important;
-      color: #fff;
+      color: #1283b8 !important;
+      & svg {
+        color: #1283b8 !important;
+      }
     }
 
     &:focus {
@@ -1608,13 +1628,14 @@
   }
   .information__page .container__information {
     width: 100%;
-    padding: 5px;
     position: relative;
   }
   .information__page .container__information .info__anime {
     width: 100%;
-    background-color: transparent;
+    background-color: #0a0a0a;
     text-align: center;
+    color: #fff !important;
+    padding: 5px 7px;
   }
 
   .container__anime .btn__favorite {
@@ -1622,7 +1643,6 @@
     position: relative;
     font-size: 20px;
     width: auto;
-
     border-radius: 6px;
     transition: all 0.2s ease-out;
     margin-inline: auto;
@@ -1641,11 +1661,10 @@
       }
     }
     &.active {
-      background-color: #1283b8 !important;
+      color: #1283b8 !important;
     }
     & svg {
       margin-top: 5px !important;
-      color: #fff !important;
     }
   }
 
@@ -1653,6 +1672,10 @@
     margin: 20px 0;
     width: 100%;
     justify-content: center;
+  }
+
+  .text-gray-900 {
+    color: #fff !important;
   }
 
   .information__page .container__information .info__anime .title__anime {
@@ -1687,8 +1710,8 @@
     width: 100%;
   }
   .information__page .container__information .info__anime .wrapp__anime strong {
-    color: #050505;
-    text-transform: lowercase;
+    color: #666565;
+    text-transform: capitalize;
     font-size: 14px;
   }
   .h-full {
@@ -1798,10 +1821,12 @@
 
   .carousel__container {
     display: flex;
+    width: 100%;
+    padding: 0 15px;
     gap: 6px;
     margin: 30px auto;
     flex-wrap: wrap;
-
+    background-color: #0a0a0a;
     &::before {
       content: 'Animes relacionados';
       display: block;
