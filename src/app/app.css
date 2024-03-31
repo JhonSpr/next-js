@@ -125,6 +125,11 @@
   width: 60px;
 }
 
+.input__file {
+  background-color: #1b1a1f !important;
+  border: 0 !important;
+}
+
 .cr-wrapper *,
 .cr-wrapper *::before,
 .cr-wrapper *::after {
