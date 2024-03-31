@@ -308,24 +308,46 @@ const UserPage = () => {
           {settings === 4 && (
             <div style={{ minHeight: '80dvh' }} className={`user__panel`}>
               <section>
-                <img src={user?.photoURL} alt='' />
-                <span>usuario: {user?.displayName}</span>
-                <p>
-                  Mi lista de Animes
-                  {favoritos.map((e) => (
-                    <>
+                <div className='first__child'>
+                  <img src={user?.photoURL} alt='' />
+                  <span>{user?.displayName}</span>
+                  <div className='list__metadata'>
+                    <span>
+                      Mis gustas: <strong>{2}</strong>
+                    </span>
+                    <span>
+                      Animes Pendientes: <strong>{2}</strong>
+                    </span>
+                    <span>
+                      Episodios Pendientes: <strong>{2}</strong>
+                    </span>
+                    <span>
+                      Ultimos animes Buscados: <strong>{2}</strong>
+                    </span>
+                    <p>
+                      <strong>Ultimos episodios Vistos</strong>
                       <br />
-                      <span>{e.name}</span>
-                    </>
-                  ))}
-                </p>
+                      {ultimosVistados
+                        .map((e, index) => (
+                          <a
+                            key={index}
+                            href={`/${e.name?.replace(/ /g, '-')}/${
+                              e.episode
+                            }`}>
+                            {e.name} {e.episode}
+                          </a>
+                        ))
+                        .slice(0, 5)}
+                    </p>
+                  </div>
+                </div>
 
-                <div>
+                <div className='last__child'>
                   <div className='file-input-container'>
                     <label
                       className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'
                       htmlFor='file_input'>
-                      sube una imagen
+                      Cambiar avatar
                     </label>
                     <input
                       className='block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400'
