@@ -33,7 +33,6 @@ html.dark {
 .carousel__container.dark {
   &::before {
     color: var(--color-custom) !important;
-    background-color: var(--darkModeBackground) !important;
   }
 }
 .trailer__anime.dark {

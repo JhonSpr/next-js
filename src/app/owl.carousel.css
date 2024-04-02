@@ -78,7 +78,8 @@
 }
 .owl-carousel .owl-nav button.owl-next {
   right: 10px;
-  top: 90px;
+  top: 0;
+  bottom: 0;
 }
 
 .hero__slider.owl-carousel .owl-nav button {
@@ -115,7 +116,6 @@
   &.owl-next {
     right: 20px;
     outline: 5px solid #d6d6d6;
-
     & span {
       -webkit-transform: rotate(-50deg);
       -ms-transform: rotate(-50deg);

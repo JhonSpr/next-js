@@ -50,19 +50,9 @@ const Carousel = ({ itemsShow, ArrayList, solo }) => {
   return (
     <OwlCarousel {...setting}>
       {ArrayList?.map((e, index) => (
-        <div
-          className={`${solo ? 'carouse__item solo' : 'carouse__item'} ${
-            !loaded ? 'loading' : ''
-          }`}
-          key={index}>
+        <div className={`carouse__item`} key={index}>
           <a href={e.name?.replace(/ /g, '-').toLowerCase()}>
-            <img
-              src={e?.image}
-              alt=''
-              onLoad={() => {
-                setLoaded(true)
-              }}
-            />
+            <img src={e?.image} alt='' />
           </a>
         </div>
       )).slice(0, 12)}

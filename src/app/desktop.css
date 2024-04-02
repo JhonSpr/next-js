@@ -1498,9 +1498,27 @@
     cursor: pointer;
   }
 
-  .owl-next {
+  .owl-next,
+  .owl-prev {
     position: absolute;
-    padding: 20px;
+    top: 0% !important;
+    bottom: 11% !important;
+    background-color: #0a0a0a93 !important;
+    font-size: 45px !important;
+    border-radius: 0 !important;
+    padding: 0 10px !important;
+    &:hover {
+      backdrop-filter: blur(6px);
+      color: #1283b8 !important;
+    }
+  }
+
+  .owl-prev {
+    left: 0 !important;
+  }
+
+  .owl-next {
+    right: 0 !important;
   }
 
   #disqus-recommendations.light {
@@ -1514,14 +1532,15 @@
       content: 'Animes relacionados';
       display: block;
       margin-bottom: -40px;
-      width: 97%;
-      background-color: #17171a;
+      width: fit-content;
+      background-color: transparent !important;
       color: #fff;
-      padding: 4px;
-      margin-inline: auto;
-      text-align: center;
-      border-radius: 4px;
+      text-align: start;
+      font-size: 20px;
       text-transform: capitalize;
+      border-left: 4px solid #1283b8;
+      padding-bottom: 0;
+      padding-left: 10px;
     }
   }
 
