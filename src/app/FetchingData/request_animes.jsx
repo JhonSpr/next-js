@@ -15,6 +15,7 @@ export const Request_Animes = ({
   limit,
   ova,
   calendario,
+  proximos,
 }) => {
   let url = `https://api-rest.up.railway.app/api/v1/${
     recien
@@ -23,6 +24,8 @@ export const Request_Animes = ({
       ? 'animes/ova'
       : 'animes' && calendario
       ? 'animes/calendario/data'
+      : 'animes' && proximos
+      ? 'animes/proximos-animes/data'
       : 'animes'
   }?`
 

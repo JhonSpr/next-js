@@ -157,6 +157,14 @@ html.dark {
   background-color: var(--darkModeBackground) !important;
 }
 
+.sidebar .sidebar__content.dark {
+  &.show {
+    & h2 {
+      color: #fff !important;
+    }
+  }
+}
+
 .card__anime.dark .name__anime {
   color: #ccc !important;
 }

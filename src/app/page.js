@@ -2,7 +2,7 @@ import { FaCirclePlay } from 'react-icons/fa6'
 import { Request_Animes } from './FetchingData/request_animes'
 import { CarouselSoloItem } from './components/Carousel'
 import SideBar, { SideBar__2 } from './components/SideBar'
-import { BsBookmarkStarFill } from 'react-icons/bs'
+import { BsBookmarkStarFill, BsBroadcastPin } from 'react-icons/bs'
 import PopularSection from './components/popular__section'
 import SectionComponent from './components/SectionComponent'
 
@@ -47,6 +47,7 @@ export default async function Home() {
   const ovas = await Request_Animes({ page: 1, ova: true })
   const MasVisitas = await Request_Animes({ page: 1, visitas: 'masVisitas' })
   const MasVotados = await Request_Animes({ page: 1, rate: 'mayor' })
+  const Proximos_Animes = await Request_Animes({ page: 1, proximos: true })
   return (
     <main>
       <div className='container__ section'>
@@ -56,6 +57,36 @@ export default async function Home() {
             itemsShow={1}
             solo={true}
           />
+          <span className='title'>
+            <BsBroadcastPin />
+            PROXIMAMENTE
+          </span>
+          <section className='recientes'>
+            {Proximos_Animes.datos
+              .map((e, index) => (
+                <article className='anime__card ova' key={index}>
+                  <a href={`/${e.name.replace(/ /g, '-')}`}>
+                    <div className='container__image__card ova'>
+                      <div className='overlay'>
+                        <FaCirclePlay />
+                      </div>
+                      <img src={e.image} alt='' />
+                    </div>
+                  </a>
+                  <div className='ds'>
+                    <span
+                      className={
+                        e.estado === 'finalizado' ? 'status end' : 'status'
+                      }>
+                      {e.estado}
+                    </span>
+                    <span className='type'>{e.tipo}</span>
+                  </div>
+                  <span className='anime__name'>{e.name}</span>
+                </article>
+              ))
+              .slice(0, 8)}
+          </section>
           <span className='title'>
             <BsBookmarkStarFill />
             ovas agregados

@@ -1,14 +1,28 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { BiSolidRightArrowSquare } from 'react-icons/bi'
 import { obtenerMensajeFecha } from '../[anime]/ListAnimes'
 import { ThemeSwitcher } from './ThemeSwitcher'
+import { contextApp } from '../providers'
+import { Loader } from './LoaderSkeleton'
 
 const SideBar = ({ ultimos__episodios, ovas }) => {
   const [op1, setOp1] = useState(true)
   const [op2, setOp2] = useState(false)
+  const [documentLoaded, setDocumentLoaded] = useState(false) // Estado
+  const { theme } = useContext(contextApp)
 
+  useEffect(() => {
+    setDocumentLoaded(true)
+    setTimeout(() => {
+      setDocumentLoaded(false)
+    }, 0)
+  }, [])
+
+  if (documentLoaded === true) {
+    return <Loader />
+  }
   return (
     <div className='sidebar'>
       <div className='ultimos__episodios'>
@@ -33,7 +47,10 @@ const SideBar = ({ ultimos__episodios, ovas }) => {
           </button>
         </div>
 
-        <div className={`sidebar__content ${op1 ? 'show' : 'hide'}`}>
+        <div
+          className={`sidebar__content ${op1 ? 'show' : 'hide'} ${
+            theme === 'dark' ? 'dark' : ''
+          }`}>
           {ultimos__episodios.recientes?.map((e, index) => (
             <li key={index}>
               <img src={e.image} alt='' />
