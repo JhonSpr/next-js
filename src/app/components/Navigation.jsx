@@ -431,7 +431,7 @@ function Navigation() {
               <li key={route}>
                 <a
                   href={
-                    status === undefined && typeof window !== 'undefined'
+                    status === undefined && typeof window !== undefined
                       ? `${window.location.origin + route}`
                       : null
                   }
