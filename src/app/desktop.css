@@ -454,7 +454,7 @@
       transition-timing-function: ease;
       transition-duration: 0.5s;
       & svg {
-        font-size: 0;
+        font-size: 40px !important;
       }
     }
     &:hover .overlay {
