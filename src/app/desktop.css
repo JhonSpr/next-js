@@ -1527,6 +1527,7 @@
     font-size: 45px !important;
     border-radius: 0 !important;
     padding: 0 10px !important;
+    color: #fff;
     &:hover {
       backdrop-filter: blur(6px);
       color: #1283b8 !important;
