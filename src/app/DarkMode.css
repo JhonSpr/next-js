@@ -2,7 +2,7 @@ html.dark {
   & body {
     --bc: #050505;
     --background-color: transparent;
-    --background-custom: #0a0a0a;
+    --background-custom: #1f1f1f;
     --color-custom: #fff;
     --darkModeBackground: #0a0a0a;
     background-color: var(--bc) !important;

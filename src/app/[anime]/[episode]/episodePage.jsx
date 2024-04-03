@@ -17,6 +17,7 @@ function EpisodePage({ name, episode, services }) {
   const [lastEpisodes, setLastEpisodes] = useState([])
   const [play, setPlay] = useState(false)
   const [loading, setLoading] = useState([])
+  const [urlFrame, setUrlFrame] = useState(null)
 
   useEffect(() => {
     setLoading(true)
@@ -32,7 +33,7 @@ function EpisodePage({ name, episode, services }) {
 
   const servicesList = services.filter((e) => e?.[dynamicCapKey])
 
-  const { image } = servicesList[0]?.[dynamicCapKey][0] ?? ''
+  const { image, url } = servicesList[0]?.[dynamicCapKey][0] ?? ''
 
   const agregarValorAVistosRecientes = async (name, image) => {
     try {
@@ -96,6 +97,10 @@ function EpisodePage({ name, episode, services }) {
     return null
   }
 
+  useEffect(() => {
+    setUrlFrame(url)
+  }, [])
+
   if (loading) {
     return (
       <div
@@ -125,6 +130,9 @@ function EpisodePage({ name, episode, services }) {
           />
         )}
         <div>
+          <span className='title'>
+            {`${name}`} {episode}
+          </span>
           <p className='nav__episode'>
             <a href='/' className='fr'>
               <FaHome /> <span>Inicio</span>
@@ -136,9 +144,7 @@ function EpisodePage({ name, episode, services }) {
             </a>
           </p>
           <div className='iframe__div'>
-            <iframe
-              src={servicesList[0]?.[dynamicCapKey].map((e) => e.url)}
-              allowFullScreen></iframe>
+            <iframe src={urlFrame} allowFullScreen></iframe>
             <div
               className={play ? 'overlay__episode hide' : 'overlay__episode'}>
               <img src={e.banner ?? e.image} alt='' />
@@ -187,9 +193,7 @@ function EpisodePage({ name, episode, services }) {
               />
             </button>
           </div>
-          <span className='title'>
-            {`${name}`} {episode}
-          </span>
+
           <div className='episodes__list'>
             {e.episodes__overlay.map((e, index) => (
               <a
@@ -207,7 +211,7 @@ function EpisodePage({ name, episode, services }) {
             ))}
           </div>
         </div>
-        <Comments noButton={true} showCommentarios={true} />
+        <Comments noButton={false} showCommentarios={false} />
       </div>
       {noLogged && (
         <div

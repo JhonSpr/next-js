@@ -1,8 +1,8 @@
 .disabled {
-  filter: brightness(20%);
+  filter: brightness(70%);
   user-select: none;
   cursor: not-allowed;
-  color: #060606 !important;
+  color: #f8f5f5 !important;
 }
 
 .pagination {

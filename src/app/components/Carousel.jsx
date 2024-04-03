@@ -38,7 +38,7 @@ const Carousel = ({ itemsShow, ArrayList, solo }) => {
       autoplayHoverPause: true,
       dots: true,
       animateOut: 'fadeOut',
-      animateIn: false,
+      animateIn: 'fadeOut',
       onTranslated: () => {
         setLoaded(true)
       },
@@ -81,7 +81,6 @@ export const CarouselSoloItem = ({ itemsShow, ArrayList, solo }) => {
       autoplayHoverPause: true,
       dots: true,
       animateOut: 'fadeOut',
-      animateIn: false,
     }
 
     setSetting(carouselSetting)
