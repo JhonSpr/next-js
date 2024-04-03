@@ -433,7 +433,7 @@ function Navigation() {
                   href={
                     typeof window !== 'undefined'
                       ? `${window.location.origin + route}`
-                      : `${window.location.origin + route}`
+                      : route
                   }
                   className={`block py-2 px-3 md:p-0 nav-link ${
                     status === 'coming soon' ? 'disabled' : ''
