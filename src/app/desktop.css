@@ -453,6 +453,7 @@
       transition-property: height;
       transition-timing-function: ease;
       transition-duration: 0.5s;
+      overflow: hidden;
       & svg {
         font-size: 40px !important;
       }
