@@ -432,8 +432,8 @@ function Navigation() {
                 <a
                   href={
                     status === undefined || typeof location !== undefined
-                      ? `${window.location.origin + route}`
-                      : `${window.location.origin + route}`
+                      ? `${location.origin + route}`
+                      : `${location.origin + route}`
                   }
                   className={`block py-2 px-3 md:p-0 nav-link ${
                     status === 'coming soon' ? 'disabled' : ''
