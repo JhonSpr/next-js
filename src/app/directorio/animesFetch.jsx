@@ -48,7 +48,12 @@ export default function AnimesFetching({ data }) {
               <span className='emitido__anime'>
                 {e?.emitido ?? 'desconocido'}
               </span>
-              <span className='status__anime'>{e.estado}</span>
+              <span
+                className={`status__anime ${
+                  e.estado !== 'finalizado' ? 'airing' : ''
+                } `}>
+                {e.estado}
+              </span>
               <span className='type__anime'>{e.tipo}</span>
               <div className='flex items-center rating__anime'>
                 <svg

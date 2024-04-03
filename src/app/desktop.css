@@ -527,23 +527,27 @@
   .column__description .status__anime {
     background-color: #1283b8;
     display: inline-block;
-    padding: 2px 5px;
+    padding: 2px 10px;
     color: #fff;
     border-radius: 6px;
     font-weight: bold;
-    width: 70%;
+    width: fit-content;
     margin: 0 2px;
     text-transform: capitalize;
     text-align: center;
+    font-size: 14px;
+    &.airing {
+      background-color: #02b820;
+    }
   }
   .column__description .type__anime {
     background-color: #1283b8;
     display: inline-block;
-    padding: 2px 5px;
+    padding: 2px 15px;
     color: #fff;
     border-radius: 6px;
     font-weight: bold;
-    width: 20%;
+    width: fit-content;
     margin: 0 2px;
     text-align: center;
   }
