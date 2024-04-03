@@ -26,8 +26,8 @@ export default function AnimesFetching({ data }) {
           <div className='card__content'>
             <a
               href={`${
-                typeof window !== 'undefined'
-                  ? `${window.location.origin}/${e.name.replace(/ /g, '-')}`
+                typeof location !== 'undefined'
+                  ? `${location.origin}/${e.name.replace(/ /g, '-')}`
                   : ''
               }  `}
               className='column__image'>
