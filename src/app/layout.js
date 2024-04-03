@@ -11,7 +11,7 @@ import Navigation from './components/Navigation'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Providers } from './providers'
 import Footer from './components/Footer'
-
+import { Analytics } from '@vercel/analytics/react'
 export default function RootLayout({ children }) {
   return (
     <html lang='es'>
@@ -30,6 +30,7 @@ export default function RootLayout({ children }) {
         <Providers>
           <Navigation />
           <SpeedInsights />
+          <Analytics />
           {children}
 
           <Footer />
