@@ -431,9 +431,9 @@ function Navigation() {
               <li key={route}>
                 <a
                   href={
-                    status === undefined || typeof location !== undefined
+                    status === undefined && typeof location !== undefined
                       ? `${location.origin + route}`
-                      : `${location.origin + route}`
+                      : null
                   }
                   className={`block py-2 px-3 md:p-0 nav-link ${
                     status === 'coming soon' ? 'disabled' : ''
