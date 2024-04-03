@@ -430,7 +430,11 @@ function Navigation() {
             {hrefs.map(({ route, label, status }) => (
               <li key={route}>
                 <a
-                  href={status === undefined ? route : null}
+                  href={
+                    status === undefined && typeof window !== 'undefined'
+                      ? `${window.location.origin + route}`
+                      : null
+                  }
                   className={`block py-2 px-3 md:p-0 nav-link ${
                     status === 'coming soon' ? 'disabled' : ''
                   }`}
