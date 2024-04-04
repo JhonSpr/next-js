@@ -37,7 +37,9 @@ export async function generateMetadata() {
 }
 
 export default async function Home() {
-  const Emisiones = await Request_Animes({ estado: ['en emision'] })
+  const Emisiones = await Request_Animes({
+    estado: ['en emision', 'proximamente'],
+  })
   const ultimos__episodios = await Request_Animes({ recien: true })
   const recientAgregados = await Request_Animes({
     page: 1,
