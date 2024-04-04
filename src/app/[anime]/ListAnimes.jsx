@@ -33,7 +33,10 @@ export const obtenerMensajeFecha = (fechaAgregado) => {
 }
 
 export function FetchSingleAnime({ data }) {
-  const { name, genero1, genero2, id, year, fechaAgregado } = data?.[0]
+  const { name, genero1, genero2, id, year, fechaAgregado } = data?.[0] || {
+    name: null,
+    image: null,
+  }
   let animeId = data?.map((e) => e?.id)
   const [loading, setLoading] = useState([])
   const [favoritos, setFavoritos] = useState([])
