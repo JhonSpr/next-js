@@ -15,6 +15,15 @@ export default function AnimesFetching({ data }) {
     }, 600)
   }, [])
 
+  const [host, setHost] = useState(null)
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const { origin } = window.location
+      setHost(origin ?? null)
+    }
+  }, [])
+
   return (
     <>
       {data?.map((e, index) => (
@@ -26,10 +35,7 @@ export default function AnimesFetching({ data }) {
           <div className='card__content'>
             {typeof window == undefined ? null : (
               <a
-                href={`${`${window.location.host}/${e.name.replace(
-                  / /g,
-                  '-'
-                )}`}  `}
+                href={`${`${host}/${e.name.replace(/ /g, '-')}`}  `}
                 className='column__image'>
                 <img src={e.image} alt='' className='image__anime' />
                 <strong className='name__anime'>{e.name}</strong>
