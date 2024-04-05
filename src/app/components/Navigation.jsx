@@ -142,7 +142,11 @@ function Navigation() {
     setOpen(!open)
   }
   return (
-    <nav className='bg-white border-gray-200 dark:bg-gray-900 nav' id='navbar'>
+    <nav
+      className={`bg-white border-gray-200 dark:bg-gray-900 nav ${
+        theme === 'dark' ? 'dark' : ''
+      }`}
+      id='navbar'>
       <div className='max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 '>
         <a href='/' className='flex items-center space-x-3 rtl:space-x-reverse'>
           <img
@@ -249,9 +253,7 @@ function Navigation() {
                     }
                     alt='Bonnie image'
                   />
-                  <h5 className='mb-1 text-xl font-medium text-gray-900 dark:text-white'>
-                    usuario
-                  </h5>
+
                   <span className='text-sm text-gray-500 dark:text-gray-400'>
                     {user?.displayName}
                   </span>

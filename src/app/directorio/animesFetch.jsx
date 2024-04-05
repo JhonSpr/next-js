@@ -24,26 +24,30 @@ export default function AnimesFetching({ data }) {
           }`}
           key={index}>
           <div className='card__content'>
-            <a
-              href={`${
-                typeof location !== 'undefined'
-                  ? `${location.origin}/${e.name.replace(/ /g, '-')}`
-                  : ''
-              }  `}
-              className='column__image'>
-              <img src={e.image} alt='' className='image__anime' />
-              <strong className='name__anime'>{e.name}</strong>
-              <button
-                className='btn__anime'
-                onClick={() => {
-                  location.assign(`/${e.name.replace(/ /, '-').toLowerCase()}`)
-                }}>
-                Ver Ahora
-              </button>
-              <div className='overlay'>
-                <FaPlayCircle />
-              </div>
-            </a>
+            {typeof window == undefined ? null : (
+              <a
+                href={`${`${window.location.host}/${e.name.replace(
+                  / /g,
+                  '-'
+                )}`}  `}
+                className='column__image'>
+                <img src={e.image} alt='' className='image__anime' />
+                <strong className='name__anime'>{e.name}</strong>
+                <button
+                  className='btn__anime'
+                  onClick={() => {
+                    location.assign(
+                      `/${e.name.replace(/ /, '-').toLowerCase()}`
+                    )
+                  }}>
+                  Ver Ahora
+                </button>
+                <div className='overlay'>
+                  <FaPlayCircle />
+                </div>
+              </a>
+            )}
+
             <div className='column__description'>
               <span className='emitido__anime'>
                 {e?.emitido ?? 'desconocido'}

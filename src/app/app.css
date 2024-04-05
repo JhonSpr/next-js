@@ -342,7 +342,7 @@
   }
 }
 
-#disqus_thread {
+footer #disqus_thread {
   color-scheme: auto !important;
 }
 
@@ -352,7 +352,6 @@
 footer {
   padding-top: 50px;
   position: relative;
-  background-color: #0c0c0e !important;
 }
 
 #disqus_thread {

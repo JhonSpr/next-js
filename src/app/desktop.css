@@ -1,15 +1,20 @@
 @media only screen and (min-width: 1250px) {
   .main__title__calendario {
+    margin-top: -2px;
     width: 100%;
     text-align: center;
     font-size: 25px;
     color: #1283b8;
     font-weight: 700;
     font-style: oblique;
-    background-color: #19191a;
+    background-color: transparent;
+
+    &.dark {
+      background-color: #111;
+    }
   }
   .section__calendario {
-    min-height: 400px;
+    min-height: 200px;
     max-height: max-content;
     color: #c1c1c1;
     padding: 10px 20px;
@@ -23,6 +28,7 @@
     font-size: 20px;
     font-weight: 500;
     margin-bottom: 10px;
+    color: #111;
   }
 
   .section__calendario > div {
@@ -37,7 +43,7 @@
     overflow: hidden;
     height: 230px;
     border-radius: 30px;
-    background-color: #1283b8;
+    background-color: #202122;
     padding: 5px;
     cursor: pointer;
     &:hover .image img {
@@ -1315,6 +1321,56 @@
       color: #fff;
       padding-left: 5px;
       text-transform: capitalize;
+    }
+  }
+
+  .nav {
+    background-color: #152d4d !important;
+
+    & .ul {
+      background-color: #152d4d !important;
+    }
+  }
+
+  footer {
+    & .text-white {
+      color: #fff !important;
+    }
+
+    & .mb-6 {
+      color: #000 !important;
+    }
+
+    background-color: #152d4d !important;
+  }
+
+  html.dark {
+    & body {
+      & nav {
+        background-color: #0c0c0e !important;
+        & .ul {
+          background-color: #0c0c0e !important;
+        }
+      }
+
+      & .title__calendario {
+        color: #1283b8 !important;
+      }
+      & footer {
+        background-color: #0c0c0e !important;
+
+        & .text-white {
+          color: #fff !important;
+        }
+
+        & .mb-6 {
+          color: #000 !important;
+        }
+
+        & .mb-6 {
+          color: #1283b8 !important;
+        }
+      }
     }
   }
 

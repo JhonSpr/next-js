@@ -1,8 +1,12 @@
-import React from 'react'
+'use client'
+
+import { useContext } from 'react'
 import { años } from './Filters'
 import { IoIosArrowUp } from 'react-icons/io'
+import { contextApp } from '../providers'
 
 const Footer = () => {
+  const { theme } = useContext(contextApp)
   const scrollToElement = () => {
     const element = document.getElementById('navbar')
     if (element) {
@@ -10,7 +14,8 @@ const Footer = () => {
     }
   }
   return (
-    <footer className='bg-white dark:bg-gray-900'>
+    <footer
+      className={`bg-white dark:bg-gray-900 ${theme == 'dark' ? 'dark' : ''}`}>
       <button onClick={scrollToElement} className='btn__up'>
         <IoIosArrowUp />
       </button>
