@@ -540,13 +540,13 @@ export function FetchSingleAnime({ data }) {
 
           <ToastContainer
             position='bottom-left'
-            autoClose={5000}
+            autoClose={3000}
             hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
+            newestOnTop={true}
+            closeOnClick={true}
             rtl={false}
             pauseOnFocusLoss={false}
-            draggable
+            draggable={true}
             pauseOnHover={false}
             theme={theme == 'dark' ? 'dark' : 'light'}
           />
