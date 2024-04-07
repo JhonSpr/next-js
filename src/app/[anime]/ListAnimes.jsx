@@ -539,6 +539,7 @@ export function FetchSingleAnime({ data }) {
           </section>
 
           <ToastContainer
+            containerId={'page__anime'}
             position='bottom-left'
             autoClose={3000}
             hideProgressBar={false}
