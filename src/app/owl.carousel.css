@@ -15,7 +15,6 @@
   -webkit-tap-highlight-color: transparent;
   position: relative;
   z-index: 1;
-  overflow: hidden;
 }
 .owl-carousel .owl-stage {
   position: relative;
