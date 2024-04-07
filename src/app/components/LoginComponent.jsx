@@ -19,13 +19,11 @@ import { toast } from 'react-toastify'
 export const Login = ({ setLoginPage, setRegisterPage, setShowMenu }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [_, setUser] = useState(null)
-  const [login, setLogin] = useState(true)
+  const [user, setUser] = useState(null)
   const [error, setError] = useState(null)
   const [showError, setShowError] = useState(false)
   const [loading, setLoading] = useState(false)
   const [showPassword, setShowpassword] = useState(false)
-  const [alert, setAlert] = useState(false)
   const router = useRouter()
 
   useEffect(() => {
@@ -38,6 +36,7 @@ export const Login = ({ setLoginPage, setRegisterPage, setShowMenu }) => {
 
   const handleLogin = async () => {
     setLoading(true)
+
     try {
       await setPersistence(auth, browserLocalPersistence)
       const userCredential = await signInWithEmailAndPassword(
@@ -45,13 +44,12 @@ export const Login = ({ setLoginPage, setRegisterPage, setShowMenu }) => {
         email,
         password
       )
+      toast.info(`Bienvenido a animesz`)
       const loggedInUser = userCredential.user
       setUser(loggedInUser)
-      location.reload()
       setLoginPage(false)
       setRegisterPage(false)
       setShowMenu(false)
-      toast.info(`Bienvenido a animesz ${user?.displayName}`)
     } catch (error) {
       setError(error.message)
       setShowError(true)

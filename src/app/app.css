@@ -312,6 +312,9 @@
   }
 }
 
+.Toastify__toast-container {
+  z-index: 9999 !important;
+}
 @keyframes loading {
   0% {
     background-position: -200% 0;

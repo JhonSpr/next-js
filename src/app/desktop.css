@@ -1326,10 +1326,15 @@
       text-transform: capitalize;
     }
   }
-
+  .fixed {
+    padding-top: 85px;
+  }
+  .alert__toastify {
+    z-index: 3;
+  }
   .nav {
     background-color: #152d4d !important;
-
+    z-index: 3 !important;
     & .ul {
       background-color: #152d4d !important;
     }

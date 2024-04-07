@@ -21,7 +21,6 @@ const Register = ({ setRegisterPage, setLoginPage, setShowMenu }) => {
   const handleRegister = async () => {
     try {
       setLoading(true)
-
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
@@ -29,10 +28,10 @@ const Register = ({ setRegisterPage, setLoginPage, setShowMenu }) => {
       )
 
       const user = userCredential.user
-      toast.success(`Bienvenido a animesz ${user?.displayName}`)
+      toast.success(`Registro correctamente`)
 
       await updateProfile(user, { displayName: username })
-
+      router.back('/')
       setLoginPage(false)
       setRegisterPage(false)
       setShowMenu(false)
@@ -104,24 +103,12 @@ const Register = ({ setRegisterPage, setLoginPage, setShowMenu }) => {
           {loading ? 'Registrando...' : 'Registrar'}
         </button>
         <button className='toggle-ready'>
-          ¿ya tienes una cuenta? -{' '}
+          ¿ya tienes una cuenta? -
           <span onClick={() => (setLoginPage(true), setRegisterPage(false))}>
             Iniciar sesion
           </span>
         </button>
       </div>
-      <ToastContainer
-        position='bottom-left'
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss={false}
-        draggable
-        pauseOnHover={false}
-        theme={theme == 'dark' ? 'dark' : 'light'}
-      />
     </div>
   )
 }

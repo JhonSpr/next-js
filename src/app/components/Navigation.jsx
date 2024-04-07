@@ -465,6 +465,7 @@ function Navigation() {
         />
       ) : null}
       <ToastContainer
+        className={'alert__toastify'}
         position='bottom-left'
         autoClose={5000}
         hideProgressBar={false}
