@@ -15,6 +15,7 @@
   -webkit-tap-highlight-color: transparent;
   position: relative;
   z-index: 1;
+  overflow: hidden;
 }
 .owl-carousel .owl-stage {
   position: relative;
@@ -62,6 +63,7 @@
   aspect-ratio: 16/9;
   object-fit: cover;
   filter: brightness(70%);
+  overflow: hidden;
 }
 .owl-carousel .owl-nav.disabled,
 .owl-carousel .owl-dots.disabled {

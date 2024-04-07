@@ -1,5 +1,5 @@
 import { child, get, getDatabase, ref, set } from 'firebase/database'
-
+import { ToastContainer, toast } from 'react-toastify'
 const useWatchLater = ({
   user,
   setIsVisible,
@@ -76,6 +76,7 @@ const useWatchLater = ({
   async function updateLikes(animeId, userId) {
     try {
       if (!user) {
+        toast.info('debes iniciar sesión para usar esta función')
         setMessage('Debes iniciar sesión para usar esta función')
         setNoLogged(true)
         setTimeout(() => {
@@ -93,6 +94,7 @@ const useWatchLater = ({
         let currentLikes = likesSnapshot.val() || 0
 
         if (userVote.dislike) {
+          toast.error('ya haz votado!')
           setMessage('Ya has dado dislike a este anime.')
           setIsVisible(true)
           setRemove(false)
@@ -106,6 +108,7 @@ const useWatchLater = ({
             set(child(animeRef, 'likes'), currentLikes),
             set(userVotesRef, { ...userVote, like: false }),
           ])
+          toast.success('se elimino tu voto')
           setMessage('Like eliminado.')
           setIsVisible(true)
           setRemove(false)
@@ -119,6 +122,7 @@ const useWatchLater = ({
             set(child(animeRef, 'likes'), currentLikes),
             set(userVotesRef, { ...userVote, like: true }),
           ])
+          toast.success('voto registrado')
           setMessage('Like registrado.')
           setIsVisible(true)
           setRemove(false)
@@ -140,6 +144,7 @@ const useWatchLater = ({
   async function updateDislikes(animeId, userId) {
     try {
       if (!user) {
+        toast.info('debes iniciar sesión para usar esta función')
         setMessage('Debes iniciar sesión para usar esta función')
         setNoLogged(true)
         setTimeout(() => {
@@ -157,6 +162,7 @@ const useWatchLater = ({
         let currentDislikes = dislikesSnapshot.val() || 0
 
         if (userVote.like) {
+          toast.error('ya haz votado!')
           setMessage('Ya has dado like a este anime.')
           setIsVisible(true)
           setRemove(false)
@@ -170,6 +176,7 @@ const useWatchLater = ({
             set(child(animeRef, 'dislikes'), currentDislikes),
             set(userVotesRef, { ...userVote, dislike: false }),
           ])
+          toast.success('se elimino tu voto')
           setMessage('Dislike eliminado.')
           setIsVisible(true)
           setRemove(false)
@@ -183,6 +190,7 @@ const useWatchLater = ({
             set(child(animeRef, 'dislikes'), currentDislikes),
             set(userVotesRef, { ...userVote, dislike: true }),
           ])
+          toast.success('voto registrado')
           setMessage('Dislike registrado.')
           setIsVisible(true)
           setRemove(false)

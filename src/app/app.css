@@ -303,7 +303,7 @@
 }
 
 .skeleton-loader {
-  background: linear-gradient(90deg, #202020 35%, #303030 50%, #202020 85%);
+  background: linear-gradient(90deg, #161515 35%, #ffffff 50%, #161515 85%);
   background-size: 200% 100% !important;
   animation: loading 7s infinite !important;
   border-radius: 4px;

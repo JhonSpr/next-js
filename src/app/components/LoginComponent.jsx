@@ -15,7 +15,7 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa'
 import { auth } from '@/app/firebase'
 import { useRouter } from 'next/navigation'
 import { IoMdClose } from 'react-icons/io'
-
+import { toast } from 'react-toastify'
 export const Login = ({ setLoginPage, setRegisterPage, setShowMenu }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -51,11 +51,8 @@ export const Login = ({ setLoginPage, setRegisterPage, setShowMenu }) => {
       setLoginPage(false)
       setRegisterPage(false)
       setShowMenu(false)
+      toast.info(`Bienvenido a animesz ${user?.displayName}`)
     } catch (error) {
-      setAlert(true)
-      setTimeout(() => {
-        setAlert(false)
-      }, 2000)
       setError(error.message)
       setShowError(true)
       setTimeout(() => {
@@ -109,7 +106,7 @@ export const Login = ({ setLoginPage, setRegisterPage, setShowMenu }) => {
         <label
           id='#'
           for='first_name'
-          className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'>
+          className='block mb-2 text-sm  text-gray-900 text-white fw-bold'>
           Correo electronico
         </label>
         <input
@@ -124,7 +121,7 @@ export const Login = ({ setLoginPage, setRegisterPage, setShowMenu }) => {
         />
         <label
           for='password'
-          className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'>
+          className='block mb-2 text-sm  text-gray-900 text-white fw-bold'>
           Password
         </label>
         <input

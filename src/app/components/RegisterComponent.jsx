@@ -1,11 +1,13 @@
 'use client'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
 import { getStorage, ref, uploadBytesResumable } from 'firebase/storage'
 
 import { useRouter } from 'next/navigation'
 import { auth } from '@/app/firebase'
 import { IoMdClose } from 'react-icons/io'
+import { ToastContainer, toast } from 'react-toastify'
+import { contextApp } from '../providers'
 
 const Register = ({ setRegisterPage, setLoginPage, setShowMenu }) => {
   const [email, setEmail] = useState('')
@@ -14,6 +16,7 @@ const Register = ({ setRegisterPage, setLoginPage, setShowMenu }) => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
   const router = useRouter()
+  const { theme } = useContext(contextApp)
 
   const handleRegister = async () => {
     try {
@@ -26,9 +29,10 @@ const Register = ({ setRegisterPage, setLoginPage, setShowMenu }) => {
       )
 
       const user = userCredential.user
+      toast.success(`Bienvenido a animesz ${user?.displayName}`)
 
       await updateProfile(user, { displayName: username })
-      router.replace('/')
+
       setLoginPage(false)
       setRegisterPage(false)
       setShowMenu(false)
@@ -106,6 +110,18 @@ const Register = ({ setRegisterPage, setLoginPage, setShowMenu }) => {
           </span>
         </button>
       </div>
+      <ToastContainer
+        position='bottom-left'
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss={false}
+        draggable
+        pauseOnHover={false}
+        theme={theme == 'dark' ? 'dark' : 'light'}
+      />
     </div>
   )
 }

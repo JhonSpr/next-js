@@ -7,7 +7,7 @@ import { createContext, useContext, useEffect, useState } from 'react'
 import { auth } from './firebase'
 import { get, getDatabase, ref, set } from 'firebase/database'
 import { calcularRating } from './user/[idUser]/userPage'
-
+import { toast } from 'react-toastify'
 export const contextApp = createContext()
 export const ContextProvider = ({ children }) => {
   const [user, setUser] = useState(null)
@@ -46,6 +46,7 @@ export const ContextProvider = ({ children }) => {
   const agregarFavoritos = async (name, image) => {
     try {
       if (!user) {
+        toast.info('debes iniciar sesión para usar esta función')
         setMessage('Debes iniciar sesión para usar esta función')
         setNoLogged(true)
         setTimeout(() => {
@@ -71,9 +72,9 @@ export const ContextProvider = ({ children }) => {
             guardarEpisodio: [...episodioGuardados],
             favoritos: [...favoritos, { name, image }],
           })
+          toast.success('Agregado a favoritos')
           setMessage('Agregado a favoritos')
           setIsVisible(true)
-
           setTimeout(() => {
             setIsVisible(false)
           }, 3000)
@@ -86,6 +87,7 @@ export const ContextProvider = ({ children }) => {
             guardarEpisodio: [...episodioGuardados],
             favoritos: favoritos,
           })
+          toast.success('Eliminado de favoritos')
           setMessage('Eliminado de favoritos')
           setIsVisible(true)
           setRemove(true)

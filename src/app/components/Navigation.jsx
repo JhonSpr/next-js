@@ -11,9 +11,9 @@ import Register from './RegisterComponent'
 import { Login } from './LoginComponent'
 import { FaStar } from 'react-icons/fa6'
 import { Loader } from './LoaderSkeleton'
-import { BiCloset } from 'react-icons/bi'
 import { FaBars } from 'react-icons/fa'
 import { IoMdClose } from 'react-icons/io'
+import { ToastContainer, toast } from 'react-toastify'
 const hrefs = [
   { label: 'Inicio', route: '/' },
   { label: 'Animes', route: '/directorio' },
@@ -89,6 +89,7 @@ function Navigation() {
 
   const logout = async () => {
     try {
+      toast.error('Sesión cerrada correctamente')
       await signOut(auth)
     } catch (error) {
       console.error('Error al cerrar sesión:', error)
@@ -463,6 +464,18 @@ function Navigation() {
           setShowMenu={setShowMenu}
         />
       ) : null}
+      <ToastContainer
+        position='bottom-left'
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss={false}
+        draggable
+        pauseOnHover={false}
+        theme={theme == 'dark' ? 'dark' : 'light'}
+      />
     </nav>
   )
 }

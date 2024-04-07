@@ -12,6 +12,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Providers } from './providers'
 import Footer from './components/Footer'
 import { Analytics } from '@vercel/analytics/react'
+import 'react-toastify/dist/ReactToastify.css'
 export default function RootLayout({ children }) {
   return (
     <html lang='es'>
