@@ -426,6 +426,10 @@
     display: flex;
     background-color: #c1c1c1;
     border-radius: 10px;
+
+    &.loading-card {
+      visibility: hidden;
+    }
   }
 
   .card__content {
