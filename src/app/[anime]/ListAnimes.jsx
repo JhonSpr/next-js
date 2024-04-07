@@ -549,7 +549,7 @@ export function FetchSingleAnime({ data }) {
             pauseOnFocusLoss={false}
             draggable={true}
             pauseOnHover={false}
-            theme={theme == 'dark' ? 'dark' : 'light'}
+            theme={theme == 'dark' ? 'dark' : 'light' || isMobile ? 'dark' : ''}
           />
         </main>
       </section>
